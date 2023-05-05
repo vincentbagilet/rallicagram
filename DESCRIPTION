@@ -4,7 +4,7 @@ Title: Wrapper for Gallicagram API
 Version: 0.1.0
 Authors@R: 
     person("Vincent", "Bagilet", , "vincent.bagilet@columbia.edu", role = c("aut", "cre"))
-Description: Enables to call the Gallicagram API directly from R.
+Description: Calls the Gallicagram API directly from R.
    Gallicagram enables to build time series of keywords used in a set of French corpora.
 License: MIT + file LICENSE
 Encoding: UTF-8

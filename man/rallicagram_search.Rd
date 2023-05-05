@@ -5,26 +5,34 @@
 \title{Retrieves the number of occurrences of a keyword in one of the corpora
 (historical press, Gallica books, Le Monde newspaper)}
 \usage{
-rallicagram_search(keyword, corpus = "presse", begin = 1789, end = 1950)
+rallicagram_search(
+  keyword,
+  corpus = "press",
+  begin = 1789,
+  end = 1950,
+  frequency = "monthly"
+)
 }
 \arguments{
+\item{keyword}{A character string. Keyword to search.}
+
 \item{corpus}{A character string. The corpus to search. Takes the following
-values: "presse" or "press" for historical press, "livres" or "books" for
-Gallica books, "lemonde" for Le Monde newspaper articles.}
+values: "press" for historical press, "books" for Gallica books,
+"lemonde" for Le Monde newspaper articles.}
 
 \item{begin}{A number. Starting year.}
 
 \item{end}{A number. End year.}
 
-\item{mot_cle}{A character string. Keyword to search.}
+\item{frequency}{A number. End year.}
 }
 \value{
-A numeric vector.
+A tibble.
 }
 \description{
 Retrieves the number of occurrences of a keyword in one of the corpora
 (historical press, Gallica books, Le Monde newspaper)
 }
 \examples{
-rallicagram_search("president")
+rallicagram_search("président")
 }

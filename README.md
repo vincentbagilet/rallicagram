@@ -42,9 +42,9 @@ devtools::install_github("vincentbagilet/rallicagram")
 
 ## Usage
 
-The main function, `rallicagram_search`, builds a data frame with the
-yearly, monthly or daily proportion of mentions of a term in one of the
-three corpora between two specified dates.
+The main function, `gallicagram`, builds a data frame with the yearly,
+monthly or daily proportion of mentions of a term in one of the three
+corpora between two specified dates.
 
 ``` r
 library(rallicagram)
@@ -73,4 +73,5 @@ gallicagram(
 ```
 
 Additional functions, to describe close co-occurrences for instance, are
-also available in this package and described in the vignette.
+also available in this package and described in the
+[vignette](rallicagram.html).

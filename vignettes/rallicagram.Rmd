@@ -1,0 +1,124 @@
+---
+title: "rallicagram"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{rallicagram}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  # fig.path = "man/figures/README-",
+  out.width = "70%",
+  dpi = 400,
+  fig.align = "center",
+  dev = "png",
+  fig.width = 7,
+  fig.height = 5
+)
+```
+
+```{r packages}
+library(rallicagram)
+```
+
+# Main functions
+
+## Occurrences
+
+The main function in this package, `gallicagram`, builds a data frame with the yearly, monthly or daily proportion of mentions of a term in one of the three corpora between two specified dates.
+
+```{r ex_occur}
+ex_occur <- gallicagram(
+  keyword = "président", 
+  corpus = "lemonde", 
+  from = 1960, 
+  to = 1970,
+  resolution = "monthly"
+)
+```
+
+Here is an example of part of the output:
+
+```{r kable_occur, echo=FALSE}
+ex_occur |> 
+  utils::head() |> 
+  knitr::kable()
+```
+
+## Co-occurrences
+
+`gallicagram`, builds a data frame with the yearly, monthly or daily proportion of mentions of close co-occurrences of two keywords in one of the three corpora between two specified dates.
+
+Close co-occurrences correspond to the number of 3-grams (4-grams in the *Le Monde* corpus) that contain the two keywords.
+
+The parameter `keywords` takes a character vector of length two as input.
+
+```{r ex_cooccur}
+ex_cooccur <- gallicagram_cooccur(
+  keywords = c("président", "république"), 
+  corpus = "lemonde", 
+  from = 1960, 
+  to = 1970,
+  resolution = "monthly"
+)
+```
+
+Here is an example of part of the output:
+
+```{r kable_cooccur, echo=FALSE}
+ex_cooccur |> 
+  utils::head() |> 
+  knitr::kable()
+```
+
+
+# Searching several keywords
+
+In order to search several keywords at once, we can use the function `purrr::map_dfr`. It first takes as parameters the vector of keywords to search, then the `gallicagram` function followed by additional arguments to pass to the `gallicagram` function. It returns a unique data frame with all the results, basically binding the two tibbles produced by each search.
+
+```{r map, eval=FALSE}
+library(purrr)
+
+keywords <- c("république", "france")
+
+purrr::map_dfr(keywords, gallicagram, 
+               corpus = "lemonde", from = "1960", to = "1970")
+```
+
+Note that based on the same principle, we can run the function for a set of various parameters at once. We only need to specify it in a data frame and can pass it to `purrr::pmap_dfr`. One can define the set of parameters in a tibble and use the function `tidyr::crossing` do create all combination of possible searches.
+
+```{r params_pmap}
+library(tibble)
+library(tidyr)
+
+params_pmap <- 
+  tibble::tibble(
+    from = 1850,
+    to = 1870,
+    resolution = "yearly"
+  ) |> 
+  tidyr::crossing(corpus = c("press", "books")) |>
+  tidyr::crossing(keyword = c("république", "france"))
+```
+
+The set of parameters to search looks like this:
+
+```{r kable_params_pmap}
+knitr::kable(params_pmap)
+```
+
+We can then pass it to the function:
+
+```{r, eval=FALSE}
+purrr::pmap_dfr(params_pmap, gallicagram) 
+```
+
+
+
+
+

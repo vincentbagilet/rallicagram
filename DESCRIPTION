@@ -14,3 +14,7 @@ Imports:
     dplyr,
     rlang,
     tidyselect
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

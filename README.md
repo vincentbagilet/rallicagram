@@ -52,8 +52,8 @@ library(rallicagram)
 gallicagram(
   keyword = "président", 
   corpus = "lemonde", 
-  begin = 1960, 
-  end = 1970,
+  from = 1960, 
+  to = 1970,
   resolution = "monthly"
 )
 #> # A tibble: 132 × 9

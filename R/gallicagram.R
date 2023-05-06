@@ -1,12 +1,12 @@
 #' Retrieves the number of occurrences of a keyword in one of the corpora
-#' (historical press, Gallica books, Le Monde newspaper)
+#' (historical press, Gallica books, Le Monde newspaper) by year, month or day.
 #'
 #' @param keyword A character string. Keyword to search.
 #' @param corpus A character string. The corpus to search. Takes the following
 #' values: "press" for historical press, "books" for Gallica books,
 #' "lemonde" for Le Monde newspaper articles.
-#' @param begin A number. Starting year.
-#' @param end A number. End year.
+#' @param from A number. Starting year.
+#' @param to A number. End year.
 #' @param resolution A character string.
 #' For Le Monde can be either "yearly", "monthly" or "daily".
 #' For historical press can be either "yearly", "monthly".
@@ -27,12 +27,12 @@
 #' gallicagram("président")
 gallicagram <- function(keyword,
                         corpus="press",
-                        begin=1789,
-                        end=1950,
+                        from=1789,
+                        to=1950,
                         resolution="monthly") {
 
-  if (!is.numeric(as.numeric(begin)) | !is.numeric(as.numeric(end))) {
-    stop("'begin' and 'end' should be numeric", call. = FALSE)
+  if (!is.numeric(as.numeric(from)) | !is.numeric(as.numeric(to))) {
+    stop("'from' and 'to' should be numeric", call. = FALSE)
   }
 
   if (!is.character(keyword)) {
@@ -57,9 +57,9 @@ gallicagram <- function(keyword,
                   "&mot=",
                   keyword_clean,
                   "&from=",
-                  begin,
+                  from,
                   "&to=",
-                  end,
+                  to,
                   "&resolution=",
                   resolution_french,
                   sep="") |>

@@ -1,4 +1,11 @@
-url: ~
 template:
-  bootstrap: 5
+  params:
+    bootswatch: cosmo
 
+authors:
+  Vincent Bagilet:
+    href: https://vincentbagilet.github.io/
+
+navbar:
+  structure:
+    right: [github]

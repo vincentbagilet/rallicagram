@@ -9,6 +9,8 @@
 #' @param end A number. End year.
 #' @param frequency A number. End year.
 #'
+#' @importFrom rlang .data
+#'
 #' @returns A tibble.
 #'
 #' @export
@@ -62,11 +64,14 @@ rallicagram_search <- function(keyword,
     dplyr::mutate(
       source = corpus,
       frequency = frequency,
-      month = ifelse(frequency == "yearly", 01, month),
-      day = ifelse(frequency != "daily", 01, day),
-      date = as.Date(paste(year, month, day, sep = "-"))
+      month_pad = ifelse(frequency == "yearly", 01, .data$month),
+      day_pad = ifelse(frequency != "daily", 01, .data$day),
+      date = as.Date(
+        paste(.data$year, .data$month_pad, .data$day_pad, sep = "-")
+      )
     ) |>
-    dplyr::select(date, keyword, "n", total, source, frequency)
+    dplyr::select("date", "keyword", "n", tidyselect::everything(),
+                  -"month_pad", -"day_pad")
 
   return(output)
 }

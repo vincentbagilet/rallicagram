@@ -6,10 +6,11 @@
 #' @importFrom rlang .data
 #'
 #' @returns A tibble. With the \code{keyword},
-#' the number of occurrences (\code{n}), the total number of ngrams
-#' over the period of a given observation (\code{total}),
-#' the proportion of occurrences of the keyword over the period of
-#' a given observation (\code{prop}),
+#' the number of occurrences (\code{nb_occur}) or co-occurrences
+#' (\code{nb_cooccur}), the total number of ngrams over the period of a
+#' given observation (\code{nb_grams} or \code{nb_ngrams}),
+#' the proportion of occurrences or co-occurrences of the keyword(s) over the
+#' period of a given observation (\code{prop_occcur} or \code{prop_coocccur}),
 #' the date at the beginning of the period of a given observation (\code{date}),
 #' the \code{source}, the \code{resolution},
 #' the \code{year} and

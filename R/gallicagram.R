@@ -46,7 +46,12 @@ gallicagram <- function(keyword,
                   "&resolution=",
                   param_clean$resolution,
                   sep = "") |>
-    tidy_gallicagram(corpus, resolution)
+    tidy_gallicagram(corpus, resolution) |>
+    dplyr::rename(
+      "nb_occur" = "n",
+      "nb_grams" = "total",
+      "prop_occur" = "prop"
+    )
 
   return(output)
 }

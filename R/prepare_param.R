@@ -1,4 +1,6 @@
 #' Internal function to prepare the parameters to use them in the API call.
+#' Checks potential errors, translates the parameters, set parameters for
+#' the API call.
 #'
 #' @inheritParams gallicagram
 #'
@@ -19,7 +21,6 @@ prepare_param <- function(keyword,
     stop("'keyword' should be a character string", call. = FALSE)
   }
 
-  #translations
   resolution_french <- ifelse(resolution == "yearly", "annee",
                        ifelse(resolution == "monthly", "mois",
                        ifelse(resolution == "daily", "jour",

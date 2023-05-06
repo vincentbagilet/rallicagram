@@ -1,9 +1,12 @@
 #' Close co-occurrences of two keywords in a Gallicagram copus
 #'
 #' @description
-#' Retrieves the number of close co-occurrences (less than 4 grams appart)
-#' of two keywords in one of the corpora
-#' (historical press, Gallica books, Le Monde newspaper) by year, month or day.
+#' Retrieves the number of close co-occurrences of two keywords in one of
+#' the corpora (historical press, Gallica books, Le Monde newspaper)
+#' by year, month or day.
+#'
+#' Close co-occurrences correspond to the number of 3-grams
+#' (4-grams in the Le Monde corpus) that contain the two keywords.
 #'
 #' @param keywords A character vector of length 2
 #' containing the two keyword to search.
@@ -13,7 +16,7 @@
 #'
 #' @export
 #' @examples
-#' gallicagram_cooccur(c("président", "menteur"))
+#' gallicagram_cooccur(c("président", "mauvais"))
 gallicagram_cooccur <- function(keywords,
                                 corpus = "press",
                                 from = 1789,
@@ -43,7 +46,12 @@ gallicagram_cooccur <- function(keywords,
                   param_clean$resolution,
                   sep = "") |>
     tidy_gallicagram(corpus, resolution) |>
-    dplyr::rename("keywords" = "keyword")
+    dplyr::rename("keywords" = "keyword") |>
+    dplyr::rename(
+      "nb_cooccur" = "n",
+      "nb_ngrams" = "total",
+      "prop_cooccur" = "prop"
+    )
 
   return(output)
 }

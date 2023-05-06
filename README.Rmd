@@ -55,5 +55,6 @@ gallicagram(
 )
 ```
 
+Additional functions, to describe close co-occurrences for instance, are also available in this package and described in the vignette.
 
 

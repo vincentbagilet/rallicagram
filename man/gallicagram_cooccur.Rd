@@ -31,20 +31,24 @@ For books can only only be. "yearly".}
 }
 \value{
 A tibble. With the \code{keyword},
-the number of occurrences (\code{n}), the total number of ngrams
-over the period of a given observation (\code{total}),
-the proportion of occurrences of the keyword over the period of
-a given observation (\code{prop}),
+the number of occurrences (\code{nb_occur}) or co-occurrences
+(\code{nb_cooccur}), the total number of ngrams over the period of a
+given observation (\code{nb_grams} or \code{nb_ngrams}),
+the proportion of occurrences or co-occurrences of the keyword(s) over the
+period of a given observation (\code{prop_occcur} or \code{prop_coocccur}),
 the date at the beginning of the period of a given observation (\code{date}),
 the \code{source}, the \code{resolution},
 the \code{year} and
 potentially the \code{month} and \code{day} of the observation.
 }
 \description{
-Retrieves the number of close co-occurrences (less than 4 grams appart)
-of two keywords in one of the corpora
-(historical press, Gallica books, Le Monde newspaper) by year, month or day.
+Retrieves the number of close co-occurrences of two keywords in one of
+the corpora (historical press, Gallica books, Le Monde newspaper)
+by year, month or day.
+
+Close co-occurrences correspond to the number of 3-grams
+(4-grams in the Le Monde corpus) that contain the two keywords.
 }
 \examples{
-gallicagram_cooccur(c("président", "menteur"))
+gallicagram_cooccur(c("président", "mauvais"))
 }

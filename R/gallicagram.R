@@ -7,20 +7,29 @@
 #' "lemonde" for Le Monde newspaper articles.
 #' @param begin A number. Starting year.
 #' @param end A number. End year.
-#' @param frequency A number. End year.
+#' @param resolution A character string.
+#' For Le Monde can be either "yearly", "monthly" or "daily".
+#' For historical press can be either "yearly", "monthly".
+#' For books can only only be. "yearly".
 #'
 #' @importFrom rlang .data
 #'
-#' @returns A tibble.
+#' @returns A tibble. With the `keyword`, the number of occurrences (`n`),
+#' the total number of ngrams over the period of a given observation (`total`),
+#' the proportion of occurrences of the keyword over the period of
+#' a given observation (`prop`),
+#' the date at the beginning of the period of a given observation (`date`),
+#' the `source`, the `resolution`,
+#' the `year` and potentially the `month` and `day` of the observation.
 #'
 #' @export
 #' @examples
-#' rallicagram_search("président")
-rallicagram_search <- function(keyword,
-                               corpus="press",
-                               begin=1789,
-                               end=1950,
-                               frequency="monthly") {
+#' gallicagram("président")
+gallicagram <- function(keyword,
+                        corpus="press",
+                        begin=1789,
+                        end=1950,
+                        resolution="monthly") {
 
   if (!is.numeric(as.numeric(begin)) | !is.numeric(as.numeric(end))) {
     stop("'begin' and 'end' should be numeric", call. = FALSE)
@@ -31,10 +40,10 @@ rallicagram_search <- function(keyword,
   }
 
   #translations
-  resolution <- ifelse(frequency == "yearly", "annee",
-                       ifelse(frequency == "monthly", "mois",
-                       ifelse(frequency == "daily", "jour",
-                          stop("Invalid frequency", call. = FALSE))))
+  resolution_french <- ifelse(resolution == "yearly", "annee",
+                       ifelse(resolution == "monthly", "mois",
+                       ifelse(resolution == "daily", "jour",
+                          stop("Invalid resolution", call. = FALSE))))
 
   corpus_french <- ifelse(corpus == "press", "presse",
                           ifelse(corpus == "books", "livres",
@@ -52,7 +61,7 @@ rallicagram_search <- function(keyword,
                   "&to=",
                   end,
                   "&resolution=",
-                  resolution,
+                  resolution_french,
                   sep="") |>
     utils::read.csv() |>
     #tidy
@@ -62,16 +71,17 @@ rallicagram_search <- function(keyword,
       tidyselect::any_of(c(month = "mois", day = "jour"))
     ) |>
     dplyr::mutate(
+      prop = .data$n/.data$total,
       source = corpus,
-      frequency = frequency,
-      month_pad = ifelse(frequency == "yearly", 01, .data$month),
-      day_pad = ifelse(frequency != "daily", 01, .data$day),
+      resolution = resolution,
+      month_pad = ifelse(resolution == "yearly", 01, .data$month),
+      day_pad = ifelse(resolution != "daily", 01, .data$day),
       date = as.Date(
         paste(.data$year, .data$month_pad, .data$day_pad, sep = "-")
       )
     ) |>
-    dplyr::select("date", "keyword", "n", tidyselect::everything(),
-                  -"month_pad", -"day_pad")
+    dplyr::select("date", "keyword", "n", "total", "prop",
+                  tidyselect::everything(), -"month_pad", -"day_pad")
 
   return(output)
 }

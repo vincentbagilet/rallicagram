@@ -18,7 +18,17 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-`rallicaggram` calls the Gallicagram API directly from R. Gallicagram enables to build time series of keywords used in a set of French corpora.
+## Overview
+
+`rallicaggram` calls the Gallicagram API directly from R. [Gallicagram](https://shiny.ens-paris-saclay.fr/app/gallicagram) enables to build time series of keywords used in a set of French corpora:
+
+- **Historical newspapers** from [Gallica](https://gallica.bnf.fr/) (corpus="press"). A corpus of 3 million issues, reliable from 1789 to 1950. Yearly or monthly resolution.
+- **Public domain books** available on [Gallica](https://gallica.bnf.fr/) (corpus="books"). 300 000
+books, more and more reliable through the 16th to 18th centuries and up to 1950. Yearly resolution.
+- **Articles published in [*Le Monde*](https://www.lemonde.fr/)** (corpus="lemonde"). Available and reliable from December 1944 to February 22, 2022. Yearly, monthly or daily resolution.
+
+Additional information on a [preprint](https://osf.io/preprints/socarxiv/84bf3/) by Gallicagram developers [
+Benoît de Courson](https://regicid.github.io/) and [Benjamin Azoulay](https://benjamin-azoulay.my.canva.site/) and on the "Notice" tab of the [Gallicagram website](https://shiny.ens-paris-saclay.fr/app/gallicagram).
 
 ## Installation
 
@@ -28,5 +38,22 @@ You can install the development version of rallicagram from [GitHub](https://git
 # install.packages("devtools")
 devtools::install_github("vincentbagilet/rallicagram")
 ```
+
+## Usage
+
+The main function, `rallicagram_search`, builds a data frame with the yearly, monthly or daily proportion of mentions of a term in one of the three corpora between two specified dates.
+
+```{r}
+library(rallicagram)
+
+gallicagram(
+  keyword = "président", 
+  corpus = "lemonde", 
+  begin = 1960, 
+  end = 1970,
+  resolution = "monthly"
+)
+```
+
 
 

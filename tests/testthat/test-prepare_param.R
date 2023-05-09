@@ -75,6 +75,6 @@ test_that("Non reliable corpus", {
       from = 1960,
       to = 1970
     ),
-    "The 'books' corpus is only reliable before 1950."
+    "The 'books' corpus is only reliable before 1940."
   )
 })

@@ -21,15 +21,20 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r packages}
+```{r packages, echo=FALSE}
 library(rallicagram)
 ```
+
+`rallicagram` is a R wrapper for the [Gallicagram API](https://regicid.github.io/api). More info on Gallicagram and its API can be found on a [preprint](https://osf.io/preprints/socarxiv/84bf3/) by Gallicagram developers [
+Benoît de Courson](https://regicid.github.io/) and [Benjamin Azoulay](https://benjamin-azoulay.my.canva.site/), on the "Notice" tab of the [Gallicagram website](https://shiny.ens-paris-saclay.fr/app/gallicagram) and on the [API docuemntation](https://regicid.github.io/api).
 
 # Main functions
 
 ## Occurrences
 
-The main function in this package, `gallicagram`, builds a data frame with the yearly, monthly or daily proportion of mentions of a term in one of the three corpora between two specified dates.
+The main function in this package, `gallicagram`, builds a data frame with the yearly, monthly or daily proportion of mentions of a term in one of the three corpora between two specified dates. 
+
+This function corresponds to the `Query` route of the [API](https://regicid.github.io/api).
 
 ```{r ex_occur}
 ex_occur <- gallicagram(
@@ -53,7 +58,7 @@ ex_occur |>
 
 `gallicagram_cooccur` builds a data frame with the yearly, monthly or daily proportion of mentions of close co-occurrences of two keywords in one of the three corpora between two specified dates.
 
-Close co-occurrences correspond to the number of 3-grams (4-grams in the *Le Monde* corpus) that contain the two keywords.
+Close co-occurrences correspond to the number of 3-grams (4-grams in the *Le Monde* corpus) that contain the two keywords. This function corresponds to the `Contain` route of the [API](https://regicid.github.io/api).
 
 The parameter `keywords` takes a character vector of length two as input.
 
@@ -75,13 +80,28 @@ ex_cooccur |>
   knitr::kable()
 ```
 
+It might also be helpful to have the keywords in two separate columns. To do that, one can use `tidyr::separate`:
+
+```{r cooccur_sep}
+ex_cooccur_sep <- ex_cooccur |> 
+  tidyr::separate(keywords, into = c("keyword_1", "keyword_2"), sep = "&")
+```
+
+This yields:
+
+```{r kable_cooccur_sep, echo=FALSE}
+ex_cooccur_sep |>
+  utils::head() |>
+  knitr::kable()
+```
+
 ## Associations
 
 `gallicagram_associated`  builds a data frame the words the most frequently used following a given ngram over the period. 
 
 For instance "camarade" is often followed by "staline" or "khrouchtchev" in Le Monde. The function returns the most frequent ngrams of the form "camarade \*". Setting `after = FALSE` also includes the most frequent ngrams of the form "\* camarade".
 
-The keyword can be a 2-gram in the "books" and "press" corpora and a 3-gram in the "lemonde" corpus. Searching the "press" corpus can require a long running time.
+The keyword can be a 2-gram in the "books" and "press" corpora and a 3-gram in the "lemonde" corpus. Searching the "press" corpus can require a long running time. This function corresponds to the `Joker` route of the [API](https://regicid.github.io/api) and is analogous to the `Joker` option on [Ngram Viewer](https://books.google.com/ngrams/).
 
 ```{r ex_assoc}
 ex_associated <- gallicagram_associated(
@@ -102,7 +122,7 @@ ex_associated |>
 
 # Searching several keywords
 
-In order to search several keywords at once, we can use the function `purrr::map_dfr`. It first takes as parameters the vector of keywords to search, then the `gallicagram` function followed by additional arguments to pass to the `gallicagram` function. It returns a unique data frame with all the results, basically binding the two tibbles produced by each search.
+In order to search several keywords at once, we can use the function `purrr::map_dfr`. It takes as parameters the vector of keywords to search, followed by the function (`gallicagram`) and additional arguments to pass to the function. It returns a unique data frame with the results for searches corresponding to each keyword, basically binding the dataframes produced by each keyword search.
 
 ```{r map, eval=FALSE}
 library(purrr)
@@ -113,7 +133,9 @@ purrr::map_dfr(keywords, gallicagram,
                corpus = "lemonde", from = "1960", to = "1970")
 ```
 
-Note that based on the same principle, we can run the function for a set of various parameters at once. We only need to specify it in a data frame and can pass it to `purrr::pmap_dfr`. One can define the set of parameters in a tibble and use the function `tidyr::crossing` do create all combination of possible searches.
+Bbased on that same principle, we can run several searches at onces, varying all parameters, not only the keyword searched. To do that, we can specify the series of parameters in a data frame, each row corresponding to a set of parameters to run the `gallicagram` function for. We then pass this data frame to `purrr::pmap_dfr`. 
+
+To specify the set of parameters, we can either build the parameters data frame by hand. It is also often helpful to use `tidyr::crossing` to create all combination of possible searches.
 
 ```{r params_pmap}
 params_pmap <-
@@ -126,14 +148,16 @@ params_pmap <-
   tidyr::crossing(keyword = c("république", "france"))
 ```
 
-The set of parameters to search looks like this:
+The corresponding set of parameters to search looks like this:
 
-```{r kable_params_pmap}
+```{r kable_params_pmap, echo=FALSE}
 knitr::kable(params_pmap)
 ```
 
-We can then pass it to the function:
+We can then pass it to `purrr::pmap_dfr` that will call the function `gallicagram` for each of the 4 sets of parameters defined in the rows of `params_pmap`:
 
 ```{r, eval=FALSE}
 purrr::pmap_dfr(params_pmap, gallicagram)
 ```
+
+This method also apply for the other functions in the `rallicagram` package.

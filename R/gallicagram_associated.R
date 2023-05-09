@@ -2,10 +2,11 @@
 #'
 #' @description
 #' Returns the word the most frequently following a given ngram over the period.
-#' It can also include the words that precede by setting
-#' \code{after = FALSE}.
+#' It can also include the words that precede by setting \code{after = FALSE}.
 #'
-#' It corresponds to the 'Joker' function on the Gallicagram app
+#' @details
+#' This function corresponds to the \code{Joker} route of the API,
+#' accessed through the 'Joker' function on the Gallicagram app
 #' and is analogous to the 'Joker' function on Ngram Viewer.
 #'
 #' For instance "camarade" is often followed by "staline" or "khrouchtchev" in

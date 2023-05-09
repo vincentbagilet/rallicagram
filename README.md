@@ -8,7 +8,8 @@
 
 ## Overview
 
-`rallicaggram` calls the Gallicagram API directly from R.
+`rallicagram` calls the [Gallicagram API](https://regicid.github.io/api)
+directly from R.
 [Gallicagram](https://shiny.ens-paris-saclay.fr/app/gallicagram) enables
 to build time series of keywords used in a set of French corpora:
 
@@ -16,14 +17,14 @@ to build time series of keywords used in a set of French corpora:
   (corpus=“press”). A corpus of 3 million issues, reliable from 1789
   to 1950. Yearly or monthly resolution.
 - **Public domain books** available on
-  [Gallica](https://gallica.bnf.fr/) (corpus=“books”). 300 000 books,
-  more and more reliable through the 16th to 18th centuries and up
-  to 1950. Yearly resolution.
+  [Gallica](https://gallica.bnf.fr/) (corpus=“books”). 300 000 books.
+  Increased reliability through the 16th to 18th centuries and up
+  to 1940. Yearly resolution.
 - **Articles published in [*Le Monde*](https://www.lemonde.fr/)**
   (corpus=“lemonde”). Available and reliable from December 1944 to
   February 22, 2022. Yearly, monthly or daily resolution.
 
-Additional information on a
+Additional information can be found on a
 [preprint](https://osf.io/preprints/socarxiv/84bf3/) by Gallicagram
 developers [Benoît de Courson](https://regicid.github.io/) and [Benjamin
 Azoulay](https://benjamin-azoulay.my.canva.site/) and on the “Notice”
@@ -75,32 +76,8 @@ gallicagram(
 It enables to draw nice graphs representing the evolution of the use of
 a term in time.
 
-``` r
-library(mediocrethemes)
-#> Loading required package: ggplot2
-set_mediocre_all()
+<img src="man/figures/README-graph-1.png" width="70%" style="display: block; margin: auto;" />
 
-ex_data <- gallicagram(
-  keyword = "informatique", 
-  corpus = "lemonde", 
-  from = 1945, 
-  to = 2022,
-  resolution = "yearly"
-)
-
-ex_data |> 
-  ggplot(aes(x = date, y = prop_occur)) + 
-  geom_line(size = 0.7) +
-  labs(
-    title = "Evolution of occurrences of 'computering' (informatique)",
-    subtitle = "In the french newspaper Le Monde",
-    x = NULL,
-    y = "Proportion of occurrences"
-  )
-```
-
-<img src="man/figures/README-graph-1.png" width="85%" style="display: block; margin: auto;" />
-
-Additional functions, to describe close co-occurrences for instance, are
-also available in this package and described in the
-[vignette](articles/rallicagram.html).
+Additional functions, to describe close co-occurrences or words
+associated with a ngram are also available in this package and described
+in the [vignette](articles/rallicagram.html).

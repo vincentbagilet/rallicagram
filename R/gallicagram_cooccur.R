@@ -5,8 +5,11 @@
 #' the corpora (historical press, Gallica books, Le Monde newspaper)
 #' by year, month or day.
 #'
+#' @details
 #' Close co-occurrences correspond to the number of 3-grams
 #' (4-grams in the Le Monde corpus) that contain the two keywords.
+#'
+#' This function corresponds to the \code{Contain} route of the API.
 #'
 #' @param keywords A character vector of length 2
 #' containing the two keyword to search.

@@ -17,9 +17,9 @@ prepare_param <- function(keyword,
     stop("'from' and 'to' should be numeric", call. = FALSE)
   }
 
-  if (corpus == "books" && to > 1950) {
+  if (corpus == "books" && to >= 1940) {
     warning(
-      "The 'books' corpus is only reliable before 1950.",
+      "The 'books' corpus is only reliable before 1940.",
       call. = FALSE
     )
   } else if (corpus == "press" && (from < 1789 || to > 1950)) {

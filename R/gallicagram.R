@@ -4,6 +4,9 @@
 #' Retrieves the number of occurrences of a keyword in one of the corpora
 #' (historical press, Gallica books, Le Monde newspaper) by year, month or day.
 #'
+#' @details
+#' This function corresponds to the \code{Query} route of the API.
+#'
 #' @param keyword A character string. Keyword to search.
 #' @param corpus A character string. The corpus to search. Takes the following
 #' values: "press" for historical press, "books" for Gallica books,

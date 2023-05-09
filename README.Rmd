@@ -20,13 +20,13 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-`rallicaggram` calls the Gallicagram API directly from R. [Gallicagram](https://shiny.ens-paris-saclay.fr/app/gallicagram) enables to build time series of keywords used in a set of French corpora:
+`rallicagram` calls the [Gallicagram API](https://regicid.github.io/api) directly from R. [Gallicagram](https://shiny.ens-paris-saclay.fr/app/gallicagram) enables to build time series of keywords used in a set of French corpora:
 
 - **Historical newspapers** from [Gallica](https://gallica.bnf.fr/) (corpus="press"). A corpus of 3 million issues, reliable from 1789 to 1950. Yearly or monthly resolution.
-- **Public domain books** available on [Gallica](https://gallica.bnf.fr/) (corpus="books"). 300 000 books, more and more reliable through the 16th to 18th centuries and up to 1950. Yearly resolution.
+- **Public domain books** available on [Gallica](https://gallica.bnf.fr/) (corpus="books"). 300 000 books. Increased reliability through the 16th to 18th centuries and up to 1940. Yearly resolution.
 - **Articles published in [*Le Monde*](https://www.lemonde.fr/)** (corpus="lemonde"). Available and reliable from December 1944 to February 22, 2022. Yearly, monthly or daily resolution.
 
-Additional information on a [preprint](https://osf.io/preprints/socarxiv/84bf3/) by Gallicagram developers [
+Additional information can be found on a [preprint](https://osf.io/preprints/socarxiv/84bf3/) by Gallicagram developers [
 Benoît de Courson](https://regicid.github.io/) and [Benjamin Azoulay](https://benjamin-azoulay.my.canva.site/) and on the "Notice" tab of the [Gallicagram website](https://shiny.ens-paris-saclay.fr/app/gallicagram).
 
 ## Installation
@@ -56,7 +56,7 @@ gallicagram(
 
 It enables to draw nice graphs representing the evolution of the use of a term in time.
 
-```{r graph, dpi=300, out.width="85%", fig.align = "center"}
+```{r graph, dpi=300, out.width="70%", fig.align = "center", echo=FALSE, message=FALSE}
 library(mediocrethemes)
 set_mediocre_all()
 
@@ -81,4 +81,4 @@ ex_data |>
 ```
 
 
-Additional functions, to describe close co-occurrences for instance, are also available in this package and described in the [vignette](articles/rallicagram.html).
+Additional functions, to describe close co-occurrences or words associated with a ngram are also available in this package and described in the [vignette](articles/rallicagram.html).

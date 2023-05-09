@@ -156,8 +156,49 @@ knitr::kable(params_pmap)
 
 We can then pass it to `purrr::pmap_dfr` that will call the function `gallicagram` for each of the 4 sets of parameters defined in the rows of `params_pmap`:
 
-```{r, eval=FALSE}
+```{r pmap, eval=FALSE}
 purrr::pmap_dfr(params_pmap, gallicagram)
 ```
 
 This method also apply for the other functions in the `rallicagram` package.
+
+# Graphs
+
+One of the main usage of `Gallicagram` is to plot time series of occurrences in a corpus. Here is an example graph using `ggplot` (and my own ggplot theme [`mediocrethemes`](https://vincentbagilet.github.io/mediocrethemes/). The use of this theme is of course not mandatory and one can remove the line `mediocrethemes::set_mediocre_all()`): 
+
+```{r raw_ts, message=FALSE}
+library(ggplot2)
+mediocrethemes::set_mediocre_all()
+
+ex_data <- gallicagram(
+  keyword = "informatique", 
+  corpus = "lemonde", 
+  from = 1945, 
+  to = 2022,
+  resolution = "yearly"
+)
+
+ex_data |> 
+  ggplot(aes(x = date, y = prop_occur)) + 
+  geom_line() +
+  labs(
+    title = "Evolution of occurrences of 'computering' (informatique)",
+    subtitle = "In the french newspaper Le Monde",
+    x = NULL,
+    y = "Proportion of occurrences"
+  )
+```
+
+We can use `geom_smooth` to plot smoother lines. The parameter `span` controls the smoothing, larger values being associated with less smoothing. Here is the same graph but smoothed:
+
+```{r smoothed_ts, message=FALSE}
+ex_data |> 
+  ggplot(aes(x = date, y = prop_occur)) + 
+  geom_smooth(span = 0.2) +
+  labs(
+    title = "Evolution of occurrences of 'computering' (informatique)",
+    subtitle = "In the french newspaper Le Monde",
+    x = NULL,
+    y = "Proportion of occurrences"
+  )
+```

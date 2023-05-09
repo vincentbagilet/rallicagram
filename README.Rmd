@@ -70,7 +70,7 @@ ex_data <- gallicagram(
 
 ex_data |> 
   ggplot(aes(x = date, y = prop_occur)) + 
-  geom_line(size = 0.7) +
+  geom_line(linewidth = 0.7) +
   labs(
     title = "Evolution of occurrences of 'computering' (informatique)",
     subtitle = "In the french newspaper Le Monde",

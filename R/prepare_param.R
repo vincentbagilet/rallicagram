@@ -13,7 +13,7 @@ prepare_param <- function(keyword,
                           to,
                           resolution) {
 
-  if (!is.numeric(from) | !is.numeric(to)) {
+  if (!is.numeric(from) || !is.numeric(to)) {
     stop("'from' and 'to' should be numeric", call. = FALSE)
   }
 
@@ -21,12 +21,12 @@ prepare_param <- function(keyword,
     stop("'keyword' should be a character string", call. = FALSE)
   }
 
-  if (corpus == "books" & resolution %in% c("monthly", "daily")) {
+  if (corpus == "books" && resolution %in% c("monthly", "daily")) {
     stop(
       "The 'books' corpus is only available at a yearly resolution",
       call. = FALSE
     )
-  } else if (corpus == "press" & resolution %in% c("daily")) {
+  } else if (corpus == "press" && resolution %in% c("daily")) {
     stop(
       "The 'press' corpus is only available at a monthly or yearly resolution",
       call. = FALSE
@@ -43,7 +43,7 @@ prepare_param <- function(keyword,
                           ifelse(corpus == "lemonde", "lemonde",
                             stop("Invalid corpus name", call. = FALSE))))
 
-  keyword_clean <- sub(" ","%20", tolower(keyword))
+  keyword_clean <- sub(" ", "%20", tolower(keyword))
 
   param_clean <- list(
     "keyword" = keyword_clean,

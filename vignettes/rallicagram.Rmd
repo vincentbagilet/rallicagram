@@ -12,7 +12,6 @@ library(knitr)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  # fig.path = "man/figures/README-",
   out.width = "70%",
   dpi = 400,
   fig.align = "center",
@@ -34,9 +33,9 @@ The main function in this package, `gallicagram`, builds a data frame with the y
 
 ```{r ex_occur}
 ex_occur <- gallicagram(
-  keyword = "président", 
-  corpus = "lemonde", 
-  from = 1960, 
+  keyword = "président",
+  corpus = "lemonde",
+  from = 1960,
   to = 1970,
   resolution = "monthly"
 )
@@ -45,8 +44,8 @@ ex_occur <- gallicagram(
 Here is an example of part of the output:
 
 ```{r kable_occur, echo=FALSE}
-ex_occur |> 
-  utils::head() |> 
+ex_occur |>
+  utils::head() |>
   knitr::kable()
 ```
 
@@ -60,9 +59,9 @@ The parameter `keywords` takes a character vector of length two as input.
 
 ```{r ex_cooccur}
 ex_cooccur <- gallicagram_cooccur(
-  keywords = c("président", "république"), 
-  corpus = "lemonde", 
-  from = 1960, 
+  keywords = c("président", "république"),
+  corpus = "lemonde",
+  from = 1960,
   to = 1970,
   resolution = "monthly"
 )
@@ -71,8 +70,8 @@ ex_cooccur <- gallicagram_cooccur(
 Here is an example of part of the output:
 
 ```{r kable_cooccur, echo=FALSE}
-ex_cooccur |> 
-  utils::head() |> 
+ex_cooccur |>
+  utils::head() |>
   knitr::kable()
 ```
 
@@ -86,19 +85,19 @@ library(purrr)
 
 keywords <- c("république", "france")
 
-purrr::map_dfr(keywords, gallicagram, 
+purrr::map_dfr(keywords, gallicagram,
                corpus = "lemonde", from = "1960", to = "1970")
 ```
 
 Note that based on the same principle, we can run the function for a set of various parameters at once. We only need to specify it in a data frame and can pass it to `purrr::pmap_dfr`. One can define the set of parameters in a tibble and use the function `tidyr::crossing` do create all combination of possible searches.
 
 ```{r params_pmap}
-params_pmap <- 
+params_pmap <-
   tibble::tibble(
     from = 1850,
     to = 1870,
     resolution = "yearly"
-  ) |> 
+  ) |>
   tidyr::crossing(corpus = c("press", "books")) |>
   tidyr::crossing(keyword = c("république", "france"))
 ```
@@ -112,5 +111,5 @@ knitr::kable(params_pmap)
 We can then pass it to the function:
 
 ```{r, eval=FALSE}
-purrr::pmap_dfr(params_pmap, gallicagram) 
+purrr::pmap_dfr(params_pmap, gallicagram)
 ```

@@ -17,6 +17,18 @@ prepare_param <- function(keyword,
     stop("'from' and 'to' should be numeric", call. = FALSE)
   }
 
+  if (corpus == "books" && to > 1950) {
+    warning(
+      "The 'books' corpus is only reliable before 1950.",
+      call. = FALSE
+    )
+  } else if (corpus == "press" && (from < 1789 || to > 1950)) {
+    warning(
+      "The 'press' corpus is only reliable between 1789 and 1950.",
+      call. = FALSE
+    )
+  }
+
   if (!is.character(keyword)) {
     stop("'keyword' should be a character string", call. = FALSE)
   }

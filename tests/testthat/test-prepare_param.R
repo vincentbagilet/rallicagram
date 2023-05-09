@@ -37,11 +37,44 @@ test_that("Invalid resolution", {
     "Invalid resolution"
   )
   expect_error(
-    gallicagram(keyword = "président", corpus = "books", resolution = "daily"),
+    gallicagram(
+      keyword = "président",
+      corpus = "books",
+      resolution = "daily",
+      from = 1800,
+      to = 1820
+    ),
     "The 'books' corpus is only available at a yearly resolution"
   )
   expect_error(
-    gallicagram(keyword = "président", corpus = "press", resolution = "daily"),
+    gallicagram(
+      keyword = "président",
+      corpus = "press",
+      from = 1800,
+      to = 1820,
+      resolution = "daily"
+    ),
     "The 'press' corpus is only available at a monthly or yearly resolution"
+  )
+})
+
+test_that("Non reliable corpus", {
+  expect_warning(
+    gallicagram(keyword = "président", "press", from = 1700, to = 1740),
+    "The 'press' corpus is only reliable between 1789 and 1950."
+  )
+  expect_warning(
+    gallicagram(keyword = "président", "press", from = 1960, to = 1970),
+    "The 'press' corpus is only reliable between 1789 and 1950."
+  )
+  expect_warning(
+    gallicagram(
+      keyword = "président",
+      corpus = "books",
+      resolution = "yearly",
+      from = 1960,
+      to = 1970
+    ),
+    "The 'books' corpus is only reliable before 1950."
   )
 })

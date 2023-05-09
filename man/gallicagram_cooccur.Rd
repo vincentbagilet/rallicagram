@@ -6,9 +6,9 @@
 \usage{
 gallicagram_cooccur(
   keywords,
-  corpus = "press",
-  from = 1789,
-  to = 1950,
+  corpus = "lemonde",
+  from = 1945,
+  to = 2022,
   resolution = "monthly"
 )
 }

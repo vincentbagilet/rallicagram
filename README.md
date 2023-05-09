@@ -72,6 +72,35 @@ gallicagram(
 #> # … with 122 more rows, and abbreviated variable name ¹​resolution
 ```
 
+It enables to draw nice graphs representing the evolution of the use of
+a term in time.
+
+``` r
+library(mediocrethemes)
+#> Loading required package: ggplot2
+set_mediocre_all()
+
+ex_data <- gallicagram(
+  keyword = "informatique", 
+  corpus = "lemonde", 
+  from = 1945, 
+  to = 2022,
+  resolution = "yearly"
+)
+
+ex_data |> 
+  ggplot(aes(x = date, y = prop_occur)) + 
+  geom_line(size = 0.7) +
+  labs(
+    title = "Evolution of occurrences of 'computering' (informatique)",
+    subtitle = "In the french newspaper Le Monde",
+    x = NULL,
+    y = "Proportion of occurrences"
+  )
+```
+
+<img src="man/figures/README-graph-1.png" width="85%" style="display: block; margin: auto;" />
+
 Additional functions, to describe close co-occurrences for instance, are
 also available in this package and described in the
-[vignette](rallicagram.html).
+[vignette](articles/rallicagram.html).

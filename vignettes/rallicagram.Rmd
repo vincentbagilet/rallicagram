@@ -93,9 +93,6 @@ purrr::map_dfr(keywords, gallicagram,
 Note that based on the same principle, we can run the function for a set of various parameters at once. We only need to specify it in a data frame and can pass it to `purrr::pmap_dfr`. One can define the set of parameters in a tibble and use the function `tidyr::crossing` do create all combination of possible searches.
 
 ```{r params_pmap}
-library(tibble)
-library(tidyr)
-
 params_pmap <- 
   tibble::tibble(
     from = 1850,

@@ -2,4 +2,5 @@
 
 export(gallicagram)
 export(gallicagram_cooccur)
+export(gallicagram_follows)
 importFrom(rlang,.data)

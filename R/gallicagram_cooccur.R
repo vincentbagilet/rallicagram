@@ -18,9 +18,9 @@
 #' @examples
 #' gallicagram_cooccur(c("président", "mauvais"))
 gallicagram_cooccur <- function(keywords,
-                                corpus = "press",
-                                from = 1789,
-                                to = 1950,
+                                corpus = "lemonde",
+                                from = 1945,
+                                to = 2022,
                                 resolution = "monthly") {
 
   if (length(keywords) != 2) {

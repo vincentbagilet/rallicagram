@@ -55,6 +55,33 @@ gallicagram(
 )
 ```
 
-Additional functions, to describe close co-occurrences for instance, are also available in this package and described in the [vignette](rallicagram.html).
+It enables to draw nice graphs representing the evolution of the use of a term in time.
+
+```{r graph, dpi=300, out.width="85%", fig.align = "center"}
+library(mediocrethemes)
+set_mediocre_all()
+
+ex_data <- gallicagram(
+  keyword = "informatique", 
+  corpus = "lemonde", 
+  from = 1945, 
+  to = 2022,
+  resolution = "yearly"
+)
+
+ex_data |> 
+  ggplot(aes(x = date, y = prop_occur)) + 
+  geom_line(size = 0.7) +
+  labs(
+    title = "Evolution of occurrences of 'computering' (informatique)",
+    subtitle = "In the french newspaper Le Monde",
+    x = NULL,
+    y = "Proportion of occurrences"
+  )
+  
+```
+
+
+Additional functions, to describe close co-occurrences for instance, are also available in this package and described in the [vignette](articles/rallicagram.html).
 
 

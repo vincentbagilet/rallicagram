@@ -16,5 +16,7 @@ Imports:
     tidyselect
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    tibble,
+    tidyr
 VignetteBuilder: knitr

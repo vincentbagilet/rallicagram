@@ -21,9 +21,9 @@
 #' @examples
 #' gallicagram("président")
 gallicagram <- function(keyword,
-                        corpus = "press",
-                        from = 1789,
-                        to = 1950,
+                        corpus = "lemonde",
+                        from = 1945,
+                        to = 2022,
                         resolution = "monthly") {
 
   if (length(keyword) != 1) {

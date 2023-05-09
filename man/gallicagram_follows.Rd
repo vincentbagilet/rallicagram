@@ -14,7 +14,7 @@ gallicagram_follows(
 )
 }
 \arguments{
-\item{keyword}{A character string. Keyword to search.}
+\item{keyword}{A character string. Keyword to search associations for.}
 
 \item{corpus}{A character string. The corpus to search. Takes the following
 values: "press" for historical press, "books" for Gallica books,

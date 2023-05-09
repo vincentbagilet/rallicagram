@@ -13,12 +13,24 @@ prepare_param <- function(keyword,
                           to,
                           resolution) {
 
-  if (!is.numeric(as.numeric(from)) | !is.numeric(as.numeric(to))) {
+  if (!is.numeric(from) | !is.numeric(to)) {
     stop("'from' and 'to' should be numeric", call. = FALSE)
   }
 
   if (!is.character(keyword)) {
     stop("'keyword' should be a character string", call. = FALSE)
+  }
+
+  if (corpus == "books" & resolution %in% c("monthly", "daily")) {
+    stop(
+      "The 'books' corpus is only available at a yearly resolution",
+      call. = FALSE
+    )
+  } else if (corpus == "press" & resolution %in% c("daily")) {
+    stop(
+      "The 'press' corpus is only available at a monthly or yearly resolution",
+      call. = FALSE
+    )
   }
 
   resolution_french <- ifelse(resolution == "yearly", "annee",
@@ -41,4 +53,3 @@ prepare_param <- function(keyword,
 
   return(param_clean)
 }
-

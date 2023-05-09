@@ -17,6 +17,8 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
+    testthat (>= 3.0.0),
     tibble,
     tidyr
 VignetteBuilder: knitr
+Config/testthat/edition: 3

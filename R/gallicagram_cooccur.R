@@ -55,4 +55,3 @@ gallicagram_cooccur <- function(keywords,
 
   return(output)
 }
-

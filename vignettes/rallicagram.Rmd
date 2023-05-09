@@ -114,8 +114,3 @@ We can then pass it to the function:
 ```{r, eval=FALSE}
 purrr::pmap_dfr(params_pmap, gallicagram) 
 ```
-
-
-
-
-

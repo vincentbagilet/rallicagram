@@ -17,6 +17,7 @@
 #' in the "lemonde" corpus. Searching the "press" corpus can require a long
 #' running time.
 #'
+#' @param keyword A character string. Keyword to search associations for.
 #' @param nb_joker An integer. The number of most frequent occurrences to
 #'  return.
 #' @param after A boolean. Whether to consider only words following the keyword
@@ -61,8 +62,13 @@ gallicagram_follows <- function(keyword,
                   ifelse(after, "True", "False"),
                   sep = "") |>
     utils::read.csv() |>
-    dplyr::as_tibble()
+    dplyr::as_tibble() |>
+    dplyr::mutate(
+      keyword = keyword,
+      corpus = param_clean$corpus,
+      from = from,
+      to = to
+    )
 
   return(output)
 }
-

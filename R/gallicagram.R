@@ -55,4 +55,3 @@ gallicagram <- function(keyword,
 
   return(output)
 }
-

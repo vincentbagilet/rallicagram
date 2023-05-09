@@ -26,7 +26,7 @@ tidy_gallicagram <- function(data, corpus, resolution) {
       tidyselect::any_of(c(month = "mois", day = "jour"))
     ) |>
     dplyr::mutate(
-      prop = .data$n/.data$total,
+      prop = .data$n / .data$total,
       source = corpus,
       resolution = resolution,
       month_pad = ifelse(resolution == "yearly", 01, .data$month),
@@ -39,4 +39,3 @@ tidy_gallicagram <- function(data, corpus, resolution) {
                   tidyselect::everything(), -"month_pad", -"day_pad")
 
 }
-

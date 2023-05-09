@@ -51,7 +51,7 @@ ex_occur |>
 
 ## Co-occurrences
 
-`gallicagram`, builds a data frame with the yearly, monthly or daily proportion of mentions of close co-occurrences of two keywords in one of the three corpora between two specified dates.
+`gallicagram_cooccur` builds a data frame with the yearly, monthly or daily proportion of mentions of close co-occurrences of two keywords in one of the three corpora between two specified dates.
 
 Close co-occurrences correspond to the number of 3-grams (4-grams in the *Le Monde* corpus) that contain the two keywords.
 
@@ -75,6 +75,30 @@ ex_cooccur |>
   knitr::kable()
 ```
 
+## Associations
+
+`gallicagram_associated`  builds a data frame the words the most frequently used following a given ngram over the period. 
+
+For instance "camarade" is often followed by "staline" or "khrouchtchev" in Le Monde. The function returns the most frequent ngrams of the form "camarade \*". Setting `after = FALSE` also includes the most frequent ngrams of the form "\* camarade".
+
+The keyword can be a 2-gram in the "books" and "press" corpora and a 3-gram in the "lemonde" corpus. Searching the "press" corpus can require a long running time.
+
+```{r ex_assoc}
+ex_associated <- gallicagram_associated(
+  keyword = "camarade",
+  corpus = "lemonde",
+  from = 1960,
+  to = 1970
+)
+```
+
+Here is an example of part of the output:
+
+```{r kable_assoc, echo=FALSE}
+ex_associated |>
+  utils::head() |>
+  knitr::kable()
+```
 
 # Searching several keywords
 

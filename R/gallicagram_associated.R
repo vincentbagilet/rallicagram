@@ -24,14 +24,15 @@
 #' and not those preceding. Set to \code{TRUE} by default.
 #' @inheritParams gallicagram
 #'
-#' @returns A tibble. With the most frequent ngrams containing the keyword
-#' mentioned (\code{ngram}) and the number of occurrences over the period
-#' (\code{nb_occur}).
+#' @returns A tibble. With the most frequent ngrams  containing the
+#' \code{keyword} mentioned (\code{ngram}) and the number of occurrences
+#' over the period (\code{nb_occur}). It also returns the input parameters
+#' \code{keyword}, \code{corpus}, \code{from} and \code{to}.
 #'
 #' @export
 #' @examples
-#' gallicagram_follows("camarade")
-gallicagram_follows <- function(keyword,
+#' gallicagram_associated("camarade")
+gallicagram_associated <- function(keyword,
                                 corpus = "lemonde",
                                 from = 1945,
                                 to = 2022,
@@ -63,6 +64,7 @@ gallicagram_follows <- function(keyword,
                   sep = "") |>
     utils::read.csv() |>
     dplyr::as_tibble() |>
+    dplyr::rename("nb_occur" = "tot", "ngram" = "gram") |>
     dplyr::mutate(
       keyword = keyword,
       corpus = param_clean$corpus,

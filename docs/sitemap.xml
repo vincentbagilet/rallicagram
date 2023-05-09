@@ -25,10 +25,10 @@
     <loc>/reference/gallicagram.html</loc>
   </url>
   <url>
-    <loc>/reference/gallicagram_cooccur.html</loc>
+    <loc>/reference/gallicagram_associated.html</loc>
   </url>
   <url>
-    <loc>/reference/gallicagram_follows.html</loc>
+    <loc>/reference/gallicagram_cooccur.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>

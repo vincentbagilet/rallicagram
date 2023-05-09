@@ -82,5 +82,3 @@ ex_data |>
 
 
 Additional functions, to describe close co-occurrences for instance, are also available in this package and described in the [vignette](articles/rallicagram.html).
-
-

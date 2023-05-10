@@ -1,7 +1,7 @@
 #' Close co-occurrences of two keywords in a Gallicagram copus
 #'
 #' @description
-#' Retrieves the number of close co-occurrences of two keywords in one of
+#' Retrieves the proportion of close co-occurrences of two keywords in one of
 #' the corpora (historical press, Gallica books, Le Monde newspaper)
 #' by year, month or day.
 #'

@@ -13,9 +13,10 @@ directly from R.
 [Gallicagram](https://shiny.ens-paris-saclay.fr/app/gallicagram) enables
 to build time series of keywords used in a set of French corpora:
 
-- **Historical newspapers** from [Gallica](https://gallica.bnf.fr/)
-  (corpus=“press”). A corpus of 3 million issues, reliable from 1789
-  to 1950. Yearly or monthly resolution.
+- **Historical newspapers** from [Gallica](https://gallica.bnf.fr/), the
+  digital library of the French National Library (Bibliothèque nationale
+  de France, BnF) (corpus=“press”). A corpus of 3 million issues,
+  reliable from 1789 to 1950. Yearly or monthly resolution.
 - **Public domain books** available on
   [Gallica](https://gallica.bnf.fr/) (corpus=“books”). 300 000 books.
   Increased reliability through the 16th to 18th centuries and up

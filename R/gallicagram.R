@@ -1,7 +1,7 @@
 #' Occurrences of a keyword in a Gallicagram copus
 #'
 #' @description
-#' Retrieves the number of occurrences of a keyword in one of the corpora
+#' Retrieves the proportion of occurrences of a keyword in one of the corpora
 #' (historical press, Gallica books, Le Monde newspaper) by year, month or day.
 #'
 #' @details

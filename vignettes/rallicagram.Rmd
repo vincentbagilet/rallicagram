@@ -54,6 +54,16 @@ ex_occur |>
   knitr::kable()
 ```
 
+## Occurences for all copora and longest period
+
+The function `gallicagram_all` enables to retrieve the yearly proportion of occurrences of a keyword in each of the corpora for the longest time range for which the data is available and reliable. 
+
+It only takes one parameter: the keyword of interest:
+
+```{r ex_all, eval=FALSE}
+gallicagram_all("président")
+```
+
 ## Co-occurrences
 
 `gallicagram_cooccur` builds a data frame with the yearly, monthly or daily proportion of mentions of close co-occurrences of two keywords in one of the three corpora between two specified dates.
@@ -189,9 +199,9 @@ ex_data |>
   )
 ```
 
-We can use `geom_smooth` to plot smoother lines. The parameter `span` controls the smoothing, larger values being associated with less smoothing. Here is the same graph but smoothed:
+We can use `geom_smooth` to plot smoother lines. When using the default loess smoothing, the parameter `span` controls the amount of smoothing. Larger values are associated with less smoothing. Here is the same graph but smoothed:
 
-```{r smoothed_ts, message=FALSE}
+```{r smoothed_ts}
 ex_data |> 
   ggplot(aes(x = date, y = prop_occur)) + 
   geom_smooth(span = 0.2) +

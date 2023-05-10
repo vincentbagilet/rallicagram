@@ -41,7 +41,7 @@ the \code{year} and
 potentially the \code{month} and \code{day} of the observation.
 }
 \description{
-Retrieves the number of occurrences of a keyword in one of the corpora
+Retrieves the proportion of occurrences of a keyword in one of the corpora
 (historical press, Gallica books, Le Monde newspaper) by year, month or day.
 }
 \details{

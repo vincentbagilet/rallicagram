@@ -42,7 +42,7 @@ the \code{year} and
 potentially the \code{month} and \code{day} of the observation.
 }
 \description{
-Retrieves the number of close co-occurrences of two keywords in one of
+Retrieves the proportion of close co-occurrences of two keywords in one of
 the corpora (historical press, Gallica books, Le Monde newspaper)
 by year, month or day.
 }

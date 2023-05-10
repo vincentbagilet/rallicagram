@@ -19,8 +19,8 @@
 #' running time.
 #'
 #' @param keyword A character string. Keyword to search associations for.
-#' @param nb_joker An integer. The number of most frequent occurrences to
-#'  return.
+#' @param nb_associated_words An integer. The number of most frequently
+#' associated words to return.
 #' @param after A boolean. Whether to consider only words following the keyword
 #' and not those preceding. Set to \code{TRUE} by default.
 #' @param stopwords A character vector of stopwords to remove.
@@ -44,7 +44,7 @@ gallicagram_associated <- function(keyword,
                                 corpus = "lemonde",
                                 from = 1945,
                                 to = 2022,
-                                nb_joker = 20,
+                                nb_associated_words = 20,
                                 after = TRUE,
                                 stopwords = NULL) {
 
@@ -67,7 +67,7 @@ gallicagram_associated <- function(keyword,
                   "&to=",
                   to,
                   "&n_joker=",
-                  nb_joker,
+                  nb_associated_words,
                   "&after=",
                   ifelse(after, "True", "False"),
                   sep = "") |>

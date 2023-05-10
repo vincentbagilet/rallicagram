@@ -119,7 +119,7 @@ ex_associated <- gallicagram_associated(
   corpus = "lemonde",
   from = 1960,
   to = 1970,
-  nb_joker = 10
+  nb_associated_words = 10
 )
 ```
 
@@ -138,7 +138,7 @@ ex_associated_stopwords <- gallicagram_associated(
   corpus = "lemonde",
   from = 1960,
   to = 1970,
-  nb_joker = 10,
+  nb_associated_words = 10,
   stopwords = lsa::stopwords_fr
 )
 ```
@@ -151,7 +151,7 @@ ex_associated_stopwords |>
   knitr::kable()
 ```
 
-Note that it reduces the number of associated words returned.  
+Note that it reduces the number of associated words returned and that it does not correspond to `nb_associated_words` anymore.
 
 # Searching several keywords
 

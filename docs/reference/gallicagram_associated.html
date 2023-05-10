@@ -54,7 +54,7 @@ It can also include the words that precede by setting <code>after = FALSE</code>
 <span>  corpus <span class="op">=</span> <span class="st">"lemonde"</span>,</span>
 <span>  from <span class="op">=</span> <span class="fl">1945</span>,</span>
 <span>  to <span class="op">=</span> <span class="fl">2022</span>,</span>
-<span>  nb_joker <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  nb_associated_words <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>  after <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  stopwords <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -80,9 +80,9 @@ values: "press" for historical press, "books" for Gallica books,
 <dd><p>A number. End year.</p></dd>
 
 
-<dt>nb_joker</dt>
-<dd><p>An integer. The number of most frequent occurrences to
-return.</p></dd>
+<dt>nb_associated_words</dt>
+<dd><p>An integer. The number of most frequently
+associated words to return.</p></dd>
 
 
 <dt>after</dt>

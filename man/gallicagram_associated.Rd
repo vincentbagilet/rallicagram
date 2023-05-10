@@ -9,7 +9,7 @@ gallicagram_associated(
   corpus = "lemonde",
   from = 1945,
   to = 2022,
-  nb_joker = 20,
+  nb_associated_words = 20,
   after = TRUE,
   stopwords = NULL
 )
@@ -25,8 +25,8 @@ values: "press" for historical press, "books" for Gallica books,
 
 \item{to}{A number. End year.}
 
-\item{nb_joker}{An integer. The number of most frequent occurrences to
-return.}
+\item{nb_associated_words}{An integer. The number of most frequently
+associated words to return.}
 
 \item{after}{A boolean. Whether to consider only words following the keyword
 and not those preceding. Set to \code{TRUE} by default.}

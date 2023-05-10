@@ -31,9 +31,10 @@ return.}
 and not those preceding. Set to \code{TRUE} by default.}
 }
 \value{
-A tibble. With the most frequent ngrams  containing the
-\code{keyword} mentioned (\code{ngram}) and the number of occurrences
-over the period (\code{nb_occur}). It also returns the input parameters
+A tibble. With the most frequent ngrams containing the
+\code{keyword} mentioned (\code{ngram}), the \code{associated_word},
+and the number of occurrences over the period (\code{nb_occur}).
+It also returns the input parameters
 \code{keyword}, \code{corpus}, \code{from} and \code{to}.
 }
 \description{

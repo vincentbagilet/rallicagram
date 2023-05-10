@@ -25,9 +25,12 @@
 #' and not those preceding. Set to \code{TRUE} by default.
 #' @inheritParams gallicagram
 #'
-#' @returns A tibble. With the most frequent ngrams  containing the
-#' \code{keyword} mentioned (\code{ngram}) and the number of occurrences
-#' over the period (\code{nb_occur}). It also returns the input parameters
+#' @importFrom rlang .data
+#'
+#' @returns A tibble. With the most frequent ngrams containing the
+#' \code{keyword} mentioned (\code{ngram}), the \code{associated_word},
+#' and the number of occurrences over the period (\code{nb_occur}).
+#' It also returns the input parameters
 #' \code{keyword}, \code{corpus}, \code{from} and \code{to}.
 #'
 #' @export
@@ -67,6 +70,11 @@ gallicagram_associated <- function(keyword,
     dplyr::as_tibble() |>
     dplyr::rename("nb_occur" = "tot", "ngram" = "gram") |>
     dplyr::mutate(
+      associated_word = sub(
+        pattern = unique(paste("\\s?", keyword,"\\s?", sep = "")),
+        replacement = "",
+        x = .data$ngram
+      ),
       keyword = keyword,
       corpus = param_clean$corpus,
       from = from,

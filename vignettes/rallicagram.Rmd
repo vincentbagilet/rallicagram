@@ -118,17 +118,40 @@ ex_associated <- gallicagram_associated(
   keyword = "camarade",
   corpus = "lemonde",
   from = 1960,
-  to = 1970
+  to = 1970,
+  nb_joker = 10
 )
 ```
 
-Here is an example of part of the output:
+The most often associated terms are:
 
 ```{r kable_assoc, echo=FALSE}
 ex_associated |>
+  knitr::kable()
+```
+
+We can see that there are stopwords included in this list. Since they may not be informative, we may want to remove them. We can do so by supplying a list of stopwords to the `stopwords` parameter of the function. For instance, we can use the list in the `lsa` package, `lsa::stopwords_fr`:
+
+```{r ex_assoc_stopwords}
+ex_associated_stopwords <- gallicagram_associated(
+  keyword = "camarade",
+  corpus = "lemonde",
+  from = 1960,
+  to = 1970,
+  nb_joker = 10,
+  stopwords = lsa::stopwords_fr
+)
+```
+
+The most often associated terms excluding stopwords are:
+
+```{r kable_assoc_stopwords, echo=FALSE}
+ex_associated_stopwords |>
   utils::head() |>
   knitr::kable()
 ```
+
+Note that it reduces the number of associated words returned.  
 
 # Searching several keywords
 

@@ -10,7 +10,8 @@ gallicagram_associated(
   from = 1945,
   to = 2022,
   nb_joker = 20,
-  after = TRUE
+  after = TRUE,
+  stopwords = NULL
 )
 }
 \arguments{
@@ -29,6 +30,11 @@ return.}
 
 \item{after}{A boolean. Whether to consider only words following the keyword
 and not those preceding. Set to \code{TRUE} by default.}
+
+\item{stopwords}{A character vector of stopwords to remove.
+Can for instance be \code{lsa::stopwords_fr}.
+Removed after withdrawing apostrophes and letters preceding them.
+If \code{NULL} does not remove any stopwords.}
 }
 \value{
 A tibble. With the most frequent ngrams containing the

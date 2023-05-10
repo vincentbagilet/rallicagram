@@ -23,6 +23,10 @@
 #'  return.
 #' @param after A boolean. Whether to consider only words following the keyword
 #' and not those preceding. Set to \code{TRUE} by default.
+#' @param stopwords A character vector of stopwords to remove.
+#' Can for instance be \code{lsa::stopwords_fr}.
+#' Removed after withdrawing apostrophes and letters preceding them.
+#' If \code{NULL} does not remove any stopwords.
 #' @inheritParams gallicagram
 #'
 #' @importFrom rlang .data
@@ -41,7 +45,8 @@ gallicagram_associated <- function(keyword,
                                 from = 1945,
                                 to = 2022,
                                 nb_joker = 20,
-                                after = TRUE) {
+                                after = TRUE,
+                                stopwords = NULL) {
 
   if (length(keyword) != 1) {
     stop(
@@ -80,6 +85,22 @@ gallicagram_associated <- function(keyword,
       from = from,
       to = to
     )
+
+  #remove stopwords
+  if (!is.null(stopwords)) {
+    output <- output |>
+      dplyr::mutate( #remove apostrophes
+        associated_word = sub(
+          pattern = "\\w'",
+          replacement = "",
+          x = .data$associated_word
+        )
+      ) |>
+      dplyr::anti_join(
+        dplyr::tibble(associated_word = stopwords),
+        by = "associated_word"
+      )
+  }
 
   return(output)
 }

@@ -55,7 +55,8 @@ It can also include the words that precede by setting <code>after = FALSE</code>
 <span>  from <span class="op">=</span> <span class="fl">1945</span>,</span>
 <span>  to <span class="op">=</span> <span class="fl">2022</span>,</span>
 <span>  nb_joker <span class="op">=</span> <span class="fl">20</span>,</span>
-<span>  after <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  after <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  stopwords <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -87,6 +88,13 @@ return.</p></dd>
 <dt>after</dt>
 <dd><p>A boolean. Whether to consider only words following the keyword
 and not those preceding. Set to <code>TRUE</code> by default.</p></dd>
+
+
+<dt>stopwords</dt>
+<dd><p>A character vector of stopwords to remove.
+Can for instance be <code><a href="https://rdrr.io/pkg/lsa/man/stopwords.html" class="external-link">lsa::stopwords_fr</a></code>.
+Removed after withdrawing apostrophes and letters preceding them.
+If <code>NULL</code> does not remove any stopwords.</p></dd>
 
 </dl></div>
     <div id="value">

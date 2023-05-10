@@ -93,7 +93,7 @@ ex_cooccur |>
 It might also be helpful to have the keywords in two separate columns. To do that, one can use `tidyr::separate`:
 
 ```{r cooccur_sep}
-ex_cooccur_sep <- ex_cooccur |> 
+ex_cooccur_sep <- ex_cooccur |>
   tidyr::separate(keywords, into = c("keyword_1", "keyword_2"), sep = "&")
 ```
 
@@ -204,15 +204,15 @@ library(ggplot2)
 mediocrethemes::set_mediocre_all()
 
 ex_data <- gallicagram(
-  keyword = "informatique", 
-  corpus = "lemonde", 
-  from = 1945, 
+  keyword = "informatique",
+  corpus = "lemonde",
+  from = 1945,
   to = 2022,
   resolution = "yearly"
 )
 
-ex_data |> 
-  ggplot(aes(x = date, y = prop_occur)) + 
+ex_data |>
+  ggplot(aes(x = date, y = prop_occur)) +
   geom_line() +
   labs(
     title = "Evolution of occurrences of 'computering' (informatique)",
@@ -225,8 +225,8 @@ ex_data |>
 We can use `geom_smooth` to plot smoother lines. When using the default loess smoothing, the parameter `span` controls the amount of smoothing. Larger values are associated with less smoothing. Here is the same graph but smoothed:
 
 ```{r smoothed_ts}
-ex_data |> 
-  ggplot(aes(x = date, y = prop_occur)) + 
+ex_data |>
+  ggplot(aes(x = date, y = prop_occur)) +
   geom_smooth(span = 0.2) +
   labs(
     title = "Evolution of occurrences of 'computering' (informatique)",

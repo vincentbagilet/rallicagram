@@ -313,7 +313,7 @@ length two as input.</p>
 <p>It might also be helpful to have the keywords in two separate
 columns. To do that, one can use <code><a href="https://tidyr.tidyverse.org/reference/separate.html" class="external-link">tidyr::separate</a></code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ex_cooccur_sep</span> <span class="op">&lt;-</span> <span class="va">ex_cooccur</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="va">ex_cooccur_sep</span> <span class="op">&lt;-</span> <span class="va">ex_cooccur</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html" class="external-link">separate</a></span><span class="op">(</span><span class="va">keywords</span>, into <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"keyword_1"</span>, <span class="st">"keyword_2"</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"&amp;"</span><span class="op">)</span></span></code></pre></div>
 <p>This yields:</p>
 <table class="table">
@@ -651,7 +651,7 @@ it does not correspond to <code>nb_associated_words</code> anymore.</p>
 <h2 id="searching-several-keywords">Searching several keywords<a class="anchor" aria-label="anchor" href="#searching-several-keywords"></a>
 </h2>
 <p>In order to search several keywords at once, we can use the function
-<code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::map_dfr</a></code>. It takes as parameters the vector of
+<code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">purrr::map_dfr</a></code>. It takes as parameters the vector of
 keywords to search, followed by the function (<code>gallicagram</code>)
 and additional arguments to pass to the function. It returns a unique
 data frame with the results for searches corresponding to each keyword,
@@ -661,14 +661,14 @@ basically binding the dataframes produced by each keyword search.</p>
 <span></span>
 <span><span class="va">keywords</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"république"</span>, <span class="st">"france"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">keywords</span>, <span class="va">gallicagram</span>,</span>
+<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">keywords</span>, <span class="va">gallicagram</span>,</span>
 <span>               corpus <span class="op">=</span> <span class="st">"lemonde"</span>, from <span class="op">=</span> <span class="st">"1960"</span>, to <span class="op">=</span> <span class="st">"1970"</span><span class="op">)</span></span></code></pre></div>
 <p>Bbased on that same principle, we can run several searches at onces,
 varying all parameters, not only the keyword searched. To do that, we
 can specify the series of parameters in a data frame, each row
 corresponding to a set of parameters to run the <code>gallicagram</code>
 function for. We then pass this data frame to
-<code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::pmap_dfr</a></code>.</p>
+<code><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">purrr::pmap_dfr</a></code>.</p>
 <p>To specify the set of parameters, we can either build the parameters
 data frame by hand. It is also often helpful to use
 <code><a href="https://tidyr.tidyverse.org/reference/expand.html" class="external-link">tidyr::crossing</a></code> to create all combination of possible
@@ -722,11 +722,11 @@ searches.</p>
 </tr>
 </tbody>
 </table>
-<p>We can then pass it to <code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::pmap_dfr</a></code> that will call
+<p>We can then pass it to <code><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">purrr::pmap_dfr</a></code> that will call
 the function <code>gallicagram</code> for each of the 4 sets of
 parameters defined in the rows of <code>params_pmap</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">pmap_dfr</a></span><span class="op">(</span><span class="va">params_pmap</span>, <span class="va">gallicagram</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">pmap_dfr</a></span><span class="op">(</span><span class="va">params_pmap</span>, <span class="va">gallicagram</span><span class="op">)</span></span></code></pre></div>
 <p>This method also apply for the other functions in the
 <code>rallicagram</code> package.</p>
 </div>
@@ -743,15 +743,15 @@ line <code><a href="https://vincentbagilet.github.io/mediocrethemes/reference/se
 <span><span class="fu">mediocrethemes</span><span class="fu">::</span><span class="fu"><a href="https://vincentbagilet.github.io/mediocrethemes/reference/set_mediocre_all.html" class="external-link">set_mediocre_all</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ex_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gallicagram.html">gallicagram</a></span><span class="op">(</span></span>
-<span>  keyword <span class="op">=</span> <span class="st">"informatique"</span>, </span>
-<span>  corpus <span class="op">=</span> <span class="st">"lemonde"</span>, </span>
-<span>  from <span class="op">=</span> <span class="fl">1945</span>, </span>
+<span>  keyword <span class="op">=</span> <span class="st">"informatique"</span>,</span>
+<span>  corpus <span class="op">=</span> <span class="st">"lemonde"</span>,</span>
+<span>  from <span class="op">=</span> <span class="fl">1945</span>,</span>
 <span>  to <span class="op">=</span> <span class="fl">2022</span>,</span>
 <span>  resolution <span class="op">=</span> <span class="st">"yearly"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">ex_data</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">prop_occur</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span><span class="va">ex_data</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">prop_occur</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Evolution of occurrences of 'computering' (informatique)"</span>,</span>
@@ -765,8 +765,8 @@ using the default loess smoothing, the parameter <code>span</code>
 controls the amount of smoothing. Larger values are associated with less
 smoothing. Here is the same graph but smoothed:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ex_data</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">prop_occur</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<code class="sourceCode R"><span><span class="va">ex_data</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">prop_occur</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>span <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Evolution of occurrences of 'computering' (informatique)"</span>,</span>

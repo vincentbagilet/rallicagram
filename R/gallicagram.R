@@ -14,9 +14,9 @@
 #' @param from A number. Starting year.
 #' @param to A number. End year.
 #' @param resolution A character string.
-#' For Le Monde can be either "yearly", "monthly" or "daily".
-#' For historical press can be either "yearly", "monthly".
-#' For books can only only be. "yearly".
+#' For lemonde can be either "yearly", "monthly" or "daily".
+#' For press can be either "yearly" or "monthly".
+#' For books can only be "yearly".
 #'
 #' @inherit tidy_gallicagram return
 #'

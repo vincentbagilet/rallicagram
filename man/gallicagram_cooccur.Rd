@@ -25,9 +25,8 @@ values: "press" for historical press, "books" for Gallica books,
 \item{to}{A number. End year.}
 
 \item{resolution}{A character string.
-For Le Monde can be either "yearly", "monthly" or "daily".
-For historical press can be either "yearly", "monthly".
-For books can only only be. "yearly".}
+For press and lemonde can be either "yearly" or "monthly".
+For books can only be "yearly".}
 }
 \value{
 A tibble. With the \code{keyword},

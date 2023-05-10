@@ -76,7 +76,7 @@ gallicagram_associated <- function(keyword,
     dplyr::rename("n_occur" = "tot", "ngram" = "gram") |>
     dplyr::mutate(
       associated_word = sub(
-        pattern = unique(paste("\\s?", keyword,"\\s?", sep = "")),
+        pattern = unique(paste("\\s?", keyword, "\\s?", sep = "")),
         replacement = "",
         x = .data$ngram
       ),

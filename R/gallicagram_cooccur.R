@@ -13,9 +13,14 @@
 #'
 #' @param keywords A character vector of length 2
 #' containing the two keyword to search.
+#' @param resolution A character string.
+#' For press and lemonde can be either "yearly" or "monthly".
+#' For books can only be "yearly".
 #' @inheritParams gallicagram
 #'
 #' @inherit tidy_gallicagram return
+#'
+#' @importFrom rlang .data
 #'
 #' @export
 #' @examples
@@ -45,8 +50,6 @@ gallicagram_cooccur <- function(keywords,
                   from,
                   "&to=",
                   to,
-                  "&resolution=",
-                  param_clean$resolution,
                   sep = "") |>
     tidy_gallicagram(corpus, resolution) |>
     dplyr::rename("keywords" = "keyword") |>
@@ -55,6 +58,21 @@ gallicagram_cooccur <- function(keywords,
       "n_ngrams" = "total",
       "prop_cooccur" = "prop"
     )
+
+  #can't specify the resolution in the API. Always monthly for press and lemonde
+  #thus, average by hand
+  if (resolution == "yearly" && corpus %in% c("press", "lemonde")) {
+    output <- output |>
+      dplyr::group_by(.data$year) |>
+      dplyr::mutate(
+        n_cooccur = sum(.data$n_cooccur),
+        n_ngrams = sum(.data$n_ngrams),
+        prop_cooccur = .data$n_cooccur / .data$n_ngrams
+      ) |>
+      dplyr::ungroup() |>
+      dplyr::select(-"month") |>
+      dplyr::distinct()
+  }
 
   return(output)
 }

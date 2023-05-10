@@ -93,9 +93,9 @@ For books can only only be. "yearly".</p></dd>
     
 
 <p>A tibble. With the <code>keyword</code>,
-the number of occurrences (<code>nb_occur</code>) or co-occurrences
-(<code>nb_cooccur</code>), the total number of ngrams over the period of a
-given observation (<code>nb_grams</code> or <code>nb_ngrams</code>),
+the number of occurrences (<code>n_occur</code>) or co-occurrences
+(<code>n_cooccur</code>), the total number of ngrams over the period of a
+given observation (<code>n_grams</code> or <code>n_ngrams</code>),
 the proportion of occurrences or co-occurrences of the keyword(s) over the
 period of a given observation (<code>prop_occcur</code> or <code>prop_coocccur</code>),
 the date at the beginning of the period of a given observation (<code>date</code>),
@@ -114,7 +114,7 @@ potentially the <code>month</code> and <code>day</code> of the observation.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">gallicagram_cooccur</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"président"</span>, <span class="st">"mauvais"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 936 × 9</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    date       keywords        nb_co…¹ nb_ng…² prop_…³  year month source resol…⁴</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    date       keywords        n_coo…¹ n_ngr…² prop_…³  year month source resol…⁴</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1945-01-01 président&amp;mauv…       0  <span style="text-decoration: underline;">166</span>925       0  <span style="text-decoration: underline;">1</span>945     1 lemon… monthly</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1945-02-01 président&amp;mauv…       0  <span style="text-decoration: underline;">162</span>907       0  <span style="text-decoration: underline;">1</span>945     2 lemon… monthly</span>
@@ -126,7 +126,7 @@ potentially the <code>month</code> and <code>day</code> of the observation.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1945-08-01 président&amp;mauv…       0  <span style="text-decoration: underline;">239</span>788       0  <span style="text-decoration: underline;">1</span>945     8 lemon… monthly</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1945-09-01 président&amp;mauv…       0  <span style="text-decoration: underline;">246</span>492       0  <span style="text-decoration: underline;">1</span>945     9 lemon… monthly</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1945-10-01 président&amp;mauv…       0  <span style="text-decoration: underline;">254</span>720       0  <span style="text-decoration: underline;">1</span>945    10 lemon… monthly</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 926 more rows, and abbreviated variable names ¹​nb_cooccur, ²​nb_ngrams,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 926 more rows, and abbreviated variable names ¹​n_cooccur, ²​n_ngrams,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​prop_cooccur, ⁴​resolution</span></span>
 </code></pre></div>
     </div>

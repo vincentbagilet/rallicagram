@@ -19,7 +19,7 @@
 #' running time.
 #'
 #' @param keyword A character string. Keyword to search associations for.
-#' @param nb_associated_words An integer. The number of most frequently
+#' @param n_associated_words An integer. The number of most frequently
 #' associated words to return.
 #' @param after A boolean. Whether to consider only words following the keyword
 #' and not those preceding. Set to \code{TRUE} by default.
@@ -33,7 +33,7 @@
 #'
 #' @returns A tibble. With the most frequent ngrams containing the
 #' \code{keyword} mentioned (\code{ngram}), the \code{associated_word},
-#' and the number of occurrences over the period (\code{nb_occur}).
+#' and the number of occurrences over the period (\code{n_occur}).
 #' It also returns the input parameters
 #' \code{keyword}, \code{corpus}, \code{from} and \code{to}.
 #'
@@ -44,7 +44,7 @@ gallicagram_associated <- function(keyword,
                                 corpus = "lemonde",
                                 from = 1945,
                                 to = 2022,
-                                nb_associated_words = 20,
+                                n_associated_words = 20,
                                 after = TRUE,
                                 stopwords = NULL) {
 
@@ -67,13 +67,13 @@ gallicagram_associated <- function(keyword,
                   "&to=",
                   to,
                   "&n_joker=",
-                  nb_associated_words,
+                  n_associated_words,
                   "&after=",
                   ifelse(after, "True", "False"),
                   sep = "") |>
     utils::read.csv() |>
     dplyr::as_tibble() |>
-    dplyr::rename("nb_occur" = "tot", "ngram" = "gram") |>
+    dplyr::rename("n_occur" = "tot", "ngram" = "gram") |>
     dplyr::mutate(
       associated_word = sub(
         pattern = unique(paste("\\s?", keyword,"\\s?", sep = "")),

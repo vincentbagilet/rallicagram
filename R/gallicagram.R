@@ -51,8 +51,8 @@ gallicagram <- function(keyword,
                   sep = "") |>
     tidy_gallicagram(corpus, resolution) |>
     dplyr::rename(
-      "nb_occur" = "n",
-      "nb_grams" = "total",
+      "n_occur" = "n",
+      "n_grams" = "total",
       "prop_occur" = "prop"
     )
 

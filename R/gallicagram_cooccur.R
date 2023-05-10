@@ -51,8 +51,8 @@ gallicagram_cooccur <- function(keywords,
     tidy_gallicagram(corpus, resolution) |>
     dplyr::rename("keywords" = "keyword") |>
     dplyr::rename(
-      "nb_cooccur" = "n",
-      "nb_ngrams" = "total",
+      "n_cooccur" = "n",
+      "n_ngrams" = "total",
       "prop_cooccur" = "prop"
     )
 

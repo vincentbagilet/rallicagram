@@ -9,7 +9,7 @@ gallicagram_associated(
   corpus = "lemonde",
   from = 1945,
   to = 2022,
-  nb_associated_words = 20,
+  n_associated_words = 20,
   after = TRUE,
   stopwords = NULL
 )
@@ -25,7 +25,7 @@ values: "press" for historical press, "books" for Gallica books,
 
 \item{to}{A number. End year.}
 
-\item{nb_associated_words}{An integer. The number of most frequently
+\item{n_associated_words}{An integer. The number of most frequently
 associated words to return.}
 
 \item{after}{A boolean. Whether to consider only words following the keyword
@@ -39,7 +39,7 @@ If \code{NULL} does not remove any stopwords.}
 \value{
 A tibble. With the most frequent ngrams containing the
 \code{keyword} mentioned (\code{ngram}), the \code{associated_word},
-and the number of occurrences over the period (\code{nb_occur}).
+and the number of occurrences over the period (\code{n_occur}).
 It also returns the input parameters
 \code{keyword}, \code{corpus}, \code{from} and \code{to}.
 }

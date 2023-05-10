@@ -30,9 +30,9 @@ For books can only only be. "yearly".}
 }
 \value{
 A tibble. With the \code{keyword},
-the number of occurrences (\code{nb_occur}) or co-occurrences
-(\code{nb_cooccur}), the total number of ngrams over the period of a
-given observation (\code{nb_grams} or \code{nb_ngrams}),
+the number of occurrences (\code{n_occur}) or co-occurrences
+(\code{n_cooccur}), the total number of ngrams over the period of a
+given observation (\code{n_grams} or \code{n_ngrams}),
 the proportion of occurrences or co-occurrences of the keyword(s) over the
 period of a given observation (\code{prop_occcur} or \code{prop_coocccur}),
 the date at the beginning of the period of a given observation (\code{date}),

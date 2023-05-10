@@ -45,9 +45,12 @@ potentially the \code{month} and \code{day} of the observation.
 Retrieves the number of close co-occurrences of two keywords in one of
 the corpora (historical press, Gallica books, Le Monde newspaper)
 by year, month or day.
-
+}
+\details{
 Close co-occurrences correspond to the number of 3-grams
 (4-grams in the Le Monde corpus) that contain the two keywords.
+
+This function corresponds to the \code{Contain} route of the API.
 }
 \examples{
 gallicagram_cooccur(c("président", "mauvais"))

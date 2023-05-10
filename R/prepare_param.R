@@ -1,4 +1,6 @@
 #' Internal function to prepare the parameters to use them in the API call.
+#'
+#' @description
 #' Checks potential errors, translates the parameters, set parameters for
 #' the API call.
 #'

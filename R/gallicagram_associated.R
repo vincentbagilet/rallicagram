@@ -1,4 +1,4 @@
-#' Find the word the most often associated with a n-gram
+#' Word the most often associated with a n-gram in a Gallicagram corpus
 #'
 #' @description
 #' Returns the word the most frequently following a given ngram over the period.

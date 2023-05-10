@@ -1,4 +1,8 @@
-#' Internal function to prepare the parameters to use them in the API call.
+#' Internal function to tidy the output of the API call.
+#'
+#' @description
+#' Turns the output into a tibble, renames the variables and
+#' add the input parameters to the output tibble.
 #'
 #' @param data A data frame produced by the Gallicagram API
 #' @inheritParams gallicagram

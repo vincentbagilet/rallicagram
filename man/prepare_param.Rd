@@ -2,9 +2,7 @@
 % Please edit documentation in R/prepare_param.R
 \name{prepare_param}
 \alias{prepare_param}
-\title{Internal function to prepare the parameters to use them in the API call.
-Checks potential errors, translates the parameters, set parameters for
-the API call.}
+\title{Internal function to prepare the parameters to use them in the API call.}
 \usage{
 prepare_param(keyword, corpus, from, to, resolution)
 }
@@ -29,7 +27,6 @@ A list.
 Contains cleaned function parameters (`keyword`, `corpus` and `resolution`).
 }
 \description{
-Internal function to prepare the parameters to use them in the API call.
 Checks potential errors, translates the parameters, set parameters for
 the API call.
 }

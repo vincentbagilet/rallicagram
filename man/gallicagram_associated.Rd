@@ -2,7 +2,7 @@
 % Please edit documentation in R/gallicagram_associated.R
 \name{gallicagram_associated}
 \alias{gallicagram_associated}
-\title{Find the word the most often associated with a n-gram}
+\title{Word the most often associated with a n-gram in a Gallicagram corpus}
 \usage{
 gallicagram_associated(
   keyword,
@@ -38,10 +38,11 @@ over the period (\code{nb_occur}). It also returns the input parameters
 }
 \description{
 Returns the word the most frequently following a given ngram over the period.
-It can also include the words that precede by setting
-\code{after = FALSE}.
-
-It corresponds to the 'Joker' function on the Gallicagram app
+It can also include the words that precede by setting \code{after = FALSE}.
+}
+\details{
+This function corresponds to the \code{Joker} route of the API,
+accessed through the 'Joker' function on the Gallicagram app
 and is analogous to the 'Joker' function on Ngram Viewer.
 
 For instance "camarade" is often followed by "staline" or "khrouchtchev" in

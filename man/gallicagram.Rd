@@ -44,6 +44,9 @@ potentially the \code{month} and \code{day} of the observation.
 Retrieves the number of occurrences of a keyword in one of the corpora
 (historical press, Gallica books, Le Monde newspaper) by year, month or day.
 }
+\details{
+This function corresponds to the \code{Query} route of the API.
+}
 \examples{
 gallicagram("président")
 }

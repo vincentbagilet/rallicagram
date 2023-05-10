@@ -2,7 +2,7 @@
 % Please edit documentation in R/tidy_gallicagram.R
 \name{tidy_gallicagram}
 \alias{tidy_gallicagram}
-\title{Internal function to prepare the parameters to use them in the API call.}
+\title{Internal function to tidy the output of the API call.}
 \usage{
 tidy_gallicagram(data, corpus, resolution)
 }
@@ -31,5 +31,6 @@ the \code{year} and
 potentially the \code{month} and \code{day} of the observation.
 }
 \description{
-Internal function to prepare the parameters to use them in the API call.
+Turns the output into a tibble, renames the variables and
+add the input parameters to the output tibble.
 }

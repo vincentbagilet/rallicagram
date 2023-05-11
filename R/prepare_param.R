@@ -19,6 +19,10 @@ prepare_param <- function(keyword,
     stop("'from' and 'to' should be numeric", call. = FALSE)
   }
 
+  if (from > to) {
+    stop("'from' cannot be larger than 'to'", call. = FALSE)
+  }
+
   if (corpus == "books" && to >= 1940) {
     warning(
       "The 'books' corpus is only reliable before 1940.",

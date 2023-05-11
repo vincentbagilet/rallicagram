@@ -1,11 +1,13 @@
 #' Word the most often associated with a n-gram in a Gallicagram corpus
 #'
 #' @description
-#' Returns the word the most frequently following a given ngram over the period.
-#' It can also include the words that precede by setting \code{after = FALSE}.
+#' Returns the word the most frequently used right after a given ngram over the
+#' period.
+#' It can also include the word that just precedes the ngram
+#' by setting \code{after = FALSE}.
 #'
 #' @details
-#' This function corresponds to the \code{Joker} route of the API,
+#' It corresponds to the \code{Joker} route of the API,
 #' accessed through the 'Joker' function on the Gallicagram app
 #' and is analogous to the 'Joker' function on Ngram Viewer.
 #'
@@ -41,12 +43,13 @@
 #' @examples
 #' gallicagram_associated("camarade")
 gallicagram_associated <- function(keyword,
-                                corpus = "lemonde",
-                                from = 1945,
-                                to = 2022,
-                                n_associated_words = 20,
-                                after = TRUE,
-                                stopwords = NULL) {
+                                   corpus = "lemonde",
+                                   from = 1945,
+                                   to = 2022,
+                                   n_associated_words = 20,
+                                   after = TRUE,
+                                   length = NULL,
+                                   stopwords = NULL) {
 
   if (length(keyword) != 1) {
     stop(
@@ -75,8 +78,8 @@ gallicagram_associated <- function(keyword,
     dplyr::as_tibble() |>
     dplyr::rename("n_occur" = "tot", "ngram" = "gram") |>
     dplyr::mutate(
-      associated_word = sub(
-        pattern = unique(paste("\\s?", keyword, "\\s?", sep = "")),
+      associated_word = sub( #extract the associated word
+        pattern = unique(paste("\\s?(\\w')?", keyword, "\\s?", sep = "")),
         replacement = "",
         x = .data$ngram
       ),

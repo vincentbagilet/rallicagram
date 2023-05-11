@@ -54,11 +54,11 @@ ex_occur |>
   knitr::kable()
 ```
 
-## Occurences for all copora and longest period
+## Occurences for all copora and the longest period possible
 
 The function `gallicagram_all` enables to retrieve the yearly proportion of occurrences of a keyword in each of the corpora for the longest time range for which the data is available and reliable. 
 
-It only takes one parameter: the keyword of interest:
+It only takes one parameter: the keyword of interest. It then calls `gallicagram(keyword)` for each corpus and for the longest period possible for the corpus and returns a data frame with the outcome of each call.
 
 ```{r ex_all, eval=FALSE}
 gallicagram_all("président")
@@ -107,7 +107,7 @@ ex_cooccur_sep |>
 
 ## Associations
 
-`gallicagram_associated`  builds a data frame the words the most frequently used following a given ngram over the period. 
+`gallicagram_associated`  builds a data frame with the words most frequently used preceding or following a given ngram over the period. 
 
 For instance "camarade" is often followed by "staline" or "khrouchtchev" in Le Monde. The function returns the most frequent ngrams of the form "camarade \*". Setting `after = FALSE` also includes the most frequent ngrams of the form "\* camarade".
 
@@ -123,14 +123,14 @@ ex_associated <- gallicagram_associated(
 )
 ```
 
-The most often associated terms are:
+The terms most often associated with "camarade" are:
 
 ```{r kable_assoc, echo=FALSE}
 ex_associated |>
   knitr::kable()
 ```
 
-We can see that there are stopwords included in this list. Since they may not be informative, we may want to remove them. We can do so by supplying a list of stopwords to the `stopwords` parameter of the function. For instance, we can use the list in the `lsa` package, `lsa::stopwords_fr`:
+We can see that some elements of this list are stopwords. Since they are not very informative, we may want to remove them. We can do that by supplying a list of words to ignore to the `stopwords` parameter of the function. For instance, we can use the list in the `lsa` package, `lsa::stopwords_fr`:
 
 ```{r ex_assoc_stopwords}
 ex_associated_stopwords <- gallicagram_associated(
@@ -151,7 +151,7 @@ ex_associated_stopwords |>
   knitr::kable()
 ```
 
-Note that it reduces the number of associated words returned and that it does not correspond to `nb_associated_words` anymore.
+Note that excluding stopwords reduces the number of associated words returned such that it does not correspond to `nb_associated_words` anymore.
 
 # Searching several keywords
 

@@ -44,11 +44,13 @@ It also returns the input parameters
 \code{keyword}, \code{corpus}, \code{from} and \code{to}.
 }
 \description{
-Returns the word the most frequently following a given ngram over the period.
-It can also include the words that precede by setting \code{after = FALSE}.
+Returns the word the most frequently used right after a given ngram over the
+period.
+It can also include the word that just precedes the ngram
+by setting \code{after = FALSE}.
 }
 \details{
-This function corresponds to the \code{Joker} route of the API,
+It corresponds to the \code{Joker} route of the API,
 accessed through the 'Joker' function on the Gallicagram app
 and is analogous to the 'Joker' function on Ngram Viewer.
 

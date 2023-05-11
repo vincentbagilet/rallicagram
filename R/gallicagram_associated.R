@@ -51,13 +51,6 @@ gallicagram_associated <- function(keyword,
                                    length = NULL,
                                    stopwords = NULL) {
 
-  if (length(keyword) != 1) {
-    stop(
-      "'keyword' should be a character string and not a character vector",
-      call. = FALSE
-    )
-  }
-
   param_clean <- prepare_param(keyword, corpus, from, to, resolution = "yearly")
   # param resolution not used
 

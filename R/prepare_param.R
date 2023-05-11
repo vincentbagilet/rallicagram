@@ -39,6 +39,13 @@ prepare_param <- function(keyword,
     stop("'keyword' should be a character string", call. = FALSE)
   }
 
+  if (length(keyword) != 1) {
+    stop(
+      "'keyword' should be a character string and not a character vector",
+      call. = FALSE
+    )
+  }
+
   if (corpus == "books" && resolution %in% c("monthly", "daily")) {
     stop(
       "The 'books' corpus is only available at a yearly resolution",

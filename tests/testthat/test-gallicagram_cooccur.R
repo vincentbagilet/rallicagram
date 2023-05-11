@@ -1,10 +1,13 @@
-test_that("Error if keywords not a length 2 character vector", {
+test_that("Error if keyword_1 not character string", {
   expect_error(
-    gallicagram_cooccur(keywords = c("avion")),
-    "'keywords' should be a length 2 character vector"
+    gallicagram_cooccur(keyword_1 = c("avion", "patate"), keyword_2 = "test"),
+    "'keyword' should be a character string and not a character vector"
   )
+})
+
+test_that("Error if keyword_2 not character string", {
   expect_error(
-    gallicagram_cooccur(keywords = c("avion", "crash", "accident")),
-    "'keywords' should be a length 2 character vector"
+    gallicagram_cooccur(keyword_1 = "test", keyword_2 = c("avion", "patate")),
+    "'keyword' should be a character string and not a character vector"
   )
 })

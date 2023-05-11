@@ -5,7 +5,8 @@
 \title{Close co-occurrences of two keywords in a Gallicagram copus}
 \usage{
 gallicagram_cooccur(
-  keywords,
+  keyword_1,
+  keyword_2,
   corpus = "lemonde",
   from = 1945,
   to = 2022,
@@ -13,8 +14,9 @@ gallicagram_cooccur(
 )
 }
 \arguments{
-\item{keywords}{A character vector of length 2
-containing the two keyword to search.}
+\item{keyword_1}{A character string. One of the two keywords to search.}
+
+\item{keyword_2}{A character string. The other keyword to search.}
 
 \item{corpus}{A character string. The corpus to search. Takes the following
 values: "press" for historical press, "books" for Gallica books,
@@ -52,5 +54,5 @@ Close co-occurrences correspond to the number of 3-grams
 This function corresponds to the \code{Contain} route of the API.
 }
 \examples{
-gallicagram_cooccur(c("président", "mauvais"))
+gallicagram_cooccur("président", "mauvais")
 }

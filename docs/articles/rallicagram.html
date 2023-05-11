@@ -189,12 +189,15 @@ term in one of the three corpora between two specified dates.</p>
 </table>
 </div>
 <div class="section level3">
-<h3 id="occurences-for-all-copora-and-longest-period">Occurences for all copora and longest period<a class="anchor" aria-label="anchor" href="#occurences-for-all-copora-and-longest-period"></a>
+<h3 id="occurences-for-all-copora-and-the-longest-period-possible">Occurences for all copora and the longest period possible<a class="anchor" aria-label="anchor" href="#occurences-for-all-copora-and-the-longest-period-possible"></a>
 </h3>
 <p>The function <code>gallicagram_all</code> enables to retrieve the
 yearly proportion of occurrences of a keyword in each of the corpora for
 the longest time range for which the data is available and reliable.</p>
-<p>It only takes one parameter: the keyword of interest:</p>
+<p>It only takes one parameter: the keyword of interest. It then calls
+<code>gallicagram(keyword)</code> for each corpus and for the longest
+period possible for the corpus and returns a data frame with the outcome
+of each call.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gallicagram_all.html">gallicagram_all</a></span><span class="op">(</span><span class="st">"président"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -207,115 +210,18 @@ keywords in one of the three corpora between two specified dates.</p>
 <p>Close co-occurrences correspond to the number of 3-grams (4-grams in
 the <em>Le Monde</em> corpus) that contain the two keywords. This
 function corresponds to the <code>Contain</code> route of the <a href="https://regicid.github.io/api" class="external-link">API</a>.</p>
-<p>The parameter <code>keywords</code> takes a character vector of
-length two as input.</p>
+<p>The parameters <code>keyword_1</code> and <code>keyword_2</code> take
+the words to look co-occurrences for.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ex_cooccur</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gallicagram_cooccur.html">gallicagram_cooccur</a></span><span class="op">(</span></span>
-<span>  keywords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"président"</span>, <span class="st">"république"</span><span class="op">)</span>,</span>
+<span>  keyword_1 <span class="op">=</span> <span class="st">"président"</span>,</span>
+<span>  keyword_2 <span class="op">=</span> <span class="st">"république"</span>,</span>
 <span>  corpus <span class="op">=</span> <span class="st">"lemonde"</span>,</span>
 <span>  from <span class="op">=</span> <span class="fl">1960</span>,</span>
 <span>  to <span class="op">=</span> <span class="fl">1970</span>,</span>
 <span>  resolution <span class="op">=</span> <span class="st">"monthly"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Here is an example of part of the output:</p>
-<table class="table">
-<colgroup>
-<col width="11%">
-<col width="22%">
-<col width="10%">
-<col width="9%">
-<col width="13%">
-<col width="5%">
-<col width="6%">
-<col width="8%">
-<col width="11%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">date</th>
-<th align="left">keywords</th>
-<th align="right">n_cooccur</th>
-<th align="right">n_ngrams</th>
-<th align="right">prop_cooccur</th>
-<th align="right">year</th>
-<th align="right">month</th>
-<th align="left">source</th>
-<th align="left">resolution</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">1960-01-01</td>
-<td align="left">président&amp;république</td>
-<td align="right">0</td>
-<td align="right">575465</td>
-<td align="right">0.0e+00</td>
-<td align="right">1960</td>
-<td align="right">1</td>
-<td align="left">lemonde</td>
-<td align="left">monthly</td>
-</tr>
-<tr class="even">
-<td align="left">1960-02-01</td>
-<td align="left">président&amp;république</td>
-<td align="right">1</td>
-<td align="right">606116</td>
-<td align="right">1.6e-06</td>
-<td align="right">1960</td>
-<td align="right">2</td>
-<td align="left">lemonde</td>
-<td align="left">monthly</td>
-</tr>
-<tr class="odd">
-<td align="left">1960-03-01</td>
-<td align="left">président&amp;république</td>
-<td align="right">0</td>
-<td align="right">616477</td>
-<td align="right">0.0e+00</td>
-<td align="right">1960</td>
-<td align="right">3</td>
-<td align="left">lemonde</td>
-<td align="left">monthly</td>
-</tr>
-<tr class="even">
-<td align="left">1960-04-01</td>
-<td align="left">président&amp;république</td>
-<td align="right">0</td>
-<td align="right">513816</td>
-<td align="right">0.0e+00</td>
-<td align="right">1960</td>
-<td align="right">4</td>
-<td align="left">lemonde</td>
-<td align="left">monthly</td>
-</tr>
-<tr class="odd">
-<td align="left">1960-05-01</td>
-<td align="left">président&amp;république</td>
-<td align="right">0</td>
-<td align="right">552610</td>
-<td align="right">0.0e+00</td>
-<td align="right">1960</td>
-<td align="right">5</td>
-<td align="left">lemonde</td>
-<td align="left">monthly</td>
-</tr>
-<tr class="even">
-<td align="left">1960-06-01</td>
-<td align="left">président&amp;république</td>
-<td align="right">0</td>
-<td align="right">563800</td>
-<td align="right">0.0e+00</td>
-<td align="right">1960</td>
-<td align="right">6</td>
-<td align="left">lemonde</td>
-<td align="left">monthly</td>
-</tr>
-</tbody>
-</table>
-<p>It might also be helpful to have the keywords in two separate
-columns. To do that, one can use <code><a href="https://tidyr.tidyverse.org/reference/separate.html" class="external-link">tidyr::separate</a></code>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ex_cooccur_sep</span> <span class="op">&lt;-</span> <span class="va">ex_cooccur</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html" class="external-link">separate</a></span><span class="op">(</span><span class="va">keywords</span>, into <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"keyword_1"</span>, <span class="st">"keyword_2"</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"&amp;"</span><span class="op">)</span></span></code></pre></div>
-<p>This yields:</p>
 <table class="table">
 <colgroup>
 <col width="11%">
@@ -346,9 +252,9 @@ columns. To do that, one can use <code><a href="https://tidyr.tidyverse.org/refe
 <td align="left">1960-01-01</td>
 <td align="left">président</td>
 <td align="left">république</td>
-<td align="right">0</td>
+<td align="right">232</td>
 <td align="right">575465</td>
-<td align="right">0.0e+00</td>
+<td align="right">0.0004032</td>
 <td align="right">1960</td>
 <td align="right">1</td>
 <td align="left">lemonde</td>
@@ -358,9 +264,9 @@ columns. To do that, one can use <code><a href="https://tidyr.tidyverse.org/refe
 <td align="left">1960-02-01</td>
 <td align="left">président</td>
 <td align="left">république</td>
-<td align="right">1</td>
+<td align="right">295</td>
 <td align="right">606116</td>
-<td align="right">1.6e-06</td>
+<td align="right">0.0004867</td>
 <td align="right">1960</td>
 <td align="right">2</td>
 <td align="left">lemonde</td>
@@ -370,9 +276,9 @@ columns. To do that, one can use <code><a href="https://tidyr.tidyverse.org/refe
 <td align="left">1960-03-01</td>
 <td align="left">président</td>
 <td align="left">république</td>
-<td align="right">0</td>
+<td align="right">287</td>
 <td align="right">616477</td>
-<td align="right">0.0e+00</td>
+<td align="right">0.0004655</td>
 <td align="right">1960</td>
 <td align="right">3</td>
 <td align="left">lemonde</td>
@@ -382,9 +288,9 @@ columns. To do that, one can use <code><a href="https://tidyr.tidyverse.org/refe
 <td align="left">1960-04-01</td>
 <td align="left">président</td>
 <td align="left">république</td>
-<td align="right">0</td>
+<td align="right">212</td>
 <td align="right">513816</td>
-<td align="right">0.0e+00</td>
+<td align="right">0.0004126</td>
 <td align="right">1960</td>
 <td align="right">4</td>
 <td align="left">lemonde</td>
@@ -394,9 +300,9 @@ columns. To do that, one can use <code><a href="https://tidyr.tidyverse.org/refe
 <td align="left">1960-05-01</td>
 <td align="left">président</td>
 <td align="left">république</td>
-<td align="right">0</td>
+<td align="right">182</td>
 <td align="right">552610</td>
-<td align="right">0.0e+00</td>
+<td align="right">0.0003293</td>
 <td align="right">1960</td>
 <td align="right">5</td>
 <td align="left">lemonde</td>
@@ -406,9 +312,9 @@ columns. To do that, one can use <code><a href="https://tidyr.tidyverse.org/refe
 <td align="left">1960-06-01</td>
 <td align="left">président</td>
 <td align="left">république</td>
-<td align="right">0</td>
+<td align="right">196</td>
 <td align="right">563800</td>
-<td align="right">0.0e+00</td>
+<td align="right">0.0003476</td>
 <td align="right">1960</td>
 <td align="right">6</td>
 <td align="left">lemonde</td>
@@ -420,8 +326,9 @@ columns. To do that, one can use <code><a href="https://tidyr.tidyverse.org/refe
 <div class="section level3">
 <h3 id="associations">Associations<a class="anchor" aria-label="anchor" href="#associations"></a>
 </h3>
-<p><code>gallicagram_associated</code> builds a data frame the words the
-most frequently used following a given ngram over the period.</p>
+<p><code>gallicagram_associated</code> builds a data frame with the
+words most frequently used preceding or following a given ngram over the
+period.</p>
 <p>For instance “camarade” is often followed by “staline” or
 “khrouchtchev” in Le Monde. The function returns the most frequent
 ngrams of the form “camarade *”. Setting <code>after = FALSE</code> also
@@ -431,7 +338,7 @@ includes the most frequent ngrams of the form “* camarade”.</p>
 a long running time. This function corresponds to the <code>Joker</code>
 route of the <a href="https://regicid.github.io/api" class="external-link">API</a> and is
 analogous to the <code>Joker</code> option on <a href="https://books.google.com/ngrams/" class="external-link">Ngram Viewer</a>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ex_associated</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gallicagram_associated.html">gallicagram_associated</a></span><span class="op">(</span></span>
 <span>  keyword <span class="op">=</span> <span class="st">"camarade"</span>,</span>
 <span>  corpus <span class="op">=</span> <span class="st">"lemonde"</span>,</span>
@@ -439,7 +346,7 @@ analogous to the <code>Joker</code> option on <a href="https://books.google.com/
 <span>  to <span class="op">=</span> <span class="fl">1970</span>,</span>
 <span>  n_associated_words <span class="op">=</span> <span class="fl">10</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>The most often associated terms are:</p>
+<p>The terms most often associated with “camarade” are:</p>
 <table class="table">
 <colgroup>
 <col width="10%">
@@ -552,12 +459,12 @@ analogous to the <code>Joker</code> option on <a href="https://books.google.com/
 </tr>
 </tbody>
 </table>
-<p>We can see that there are stopwords included in this list. Since they
-may not be informative, we may want to remove them. We can do so by
-supplying a list of stopwords to the <code>stopwords</code> parameter of
-the function. For instance, we can use the list in the <code>lsa</code>
-package, <code><a href="https://rdrr.io/pkg/lsa/man/stopwords.html" class="external-link">lsa::stopwords_fr</a></code>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<p>We can see that some elements of this list are stopwords. Since they
+are not very informative, we may want to remove them. We can do that by
+supplying a list of words to ignore to the <code>stopwords</code>
+parameter of the function. For instance, we can use the list in the
+<code>lsa</code> package, <code><a href="https://rdrr.io/pkg/lsa/man/stopwords.html" class="external-link">lsa::stopwords_fr</a></code>:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ex_associated_stopwords</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gallicagram_associated.html">gallicagram_associated</a></span><span class="op">(</span></span>
 <span>  keyword <span class="op">=</span> <span class="st">"camarade"</span>,</span>
 <span>  corpus <span class="op">=</span> <span class="st">"lemonde"</span>,</span>
@@ -643,37 +550,38 @@ package, <code><a href="https://rdrr.io/pkg/lsa/man/stopwords.html" class="exter
 </tr>
 </tbody>
 </table>
-<p>Note that it reduces the number of associated words returned and that
-it does not correspond to <code>nb_associated_words</code> anymore.</p>
+<p>Note that excluding stopwords reduces the number of associated words
+returned such that it does not correspond to
+<code>nb_associated_words</code> anymore.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="searching-several-keywords">Searching several keywords<a class="anchor" aria-label="anchor" href="#searching-several-keywords"></a>
 </h2>
 <p>In order to search several keywords at once, we can use the function
-<code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">purrr::map_dfr</a></code>. It takes as parameters the vector of
+<code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::map_dfr</a></code>. It takes as parameters the vector of
 keywords to search, followed by the function (<code>gallicagram</code>)
 and additional arguments to pass to the function. It returns a unique
 data frame with the results for searches corresponding to each keyword,
 basically binding the dataframes produced by each keyword search.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">keywords</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"république"</span>, <span class="st">"france"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">keywords</span>, <span class="va">gallicagram</span>,</span>
+<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">keywords</span>, <span class="va">gallicagram</span>,</span>
 <span>               corpus <span class="op">=</span> <span class="st">"lemonde"</span>, from <span class="op">=</span> <span class="st">"1960"</span>, to <span class="op">=</span> <span class="st">"1970"</span><span class="op">)</span></span></code></pre></div>
 <p>Bbased on that same principle, we can run several searches at onces,
 varying all parameters, not only the keyword searched. To do that, we
 can specify the series of parameters in a data frame, each row
 corresponding to a set of parameters to run the <code>gallicagram</code>
 function for. We then pass this data frame to
-<code><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">purrr::pmap_dfr</a></code>.</p>
+<code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::pmap_dfr</a></code>.</p>
 <p>To specify the set of parameters, we can either build the parameters
 data frame by hand. It is also often helpful to use
 <code><a href="https://tidyr.tidyverse.org/reference/expand.html" class="external-link">tidyr::crossing</a></code> to create all combination of possible
 searches.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">params_pmap</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>    from <span class="op">=</span> <span class="fl">1850</span>,</span>
@@ -722,11 +630,11 @@ searches.</p>
 </tr>
 </tbody>
 </table>
-<p>We can then pass it to <code><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">purrr::pmap_dfr</a></code> that will call
+<p>We can then pass it to <code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::pmap_dfr</a></code> that will call
 the function <code>gallicagram</code> for each of the 4 sets of
 parameters defined in the rows of <code>params_pmap</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">pmap_dfr</a></span><span class="op">(</span><span class="va">params_pmap</span>, <span class="va">gallicagram</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">pmap_dfr</a></span><span class="op">(</span><span class="va">params_pmap</span>, <span class="va">gallicagram</span><span class="op">)</span></span></code></pre></div>
 <p>This method also apply for the other functions in the
 <code>rallicagram</code> package.</p>
 </div>
@@ -738,7 +646,7 @@ series of occurrences in a corpus. Here is an example graph using
 <code>ggplot</code> (and my own ggplot theme <a href="https://vincentbagilet.github.io/mediocrethemes/" class="external-link"><code>mediocrethemes</code></a>.
 The use of this theme is of course not mandatory and one can remove the
 line <code><a href="https://vincentbagilet.github.io/mediocrethemes/reference/set_mediocre_all.html" class="external-link">mediocrethemes::set_mediocre_all()</a></code>):</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="fu">mediocrethemes</span><span class="fu">::</span><span class="fu"><a href="https://vincentbagilet.github.io/mediocrethemes/reference/set_mediocre_all.html" class="external-link">set_mediocre_all</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -764,7 +672,7 @@ line <code><a href="https://vincentbagilet.github.io/mediocrethemes/reference/se
 using the default loess smoothing, the parameter <code>span</code>
 controls the amount of smoothing. Larger values are associated with less
 smoothing. Here is the same graph but smoothed:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ex_data</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">prop_occur</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>span <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span></span>

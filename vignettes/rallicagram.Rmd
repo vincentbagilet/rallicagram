@@ -70,11 +70,12 @@ gallicagram_all("président")
 
 Close co-occurrences correspond to the number of 3-grams (4-grams in the *Le Monde* corpus) that contain the two keywords. This function corresponds to the `Contain` route of the [API](https://regicid.github.io/api).
 
-The parameter `keywords` takes a character vector of length two as input.
+The parameters `keyword_1` and `keyword_2` take the words to look co-occurrences for.
 
 ```{r ex_cooccur}
 ex_cooccur <- gallicagram_cooccur(
-  keywords = c("président", "république"),
+  keyword_1 = "président",
+  keyword_2 = "république",
   corpus = "lemonde",
   from = 1960,
   to = 1970,
@@ -86,21 +87,6 @@ Here is an example of part of the output:
 
 ```{r kable_cooccur, echo=FALSE}
 ex_cooccur |>
-  utils::head() |>
-  knitr::kable()
-```
-
-It might also be helpful to have the keywords in two separate columns. To do that, one can use `tidyr::separate`:
-
-```{r cooccur_sep}
-ex_cooccur_sep <- ex_cooccur |>
-  tidyr::separate(keywords, into = c("keyword_1", "keyword_2"), sep = "&")
-```
-
-This yields:
-
-```{r kable_cooccur_sep, echo=FALSE}
-ex_cooccur_sep |>
   utils::head() |>
   knitr::kable()
 ```

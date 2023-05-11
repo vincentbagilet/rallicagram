@@ -11,6 +11,7 @@ gallicagram_associated(
   to = 2022,
   n_associated_words = 20,
   after = TRUE,
+  length = NULL,
   stopwords = NULL
 )
 }

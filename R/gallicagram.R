@@ -29,13 +29,6 @@ gallicagram <- function(keyword,
                         to = 2022,
                         resolution = "monthly") {
 
-  if (length(keyword) != 1) {
-    stop(
-      "'keyword' should be a character string and not a character vector",
-      call. = FALSE
-    )
-  }
-
   param_clean <- prepare_param(keyword, corpus, from, to, resolution)
 
   output <- paste("https://shiny.ens-paris-saclay.fr/guni/query?corpus=",

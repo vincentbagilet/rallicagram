@@ -14,13 +14,6 @@
 #' gallicagram_all("président")
 gallicagram_all <- function(keyword) {
 
-  if (length(keyword) != 1) {
-    stop(
-      "'keyword' should be a character string and not a character vector",
-      call. = FALSE
-    )
-  }
-
   keyword_clean <- sub(" ", "%20", tolower(keyword))
 
   output <-

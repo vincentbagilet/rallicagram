@@ -11,8 +11,8 @@
 #'
 #' This function corresponds to the \code{Contain} route of the API.
 #'
-#' @param keywords A character vector of length 2
-#' containing the two keyword to search.
+#' @param keyword_1 A character string. One of the two keywords to search.
+#' @param keyword_2 A character string. The other keyword to search.
 #' @param resolution A character string.
 #' For press and lemonde can be either "yearly" or "monthly".
 #' For books can only be "yearly".
@@ -24,40 +24,40 @@
 #'
 #' @export
 #' @examples
-#' gallicagram_cooccur(c("président", "mauvais"))
-gallicagram_cooccur <- function(keywords,
+#' gallicagram_cooccur("président", "mauvais")
+gallicagram_cooccur <- function(keyword_1,
+                                keyword_2,
                                 corpus = "lemonde",
                                 from = 1945,
                                 to = 2022,
                                 resolution = "monthly") {
 
-  if (length(keywords) != 2) {
-    stop(
-      "'keywords' should be a length 2 character vector",
-      call. = FALSE
-    )
-  }
-
-  param_clean <- prepare_param(keywords, corpus, from, to, resolution)
+  param_clean <- prepare_param(keyword_1, corpus, from, to, resolution)
+  param_clean_2 <- prepare_param(keyword_2, corpus, from, to, resolution)
 
   output <- paste("https://shiny.ens-paris-saclay.fr/guni/contain?corpus=",
                   param_clean$corpus,
                   "&mot1=",
-                  param_clean$keyword[1],
+                  param_clean$keyword,
                   "&mot2=",
-                  param_clean$keyword[2],
+                  param_clean_2$keyword,
                   "&from=",
                   from,
                   "&to=",
                   to,
                   sep = "") |>
     tidy_gallicagram(corpus, resolution) |>
-    dplyr::rename("keywords" = "keyword") |>
+    dplyr::select(-"keyword") |>
+    dplyr::mutate(
+      keyword_1 = keyword_1,
+      keyword_2 = keyword_2,
+    ) |>
     dplyr::rename(
       "n_cooccur" = "n",
       "n_ngrams" = "total",
       "prop_cooccur" = "prop"
-    )
+    ) |>
+    dplyr::select("date", "keyword_1", "keyword_2", tidyselect::everything())
 
   #can't specify the resolution in the API. Always monthly for press and lemonde
   #thus, average by hand

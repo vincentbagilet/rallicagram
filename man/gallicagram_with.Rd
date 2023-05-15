@@ -27,7 +27,8 @@ values: "press" for historical press, "books" for Gallica books,
 \item{to}{An integer. End year.}
 
 \item{n_results}{An integer. The number of most frequently
-associated words to return.}
+associated words to return. \code{n_results} can also be set to "all" to
+return all the available results.}
 
 \item{after}{A boolean. Whether to consider only words following the keyword
 and not those preceding. Set to \code{FALSE} by default.}
@@ -56,11 +57,7 @@ Le Monde. The function returns the most frequent ngrams of the form
 "camarade *" when setting \code{after = TRUE}. \code{after = FALSE} also
 includes the most frequent ngrams of the form "* camarade".
 
-The keyword can be a 2-gram in the "books" and "press" corpora and a 3-gram
-in the "lemonde" corpus.
-Length can thus be up to 3 in the "books" and "press" corpora and 4 in the
-"lemonde" corpus. Searching the "press" corpus can require a long
-running time.
+Searching the "press" corpus can require a long running time.
 }
 \examples{
 gallicagram_with("camarade", length = 2)

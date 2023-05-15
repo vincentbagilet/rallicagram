@@ -2,21 +2,21 @@
 % Please edit documentation in R/gallicagram_associated.R
 \name{gallicagram_associated}
 \alias{gallicagram_associated}
-\title{Word the most often associated with a n-gram in a Gallicagram corpus}
+\title{Words the most often associated with a keyword in a Gallicagram corpus}
 \usage{
 gallicagram_associated(
   keyword,
   corpus = "lemonde",
   from = 1945,
   to = 2022,
-  n_associated_words = 20,
-  after = TRUE,
-  distance = 1,
+  n_results = 20,
+  distance = 3,
   stopwords = NULL
 )
 }
 \arguments{
-\item{keyword}{A character string. Keyword to search associations for.}
+\item{keyword}{A character string. Keyword to search. Can be up to a 3-gram
+in the "books" and "press" corpora and a 4-gram in the "lemonde" corpus.}
 
 \item{corpus}{A character string. The corpus to search. Takes the following
 values: "press" for historical press, "books" for Gallica books,
@@ -26,11 +26,9 @@ values: "press" for historical press, "books" for Gallica books,
 
 \item{to}{An integer. End year.}
 
-\item{n_associated_words}{An integer. The number of most frequently
-associated words to return.}
-
-\item{after}{A boolean. Whether to consider only words following the keyword
-and not those preceding. Set to \code{TRUE} by default.}
+\item{n_results}{An integer. The number of most frequently
+associated words to return. \code{n_results} can also be set to "all" to
+return all the available results.}
 
 \item{distance}{An integer. The word distance to which look for words
 associated with the keyword.}
@@ -41,31 +39,28 @@ Removed after withdrawing apostrophes and letters preceding them.
 If \code{NULL} does not remove any stopwords.}
 }
 \value{
-A tibble. With the most frequent ngrams containing the
-\code{keyword} mentioned (\code{ngram}), the \code{associated_word},
+A tibble. With the words the most frequently associated with the
+\code{keyword} mentioned (\code{associated_word}),
 and the number of occurrences over the period (\code{n_occur}).
 It also returns the input parameters
 \code{keyword}, \code{corpus}, \code{from} and \code{to}.
 }
 \description{
-Returns the word the most frequently used right after a given ngram over the
-period.
-It can also include the word that just precedes the ngram
-by setting \code{after = FALSE}.
+Returns the word the most frequently at a given number of words
+(\code{distance}) from the keyword.
 }
 \details{
-It corresponds to the \code{Joker} route of the API,
-accessed through the 'Joker' function on the Gallicagram app
-and is analogous to the 'Joker' function on Ngram Viewer.
+This functions calls the '\code{associated}' route of the API.
 
-For instance "camarade" is often followed by "staline" or "khrouchtchev" in
-Le Monde. The function returns the most frequent ngrams of the form
-"camarade *". Setting \code{after = FALSE} also includes the most frequent
-ngrams of the form "* camarade".
+Note that the API route does not allow to search for associated words
+after a punctuation mark.
+For instance, in "son camarade, le chasseur, a", the function will
+not count "chasseur" as a word associated with "camarade". The ngram
+"son camarade le chasseur" is not in the database.
+Thus, there might be less associated words at a longer distance
+as it increases the probability of ngrams to be excluded from the database.
 
-The keyword can be a 2-gram in the "books" and "press" corpora and a 3-gram
-in the "lemonde" corpus. Searching the "press" corpus can require a long
-running time.
+Searching the "press" corpus can require a long running time.
 }
 \examples{
 gallicagram_associated("camarade")

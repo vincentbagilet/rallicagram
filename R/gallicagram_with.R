@@ -13,14 +13,11 @@
 #' "camarade *" when setting \code{after = TRUE}. \code{after = FALSE} also
 #' includes the most frequent ngrams of the form "* camarade".
 #'
-#' The keyword can be a 2-gram in the "books" and "press" corpora and a 3-gram
-#' in the "lemonde" corpus.
-#' Length can thus be up to 3 in the "books" and "press" corpora and 4 in the
-#' "lemonde" corpus. Searching the "press" corpus can require a long
-#' running time.
+#' Searching the "press" corpus can require a long running time.
 #'
 #' @param n_results An integer. The number of most frequently
-#' associated words to return.
+#' associated words to return. \code{n_results} can also be set to "all" to
+#' return all the available results.
 #' @param after A boolean. Whether to consider only words following the keyword
 #' and not those preceding. Set to \code{FALSE} by default.
 #' @param length An integer. The length of the ngrams considered.
@@ -48,13 +45,17 @@ gallicagram_with <- function(keyword,
   param_clean <- prepare_param(keyword, corpus, from, to, resolution = "yearly")
   # param resolution not used
 
+  if (!is.numeric(length)) {
+    stop("'length' should be numeric", call. = FALSE)
+  }
+
   if (corpus %in% c("books", "press") && length > 3) {
     stop("'length' cannot be more than 3 for this corpus", call. = FALSE)
   } else if (corpus == "lemonde" && length > 4) {
     stop("'length' cannot be more than 4 for this corpus", call. = FALSE)
   }
 
-  if (length < strsplit(x = keyword, split = " ")[[1]] |> length()) {
+  if (length < length(strsplit(x = keyword, split = " ")[[1]])) {
     stop(
       "'length' has to be larger than the number of words in 'keyword'",
       call. = FALSE

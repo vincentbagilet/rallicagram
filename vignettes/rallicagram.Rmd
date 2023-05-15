@@ -54,7 +54,7 @@ ex_occur |>
   knitr::kable()
 ```
 
-## Occurences for all copora and the longest period possible
+### Occurences for all copora and the longest period possible
 
 The function `gallicagram_all` enables to retrieve the yearly proportion of occurrences of a keyword in each of the corpora for the longest time range for which the data is available and reliable. 
 
@@ -152,7 +152,7 @@ purrr::map_dfr(keywords, gallicagram,
                corpus = "lemonde", from = "1960", to = "1970")
 ```
 
-Bbased on that same principle, we can run several searches at onces, varying all parameters, not only the keyword searched. To do that, we can specify the series of parameters in a data frame, each row corresponding to a set of parameters to run the `gallicagram` function for. We then pass this data frame to `purrr::pmap_dfr`. 
+Based on that same principle, we can run several searches at onces, varying all parameters, not only the keyword searched. To do that, we can specify the series of parameters in a data frame, each row corresponding to a set of parameters to run the `gallicagram` function for. We then pass this data frame to `purrr::pmap_dfr`. 
 
 To specify the set of parameters, we can either build the parameters data frame by hand. It is also often helpful to use `tidyr::crossing` to create all combination of possible searches.
 

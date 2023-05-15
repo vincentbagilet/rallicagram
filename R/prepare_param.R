@@ -15,6 +15,7 @@ prepare_param <- function(keyword,
                           to,
                           resolution) {
 
+  #errors in from/to
   if (!is.numeric(from) || !is.numeric(to)) {
     stop("'from' and 'to' should be numeric", call. = FALSE)
   }
@@ -23,6 +24,19 @@ prepare_param <- function(keyword,
     stop("'from' cannot be larger than 'to'", call. = FALSE)
   }
 
+  #errors in keyword
+  if (!is.character(keyword)) {
+    stop("'keyword' should be a character string", call. = FALSE)
+  }
+
+  if (length(keyword) != 1) {
+    stop(
+      "'keyword' should be a character string and not a character vector",
+      call. = FALSE
+    )
+  }
+
+  #reliability corpus
   if (corpus == "books" && to >= 1940) {
     warning(
       "The 'books' corpus is only reliable before 1940.",
@@ -35,17 +49,7 @@ prepare_param <- function(keyword,
     )
   }
 
-  if (!is.character(keyword)) {
-    stop("'keyword' should be a character string", call. = FALSE)
-  }
-
-  if (length(keyword) != 1) {
-    stop(
-      "'keyword' should be a character string and not a character vector",
-      call. = FALSE
-    )
-  }
-
+  #error in resolution
   if (corpus == "books" && resolution %in% c("monthly", "daily")) {
     stop(
       "The 'books' corpus is only available at a yearly resolution",
@@ -58,6 +62,7 @@ prepare_param <- function(keyword,
     )
   }
 
+  #translations
   resolution_french <- ifelse(resolution == "yearly", "annee",
                        ifelse(resolution == "monthly", "mois",
                        ifelse(resolution == "daily", "jour",

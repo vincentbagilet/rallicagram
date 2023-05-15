@@ -101,9 +101,9 @@ gallicagram_associated <- function(keyword,
         x = .data$gram
       )
     ) |>
-    dplyr::group_by(associated_word) |>
-    dplyr::summarise(n_occur = sum(tot), .groups = "drop") |>
-    dplyr::arrange(dplyr::desc(n_occur)) |>
+    dplyr::group_by(.data$associated_word) |>
+    dplyr::summarise(n_occur = sum(.data$tot), .groups = "drop") |>
+    dplyr::arrange(dplyr::desc(.data$n_occur)) |>
     #add param
     dplyr::mutate(
       keyword = keyword,

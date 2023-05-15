@@ -105,7 +105,8 @@ ex_associated <- gallicagram_associated(
   corpus = "lemonde",
   from = 1960,
   to = 1970,
-  n_associated_words = 10
+  n_results = 10,
+  distance = 3
 )
 ```
 
@@ -124,8 +125,8 @@ ex_associated_stopwords <- gallicagram_associated(
   corpus = "lemonde",
   from = 1960,
   to = 1970,
-  n_associated_words = 10,
-  stopwords = lsa::stopwords_fr
+  n_results = 10,
+  stopwords = NULL
 )
 ```
 

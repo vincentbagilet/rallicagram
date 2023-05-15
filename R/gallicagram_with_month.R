@@ -1,16 +1,14 @@
-#' ngrams that most frequently contain a keyword in a Gallicagram corpus over a
-#' period
+#' ngrams that most frequently contain a keyword in a Gallicagram corpus for a
+#' specific month
 #'
 #' @description
-#' Returns the most frequent ngrams containing a keyword over a given period.
+#' Returns the most frequent ngrams containing a keyword for a given month
 #'
 #' @details
-#' This function corresponds to the \code{Joker} route of the API,
-#' accessed through the 'Joker' function on the Gallicagram app.
-#' When length = 1, it is analogous to the 'Joker' function on Ngram Viewer.
+#' This function corresponds to the \code{joker_month} route of the API.
 #'
-#' It is analogous to \code{gallicagram_with_month} but for a period instead of
-#' a given month.
+#' It is analogous to \code{gallicagram_with} but for a precise month instead
+#' of a given period.
 #'
 #' For instance "camarade" is often followed by "staline" or "khrouchtchev" in
 #' Le Monde. The function returns the most frequent ngrams of the form
@@ -19,35 +17,26 @@
 #'
 #' Searching the "press" corpus can require a long running time.
 #'
-#' @param n_results An integer. The number of most frequently
-#' associated words to return. \code{n_results} can also be set to "all" to
-#' return all the available results.
-#' @param after A boolean. Whether to consider only words following the keyword
-#' and not those preceding. Set to \code{FALSE} by default.
-#' @param length An integer. The length of the ngrams considered.
-#' Can be up to 3 in the "books" and "press" corpora and 4 in the
-#' "lemonde" corpus.
-#' @inheritParams gallicagram
+#' @param year An integer. The year of interest.
+#' @param month An integer. The month of the \code{year} of interest.
+#' @inheritParams gallicagram_with
 #'
 #' @returns A tibble. With the \code{n_results} most frequent ngrams containing
 #' the \code{keyword} searched (\code{ngram})
 #' and the number of occurrences over the period (\code{n_occur}).
 #' It also returns the input parameters
-#' \code{keyword}, \code{corpus}, \code{from} and \code{to}.
+#' \code{keyword}, \code{corpus}, \code{year} and \code{month}.
 #'
 #' @export
 #' @examples
-#' gallicagram_with("camarade", length = 2)
-gallicagram_with <- function(keyword,
+#' gallicagram_with_month("camarade", length = 2)
+gallicagram_with_month <- function(keyword,
                              corpus = "lemonde",
-                             from = 1945,
-                             to = 2022,
+                             year = 2022,
+                             month = 1,
                              n_results = 20,
                              after = FALSE,
                              length = 2) {
-
-  param_clean <- prepare_param(keyword, corpus, from, to, resolution = "yearly")
-  # param resolution not used
 
   #errors handling
   if (!is.numeric(length)) {
@@ -67,14 +56,23 @@ gallicagram_with <- function(keyword,
     )
   }
 
-  output <- paste("https://shiny.ens-paris-saclay.fr/guni/joker?corpus=",
+  if (!is.numeric(year) || !is.numeric(month)) {
+    stop("'year' and 'month' should be numeric", call. = FALSE)
+  }
+
+  param_clean <- prepare_param(keyword, corpus, year, year, resolution = "yearly")
+  # param resolution not used
+
+
+
+  output <- paste("https://shiny.ens-paris-saclay.fr/guni/joker_mois?corpus=",
                   param_clean$corpus,
                   "&mot=",
                   param_clean$keyword,
-                  "&from=",
-                  from,
-                  "&to=",
-                  to,
+                  "&year=",
+                  year,
+                  "&month=",
+                  month,
                   "&n_joker=",
                   n_results,
                   "&after=",
@@ -88,8 +86,8 @@ gallicagram_with <- function(keyword,
     dplyr::mutate(
       keyword = keyword,
       corpus = param_clean$corpus,
-      from = from,
-      to = to
+      year = year,
+      month = month
     )
 
   return(output)

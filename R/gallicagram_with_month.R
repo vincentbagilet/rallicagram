@@ -63,8 +63,6 @@ gallicagram_with_month <- function(keyword,
   param_clean <- prepare_param(keyword, corpus, year, year, resolution = "yearly")
   # param resolution not used
 
-
-
   output <- paste("https://shiny.ens-paris-saclay.fr/guni/joker_mois?corpus=",
                   param_clean$corpus,
                   "&mot=",

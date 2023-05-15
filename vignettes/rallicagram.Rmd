@@ -91,13 +91,34 @@ ex_cooccur |>
   knitr::kable()
 ```
 
+### Co-occurrences in two lexicons
+
+If one wants to compute co-occurrences in two lexicons, one can use the function `gallicagram_cooccur_lexicon`. It simply loops the function `gallicagram_cooccur` over each  word of each lexicon and sums the results. It takes as inputs two vectors of keywords:
+
+```{r ex_cooccur_lexicon}
+ex_cooccur_lexicon <- gallicagram_cooccur_lexicon(
+  lexicon_1 = c("président", "présidente"),
+  lexicon_2 = c("mauvais", "nul"),
+  corpus = "lemonde",
+  from = 1960,
+  to = 1970,
+  resolution = "monthly"
+)
+```
+
+Here is an example of part of the output:
+
+```{r kable_cooccur_lexicon, echo=FALSE}
+ex_cooccur_lexicon |>
+  utils::head() |>
+  knitr::kable()
+```
+
 ## Associations
 
-`gallicagram_associated`  builds a data frame with the words most frequently used preceding or following a given ngram over the period. 
+`gallicagram_associated`  builds a data frame with the words most frequently used close (at a specified distance) to a given keyword over the period. This function calls the `associated` route of the [API](https://regicid.github.io/api).
 
-For instance "camarade" is often followed by "staline" or "khrouchtchev" in Le Monde. The function returns the most frequent ngrams of the form "camarade \*". Setting `after = FALSE` also includes the most frequent ngrams of the form "\* camarade".
-
-The keyword can be a 2-gram in the "books" and "press" corpora and a 3-gram in the "lemonde" corpus. Searching the "press" corpus can require a long running time. This function corresponds to the `Joker` route of the [API](https://regicid.github.io/api) and is analogous to the `Joker` option on [Ngram Viewer](https://books.google.com/ngrams/).
+The keyword can be a 2-gram in the "books" and "press" corpora and a 3-gram in the "lemonde" corpus. The length of the keyword plus the distance cannot be more than 3 for the "books" and "press" corpora and a 4 for the "lemonde" corpus. Searching the "press" corpus can take a long time. 
 
 ```{r ex_assoc}
 ex_associated <- gallicagram_associated(
@@ -117,7 +138,7 @@ ex_associated |>
   knitr::kable()
 ```
 
-We can see that some elements of this list are stopwords. Since they are not very informative, we may want to remove them. We can do that by supplying a list of words to ignore to the `stopwords` parameter of the function. For instance, we can use the list in the `lsa` package, `lsa::stopwords_fr`:
+By default, the most frequent words in the Gallica books corpus are removed. Instead, we can remove other stopwords, by supplying a list of words to ignore to the `stopwords` parameter of the function. For instance, we can use the list in the `lsa` package, `lsa::stopwords_fr`. To keep the stopwwords, set the `stopwords` parameter to `NULL`.
 
 ```{r ex_assoc_stopwords}
 ex_associated_stopwords <- gallicagram_associated(
@@ -130,15 +151,13 @@ ex_associated_stopwords <- gallicagram_associated(
 )
 ```
 
-The most often associated terms excluding stopwords are:
+The most often associated terms without excluding stopwords are:
 
 ```{r kable_assoc_stopwords, echo=FALSE}
 ex_associated_stopwords |>
   utils::head() |>
   knitr::kable()
 ```
-
-Note that excluding stopwords reduces the number of associated words returned such that it does not correspond to `nb_associated_words` anymore.
 
 # Searching several keywords
 

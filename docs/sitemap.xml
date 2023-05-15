@@ -34,10 +34,22 @@
     <loc>/reference/gallicagram_cooccur.html</loc>
   </url>
   <url>
+    <loc>/reference/gallicagram_cooccur_lexicon.html</loc>
+  </url>
+  <url>
+    <loc>/reference/gallicagram_with.html</loc>
+  </url>
+  <url>
+    <loc>/reference/gallicagram_with_month.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
     <loc>/reference/prepare_param.html</loc>
+  </url>
+  <url>
+    <loc>/reference/stopwords_gallica.html</loc>
   </url>
   <url>
     <loc>/reference/tidy_gallicagram.html</loc>

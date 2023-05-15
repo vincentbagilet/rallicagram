@@ -11,7 +11,7 @@ gallicagram_associated(
   to = 2022,
   n_results = 20,
   distance = 3,
-  stopwords = NULL
+  stopwords = rallicagram::stopwords_gallica
 )
 }
 \arguments{
@@ -34,8 +34,8 @@ return all the available results.}
 associated with the keyword.}
 
 \item{stopwords}{A character vector of stopwords to remove.
-Can for instance be \code{lsa::stopwords_fr}.
-Removed after withdrawing apostrophes and letters preceding them.
+The default is the vector of the 500 most frequent words in the Gallica
+books dataset. Can also be \code{lsa::stopwords_fr}.
 If \code{NULL} does not remove any stopwords.}
 }
 \value{
@@ -59,6 +59,8 @@ not count "chasseur" as a word associated with "camarade". The ngram
 "son camarade le chasseur" is not in the database.
 Thus, there might be less associated words at a longer distance
 as it increases the probability of ngrams to be excluded from the database.
+
+Apostrophes and letters preceding them are withdrawn from the dataset.
 
 Searching the "press" corpus can require a long running time.
 }

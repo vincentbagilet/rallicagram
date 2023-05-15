@@ -17,9 +17,6 @@ test_that("Error if length too long", {
     ),
   "'length' cannot be more than 3 for this corpus"
   )
-})
-
-test_that("Error if keyword not character string", {
   expect_error(
     gallicagram_with(keyword = "son camarade de", length = 2),
     "'length' has to be larger than the number of words in 'keyword'"

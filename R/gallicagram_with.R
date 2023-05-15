@@ -45,6 +45,7 @@ gallicagram_with <- function(keyword,
   param_clean <- prepare_param(keyword, corpus, from, to, resolution = "yearly")
   # param resolution not used
 
+  #errors handling
   if (!is.numeric(length)) {
     stop("'length' should be numeric", call. = FALSE)
   }

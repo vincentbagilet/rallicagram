@@ -15,13 +15,15 @@
 #' Thus, there might be less associated words at a longer distance
 #' as it increases the probability of ngrams to be excluded from the database.
 #'
+#' Apostrophes and letters preceding them are withdrawn from the dataset.
+#'
 #' Searching the "press" corpus can require a long running time.
 #'
 #' @param distance An integer. The word distance to which look for words
 #' associated with the keyword.
 #' @param stopwords A character vector of stopwords to remove.
-#' Can for instance be \code{lsa::stopwords_fr}.
-#' Removed after withdrawing apostrophes and letters preceding them.
+#' The default is the vector of the 500 most frequent words in the Gallica
+#' books dataset. Can also be \code{lsa::stopwords_fr}.
 #' If \code{NULL} does not remove any stopwords.
 #'
 #' @inheritParams gallicagram_with
@@ -43,7 +45,7 @@ gallicagram_associated <- function(keyword,
                                    to = 2022,
                                    n_results = 20,
                                    distance = 3,
-                                   stopwords = NULL) {
+                                   stopwords = rallicagram::stopwords_gallica) {
 
   param_clean <- prepare_param(keyword, corpus, from, to, resolution = "yearly")
   # param resolution not used
@@ -91,7 +93,18 @@ gallicagram_associated <- function(keyword,
                   sep = "") |>
     utils::read.csv() |>
     dplyr::as_tibble() |>
-    dplyr::rename("n_occur" = "tot", "associated_word" = "gram") |>
+    #remove apostrophes
+    dplyr::mutate(
+      associated_word = sub(
+        pattern = "\\w'",
+        replacement = "",
+        x = .data$gram
+      )
+    ) |>
+    dplyr::group_by(associated_word) |>
+    dplyr::summarise(n_occur = sum(tot), .groups = "drop") |>
+    dplyr::arrange(dplyr::desc(n_occur)) |>
+    #add param
     dplyr::mutate(
       keyword = keyword,
       corpus = param_clean$corpus,
@@ -103,13 +116,6 @@ gallicagram_associated <- function(keyword,
   #remove stopwords
   if (!is.null(stopwords)) {
     output <- output |>
-      dplyr::mutate( #remove apostrophes
-        associated_word = sub(
-          pattern = "\\w'",
-          replacement = "",
-          x = .data$associated_word
-        )
-      ) |>
       dplyr::anti_join(
         dplyr::tibble(associated_word = stopwords),
         by = "associated_word"

@@ -28,3 +28,5 @@ VignetteBuilder: knitr
 Config/testthat/edition: 3
 Remotes: 
     github::vincentbagilet/mediocrethemes
+Depends: 
+    R (>= 2.10)

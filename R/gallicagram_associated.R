@@ -29,6 +29,8 @@
 #' Can for instance be \code{lsa::stopwords_fr}.
 #' Removed after withdrawing apostrophes and letters preceding them.
 #' If \code{NULL} does not remove any stopwords.
+#' @param distance An integer. The word distance to which look for words
+#' associated with the keyword.
 #' @inheritParams gallicagram
 #'
 #' @importFrom rlang .data
@@ -48,11 +50,17 @@ gallicagram_associated <- function(keyword,
                                    to = 2022,
                                    n_associated_words = 20,
                                    after = TRUE,
-                                   length = NULL,
+                                   distance = 1,
                                    stopwords = NULL) {
 
   param_clean <- prepare_param(keyword, corpus, from, to, resolution = "yearly")
   # param resolution not used
+
+  length <- ifelse(
+    corpus=="lemonde",
+    max(4, length(keyword) + distance),
+    max(3, length(keyword) + distance)
+  )
 
   output <- paste("https://shiny.ens-paris-saclay.fr/guni/joker?corpus=",
                   param_clean$corpus,
@@ -66,6 +74,8 @@ gallicagram_associated <- function(keyword,
                   n_associated_words,
                   "&after=",
                   ifelse(after, "True", "False"),
+                  "&length=",
+                  length,
                   sep = "") |>
     utils::read.csv() |>
     dplyr::as_tibble() |>

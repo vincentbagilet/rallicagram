@@ -7,15 +7,16 @@
 prepare_param(keyword, corpus, from, to, resolution)
 }
 \arguments{
-\item{keyword}{A character string. Keyword to search.}
+\item{keyword}{A character string. Keyword to search. Can be up to a 3-gram
+in the "books" and "press" corpora and a 4-gram in the "lemonde" corpus.}
 
 \item{corpus}{A character string. The corpus to search. Takes the following
 values: "press" for historical press, "books" for Gallica books,
 "lemonde" for Le Monde newspaper articles.}
 
-\item{from}{A number. Starting year.}
+\item{from}{An integer. Starting year.}
 
-\item{to}{A number. End year.}
+\item{to}{An integer. End year.}
 
 \item{resolution}{A character string.
 For lemonde can be either "yearly", "monthly" or "daily".

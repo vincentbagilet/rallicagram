@@ -1,0 +1,90 @@
+#' ngrams that most frequently contain a keyword in a Gallicagram corpus
+#'
+#' @description
+#' Returns the most frequent ngrams containing a keyword over a given period.
+#'
+#' @details
+#' This function corresponds to the \code{Joker} route of the API,
+#' accessed through the 'Joker' function on the Gallicagram app.
+#' When length = 1, it is analogous to the 'Joker' function on Ngram Viewer.
+#'
+#' For instance "camarade" is often followed by "staline" or "khrouchtchev" in
+#' Le Monde. The function returns the most frequent ngrams of the form
+#' "camarade *" when setting \code{after = TRUE}. \code{after = FALSE} also
+#' includes the most frequent ngrams of the form "* camarade".
+#'
+#' The keyword can be a 2-gram in the "books" and "press" corpora and a 3-gram
+#' in the "lemonde" corpus.
+#' Length can thus be up to 3 in the "books" and "press" corpora and 4 in the
+#' "lemonde" corpus. Searching the "press" corpus can require a long
+#' running time.
+#'
+#' @param n_results An integer. The number of most frequently
+#' associated words to return.
+#' @param after A boolean. Whether to consider only words following the keyword
+#' and not those preceding. Set to \code{FALSE} by default.
+#' @param length An integer. The length of the ngrams considered.
+#' Can be up to 3 in the "books" and "press" corpora and 4 in the
+#' "lemonde" corpus.
+#' @inheritParams gallicagram
+#'
+#' @returns A tibble. With the \code{n_results} most frequent ngrams containing
+#' the \code{keyword} searched (\code{ngram})
+#' and the number of occurrences over the period (\code{n_occur}).
+#' It also returns the input parameters
+#' \code{keyword}, \code{corpus}, \code{from} and \code{to}.
+#'
+#' @export
+#' @examples
+#' gallicagram_with("camarade", length = 2)
+gallicagram_with <- function(keyword,
+                             corpus = "lemonde",
+                             from = 1945,
+                             to = 2022,
+                             n_results = 20,
+                             after = FALSE,
+                             length = 2) {
+
+  param_clean <- prepare_param(keyword, corpus, from, to, resolution = "yearly")
+  # param resolution not used
+
+  if (corpus %in% c("books", "press") && length > 3) {
+    stop("'length' cannot be more than 3 for this corpus", call. = FALSE)
+  } else if (corpus == "lemonde" && length > 4) {
+    stop("'length' cannot be more than 4 for this corpus", call. = FALSE)
+  }
+
+  if (length < strsplit(x = keyword, split = " ")[[1]] |> length()) {
+    stop(
+      "'length' has to be larger than the number of words in 'keyword'",
+      call. = FALSE
+    )
+  }
+
+  output <- paste("https://shiny.ens-paris-saclay.fr/guni/joker?corpus=",
+                  param_clean$corpus,
+                  "&mot=",
+                  param_clean$keyword,
+                  "&from=",
+                  from,
+                  "&to=",
+                  to,
+                  "&n_joker=",
+                  n_results,
+                  "&after=",
+                  ifelse(after, "True", "False"),
+                  "&length=",
+                  length,
+                  sep = "") |>
+    utils::read.csv() |>
+    dplyr::as_tibble() |>
+    dplyr::rename("n_occur" = "tot", "ngram" = "gram") |>
+    dplyr::mutate(
+      keyword = keyword,
+      corpus = param_clean$corpus,
+      from = from,
+      to = to
+    )
+
+  return(output)
+}

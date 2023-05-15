@@ -11,7 +11,7 @@ gallicagram_associated(
   to = 2022,
   n_associated_words = 20,
   after = TRUE,
-  length = NULL,
+  distance = 1,
   stopwords = NULL
 )
 }
@@ -22,15 +22,18 @@ gallicagram_associated(
 values: "press" for historical press, "books" for Gallica books,
 "lemonde" for Le Monde newspaper articles.}
 
-\item{from}{A number. Starting year.}
+\item{from}{An integer. Starting year.}
 
-\item{to}{A number. End year.}
+\item{to}{An integer. End year.}
 
 \item{n_associated_words}{An integer. The number of most frequently
 associated words to return.}
 
 \item{after}{A boolean. Whether to consider only words following the keyword
 and not those preceding. Set to \code{TRUE} by default.}
+
+\item{distance}{An integer. The word distance to which look for words
+associated with the keyword.}
 
 \item{stopwords}{A character vector of stopwords to remove.
 Can for instance be \code{lsa::stopwords_fr}.

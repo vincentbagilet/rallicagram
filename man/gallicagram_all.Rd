@@ -7,7 +7,8 @@
 gallicagram_all(keyword)
 }
 \arguments{
-\item{keyword}{A character string. Keyword to search.}
+\item{keyword}{A character string. Keyword to search. Can be up to a 3-gram
+in the "books" and "press" corpora and a 4-gram in the "lemonde" corpus.}
 }
 \value{
 A tibble. With the \code{keyword},
@@ -17,7 +18,7 @@ given observation (\code{n_grams} or \code{n_ngrams}),
 the proportion of occurrences or co-occurrences of the keyword(s) over the
 period of a given observation (\code{prop_occcur} or \code{prop_coocccur}),
 the date at the beginning of the period of a given observation (\code{date}),
-the \code{source}, the \code{resolution},
+the \code{corpus}, the \code{resolution},
 the \code{year} and
 potentially the \code{month} and \code{day} of the observation.
 }

@@ -7,12 +7,13 @@
 #' @details
 #' This function corresponds to the \code{Query} route of the API.
 #'
-#' @param keyword A character string. Keyword to search.
+#' @param keyword A character string. Keyword to search. Can be up to a 3-gram
+#' in the "books" and "press" corpora and a 4-gram in the "lemonde" corpus.
 #' @param corpus A character string. The corpus to search. Takes the following
 #' values: "press" for historical press, "books" for Gallica books,
 #' "lemonde" for Le Monde newspaper articles.
-#' @param from A number. Starting year.
-#' @param to A number. End year.
+#' @param from An integer. Starting year.
+#' @param to An integer. End year.
 #' @param resolution A character string.
 #' For lemonde can be either "yearly", "monthly" or "daily".
 #' For press can be either "yearly" or "monthly".

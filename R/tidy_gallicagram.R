@@ -16,7 +16,7 @@
 #' the proportion of occurrences or co-occurrences of the keyword(s) over the
 #' period of a given observation (\code{prop_occcur} or \code{prop_coocccur}),
 #' the date at the beginning of the period of a given observation (\code{date}),
-#' the \code{source}, the \code{resolution},
+#' the \code{corpus}, the \code{resolution},
 #' the \code{year} and
 #' potentially the \code{month} and \code{day} of the observation.
 #'
@@ -31,7 +31,7 @@ tidy_gallicagram <- function(data, corpus, resolution) {
     ) |>
     dplyr::mutate(
       prop = .data$n / .data$total,
-      source = corpus,
+      corpus = corpus,
       resolution = resolution,
       month_pad = ifelse(resolution == "yearly", 01, .data$month),
       day_pad = ifelse(resolution != "daily", 01, .data$day),

@@ -59,7 +59,7 @@ gallicagram(
   resolution = "monthly"
 )
 #> # A tibble: 132 × 9
-#>    date       keyword   n_occur n_grams prop_occur  year month source  resolut…¹
+#>    date       keyword   n_occur n_grams prop_occur  year month corpus  resolut…¹
 #>    <date>     <chr>       <int>   <int>      <dbl> <int> <int> <chr>   <chr>    
 #>  1 1960-01-01 président    1338  872943    0.00153  1960     1 lemonde monthly  
 #>  2 1960-02-01 président    1360  915672    0.00149  1960     2 lemonde monthly  

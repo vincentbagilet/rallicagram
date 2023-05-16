@@ -45,7 +45,7 @@ gallicagram_cooccur_lexicon <- function(lexicon_1,
     dplyr::group_by(.data$date) |>
     dplyr::mutate(
       n_cooccur = sum(.data$n_cooccur),
-      prop_cooccur = .data$prop_cooccur / .data$n_ngrams
+      prop_cooccur = .data$n_cooccur / .data$n_ngrams
     ) |>
     dplyr::select(-keyword_1, -keyword_2) |>
     dplyr::distinct() |>

@@ -31,12 +31,12 @@
 #' @examples
 #' gallicagram_with_month("camarade", length = 2)
 gallicagram_with_month <- function(keyword,
-                             corpus = "lemonde",
-                             year = 2022,
-                             month = 1,
-                             n_results = 20,
-                             after = FALSE,
-                             length = 2) {
+                                   corpus = "lemonde",
+                                   year = 2022,
+                                   month = 1,
+                                   n_results = 20,
+                                   after = FALSE,
+                                   length = 2) {
 
   #errors handling
   if (!is.numeric(length)) {

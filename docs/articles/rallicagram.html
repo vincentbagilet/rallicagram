@@ -370,7 +370,7 @@ keywords:</p>
 <td align="left">1960-01-01</td>
 <td align="right">3</td>
 <td align="right">575465</td>
-<td align="right">0</td>
+<td align="right">5.2e-06</td>
 <td align="right">1960</td>
 <td align="right">1</td>
 <td align="left">lemonde</td>
@@ -382,7 +382,7 @@ keywords:</p>
 <td align="left">1960-02-01</td>
 <td align="right">0</td>
 <td align="right">606116</td>
-<td align="right">0</td>
+<td align="right">0.0e+00</td>
 <td align="right">1960</td>
 <td align="right">2</td>
 <td align="left">lemonde</td>
@@ -394,7 +394,7 @@ keywords:</p>
 <td align="left">1960-03-01</td>
 <td align="right">0</td>
 <td align="right">616477</td>
-<td align="right">0</td>
+<td align="right">0.0e+00</td>
 <td align="right">1960</td>
 <td align="right">3</td>
 <td align="left">lemonde</td>
@@ -406,7 +406,7 @@ keywords:</p>
 <td align="left">1960-04-01</td>
 <td align="right">0</td>
 <td align="right">513816</td>
-<td align="right">0</td>
+<td align="right">0.0e+00</td>
 <td align="right">1960</td>
 <td align="right">4</td>
 <td align="left">lemonde</td>
@@ -418,7 +418,7 @@ keywords:</p>
 <td align="left">1960-05-01</td>
 <td align="right">0</td>
 <td align="right">552610</td>
-<td align="right">0</td>
+<td align="right">0.0e+00</td>
 <td align="right">1960</td>
 <td align="right">5</td>
 <td align="left">lemonde</td>
@@ -430,7 +430,7 @@ keywords:</p>
 <td align="left">1960-06-01</td>
 <td align="right">0</td>
 <td align="right">563800</td>
-<td align="right">0</td>
+<td align="right">0.0e+00</td>
 <td align="right">1960</td>
 <td align="right">6</td>
 <td align="left">lemonde</td>
@@ -656,7 +656,7 @@ For instance, we can use the list in the <code>lsa</code> package,
 <h2 id="searching-several-keywords">Searching several keywords<a class="anchor" aria-label="anchor" href="#searching-several-keywords"></a>
 </h2>
 <p>In order to search several keywords at once, we can use the function
-<code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::map_dfr</a></code>. It takes as parameters the vector of
+<code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">purrr::map_dfr</a></code>. It takes as parameters the vector of
 keywords to search, followed by the function (<code>gallicagram</code>)
 and additional arguments to pass to the function. It returns a unique
 data frame with the results for searches corresponding to each keyword,
@@ -666,14 +666,14 @@ basically binding the dataframes produced by each keyword search.</p>
 <span></span>
 <span><span class="va">keywords</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"république"</span>, <span class="st">"france"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">keywords</span>, <span class="va">gallicagram</span>,</span>
+<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">keywords</span>, <span class="va">gallicagram</span>,</span>
 <span>               corpus <span class="op">=</span> <span class="st">"lemonde"</span>, from <span class="op">=</span> <span class="st">"1960"</span>, to <span class="op">=</span> <span class="st">"1970"</span><span class="op">)</span></span></code></pre></div>
 <p>Based on that same principle, we can run several searches at onces,
 varying all parameters, not only the keyword searched. To do that, we
 can specify the series of parameters in a data frame, each row
 corresponding to a set of parameters to run the <code>gallicagram</code>
 function for. We then pass this data frame to
-<code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::pmap_dfr</a></code>.</p>
+<code><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">purrr::pmap_dfr</a></code>.</p>
 <p>To specify the set of parameters, we can either build the parameters
 data frame by hand. It is also often helpful to use
 <code><a href="https://tidyr.tidyverse.org/reference/expand.html" class="external-link">tidyr::crossing</a></code> to create all combination of possible
@@ -727,11 +727,11 @@ searches.</p>
 </tr>
 </tbody>
 </table>
-<p>We can then pass it to <code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::pmap_dfr</a></code> that will call
+<p>We can then pass it to <code><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">purrr::pmap_dfr</a></code> that will call
 the function <code>gallicagram</code> for each of the 4 sets of
 parameters defined in the rows of <code>params_pmap</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">pmap_dfr</a></span><span class="op">(</span><span class="va">params_pmap</span>, <span class="va">gallicagram</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">pmap_dfr</a></span><span class="op">(</span><span class="va">params_pmap</span>, <span class="va">gallicagram</span><span class="op">)</span></span></code></pre></div>
 <p>This method also apply for the other functions in the
 <code>rallicagram</code> package.</p>
 </div>

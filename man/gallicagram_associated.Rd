@@ -11,7 +11,7 @@ gallicagram_associated(
   to = 2022,
   n_results = 20,
   distance = 3,
-  stopwords = rallicagram::stopwords_gallica
+  stopwords = rallicagram::stopwords_gallica[1:500]
 )
 }
 \arguments{
@@ -35,7 +35,9 @@ associated with the keyword.}
 
 \item{stopwords}{A character vector of stopwords to remove.
 The default is the vector of the 500 most frequent words in the Gallica
-books dataset. Can also be \code{lsa::stopwords_fr}.
+books dataset. We can change this number by passing
+\code{stopwords_gallicca[1:300]} (for instance, for the 300 most frequent)
+to the \code{stopwords} argument. Can also be \code{lsa::stopwords_fr}
 If \code{NULL} does not remove any stopwords.}
 }
 \value{

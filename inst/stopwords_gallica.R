@@ -2,7 +2,6 @@
 
 stopwords_gallica <-
   readr::read_csv("https://regicid.github.io/stopwords.csv") |>
-  dplyr::slice(1:500) |>
   dplyr::select(stopword = monogram) %>%
   .$stopword
 

@@ -56,7 +56,7 @@
 <span>  to <span class="op">=</span> <span class="fl">2022</span>,</span>
 <span>  n_results <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>  distance <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  stopwords <span class="op">=</span> <span class="fu">rallicagram</span><span class="fu">::</span><span class="va"><a href="stopwords_gallica.html">stopwords_gallica</a></span></span>
+<span>  stopwords <span class="op">=</span> <span class="fu">rallicagram</span><span class="fu">::</span><span class="va"><a href="stopwords_gallica.html">stopwords_gallica</a></span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">500</span><span class="op">]</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -95,7 +95,9 @@ associated with the keyword.</p></dd>
 <dt>stopwords</dt>
 <dd><p>A character vector of stopwords to remove.
 The default is the vector of the 500 most frequent words in the Gallica
-books dataset. Can also be <code><a href="https://rdrr.io/pkg/lsa/man/stopwords.html" class="external-link">lsa::stopwords_fr</a></code>.
+books dataset. We can change this number by passing
+<code>stopwords_gallicca[1:300]</code> (for instance, for the 300 most frequent)
+to the <code>stopwords</code> argument. Can also be <code><a href="https://rdrr.io/pkg/lsa/man/stopwords.html" class="external-link">lsa::stopwords_fr</a></code>
 If <code>NULL</code> does not remove any stopwords.</p></dd>
 
 </dl></div>

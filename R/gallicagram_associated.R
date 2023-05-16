@@ -23,7 +23,9 @@
 #' associated with the keyword.
 #' @param stopwords A character vector of stopwords to remove.
 #' The default is the vector of the 500 most frequent words in the Gallica
-#' books dataset. Can also be \code{lsa::stopwords_fr}.
+#' books dataset. We can change this number by passing
+#' \code{stopwords_gallicca[1:300]} (for instance, for the 300 most frequent)
+#' to the \code{stopwords} argument. Can also be \code{lsa::stopwords_fr}
 #' If \code{NULL} does not remove any stopwords.
 #'
 #' @inheritParams gallicagram_with
@@ -45,7 +47,7 @@ gallicagram_associated <- function(keyword,
                                    to = 2022,
                                    n_results = 20,
                                    distance = 3,
-                                   stopwords = rallicagram::stopwords_gallica) {
+                        stopwords = rallicagram::stopwords_gallica[1:500]) {
 
   param_clean <- prepare_param(keyword, corpus, from, to, resolution = "yearly")
   # param resolution not used

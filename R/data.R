@@ -2,5 +2,5 @@
 #'
 #' Sorted from most to less frequent word
 #'
-#' @format A length 500 vector.
+#' @format A length 1000 vector.
 "stopwords_gallica"

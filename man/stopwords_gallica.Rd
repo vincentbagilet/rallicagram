@@ -5,7 +5,7 @@
 \alias{stopwords_gallica}
 \title{A vector containing the most frequent words in the Gallica books corpus}
 \format{
-A length 500 vector.
+A length 1000 vector.
 }
 \usage{
 stopwords_gallica

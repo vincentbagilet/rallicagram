@@ -73,7 +73,7 @@ prepare_param <- function(keyword,
                           ifelse(corpus == "lemonde", "lemonde",
                             stop("Invalid corpus name", call. = FALSE))))
 
-  keyword_clean <- sub(" ", "%20", tolower(keyword))
+  keyword_clean <- gsub(" ", "%20", tolower(keyword))
 
   param_clean <- list(
     "keyword" = keyword_clean,

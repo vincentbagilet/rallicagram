@@ -50,8 +50,8 @@ gallicagram_cooccur_lexicon <- function(lexicon_1,
     dplyr::select(-keyword_1, -keyword_2) |>
     dplyr::distinct() |>
     dplyr::mutate(
-      lexicon_1 = paste(lexicon_1, collapse = "&"),
-      lexicon_2 = paste(lexicon_2, collapse = "&")
+      lexicon_1 = paste(lexicon_1, collapse = "+"),
+      lexicon_2 = paste(lexicon_2, collapse = "+")
     )
 
   return(output)

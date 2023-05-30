@@ -136,7 +136,7 @@ ex_associated_stopwords |>
   knitr::kable()
 ```
 
-## Several keywords, occurrences of a lexicon and of stemmed words
+# Several keywords, occurrences of a lexicon and of stemmed words
 
 ## Searching several keywords
 

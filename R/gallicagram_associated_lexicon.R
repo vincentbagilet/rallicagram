@@ -31,27 +31,36 @@ gallicagram_associated_lexicon <- function(lexicon,
                                            corpus = "lemonde",
                                            from = 1945,
                                            to = 2022,
-                                           resolution = "monthly") {
+                                           n_results = 20,
+                                           distance = 3,
+                        stopwords = rallicagram::stopwords_gallica[1:500]) {
 
   output <- NULL
 
+  #to check for errors
+  param_clean <- prepare_param("a", corpus, from, to, "yearly")
+
+  if(!is.character(lexicon) | !is.vector(lexicon)) {
+    stop("'lexicon' must be a character vector.")
+  }
+
   for (keyword in lexicon) {
       output <- output |>
-        rbind(gallicagram_associated(keyword, corpus, from, to, resolution))
+        rbind(gallicagram_associated(keyword, corpus, from, to,
+                                     n_results = 10000001, distance))
   }
 
   output <- output |>
     dplyr::mutate(keyword = lexicon[1]) |>
-    dplyr::group_by(.data$date) |>
-    dplyr::mutate(
-      n_occur = sum(.data$n_occur),
-      prop_occur = .data$n_occur / .data$n_grams
-    ) |>
+    dplyr::group_by(.data$associated_word) |>
+    dplyr::mutate(n_occur = sum(.data$n_occur)) |>
     dplyr::ungroup() |>
     dplyr::distinct() |>
+    dplyr::arrange(dplyr::desc(n_occur)) |>
     dplyr::mutate(
       lexicon = paste(lexicon, collapse = "+")
-    )
+    ) |>
+    dplyr::slice(1:n_results)
 
   return(output)
 }

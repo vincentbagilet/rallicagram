@@ -32,7 +32,7 @@
 #'
 #' @importFrom rlang .data
 #'
-#' @returns A tibble. With the words the most frequently associated with the
+#' @returns A tibble. Containing the words the most frequently associated with the
 #' \code{keyword} mentioned (\code{associated_word}),
 #' and the number of occurrences over the period (\code{n_occur}).
 #' It also returns the input parameters

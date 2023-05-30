@@ -41,7 +41,7 @@ to the \code{stopwords} argument. Can also be \code{lsa::stopwords_fr}
 If \code{NULL} does not remove any stopwords.}
 }
 \value{
-A tibble. With the words the most frequently associated with the
+A tibble. Containing the words the most frequently associated with the
 \code{keyword} mentioned (\code{associated_word}),
 and the number of occurrences over the period (\code{n_occur}).
 It also returns the input parameters

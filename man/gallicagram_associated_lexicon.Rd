@@ -10,7 +10,9 @@ gallicagram_associated_lexicon(
   corpus = "lemonde",
   from = 1945,
   to = 2022,
-  resolution = "monthly"
+  n_results = 20,
+  distance = 3,
+  stopwords = rallicagram::stopwords_gallica[1:500]
 )
 }
 \arguments{
@@ -25,6 +27,20 @@ values: "press" for historical press, "books" for Gallica books,
 \item{from}{An integer. Starting year.}
 
 \item{to}{An integer. End year.}
+
+\item{n_results}{An integer. The number of most frequently
+associated words to return. \code{n_results} can also be set to "all" to
+return all the available results.}
+
+\item{distance}{An integer. The word distance to which look for words
+associated with the keyword.}
+
+\item{stopwords}{A character vector of stopwords to remove.
+The default is the vector of the 500 most frequent words in the Gallica
+books dataset. We can change this number by passing
+\code{stopwords_gallicca[1:300]} (for instance, for the 300 most frequent)
+to the \code{stopwords} argument. Can also be \code{lsa::stopwords_fr}
+If \code{NULL} does not remove any stopwords.}
 }
 \value{
 A tibble. With the words the most frequently associated with any of

@@ -40,6 +40,13 @@ gallicagram_lexicon <- function(lexicon,
 
   output <- NULL
 
+  #to check for errors
+  param_clean <- prepare_param("a", corpus, from, to, resolution)
+
+  if(!is.character(lexicon) | !is.vector(lexicon)) {
+    stop("'lexicon' must be a character vector.")
+  }
+
   for (keyword in lexicon) {
       output <- output |>
         rbind(gallicagram(keyword, corpus, from, to, resolution))

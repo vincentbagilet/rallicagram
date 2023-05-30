@@ -17,6 +17,8 @@
 #'
 #' @inheritParams gallicagram
 #'
+#' @importFrom rlang .data
+#'
 #' @returns A tibble. With the first \code{keyword} in the vector,
 #' typically the one, the entire \code{lexicon},
 #' the number of occurrences (\code{n_occur}) or co-occurrences

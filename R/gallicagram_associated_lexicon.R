@@ -17,6 +17,8 @@
 #'
 #' @inheritParams gallicagram_associated
 #'
+#' @importFrom rlang .data
+#'
 #' @returns A tibble. With the words the most frequently associated with any of
 #' the keywords in the \code{lexicon} mentioned (\code{associated_word}),
 #' the first \code{keyword} in this lexicon, typically the main one
@@ -56,7 +58,7 @@ gallicagram_associated_lexicon <- function(lexicon,
     dplyr::mutate(n_occur = sum(.data$n_occur)) |>
     dplyr::ungroup() |>
     dplyr::distinct() |>
-    dplyr::arrange(dplyr::desc(n_occur)) |>
+    dplyr::arrange(dplyr::desc(.data$n_occur)) |>
     dplyr::mutate(
       lexicon = paste(lexicon, collapse = "+")
     ) |>

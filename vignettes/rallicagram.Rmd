@@ -91,29 +91,6 @@ ex_cooccur |>
   knitr::kable()
 ```
 
-### Co-occurrences in two lexicons
-
-If one wants to compute co-occurrences in two lexicons, one can use the function `gallicagram_cooccur_lexicon`. It simply loops the function `gallicagram_cooccur` over each  word of each lexicon and sums the results. It takes as inputs two vectors of keywords:
-
-```{r ex_cooccur_lexicon}
-ex_cooccur_lexicon <- gallicagram_cooccur_lexicon(
-  lexicon_1 = c("président", "présidente"),
-  lexicon_2 = c("mauvais", "nul"),
-  corpus = "lemonde",
-  from = 1960,
-  to = 1970,
-  resolution = "monthly"
-)
-```
-
-Here is an example of part of the output:
-
-```{r kable_cooccur_lexicon, echo=FALSE}
-ex_cooccur_lexicon |>
-  utils::head() |>
-  knitr::kable()
-```
-
 ## Associations
 
 `gallicagram_associated`  builds a data frame with the words most frequently used close (at a specified distance) to a given keyword over the period. This function calls the `associated` route of the [API](https://regicid.github.io/api).
@@ -159,7 +136,9 @@ ex_associated_stopwords |>
   knitr::kable()
 ```
 
-# Searching several keywords
+## Several keywords, occurrences of a lexicon and of stemmed words
+
+## Searching several keywords
 
 In order to search several keywords at once, we can use the function `purrr::map_dfr`. It takes as parameters the vector of keywords to search, followed by the function (`gallicagram`) and additional arguments to pass to the function. It returns a unique data frame with the results for searches corresponding to each keyword, basically binding the dataframes produced by each keyword search.
 
@@ -172,7 +151,7 @@ purrr::map_dfr(keywords, gallicagram,
                corpus = "lemonde", from = "1960", to = "1970")
 ```
 
-Based on that same principle, we can run several searches at onces, varying all parameters, not only the keyword searched. To do that, we can specify the series of parameters in a data frame, each row corresponding to a set of parameters to run the `gallicagram` function for. We then pass this data frame to `purrr::pmap_dfr`. 
+Based on that same principle, we can run several searches at once, varying all parameters, not only the keyword searched. To do that, we can specify the series of parameters in a data frame, each row corresponding to a set of parameters to run the `gallicagram` function for. We then pass this data frame to `purrr::pmap_dfr`. 
 
 To specify the set of parameters, we can either build the parameters data frame by hand. It is also often helpful to use `tidyr::crossing` to create all combination of possible searches.
 
@@ -200,6 +179,65 @@ purrr::pmap_dfr(params_pmap, gallicagram)
 ```
 
 This method also apply for the other functions in the `rallicagram` package.
+
+## Occurrences of a lexicon
+
+If one wants to compute occurrences in a lexicon, co-occurrences in two lexicons or words associated with a lexicon, one can use the functions with suffix `_lexicon` (`gallicagram_lexicon`, `gallicagram_cooccur_lexicon` and `gallicagram_associated_lexicon`). They simply loop the function over each  word the lexicon(s) and sums the results. It takes as inputs vectors of keywords:
+
+```{r ex_lexicon}
+ex_lexicon <- gallicagram_lexicon(
+  lexicon = c("président", "présidente"),
+  corpus = "lemonde",
+  from = 1960,
+  to = 1970,
+  resolution = "monthly"
+)
+
+ex_cooccur_lexicon <- gallicagram_cooccur_lexicon(
+  lexicon_1 = c("président", "présidente"),
+  lexicon_2 = c("mauvais", "nul"),
+  corpus = "lemonde",
+  from = 1960,
+  to = 1970,
+  resolution = "monthly"
+)
+```
+
+Here is an example of part of the output:
+
+```{r kable_lexicon, echo=FALSE}
+ex_lexicon |>
+  utils::head() |>
+  knitr::kable()
+```
+
+## Words with the same stem
+
+The function `get_same_stem()` takes as input a keyword and returns a vector of words that share the same stem. For instance, for "écologie":
+
+```{r get_same_stem}
+get_same_stem("écologie")
+```
+
+This function is particularly useful when its output is passed to one of the `_lexicon` functions:
+
+```{r ex_stem_lexicon}
+ex_stem_lexicon <- get_same_stem("écologie") |> 
+  gallicagram_lexicon(
+    corpus = "lemonde",
+    from = 1960,
+    to = 1970,
+    resolution = "yearly"
+  )
+```
+
+It enables to get all the occurrences for words that share the same stem as the keyword. Note that due to the number of requests, it may take some time to run. 
+
+```{r kable_stem_lexicon, echo=FALSE}
+ex_stem_lexicon |>
+  utils::head() |>
+  knitr::kable()
+```
 
 # Graphs
 

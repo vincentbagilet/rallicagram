@@ -31,16 +31,25 @@
     <loc>/reference/gallicagram_associated.html</loc>
   </url>
   <url>
+    <loc>/reference/gallicagram_associated_lexicon.html</loc>
+  </url>
+  <url>
     <loc>/reference/gallicagram_cooccur.html</loc>
   </url>
   <url>
     <loc>/reference/gallicagram_cooccur_lexicon.html</loc>
   </url>
   <url>
+    <loc>/reference/gallicagram_lexicon.html</loc>
+  </url>
+  <url>
     <loc>/reference/gallicagram_with.html</loc>
   </url>
   <url>
     <loc>/reference/gallicagram_with_month.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_same_stem.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
@@ -53,5 +62,8 @@
   </url>
   <url>
     <loc>/reference/tidy_gallicagram.html</loc>
+  </url>
+  <url>
+    <loc>/reference/word_lemma_stem.html</loc>
   </url>
 </urlset>

@@ -75,7 +75,7 @@ Gallicagram developers <a href="https://regicid.github.io/" class="external-link
 Courson</a> and <a href="https://benjamin-azoulay.my.canva.site/" class="external-link">Benjamin Azoulay</a>, on
 the “Notice” tab of the <a href="https://shiny.ens-paris-saclay.fr/app/gallicagram" class="external-link">Gallicagram
 website</a> and on the <a href="https://regicid.github.io/api" class="external-link">API
-docuemntation</a>.</p>
+documentation</a>.</p>
 <div class="section level2">
 <h2 id="main-functions">Main functions<a class="anchor" aria-label="anchor" href="#main-functions"></a>
 </h2>
@@ -534,17 +534,18 @@ For instance, we can use the list in the <code>lsa</code> package,
 </div>
 </div>
 <div class="section level2">
-<h2 id="several-keywords-occurrences-of-a-lexicon-and-of-stemmed-words">Several keywords, occurrences of a lexicon and of stemmed words<a class="anchor" aria-label="anchor" href="#several-keywords-occurrences-of-a-lexicon-and-of-stemmed-words"></a>
+<h2 id="more-than-one-keyword">More than one keyword<a class="anchor" aria-label="anchor" href="#more-than-one-keyword"></a>
 </h2>
 <div class="section level3">
 <h3 id="searching-several-keywords">Searching several keywords<a class="anchor" aria-label="anchor" href="#searching-several-keywords"></a>
 </h3>
-<p>In order to search several keywords at once, we can use the function
-<code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::map_dfr</a></code>. It takes as parameters the vector of
-keywords to search, followed by the function (<code>gallicagram</code>)
-and additional arguments to pass to the function. It returns a unique
-data frame with the results for searches corresponding to each keyword,
-basically binding the dataframes produced by each keyword search.</p>
+<p>In order to run the functions for several keywords at once, we can
+use the function <code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::map_dfr</a></code>. It takes as parameters the
+vector of keywords to search, followed by the function
+(<code>gallicagram</code>) and additional arguments to pass to the
+function. It returns a unique data frame with the results for searches
+corresponding to each keyword, basically binding the dataframes produced
+by each keyword search.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
 <span></span>
@@ -647,7 +648,8 @@ inputs vectors of keywords:</p>
 <span>  to <span class="op">=</span> <span class="fl">1970</span>,</span>
 <span>  resolution <span class="op">=</span> <span class="st">"monthly"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>Here is an example of part of the output:</p>
+<p>Here is an example of part of the output of
+<code>gallicagram_lexicon</code>:</p>
 <table class="table">
 <colgroup>
 <col width="11%">

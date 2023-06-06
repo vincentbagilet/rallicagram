@@ -26,7 +26,7 @@ library(rallicagram)
 ```
 
 `rallicagram` is a R wrapper for the [Gallicagram API](https://regicid.github.io/api). More info on Gallicagram and its API can be found on a [preprint](https://osf.io/preprints/socarxiv/84bf3/) by Gallicagram developers [
-Benoît de Courson](https://regicid.github.io/) and [Benjamin Azoulay](https://benjamin-azoulay.my.canva.site/), on the "Notice" tab of the [Gallicagram website](https://shiny.ens-paris-saclay.fr/app/gallicagram) and on the [API docuemntation](https://regicid.github.io/api).
+Benoît de Courson](https://regicid.github.io/) and [Benjamin Azoulay](https://benjamin-azoulay.my.canva.site/), on the "Notice" tab of the [Gallicagram website](https://shiny.ens-paris-saclay.fr/app/gallicagram) and on the [API documentation](https://regicid.github.io/api).
 
 # Main functions
 
@@ -136,11 +136,11 @@ ex_associated_stopwords |>
   knitr::kable()
 ```
 
-# Several keywords, occurrences of a lexicon and of stemmed words
+# More than one keyword
 
 ## Searching several keywords
 
-In order to search several keywords at once, we can use the function `purrr::map_dfr`. It takes as parameters the vector of keywords to search, followed by the function (`gallicagram`) and additional arguments to pass to the function. It returns a unique data frame with the results for searches corresponding to each keyword, basically binding the dataframes produced by each keyword search.
+In order to run the functions for several keywords at once, we can use the function `purrr::map_dfr`. It takes as parameters the vector of keywords to search, followed by the function (`gallicagram`) and additional arguments to pass to the function. It returns a unique data frame with the results for searches corresponding to each keyword, basically binding the dataframes produced by each keyword search.
 
 ```{r map, eval=FALSE}
 library(purrr)
@@ -203,7 +203,7 @@ ex_cooccur_lexicon <- gallicagram_cooccur_lexicon(
 )
 ```
 
-Here is an example of part of the output:
+Here is an example of part of the output of `gallicagram_lexicon`:
 
 ```{r kable_lexicon, echo=FALSE}
 ex_lexicon |>

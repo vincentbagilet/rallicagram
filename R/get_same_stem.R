@@ -16,7 +16,7 @@ get_same_stem <- function(keyword) {
     stop("Keyword not in the dataset", call. = FALSE)
   } else {
     stem <- wls[[which(wls$word == keyword)[1], "stem"]]
-    vector <- wls[which(wls$stem == stem), "word"]$word
+    vector <- wls[which(wls$stem == stem), ]$word
   }
 
   return(vector)

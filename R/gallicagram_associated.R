@@ -19,8 +19,9 @@
 #'
 #' Searching the "press" corpus can require a long running time.
 #'
-#' @param distance An integer. The word distance to which look for words
-#' associated with the keyword.
+#' @param distance An integer or "max". The word distance to which look
+#' for words associated with the keyword.
+#' If equal to "max", will be 4 for the Le Monde corpus and 3 otherwise.
 #' @param stopwords A character vector of stopwords to remove.
 #' The default is the vector of the 500 most frequent words in the Gallica
 #' books dataset. We can change this number by passing
@@ -46,25 +47,32 @@ gallicagram_associated <- function(keyword,
                                    from = 1945,
                                    to = 2022,
                                    n_results = 20,
-                                   distance = 3,
+                                   distance = "max",
                         stopwords = rallicagram::stopwords_gallica[1:500]) {
 
   param_clean <- prepare_param(keyword, corpus, from, to, resolution = "yearly")
   # param resolution not used
 
-  length <- ifelse(
-    corpus == "lemonde",
-    max(4, length(strsplit(x = keyword, split = " ")[[1]]) + distance),
-    max(3, length(strsplit(x = keyword, split = " ")[[1]]) + distance)
-  )
-
-  n_joker <- ifelse(is.null(stopwords), n_results, "all")
-
-  #errors handling
-  if (!is.numeric(distance)) {
-    stop("'distance' should be numeric", call. = FALSE)
+  #errors handling 1
+  if (!(is.numeric(distance) | distance == "max")) {
+    stop("'distance' should be numeric or 'max'", call. = FALSE)
   }
 
+  #compute length
+  max_length_corpus <- ifelse(corpus == "lemonde", 4, 3)
+
+  length <- ifelse(
+    distance == "max",
+    max_length_corpus,
+    max(max_length_corpus,
+        length(strsplit(x = keyword, split = " ")[[1]]) + distance)
+  )
+
+  n_joker <- ifelse(is.null(stopwords),
+                    n_results + length(strsplit(x = keyword, split = " ")[[1]]),
+                    "all")
+
+  #errors handling2
   if (corpus %in% c("books", "press") && length > 3) {
     stop("The sum of the number of words in 'keyword' and 'distance'
          cannot be more than 3 for this corpus", call. = FALSE)
@@ -73,11 +81,17 @@ gallicagram_associated <- function(keyword,
          cannot be more than 4 for this corpus", call. = FALSE)
   }
 
-  if (distance <= 0) {
+  if (distance <= 0 & distance != "max") {
     stop(
       "'distance' has to be larger than 0",
       call. = FALSE
     )
+  }
+
+  if (grepl("\\'", keyword)) {
+    stop("'keyword' cannot contain an apostrophe.
+         Specifying a keyword without the apostrophe will also return words
+         associated with the apostrophe version of the keyword.", call. = FALSE)
   }
 
   output <- paste("https://shiny.ens-paris-saclay.fr/guni/associated?corpus=",
@@ -103,6 +117,7 @@ gallicagram_associated <- function(keyword,
         x = .data$gram
       )
     ) |>
+    dplyr::filter(!(associated_word %in% strsplit(keyword, "\\s")[[1]])) |>
     dplyr::group_by(.data$associated_word) |>
     dplyr::summarise(n_occur = sum(.data$tot), .groups = "drop") |>
     dplyr::arrange(dplyr::desc(.data$n_occur)) |>
@@ -121,9 +136,13 @@ gallicagram_associated <- function(keyword,
       dplyr::anti_join(
         dplyr::tibble(associated_word = stopwords),
         by = "associated_word"
-      ) |>
-      dplyr::slice(1:n_results)
+      )
   }
+
+  output <- output |>
+    dplyr::filter(associated_word != "") |>
+    #these "" were created because associated_word returned of the shape \\w'
+    dplyr::slice(1:n_results)
 
   return(output)
 }

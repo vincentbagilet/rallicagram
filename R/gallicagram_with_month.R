@@ -60,6 +60,12 @@ gallicagram_with_month <- function(keyword,
     stop("'year' and 'month' should be numeric", call. = FALSE)
   }
 
+  if (grepl("\\'", keyword)) {
+    stop("'keyword' cannot contain an apostrophe.
+         Specifying a keyword without the apostrophe will also return words
+         associated with the apostrophe version of the keyword.", call. = FALSE)
+  }
+
   param_clean <- prepare_param(keyword, corpus, year, year, resolution = "yearly")
   # param resolution not used
 

@@ -67,6 +67,12 @@ gallicagram_with <- function(keyword,
     )
   }
 
+  if (grepl("\\'", keyword)) {
+    stop("'keyword' cannot contain an apostrophe.
+         Specifying a keyword without the apostrophe will also return words
+         associated with the apostrophe version of the keyword.", call. = FALSE)
+  }
+
   output <- paste("https://shiny.ens-paris-saclay.fr/guni/joker?corpus=",
                   param_clean$corpus,
                   "&mot=",

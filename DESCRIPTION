@@ -29,4 +29,4 @@ Config/testthat/edition: 3
 Remotes: 
     github::vincentbagilet/mediocrethemes
 Depends: 
-    R (>= 2.10)
+    R (>= 4.1.0)

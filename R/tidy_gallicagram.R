@@ -1,10 +1,10 @@
 #' Internal function to tidy the output of the API call.
 #'
 #' @description
-#' Turns the output into a tibble, renames the variables and
+#' Turns the Gallicagram API data into a tibble, renames the variables and
 #' add the input parameters to the output tibble.
 #'
-#' @param data A data frame produced by the Gallicagram API
+#' @param url A url to pass the Gallicagram API
 #' @inheritParams gallicagram
 #'
 #' @importFrom rlang .data
@@ -20,11 +20,10 @@
 #' the \code{year} and
 #' potentially the \code{month} and \code{day} of the observation.
 #'
-tidy_gallicagram <- function(data, corpus, resolution) {
+tidy_gallicagram <- function(url, corpus, resolution) {
 
-  data |>
-    utils::read.csv() |>
-    dplyr::as_tibble() |>
+  url |>
+    rallicagram:::read_data_gallicagram() |>
     dplyr::rename(keyword = "gram", year = "annee") |>
     dplyr::rename(
       tidyselect::any_of(c(month = "mois", day = "jour"))

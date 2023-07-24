@@ -4,10 +4,10 @@
 \alias{tidy_gallicagram}
 \title{Internal function to tidy the output of the API call.}
 \usage{
-tidy_gallicagram(data, corpus, resolution)
+tidy_gallicagram(url, corpus, resolution)
 }
 \arguments{
-\item{data}{A data frame produced by the Gallicagram API}
+\item{url}{A url to pass the Gallicagram API}
 
 \item{corpus}{A character string. The corpus to search. Takes the following
 values: "press" for historical press, "books" for Gallica books,
@@ -31,6 +31,6 @@ the \code{year} and
 potentially the \code{month} and \code{day} of the observation.
 }
 \description{
-Turns the output into a tibble, renames the variables and
+Turns the Gallicagram API data into a tibble, renames the variables and
 add the input parameters to the output tibble.
 }

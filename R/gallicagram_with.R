@@ -88,8 +88,7 @@ gallicagram_with <- function(keyword,
                   "&length=",
                   length,
                   sep = "") |>
-    utils::read.csv() |>
-    dplyr::as_tibble() |>
+    rallicagram:::read_data_gallicagram() |>
     dplyr::rename("n_occur" = "tot", "ngram" = "gram") |>
     dplyr::mutate(
       keyword = keyword,

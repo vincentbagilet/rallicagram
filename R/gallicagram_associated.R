@@ -107,8 +107,7 @@ gallicagram_associated <- function(keyword,
                   "&length=",
                   length,
                   sep = "") |>
-    utils::read.csv() |>
-    dplyr::as_tibble() |>
+    rallicagram:::read_data_gallicagram() |>
     #remove apostrophes
     dplyr::mutate(
       associated_word = sub(

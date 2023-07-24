@@ -25,11 +25,11 @@
 #' @examples
 #' gallicagram_cooccur_lexicon(c("président", "présidente"), c("mauvais", "nul"))
 gallicagram_cooccur_lexicon <- function(lexicon_1,
-                                lexicon_2,
-                                corpus = "lemonde",
-                                from = 1945,
-                                to = 2022,
-                                resolution = "monthly") {
+                                        lexicon_2,
+                                        corpus = "lemonde",
+                                        from = 1945,
+                                        to = 2022,
+                                        resolution = "monthly") {
 
   output <- NULL
 

@@ -1,7 +1,7 @@
 Package: rallicagram
 Type: Package
 Title: Wrapper for Gallicagram API
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person("Vincent", "Bagilet", , "vincent.bagilet@columbia.edu", role = c("aut", "cre"))
 Description: Calls the Gallicagram API directly from R.

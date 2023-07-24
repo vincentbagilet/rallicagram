@@ -10,7 +10,8 @@ gallicagram_cooccur(
   corpus = "lemonde",
   from = 1945,
   to = 2022,
-  resolution = "monthly"
+  resolution = "monthly",
+  count_period = TRUE
 )
 }
 \arguments{
@@ -29,6 +30,11 @@ values: "press" for historical press, "books" for Gallica books,
 \item{resolution}{A character string.
 For press and lemonde can be either "yearly" or "monthly".
 For books can only be "yearly".}
+
+\item{count_period}{If FALSE, counts the co-occurrences of each phrase
+containing both keywords.
+If TRUE, returns the number of times both keywords co-occur
+in each resolution period.}
 }
 \value{
 A tibble. With the \code{keyword},

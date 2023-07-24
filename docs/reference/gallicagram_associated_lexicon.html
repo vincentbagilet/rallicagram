@@ -20,7 +20,7 @@ in a Gallicagram corpus — gallicagram_associated_lexicon"><meta property="og:d
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rallicagram</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
       </span>
     </div>
 
@@ -92,8 +92,9 @@ return all the available results.</p></dd>
 
 
 <dt>distance</dt>
-<dd><p>An integer. The word distance to which look for words
-associated with the keyword.</p></dd>
+<dd><p>An integer or "max". The word distance to which look
+for words associated with the keyword.
+If equal to "max", will be 4 for the Le Monde corpus and 3 otherwise.</p></dd>
 
 
 <dt>stopwords</dt>

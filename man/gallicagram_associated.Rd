@@ -63,7 +63,8 @@ not count "chasseur" as a word associated with "camarade". The ngram
 Thus, there might be less associated words at a longer distance
 as it increases the probability of ngrams to be excluded from the database.
 
-Apostrophes and letters preceding them are withdrawn from the dataset.
+Apostrophes and letters preceding them are withdrawn from the dataset
+(except for n' since they carry meaning)
 
 Searching the "press" corpus can require a long running time.
 }

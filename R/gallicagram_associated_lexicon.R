@@ -34,7 +34,7 @@ gallicagram_associated_lexicon <- function(lexicon,
                                            from = 1945,
                                            to = 2022,
                                            n_results = 20,
-                                           distance = 3,
+                                           distance = "max",
                         stopwords = rallicagram::stopwords_gallica[1:500]) {
 
   output <- NULL
@@ -48,8 +48,9 @@ gallicagram_associated_lexicon <- function(lexicon,
 
   for (keyword in lexicon) {
       output <- output |>
-        rbind(gallicagram_associated(keyword, corpus, from, to,
-                                     n_results = 10000001, distance))
+        rbind(gallicagram_associated(
+          keyword, corpus, from, to, n_results = 10000001, distance, stopwords
+        ))
   }
 
   output <- output |>

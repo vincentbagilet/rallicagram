@@ -19,9 +19,9 @@
 #'
 #' Searching the "press" corpus can require a long running time.
 #'
-#' @param distance An integer or "max". The word distance to which look
-#' for words associated with the keyword.
-#' If equal to "max", will be 4 for the Le Monde corpus and 3 otherwise.
+#' @param distance An integer or "max". The maximum distance,
+#' in number of words, at which to look for words associated with the keyword.
+#' If equal to "max", will be 3 for the Le Monde corpus and 2 otherwise.
 #' @param stopwords A character vector of stopwords to remove.
 #' The default is the vector of the 500 most frequent words in the Gallica
 #' books dataset. We can change this number by passing
@@ -61,24 +61,29 @@ gallicagram_associated <- function(keyword,
   #compute length
   max_length_corpus <- ifelse(corpus == "lemonde", 4, 3)
 
-  length <- ifelse(
+  asked_length <- ifelse(
     distance == "max",
     max_length_corpus,
-    max(max_length_corpus,
-        length(strsplit(x = keyword, split = " ")[[1]]) + distance)
+    length(strsplit(x = keyword, split = " ")[[1]]) + distance
   )
+
+  length <- min(max_length_corpus, asked_length)
 
   n_joker <- ifelse(is.null(stopwords),
                     n_results + length(strsplit(x = keyword, split = " ")[[1]]),
                     "all")
 
   #errors handling2
-  if (corpus %in% c("books", "press") && length > 3) {
-    stop("The sum of the number of words in 'keyword' and 'distance'
-         cannot be more than 3 for this corpus", call. = FALSE)
-  } else if (corpus == "lemonde" && length > 4) {
-    stop("The sum of the number of words in 'keyword' and 'distance'
-         cannot be more than 4 for this corpus", call. = FALSE)
+  if (corpus %in% c("books", "press") && asked_length > 3) {
+    warning(
+      "Distance set to 'max'. The sum of the number of words in 'keyword' and
+      'distance' cannot be more than 3 for this corpus.", call. = FALSE
+    )
+  } else if (corpus == "lemonde" && asked_length > 4) {
+    warning(
+      "Distance set to 'max'. The sum of the number of words in 'keyword' and
+      'distance' cannot be more than 4 for this corpus.", call. = FALSE
+    )
   }
 
   if (distance <= 0 & distance != "max") {
@@ -107,7 +112,7 @@ gallicagram_associated <- function(keyword,
                   "&length=",
                   length,
                   sep = "") |>
-    rallicagram:::read_data_gallicagram() |>
+    read_data_gallicagram() |>
     #remove apostrophes
     dplyr::mutate(
       associated_word = sub(
@@ -116,7 +121,7 @@ gallicagram_associated <- function(keyword,
         x = .data$gram
       )
     ) |>
-    dplyr::filter(!(associated_word %in% strsplit(keyword, "\\s")[[1]])) |>
+    dplyr::filter(!(.data$associated_word %in% strsplit(keyword, "\\s")[[1]])) |>
     dplyr::group_by(.data$associated_word) |>
     dplyr::summarise(n_occur = sum(.data$tot), .groups = "drop") |>
     dplyr::arrange(dplyr::desc(.data$n_occur)) |>
@@ -126,7 +131,7 @@ gallicagram_associated <- function(keyword,
       corpus = param_clean$corpus,
       from = from,
       to = to,
-      distance = distance
+      distance = length - 1
     )
 
   #remove stopwords
@@ -139,7 +144,7 @@ gallicagram_associated <- function(keyword,
   }
 
   output <- output |>
-    dplyr::filter(associated_word != "") |>
+    dplyr::filter(.data$associated_word != "") |>
     #these "" were created because associated_word returned of the shape \\w'
     dplyr::slice(1:n_results)
 

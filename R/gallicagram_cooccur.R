@@ -53,7 +53,7 @@ gallicagram_cooccur <- function(keyword_1,
                   "&count=",
                   ifelse(count_period, "True", "False"),
                   sep = "") |>
-    rallicagram:::tidy_gallicagram(corpus, resolution) |>
+    tidy_gallicagram(corpus, resolution) |>
     dplyr::rename(
       "gram" = "keyword",
       "n_cooccur" = "n",
@@ -63,7 +63,7 @@ gallicagram_cooccur <- function(keyword_1,
     dplyr::mutate(
       keyword_1 = keyword_1,
       keyword_2 = keyword_2,
-      gram = ifelse(gram == "", NA, gram)
+      gram = ifelse(.data$gram == "", NA, .data$gram)
     ) |>
     dplyr::select("date", "keyword_1", "keyword_2", tidyselect::everything())
 

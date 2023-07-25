@@ -23,7 +23,7 @@
 tidy_gallicagram <- function(url, corpus, resolution) {
 
   url |>
-    rallicagram:::read_data_gallicagram() |>
+    read_data_gallicagram() |>
     dplyr::rename(keyword = "gram", year = "annee") |>
     dplyr::rename(
       tidyselect::any_of(c(month = "mois", day = "jour"))

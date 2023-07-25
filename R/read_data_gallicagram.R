@@ -4,7 +4,7 @@
 #' Turns the output into a tibble
 #' Only necessary to allow a longer timeout period.
 #'
-#' @param data The data produced by the Gallicagram API
+#' @param url The url to pass to the Gallicagram API
 #'
 #' @returns A tibble containing the raw data from the Gallicagram API.
 #'

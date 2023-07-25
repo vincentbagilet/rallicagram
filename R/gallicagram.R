@@ -43,7 +43,7 @@ gallicagram <- function(keyword,
                   "&resolution=",
                   param_clean$resolution,
                   sep = "") |>
-    rallicagram:::tidy_gallicagram(corpus, resolution) |>
+    tidy_gallicagram(corpus, resolution) |>
     dplyr::rename(
       "n_occur" = "n",
       "n_grams" = "total",

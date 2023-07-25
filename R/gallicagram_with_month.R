@@ -84,7 +84,7 @@ gallicagram_with_month <- function(keyword,
                   "&length=",
                   length,
                   sep = "") |>
-    rallicagram:::read_data_gallicagram() |>
+    read_data_gallicagram() |>
     dplyr::rename("n_occur" = "tot", "ngram" = "gram") |>
     dplyr::mutate(
       keyword = keyword,

@@ -30,9 +30,9 @@ values: "press" for historical press, "books" for Gallica books,
 associated words to return. \code{n_results} can also be set to "all" to
 return all the available results.}
 
-\item{distance}{An integer or "max". The word distance to which look
-for words associated with the keyword.
-If equal to "max", will be 4 for the Le Monde corpus and 3 otherwise.}
+\item{distance}{An integer or "max". The maximum distance,
+in number of words, at which to look for words associated with the keyword.
+If equal to "max", will be 3 for the Le Monde corpus and 2 otherwise.}
 
 \item{stopwords}{A character vector of stopwords to remove.
 The default is the vector of the 500 most frequent words in the Gallica

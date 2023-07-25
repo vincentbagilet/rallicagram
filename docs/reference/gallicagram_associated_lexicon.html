@@ -58,7 +58,7 @@ in a Gallicagram corpus</h1>
 <span>  from <span class="op">=</span> <span class="fl">1945</span>,</span>
 <span>  to <span class="op">=</span> <span class="fl">2022</span>,</span>
 <span>  n_results <span class="op">=</span> <span class="fl">20</span>,</span>
-<span>  distance <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  distance <span class="op">=</span> <span class="st">"max"</span>,</span>
 <span>  stopwords <span class="op">=</span> <span class="fu">rallicagram</span><span class="fu">::</span><span class="va"><a href="stopwords_gallica.html">stopwords_gallica</a></span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">500</span><span class="op">]</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -92,9 +92,9 @@ return all the available results.</p></dd>
 
 
 <dt>distance</dt>
-<dd><p>An integer or "max". The word distance to which look
-for words associated with the keyword.
-If equal to "max", will be 4 for the Le Monde corpus and 3 otherwise.</p></dd>
+<dd><p>An integer or "max". The maximum distance,
+in number of words, at which to look for words associated with the keyword.
+If equal to "max", will be 3 for the Le Monde corpus and 2 otherwise.</p></dd>
 
 
 <dt>stopwords</dt>

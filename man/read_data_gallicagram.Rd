@@ -7,7 +7,7 @@
 read_data_gallicagram(url)
 }
 \arguments{
-\item{data}{The data produced by the Gallicagram API}
+\item{url}{The url to pass to the Gallicagram API}
 }
 \value{
 A tibble containing the raw data from the Gallicagram API.

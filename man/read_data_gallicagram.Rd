@@ -16,3 +16,7 @@ A tibble containing the raw data from the Gallicagram API.
 Turns the output into a tibble
 Only necessary to allow a longer timeout period.
 }
+\details{
+The timeout is set to 5000s to handle queries that take Gallicagram
+a long time to process.
+}

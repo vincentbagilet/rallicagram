@@ -11,7 +11,8 @@ gallicagram_cooccur(
   from = 1945,
   to = 2022,
   resolution = "monthly",
-  count_period = TRUE
+  count_period = TRUE,
+  n_of = "grams"
 )
 }
 \arguments{

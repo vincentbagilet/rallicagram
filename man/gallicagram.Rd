@@ -9,7 +9,8 @@ gallicagram(
   corpus = "lemonde",
   from = 1945,
   to = 2022,
-  resolution = "monthly"
+  resolution = "monthly",
+  n_of = "grams"
 )
 }
 \arguments{

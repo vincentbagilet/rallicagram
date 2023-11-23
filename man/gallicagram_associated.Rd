@@ -42,9 +42,10 @@ to the \code{stopwords} argument. Can also be \code{lsa::stopwords_fr}
 If \code{NULL} does not remove any stopwords.}
 }
 \value{
-A tibble. Containing the words the most frequently associated with the
-\code{keyword} mentioned (\code{associated_word}),
-and the number of occurrences over the period (\code{n_occur}).
+A tibble. Containing the words the most frequently associated with
+the \code{keyword} mentioned (\code{associated_word}),
+the number of occurrences over the period (\code{n_occur}),
+and the level at which the cooccurrences are computed (n-grams or articles).
 It also returns the input parameters
 \code{keyword}, \code{corpus}, \code{from} and \code{to}.
 }

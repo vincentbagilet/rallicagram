@@ -17,7 +17,7 @@
 #' "camarade *" when setting \code{after = TRUE}. \code{after = FALSE} also
 #' includes the most frequent ngrams of the form "* camarade".
 #'
-#' Searching the "press" corpus can require a long running time.
+#' Searching the "presse" corpus can require a long running time.
 #'
 #' @param n_results An integer. The number of most frequently
 #' associated words to return. \code{n_results} can also be set to "all" to
@@ -54,10 +54,16 @@ gallicagram_with <- function(keyword,
     stop("'length' should be numeric", call. = FALSE)
   }
 
-  if (corpus %in% c("books", "press") && length > 3) {
-    stop("'length' cannot be more than 3 for this corpus", call. = FALSE)
-  } else if (corpus == "lemonde" && length > 4) {
-    stop("'length' cannot be more than 4 for this corpus", call. = FALSE)
+  max_length_corpus <- rallicagram::list_corpora |>
+    dplyr::filter(corpus == param_clean$corpus) |>
+    dplyr::pull(max_length)
+
+  if (length > max_length_corpus) {
+    stop(
+      paste(
+        "'length' cannot be more than", max_length_corpus, "for this corpus"
+      ),
+      call. = FALSE)
   }
 
   if (length < length(strsplit(x = keyword, split = " ")[[1]])) {

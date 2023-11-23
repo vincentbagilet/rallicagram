@@ -34,7 +34,9 @@ return all the available results.}
 
 \item{distance}{An integer or "max". The maximum distance,
 in number of words, at which to look for words associated with the keyword.
-If equal to "max", will be 3 for the Le Monde corpus and 2 otherwise.}
+The max length for each corpus (distance + number of words in the keyword)
+is described in the \code{max_length} column
+of the \code{list_corpora} dataset.}
 
 \item{stopwords}{A character vector of stopwords to remove.
 The default is the vector of the 500 most frequent words in the Gallica
@@ -47,7 +49,8 @@ If \code{NULL} does not remove any stopwords.}
 A tibble. Containing the words the most frequently associated with
 the \code{keyword} mentioned (\code{associated_word}),
 the number of occurrences over the period (\code{n_occur}),
-and the level at which the cooccurrences are computed (n-grams or articles).
+and the level at which the cooccurrences are computed (n-grams or articles,
+reported in (\code{cooccur_level})).
 It also returns the input parameters
 \code{keyword}, \code{corpus}, \code{from} and \code{to}.
 }

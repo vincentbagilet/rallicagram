@@ -43,10 +43,16 @@ gallicagram_with_month <- function(keyword,
     stop("'length' should be numeric", call. = FALSE)
   }
 
-  if (corpus %in% c("books", "press") && length > 3) {
-    stop("'length' cannot be more than 3 for this corpus", call. = FALSE)
-  } else if (corpus == "lemonde" && length > 4) {
-    stop("'length' cannot be more than 4 for this corpus", call. = FALSE)
+  max_length_corpus <- rallicagram::list_corpora |>
+    dplyr::filter(corpus == param_clean$corpus) |>
+    dplyr::pull(max_length)
+
+  if (length > max_length_corpus) {
+    stop(
+      paste(
+        "'length' cannot be more than", max_length_corpus, "for this corpus"
+      ),
+      call. = FALSE)
   }
 
   if (length < length(strsplit(x = keyword, split = " ")[[1]])) {
@@ -66,7 +72,8 @@ gallicagram_with_month <- function(keyword,
          associated with the apostrophe version of the keyword.", call. = FALSE)
   }
 
-  param_clean <- prepare_param(keyword, corpus, year, year, resolution = "yearly")
+  param_clean <-
+    prepare_param(keyword, corpus, year, year, resolution = "yearly")
   # param resolution not used
 
   output <- paste("https://shiny.ens-paris-saclay.fr/guni/joker_mois?corpus=",

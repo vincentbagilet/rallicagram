@@ -63,7 +63,7 @@ Le Monde. The function returns the most frequent ngrams of the form
 "camarade *" when setting \code{after = TRUE}. \code{after = FALSE} also
 includes the most frequent ngrams of the form "* camarade".
 
-Searching the "press" corpus can require a long running time.
+Searching the "presse" corpus can require a long running time.
 }
 \examples{
 gallicagram_with("camarade", length = 2)

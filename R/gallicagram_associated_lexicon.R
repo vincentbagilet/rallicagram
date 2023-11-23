@@ -11,9 +11,7 @@
 #'
 #' Can typically be used with the function \code{get_same_stem()}.
 #'
-#' @param lexicon A character vector. Keywords to search. Can contain up to
-#' a 3-gram in the "books" and "press" corpora and
-#' a 4-gram in the "lemonde" corpus.
+#' @param lexicon A character vector. Keywords to search.
 #'
 #' @inheritParams gallicagram_associated
 #'

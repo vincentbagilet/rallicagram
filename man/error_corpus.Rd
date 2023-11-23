@@ -7,8 +7,7 @@
 error_corpus(corpus, from, to, resolution)
 }
 \arguments{
-\item{corpus}{A character string. The corpus to search. The list of
-available corpora can be found in the \code{list_corpora} dataset.}
+\item{corpus}{A character string. The corpus specified by the user.}
 
 \item{from}{An integer. Starting year.}
 
@@ -20,8 +19,6 @@ in the \code{resolution} column of the \code{list_corpora} dataset.}
 "yearly".
 The finest available resolution for the corpus selected can be found
 in the \code{resolution} column of the \code{list_corpora} dataset.}
-
-\item{corpus_code}{A character string. The corpus specified by the user.}
 }
 \value{
 This function does not return a value but may issue warnings or

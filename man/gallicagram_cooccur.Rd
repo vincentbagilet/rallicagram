@@ -52,8 +52,7 @@ potentially the \code{month} and \code{day} of the observation.
 }
 \description{
 Retrieves the proportion of close co-occurrences of two keywords in one of
-the corpora (historical press, Gallica books, Le Monde newspaper)
-by year, month or day.
+the corpora by year, month or day.
 }
 \details{
 Close co-occurrences correspond to the number of 3-grams

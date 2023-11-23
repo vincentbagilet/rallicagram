@@ -16,9 +16,7 @@ gallicagram_associated_lexicon(
 )
 }
 \arguments{
-\item{lexicon}{A character vector. Keywords to search. Can contain up to
-a 3-gram in the "books" and "press" corpora and
-a 4-gram in the "lemonde" corpus.}
+\item{lexicon}{A character vector. Keywords to search.}
 
 \item{corpus}{A character string. The corpus to search. The list of
 available corpora can be found in the \code{list_corpora} dataset.}
@@ -35,7 +33,9 @@ return all the available results.}
 
 \item{distance}{An integer or "max". The maximum distance,
 in number of words, at which to look for words associated with the keyword.
-If equal to "max", will be 3 for the Le Monde corpus and 2 otherwise.}
+The max length for each corpus (distance + number of words in the keyword)
+is described in the \code{max_length} column
+of the \code{list_corpora} dataset.}
 
 \item{stopwords}{A character vector of stopwords to remove.
 The default is the vector of the 500 most frequent words in the Gallica

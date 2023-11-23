@@ -9,7 +9,9 @@
 #'
 #' @export
 #' @examples
-#' get_same_stem("président")
+#' \dontrun{
+#'   get_same_stem("président")
+#' }
 get_same_stem <- function(keyword) {
   wls <- rallicagram::word_lemma_stem
   if(length(which(wls$word == keyword)) == 0) {

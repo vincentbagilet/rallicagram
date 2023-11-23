@@ -29,7 +29,9 @@
 #'
 #' @export
 #' @examples
-#' gallicagram_with_month("camarade", length = 2)
+#' \dontrun{
+#'   gallicagram_with_month("camarade", length = 2)
+#' }
 gallicagram_with_month <- function(keyword,
                                    corpus = "lemonde",
                                    year = 2022,

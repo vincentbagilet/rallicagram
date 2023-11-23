@@ -26,7 +26,9 @@
 #'
 #' @export
 #' @examples
-#' gallicagram_associated_lexicon(c("président", "présidentiel"))
+#' \dontrun{
+#'   gallicagram_associated_lexicon(c("président", "présidentiel"))
+#' }
 gallicagram_associated_lexicon <- function(lexicon,
                                            corpus = "lemonde",
                                            from = 1945,

@@ -17,17 +17,19 @@
 #'
 #' @export
 #' @examples
-#' gallicagram("président") |>
-#'   gallicagraph()
+#' \dontrun{
+#'   gallicagram("président") |>
+#'     gallicagraph()
 #'
-#' gallicagram("président") |>
-#'   rbind(gallicagram("république")) |>
-#'   gallicagraph(color = keyword)
+#'   gallicagram("président") |>
+#'     rbind(gallicagram("république")) |>
+#'     gallicagraph(color = keyword)
 #'
-#' gallicagram("président") |>
-#'   rbind(gallicagram("république")) |>
-#'   gallicagraph() +
-#'   facet_wrap(~ keyword)
+#'   gallicagram("président") |>
+#'     rbind(gallicagram("république")) |>
+#'     gallicagraph() +
+#'     facet_wrap(~ keyword)
+#' }
 gallicagraph <- function(data, color = NULL) {
   data |>
     ggplot2::ggplot(

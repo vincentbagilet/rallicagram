@@ -11,7 +11,9 @@
 #'
 #' @export
 #' @examples
-#' gallicagram_all("président")
+#' \dontrun{
+#'   gallicagram_all("président")
+#' }
 gallicagram_all <- function(keyword) {
 
   keyword_clean <- sub(" ", "%20", tolower(keyword))

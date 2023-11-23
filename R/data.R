@@ -20,17 +20,18 @@
 
 #' A data frame containing information about the available corpora
 #'
-#' It includes the years for which the data is reliable,
-#' the number of words in each corpora, the code to use in the API,
+#' It includes the code name of the corpus, its plain language name,
+#' the years for which the data is reliable,
+#' the number of words in each corpus,
 #' the maximum length of the ngrams, and the resolution.
 #'
 #' @format A data frame with 17 rows and 7 variables:
 #' \describe{
-#'   \item{title}{The title of the corpus.}
+#'   \item{corpus}{Code name of the corpus.}
+#'   \item{name_corpus}{Plain language name of the corpus.}
 #'   \item{start_reliable}{The year after which the corpus starts being reliable.}
 #'   \item{end_reliable}{The year after which the corpus stops being reliable.}
 #'   \item{nb_words}{The number of words in the corpus.}
-#'   \item{code_api}{The code for to call the corpus in the API.}
 #'   \item{max_length}{The maximum length of ngrams available.}
 #'   \item{resolution}{The finest available resolution (e.g., daily, monthly, yearly).}
 #' }

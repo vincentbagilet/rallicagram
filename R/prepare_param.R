@@ -37,31 +37,8 @@ prepare_param <- function(keyword,
     )
   }
 
-  #reliability corpus
-  if (corpus == "books" && to >= 1940) {
-    warning(
-      "The 'books' corpus is only reliable before 1940.",
-      call. = FALSE
-    )
-  } else if (corpus == "press" && (from < 1789 || to > 1950)) {
-    warning(
-      "The 'press' corpus is only reliable between 1789 and 1950.",
-      call. = FALSE
-    )
-  }
-
-  #error in resolution
-  if (corpus == "books" && resolution %in% c("monthly", "daily")) {
-    stop(
-      "The 'books' corpus is only available at a yearly resolution",
-      call. = FALSE
-    )
-  } else if (corpus == "press" && resolution %in% c("daily")) {
-    stop(
-      "The 'press' corpus is only available at a monthly or yearly resolution",
-      call. = FALSE
-    )
-  }
+  #error corpus
+  rallicagram::error_corpus(corpus, from, to, resolution)
 
   #error in n_of
   if (!(corpus == "lemonde" && n_of == "article") & !(n_of =="grams")) {
@@ -78,10 +55,14 @@ prepare_param <- function(keyword,
                        ifelse(resolution == "daily", "jour",
                           stop("Invalid resolution", call. = FALSE))))
 
-  corpus_french <- ifelse(corpus == "press", "presse",
-                          ifelse(corpus == "books", "livres",
-                          ifelse(corpus == "lemonde", "lemonde",
-                            stop("Invalid corpus name", call. = FALSE))))
+  #to handle code written with a previous version of the package
+  corpus_french <-
+    dplyr::case_when(
+      corpus == "press" ~ "presse",
+      corpus == "books" ~ "livres",
+      corpus == "lemonde" ~ "lemonde",
+      .default = corpus
+    )
 
   keyword_clean <- gsub(" ", "%20", tolower(keyword))
 

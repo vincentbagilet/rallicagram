@@ -16,12 +16,12 @@ gallicagram_with_month(
 )
 }
 \arguments{
-\item{keyword}{A character string. Keyword to search. Can be up to a 3-gram
-in the "books" and "press" corpora and a 4-gram in the "lemonde" corpus.}
+\item{keyword}{A character string. Keyword to search.
+The largest number of words the keyword can contain can be found
+in the \code{resolution} column of the \code{list_corpora} dataset.}
 
-\item{corpus}{A character string. The corpus to search. Takes the following
-values: "press" for historical press, "books" for Gallica books,
-"lemonde" for Le Monde newspaper articles.}
+\item{corpus}{A character string. The corpus to search. The list of
+available corpora can be found in the \code{list_corpora} dataset.}
 
 \item{year}{An integer. The year of interest.}
 

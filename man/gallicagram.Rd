@@ -14,21 +14,23 @@ gallicagram(
 )
 }
 \arguments{
-\item{keyword}{A character string. Keyword to search. Can be up to a 3-gram
-in the "books" and "press" corpora and a 4-gram in the "lemonde" corpus.}
+\item{keyword}{A character string. Keyword to search.
+The largest number of words the keyword can contain can be found
+in the \code{resolution} column of the \code{list_corpora} dataset.}
 
-\item{corpus}{A character string. The corpus to search. Takes the following
-values: "press" for historical press, "books" for Gallica books,
-"lemonde" for Le Monde newspaper articles.}
+\item{corpus}{A character string. The corpus to search. The list of
+available corpora can be found in the \code{list_corpora} dataset.}
 
 \item{from}{An integer. Starting year.}
 
-\item{to}{An integer. End year.}
+\item{to}{An integer. End year.
+The finest available resolution for the corpus selected can be found
+in the \code{resolution} column of the \code{list_corpora} dataset.}
 
-\item{resolution}{A character string.
-For lemonde can be either "yearly", "monthly" or "daily".
-For press can be either "yearly" or "monthly".
-For books can only be "yearly".}
+\item{resolution}{A character string. Can only be "daily", "monthly" or
+"yearly".
+The finest available resolution for the corpus selected can be found
+in the \code{resolution} column of the \code{list_corpora} dataset.}
 }
 \value{
 A tibble. With the \code{keyword},
@@ -44,11 +46,17 @@ potentially the \code{month} and \code{day} of the observation.
 }
 \description{
 Retrieves the proportion of occurrences of a keyword in one of the corpora
-(historical press, Gallica books, Le Monde newspaper) by year, month or day.
+by year, month or day.
 }
 \details{
 This function corresponds to the \code{Query} route of the API.
+
+Information regarding available characteristics of the corpus can be found
+in the \code{list_corpora} dataset.
 }
 \examples{
-gallicagram("président")
+\dontrun{
+  gallicagram("président")
+}
+
 }

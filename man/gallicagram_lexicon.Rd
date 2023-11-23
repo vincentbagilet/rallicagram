@@ -17,18 +17,19 @@ gallicagram_lexicon(
 a 3-gram in the "books" and "press" corpora and
 a 4-gram in the "lemonde" corpus.}
 
-\item{corpus}{A character string. The corpus to search. Takes the following
-values: "press" for historical press, "books" for Gallica books,
-"lemonde" for Le Monde newspaper articles.}
+\item{corpus}{A character string. The corpus to search. The list of
+available corpora can be found in the \code{list_corpora} dataset.}
 
 \item{from}{An integer. Starting year.}
 
-\item{to}{An integer. End year.}
+\item{to}{An integer. End year.
+The finest available resolution for the corpus selected can be found
+in the \code{resolution} column of the \code{list_corpora} dataset.}
 
-\item{resolution}{A character string.
-For lemonde can be either "yearly", "monthly" or "daily".
-For press can be either "yearly" or "monthly".
-For books can only be "yearly".}
+\item{resolution}{A character string. Can only be "daily", "monthly" or
+"yearly".
+The finest available resolution for the corpus selected can be found
+in the \code{resolution} column of the \code{list_corpora} dataset.}
 }
 \value{
 A tibble. With the first \code{keyword} in the vector,

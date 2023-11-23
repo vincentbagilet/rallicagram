@@ -2,28 +2,36 @@
 #'
 #' @description
 #' Retrieves the proportion of occurrences of a keyword in one of the corpora
-#' (historical press, Gallica books, Le Monde newspaper) by year, month or day.
+#' by year, month or day.
 #'
 #' @details
 #' This function corresponds to the \code{Query} route of the API.
 #'
-#' @param keyword A character string. Keyword to search. Can be up to a 3-gram
-#' in the "books" and "press" corpora and a 4-gram in the "lemonde" corpus.
-#' @param corpus A character string. The corpus to search. Takes the following
-#' values: "press" for historical press, "books" for Gallica books,
-#' "lemonde" for Le Monde newspaper articles.
+#' Information regarding available characteristics of the corpus can be found
+#' in the \code{list_corpora} dataset.
+#'
+#' @param keyword A character string. Keyword to search.
+#' The largest number of words the keyword can contain can be found
+#' in the \code{resolution} column of the \code{list_corpora} dataset.
+#' @param corpus A character string. The corpus to search. The list of
+#' available corpora can be found in the \code{list_corpora} dataset.
 #' @param from An integer. Starting year.
 #' @param to An integer. End year.
-#' @param resolution A character string.
-#' For lemonde can be either "yearly", "monthly" or "daily".
-#' For press can be either "yearly" or "monthly".
-#' For books can only be "yearly".
+#' The finest available resolution for the corpus selected can be found
+#' in the \code{resolution} column of the \code{list_corpora} dataset.
+#' @param resolution A character string. Can only be "daily", "monthly" or
+#' "yearly".
+#' The finest available resolution for the corpus selected can be found
+#' in the \code{resolution} column of the \code{list_corpora} dataset.
 #'
 #' @inherit tidy_gallicagram return
 #'
-#' @export
 #' @examples
-#' gallicagram("président")
+#' \dontrun{
+#'   gallicagram("président")
+#' }
+#'
+#' @export
 gallicagram <- function(keyword,
                         corpus = "lemonde",
                         from = 1945,

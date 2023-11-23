@@ -7,8 +7,9 @@
 gallicagram_all(keyword)
 }
 \arguments{
-\item{keyword}{A character string. Keyword to search. Can be up to a 3-gram
-in the "books" and "press" corpora and a 4-gram in the "lemonde" corpus.}
+\item{keyword}{A character string. Keyword to search.
+The largest number of words the keyword can contain can be found
+in the \code{resolution} column of the \code{list_corpora} dataset.}
 }
 \value{
 A tibble. With the \code{keyword},

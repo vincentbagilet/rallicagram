@@ -20,13 +20,14 @@ gallicagram_cooccur(
 
 \item{keyword_2}{A character string. The other keyword to search.}
 
-\item{corpus}{A character string. The corpus to search. Takes the following
-values: "press" for historical press, "books" for Gallica books,
-"lemonde" for Le Monde newspaper articles.}
+\item{corpus}{A character string. The corpus to search. The list of
+available corpora can be found in the \code{list_corpora} dataset.}
 
 \item{from}{An integer. Starting year.}
 
-\item{to}{An integer. End year.}
+\item{to}{An integer. End year.
+The finest available resolution for the corpus selected can be found
+in the \code{resolution} column of the \code{list_corpora} dataset.}
 
 \item{resolution}{A character string.
 For press and lemonde can be either "yearly" or "monthly".

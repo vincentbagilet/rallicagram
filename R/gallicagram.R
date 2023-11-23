@@ -43,7 +43,8 @@ gallicagram <- function(keyword,
 
   spaces_keyword <-
     attr(gregexpr(" ", keyword, fixed = TRUE)[[1]], "match.length")
-  nb_words_keyword <- ifelse(spaces_keyword == -1, 1, length(spaces_keyword)+1)
+  nb_words_keyword <-
+    ifelse(spaces_keyword == -1, 1, length(spaces_keyword) + 1)
 
   output <- paste("https://shiny.ens-paris-saclay.fr/guni/query",
                   ifelse(

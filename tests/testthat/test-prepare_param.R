@@ -23,18 +23,18 @@ test_that("Error if from or to not numerical", {
 test_that("Invalid corpus name", {
   expect_error(
     gallicagram(keyword = "président", corpus = "err"),
-    "Invalid corpus name"
+    "The corpus should be one of.+"
   )
   expect_error(
     gallicagram(keyword = "président", corpus = 3),
-    "Invalid corpus name"
+    "The corpus should be one of.+"
   )
 })
 
 test_that("Invalid resolution", {
   expect_error(
     gallicagram(keyword = "président", resolution = "err"),
-    "Invalid resolution"
+    "Resolution can only.+"
   )
   expect_error(
     gallicagram(
@@ -44,7 +44,7 @@ test_that("Invalid resolution", {
       from = 1800,
       to = 1820
     ),
-    "The 'books' corpus is only available at a yearly resolution"
+    ".+only available.+"
   )
   expect_error(
     gallicagram(
@@ -54,18 +54,14 @@ test_that("Invalid resolution", {
       to = 1820,
       resolution = "daily"
     ),
-    "The 'press' corpus is only available at a monthly or yearly resolution"
+    ".+only available.+"
   )
 })
 
 test_that("Non reliable corpus", {
   expect_warning(
     gallicagram(keyword = "président", "press", from = 1700, to = 1740),
-    "The 'press' corpus is only reliable between 1789 and 1950."
-  )
-  expect_warning(
-    gallicagram(keyword = "président", "press", from = 1960, to = 1970),
-    "The 'press' corpus is only reliable between 1789 and 1950."
+    ".+only reliable.+"
   )
   expect_warning(
     gallicagram(
@@ -75,6 +71,6 @@ test_that("Non reliable corpus", {
       from = 1960,
       to = 1970
     ),
-    "The 'books' corpus is only reliable before 1940."
+    ".+only reliable.+"
   )
 })

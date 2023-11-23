@@ -57,12 +57,9 @@ prepare_param <- function(keyword,
 
   #to handle code written with a previous version of the package
   corpus_french <-
-    dplyr::case_when(
-      corpus == "press" ~ "presse",
-      corpus == "books" ~ "livres",
-      corpus == "lemonde" ~ "lemonde",
-      .default = corpus
-    )
+    ifelse(corpus == "press", "presse",
+           ifelse(corpus == "books", "livres",
+                  ifelse(corpus == "lemonde", "lemonde", corpus)))
 
   keyword_clean <- gsub(" ", "%20", tolower(keyword))
 

@@ -18,7 +18,7 @@ add the input parameters to the output tibble."><!-- mathjax --><script src="htt
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rallicagram</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
       </span>
     </div>
 
@@ -59,16 +59,15 @@ add the input parameters to the output tibble.</p>
 
 
 <dt>corpus</dt>
-<dd><p>A character string. The corpus to search. Takes the following
-values: "press" for historical press, "books" for Gallica books,
-"lemonde" for Le Monde newspaper articles.</p></dd>
+<dd><p>A character string. The corpus to search. The list of
+available corpora can be found in the <code>list_corpora</code> dataset.</p></dd>
 
 
 <dt>resolution</dt>
-<dd><p>A character string.
-For lemonde can be either "yearly", "monthly" or "daily".
-For press can be either "yearly" or "monthly".
-For books can only be "yearly".</p></dd>
+<dd><p>A character string. Can only be "daily", "monthly" or
+"yearly".
+The finest available resolution for the corpus selected can be found
+in the <code>resolution</code> column of the <code>list_corpora</code> dataset.</p></dd>
 
 </dl></div>
     <div id="value">

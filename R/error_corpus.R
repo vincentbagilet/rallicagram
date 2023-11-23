@@ -40,14 +40,20 @@ error_corpus <- function(corpus,
                          from,
                          to,
                          resolution) {
+  if (!is.character(corpus)) {
+    stop(
+      paste(
+        "The corpus should be one of:",
+        paste(list_corpora$corpus, collapse = ", ")
+      )
+    )
+  }
+
   #to handle code written with a previous version of the package
   corpus_french <-
-    dplyr::case_when(
-      corpus == "press" ~ "presse",
-      corpus == "books" ~ "livres",
-      corpus == "lemonde" ~ "lemonde",
-      .default = corpus
-    )
+    ifelse(corpus == "press", "presse",
+           ifelse(corpus == "books", "livres",
+                  ifelse(corpus == "lemonde", "lemonde", corpus)))
 
   #reliability corpus
   if (!(corpus_french %in% list_corpora$corpus)) {
@@ -80,14 +86,14 @@ error_corpus <- function(corpus,
   }
 
   #error in resolution
-  if(!(resolution %in% c("daily", "monthly", "yearly"))) {
+  if (!(resolution %in% c("daily", "monthly", "yearly"))) {
     stop("Resolution can only be daily, monthly or yearly.")
   }
 
   if (
-    (resolution == "monthly" && info_corpus$resolution == "yearly") |
-    (resolution == "daily" &&
-      info_corpus$resolution %in% c("yearly", "monthly"))
+    (resolution == "monthly" && info_corpus$resolution == "yearly") ||
+      (resolution == "daily" &&
+       info_corpus$resolution %in% c("yearly", "monthly"))
   ) {
     stop(
       paste(

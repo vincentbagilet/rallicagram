@@ -8,14 +8,14 @@ test_that("Error if keyword not character string", {
 test_that("Error if length too long", {
   expect_error(
     gallicagram_with(keyword = "camarade", corpus = "lemonde", length = 5),
-    "'length' cannot be more than 4 for this corpus"
+    "'length' cannot be more than.+"
   )
   expect_error(
     gallicagram_with(
-      keyword = "camarade", corpus = "books", length = 4,
+      keyword = "camarade", corpus = "books", length = 8,
       from = 1860, to = 1890
     ),
-  "'length' cannot be more than 3 for this corpus"
+  "'length' cannot be more than.+"
   )
   expect_error(
     gallicagram_with(keyword = "son camarade de", length = 2),

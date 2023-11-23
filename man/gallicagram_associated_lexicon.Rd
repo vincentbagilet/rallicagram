@@ -63,5 +63,7 @@ obtained for each keyword in the vector.
 Can typically be used with the function \code{get_same_stem()}.
 }
 \examples{
-gallicagram_associated_lexicon(c("président", "présidentiel"))
+\dontrun{
+  gallicagram_associated_lexicon(c("président", "présidentiel"))
+}
 }

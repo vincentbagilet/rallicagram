@@ -45,9 +45,8 @@ gallicagram_with_month <- function(keyword,
     stop("'length' should be numeric", call. = FALSE)
   }
 
-  max_length_corpus <- rallicagram::list_corpora |>
-    dplyr::filter(corpus == param_clean$corpus) |>
-    dplyr::pull(max_length)
+  max_length_corpus <- rallicagram::list_corpora[
+    rallicagram::list_corpora$corpus == param_clean$corpus, "max_length"][[1]]
 
   if (length > max_length_corpus) {
     stop(

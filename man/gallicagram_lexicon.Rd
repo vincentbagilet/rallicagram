@@ -56,5 +56,7 @@ each keyword in the vector.
 Can typically be used with the function \code{get_same_stem()}.
 }
 \examples{
-gallicagram_lexicon(c("président", "présidentiel"))
+\dontrun{
+  gallicagram_lexicon(c("président", "présidentiel"))
+}
 }

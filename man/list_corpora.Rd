@@ -9,11 +9,11 @@ A data frame with 17 rows and 7 variables:
 \describe{
   \item{corpus}{Code name of the corpus.}
   \item{name_corpus}{Plain language name of the corpus.}
-  \item{start_reliable}{The year after which the corpus starts being reliable.}
-  \item{end_reliable}{The year after which the corpus stops being reliable.}
+  \item{start_reliable}{The year at which the corpus starts being reliable.}
+  \item{end_reliable}{The year at which the corpus stops being reliable.}
   \item{nb_words}{The number of words in the corpus.}
   \item{max_length}{The maximum length of ngrams available.}
-  \item{resolution}{The finest available resolution (e.g., daily, monthly, yearly).}
+  \item{resolution}{The finest available resolution (daily, monthly, yearly)}
 }
 }
 \usage{

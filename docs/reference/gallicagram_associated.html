@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rallicagram</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
       </span>
     </div>
 
@@ -63,14 +63,14 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>keyword</dt>
-<dd><p>A character string. Keyword to search. Can be up to a 3-gram
-in the "books" and "press" corpora and a 4-gram in the "lemonde" corpus.</p></dd>
+<dd><p>A character string. Keyword to search.
+The largest number of words the keyword can contain can be found
+in the <code>resolution</code> column of the <code>list_corpora</code> dataset.</p></dd>
 
 
 <dt>corpus</dt>
-<dd><p>A character string. The corpus to search. Takes the following
-values: "press" for historical press, "books" for Gallica books,
-"lemonde" for Le Monde newspaper articles.</p></dd>
+<dd><p>A character string. The corpus to search. The list of
+available corpora can be found in the <code>list_corpora</code> dataset.</p></dd>
 
 
 <dt>from</dt>
@@ -78,7 +78,9 @@ values: "press" for historical press, "books" for Gallica books,
 
 
 <dt>to</dt>
-<dd><p>An integer. End year.</p></dd>
+<dd><p>An integer. End year.
+The finest available resolution for the corpus selected can be found
+in the <code>resolution</code> column of the <code>list_corpora</code> dataset.</p></dd>
 
 
 <dt>n_results</dt>
@@ -90,7 +92,9 @@ return all the available results.</p></dd>
 <dt>distance</dt>
 <dd><p>An integer or "max". The maximum distance,
 in number of words, at which to look for words associated with the keyword.
-If equal to "max", will be 3 for the Le Monde corpus and 2 otherwise.</p></dd>
+The max length for each corpus (distance + number of words in the keyword)
+is described in the <code>max_length</code> column
+of the <code>list_corpora</code> dataset.</p></dd>
 
 
 <dt>stopwords</dt>
@@ -98,7 +102,7 @@ If equal to "max", will be 3 for the Le Monde corpus and 2 otherwise.</p></dd>
 The default is the vector of the 500 most frequent words in the Gallica
 books dataset. We can change this number by passing
 <code>stopwords_gallicca[1:300]</code> (for instance, for the 300 most frequent)
-to the <code>stopwords</code> argument. Can also be <code><a href="https://rdrr.io/pkg/lsa/man/stopwords.html" class="external-link">lsa::stopwords_fr</a></code>
+to the <code>stopwords</code> argument. Can also be <code>lsa::stopwords_fr</code>
 If <code>NULL</code> does not remove any stopwords.</p></dd>
 
 </dl></div>
@@ -106,9 +110,11 @@ If <code>NULL</code> does not remove any stopwords.</p></dd>
     <h2>Value</h2>
     
 
-<p>A tibble. Containing the words the most frequently associated with the
-<code>keyword</code> mentioned (<code>associated_word</code>),
-and the number of occurrences over the period (<code>n_occur</code>).
+<p>A tibble. Containing the words the most frequently associated with
+the <code>keyword</code> mentioned (<code>associated_word</code>),
+the number of occurrences over the period (<code>n_occur</code>),
+and the level at which the cooccurrences are computed (n-grams or articles,
+reported in (<code>cooccur_level</code>)).
 It also returns the input parameters
 <code>keyword</code>, <code>corpus</code>, <code>from</code> and <code>to</code>.</p>
     </div>
@@ -131,28 +137,28 @@ as it increases the probability of ngrams to be excluded from the database.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">gallicagram_associated</span><span class="op">(</span><span class="st">"camarade"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 20 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    associated_word n_occur keyword  corpus   from    to distance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ancien              456 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> classe              318 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> promotion           183 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> vieux               124 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> khrouchtchev        106 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> mao                  97 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> staline              96 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> parti                80 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> combat               72 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> toung                72 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> kim                  71 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> ami                  70 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> lycée                70 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> compagnie            67 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> club                 61 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> d'école              57 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> ancienne             56 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> ex                   44 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> jong                 44 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">20</span> président            44 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    associated_word n_occur keyword  corpus   from    to cooccur_level</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ancien              456 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> classe              318 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> promotion           183 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> vieux               124 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> khrouchtchev        106 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> mao                  97 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> staline              96 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> parti                80 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> combat               72 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> toung                72 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> kim                  71 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> ami                  70 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> lycée                70 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> compagnie            67 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> club                 61 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> d'école              57 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> ancienne             56 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> ex                   44 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> jong                 44 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">20</span> président            44 camarade lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022 3-grams      </span>
 </code></pre></div>
     </div>
   </div>

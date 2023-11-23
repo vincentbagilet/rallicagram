@@ -25,15 +25,17 @@ This function can also be combined with faceting by adding for instance
 \code{+ facet_wrap(~ keyword)} after calling the function.
 }
 \examples{
-gallicagram("président") |>
-  gallicagraph()
+\dontrun{
+  gallicagram("président") |>
+    gallicagraph()
 
-gallicagram("président") |>
-  rbind(gallicagram("république")) |>
-  gallicagraph(color = keyword)
+  gallicagram("président") |>
+    rbind(gallicagram("république")) |>
+    gallicagraph(color = keyword)
 
-gallicagram("président") |>
-  rbind(gallicagram("république")) |>
-  gallicagraph() +
-  facet_wrap(~ keyword)
+  gallicagram("président") |>
+    rbind(gallicagram("république")) |>
+    gallicagraph() +
+    facet_wrap(~ keyword)
+}
 }

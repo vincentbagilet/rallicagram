@@ -66,5 +66,7 @@ includes the most frequent ngrams of the form "* camarade".
 Searching the "presse" corpus can require a long running time.
 }
 \examples{
-gallicagram_with("camarade", length = 2)
+\dontrun{
+  gallicagram_with("camarade", length = 2)
+}
 }

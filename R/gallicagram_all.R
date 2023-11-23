@@ -1,9 +1,9 @@
 #' Occurrences of a keyword in all Gallicagram corpora
 #'
 #' @description
-#' Retrieves the yearly proportion of occurrences of a keyword in each of the
-#' corpora for the longest time range for which the data is available
-#' and reliable.
+#' Retrieves the yearly proportion of occurrences of a keyword in the lemonde,
+#' books and press corpora, for the longest time range possible
+#' while data remaining reliable.
 #'
 #' @inheritParams gallicagram
 #'

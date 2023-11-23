@@ -61,5 +61,7 @@ Close co-occurrences correspond to the number of 3-grams
 This function corresponds to the \code{Contain} route of the API.
 }
 \examples{
-gallicagram_cooccur("président", "mauvais")
+\dontrun{
+  gallicagram_cooccur("président", "mauvais")
+}
 }

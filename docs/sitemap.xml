@@ -22,6 +22,9 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/error_corpus.html</loc>
+  </url>
+  <url>
     <loc>/reference/gallicagram.html</loc>
   </url>
   <url>
@@ -49,10 +52,16 @@
     <loc>/reference/gallicagram_with_month.html</loc>
   </url>
   <url>
+    <loc>/reference/gallicagraph.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_same_stem.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/list_corpora.html</loc>
   </url>
   <url>
     <loc>/reference/prepare_param.html</loc>

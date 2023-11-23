@@ -19,7 +19,7 @@ specific month — gallicagram_with_month"><meta property="og:description" conte
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rallicagram</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
       </span>
     </div>
 
@@ -64,14 +64,14 @@ specific month</h1>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>keyword</dt>
-<dd><p>A character string. Keyword to search. Can be up to a 3-gram
-in the "books" and "press" corpora and a 4-gram in the "lemonde" corpus.</p></dd>
+<dd><p>A character string. Keyword to search.
+The largest number of words the keyword can contain can be found
+in the <code>resolution</code> column of the <code>list_corpora</code> dataset.</p></dd>
 
 
 <dt>corpus</dt>
-<dd><p>A character string. The corpus to search. Takes the following
-values: "press" for historical press, "books" for Gallica books,
-"lemonde" for Le Monde newspaper articles.</p></dd>
+<dd><p>A character string. The corpus to search. The list of
+available corpora can be found in the <code>list_corpora</code> dataset.</p></dd>
 
 
 <dt>year</dt>
@@ -123,30 +123,9 @@ includes the most frequent ngrams of the form "* camarade".</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">gallicagram_with_month</span><span class="op">(</span><span class="st">"camarade"</span>, length <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 20 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    n_occur ngram               keyword  corpus   year month</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>       9 un camarade         camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>       8 camarade de         camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>       5 le camarade         camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>       4 d'un camarade       camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>       4 camarade n          camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>       3 son camarade        camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>       3 leur camarade       camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>       3 camarade staline    camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>       3 camarade qui        camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>       3 camarade du         camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>       2 sa camarade         camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>       2 du camarade         camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span>       2 camarade silencieux camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span>       2 camarade pasternak  camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span>       2 camarade et         camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span>       2 bon camarade        camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span>       2 ancien camarade     camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span>       1 vrai camarade       camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span>       1 mauvais camarade    camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">20</span>       1 explique camarade   camarade lemonde  <span style="text-decoration: underline;">2</span>022     1</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">gallicagram_with_month</span><span class="op">(</span><span class="st">"camarade"</span>, length <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>

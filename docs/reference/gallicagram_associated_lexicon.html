@@ -20,7 +20,7 @@ in a Gallicagram corpus — gallicagram_associated_lexicon"><meta property="og:d
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rallicagram</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
       </span>
     </div>
 
@@ -66,15 +66,12 @@ in a Gallicagram corpus</h1>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>lexicon</dt>
-<dd><p>A character vector. Keywords to search. Can contain up to
-a 3-gram in the "books" and "press" corpora and
-a 4-gram in the "lemonde" corpus.</p></dd>
+<dd><p>A character vector. Keywords to search.</p></dd>
 
 
 <dt>corpus</dt>
-<dd><p>A character string. The corpus to search. Takes the following
-values: "press" for historical press, "books" for Gallica books,
-"lemonde" for Le Monde newspaper articles.</p></dd>
+<dd><p>A character string. The corpus to search. The list of
+available corpora can be found in the <code>list_corpora</code> dataset.</p></dd>
 
 
 <dt>from</dt>
@@ -82,7 +79,9 @@ values: "press" for historical press, "books" for Gallica books,
 
 
 <dt>to</dt>
-<dd><p>An integer. End year.</p></dd>
+<dd><p>An integer. End year.
+The finest available resolution for the corpus selected can be found
+in the <code>resolution</code> column of the <code>list_corpora</code> dataset.</p></dd>
 
 
 <dt>n_results</dt>
@@ -94,7 +93,9 @@ return all the available results.</p></dd>
 <dt>distance</dt>
 <dd><p>An integer or "max". The maximum distance,
 in number of words, at which to look for words associated with the keyword.
-If equal to "max", will be 3 for the Le Monde corpus and 2 otherwise.</p></dd>
+The max length for each corpus (distance + number of words in the keyword)
+is described in the <code>max_length</code> column
+of the <code>list_corpora</code> dataset.</p></dd>
 
 
 <dt>stopwords</dt>
@@ -102,7 +103,7 @@ If equal to "max", will be 3 for the Le Monde corpus and 2 otherwise.</p></dd>
 The default is the vector of the 500 most frequent words in the Gallica
 books dataset. We can change this number by passing
 <code>stopwords_gallicca[1:300]</code> (for instance, for the 300 most frequent)
-to the <code>stopwords</code> argument. Can also be <code><a href="https://rdrr.io/pkg/lsa/man/stopwords.html" class="external-link">lsa::stopwords_fr</a></code>
+to the <code>stopwords</code> argument. Can also be <code>lsa::stopwords_fr</code>
 If <code>NULL</code> does not remove any stopwords.</p></dd>
 
 </dl></div>
@@ -126,30 +127,9 @@ obtained for each keyword in the vector.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">gallicagram_associated_lexicon</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"président"</span>, <span class="st">"présidentiel"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 20 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    associated_word n_occur keyword   corpus   from    to distance lexicon       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> république       <span style="text-decoration: underline;">191</span>662 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> vice              <span style="text-decoration: underline;">45</span>745 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> commission        <span style="text-decoration: underline;">45</span>433 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> groupe            <span style="text-decoration: underline;">34</span>488 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> l'ancien          <span style="text-decoration: underline;">29</span>556 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> américain         <span style="text-decoration: underline;">24</span>471 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> fédération        <span style="text-decoration: underline;">23</span>367 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> l'assemblée       <span style="text-decoration: underline;">22</span>825 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> parti             <span style="text-decoration: underline;">21</span>872 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> nationale         <span style="text-decoration: underline;">18</span>584 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> comité            <span style="text-decoration: underline;">18</span>319 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> unis              <span style="text-decoration: underline;">18</span>183 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> l'association     <span style="text-decoration: underline;">17</span>589 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> élu               <span style="text-decoration: underline;">17</span>552 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> national          <span style="text-decoration: underline;">16</span>149 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> directeur         <span style="text-decoration: underline;">12</span>765 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> déclaré           <span style="text-decoration: underline;">12</span>742 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> bush              <span style="text-decoration: underline;">12</span>162 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> etats             <span style="text-decoration: underline;">12</span>140 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">20</span> l'union           <span style="text-decoration: underline;">10</span>526 président lemonde  <span style="text-decoration: underline;">1</span>945  <span style="text-decoration: underline;">2</span>022        3 président+pré…</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu">gallicagram_associated_lexicon</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"président"</span>, <span class="st">"présidentiel"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>

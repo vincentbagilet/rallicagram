@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-`rallicagram` calls the [Gallicagram API](https://regicid.github.io/api) directly from R. [Gallicagram](https://shiny.ens-paris-saclay.fr/app/gallicagram) enables to build time series of keywords used in a set of French corpora:
+`rallicagram` calls the [Gallicagram API](https://regicid.github.io/api) directly from R. [Gallicagram](https://shiny.ens-paris-saclay.fr/app/gallicagram) historically enabled to build time series of keywords used in a set of French corpora:
 
 - **Historical newspapers** from [Gallica](https://gallica.bnf.fr/), the digital library of the French National Library (Bibliothèque nationale de France, BnF) (corpus="press"). A corpus of 3 million issues, reliable from 1789 to 1950. Yearly or monthly resolution.
 - **Public domain books** available on [Gallica](https://gallica.bnf.fr/) (corpus="books"). 300 000 books. Increased reliability through the 16th to 18th centuries and up to 1940. Yearly resolution.
@@ -28,6 +28,16 @@ knitr::opts_chunk$set(
 
 Additional information can be found on a [preprint](https://osf.io/preprints/socarxiv/84bf3/) by Gallicagram developers [
 Benoît de Courson](https://regicid.github.io/) and [Benjamin Azoulay](https://benjamin-azoulay.my.canva.site/) and on the "Notice" tab of the [Gallicagram website](https://shiny.ens-paris-saclay.fr/app/gallicagram).
+
+The set of corpora has now been vastly extended:
+
+```{r list_corpora, echo=FALSE}
+rallicagram::list_corpora |> 
+  dplyr::rename_with(\(x) stringr::str_replace(x, "_", " ") |>  
+                       stringr::str_to_title()) |> 
+  knitr::kable()
+```
+
 
 ## Installation
 

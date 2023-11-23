@@ -18,7 +18,7 @@ the API call."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rallicagram</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
       </span>
     </div>
 
@@ -49,20 +49,20 @@ the API call.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">prepare_param</span><span class="op">(</span><span class="va">keyword</span>, <span class="va">corpus</span>, <span class="va">from</span>, <span class="va">to</span>, <span class="va">resolution</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">prepare_param</span><span class="op">(</span><span class="va">keyword</span>, <span class="va">corpus</span>, <span class="va">from</span>, <span class="va">to</span>, <span class="va">resolution</span>, n_of <span class="op">=</span> <span class="st">"grams"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>keyword</dt>
-<dd><p>A character string. Keyword to search. Can be up to a 3-gram
-in the "books" and "press" corpora and a 4-gram in the "lemonde" corpus.</p></dd>
+<dd><p>A character string. Keyword to search.
+The largest number of words the keyword can contain can be found
+in the <code>resolution</code> column of the <code>list_corpora</code> dataset.</p></dd>
 
 
 <dt>corpus</dt>
-<dd><p>A character string. The corpus to search. Takes the following
-values: "press" for historical press, "books" for Gallica books,
-"lemonde" for Le Monde newspaper articles.</p></dd>
+<dd><p>A character string. The corpus to search. The list of
+available corpora can be found in the <code>list_corpora</code> dataset.</p></dd>
 
 
 <dt>from</dt>
@@ -70,14 +70,16 @@ values: "press" for historical press, "books" for Gallica books,
 
 
 <dt>to</dt>
-<dd><p>An integer. End year.</p></dd>
+<dd><p>An integer. End year.
+The finest available resolution for the corpus selected can be found
+in the <code>resolution</code> column of the <code>list_corpora</code> dataset.</p></dd>
 
 
 <dt>resolution</dt>
-<dd><p>A character string.
-For lemonde can be either "yearly", "monthly" or "daily".
-For press can be either "yearly" or "monthly".
-For books can only be "yearly".</p></dd>
+<dd><p>A character string. Can only be "daily", "monthly" or
+"yearly".
+The finest available resolution for the corpus selected can be found
+in the <code>resolution</code> column of the <code>list_corpora</code> dataset.</p></dd>
 
 </dl></div>
     <div id="value">

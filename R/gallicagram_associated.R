@@ -53,20 +53,20 @@ gallicagram_associated <- function(keyword,
                                    to = 2022,
                                    n_results = 20,
                                    distance = "max",
-                        stopwords = rallicagram::stopwords_gallica[1:500]) {
+                                   stopwords =
+                                     rallicagram::stopwords_gallica[1:500]) {
 
   param_clean <- prepare_param(keyword, corpus, from, to, resolution = "yearly")
   # param resolution not used
 
   #errors handling 1
-  if (!(is.numeric(distance) | distance == "max")) {
+  if (!(is.numeric(distance) || distance == "max")) {
     stop("'distance' should be numeric or 'max'", call. = FALSE)
   }
 
   #compute length
-  max_length_corpus <- rallicagram::list_corpora |>
-    dplyr::filter(corpus == param_clean$corpus) |>
-    dplyr::pull(max_length)
+  max_length_corpus <- rallicagram::list_corpora[
+    rallicagram::list_corpora$corpus == param_clean$corpus, "max_length"][[1]]
 
   asked_length <- ifelse(
     distance == "max",

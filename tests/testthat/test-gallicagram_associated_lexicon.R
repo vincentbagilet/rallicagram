@@ -9,16 +9,14 @@ test_that("Error if distance too large", {
   expect_warning(
     gallicagram_associated_lexicon(lexicon = "camarade", corpus = "lemonde",
                            distance = 5),
-    "Distance set to 'max'. The sum of the number of words in 'keyword' and
-      'distance' cannot be more than 4 for this corpus."
+    "Distance set to \\'max\\'.+"
   )
   expect_warning(
     gallicagram_associated_lexicon(
-      lexicon = "camarade", corpus = "books", distance = 4,
+      lexicon = "camarade", corpus = "livres", distance = 8,
       from = 1860, to = 1890
     ),
-    "Distance set to 'max'. The sum of the number of words in 'keyword' and
-      'distance' cannot be more than 3 for this corpus."
+    "Distance set to \\'max\\'.+"
   )
 })
 

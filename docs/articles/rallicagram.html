@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rallicagram</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
       </span>
     </div>
 
@@ -97,26 +97,28 @@ term in one of the three corpora between two specified dates.</p>
 <p>Here is an example of part of the output:</p>
 <table class="table">
 <colgroup>
-<col width="14%">
 <col width="12%">
-<col width="10%">
-<col width="10%">
-<col width="14%">
+<col width="11%">
+<col width="9%">
+<col width="9%">
+<col width="12%">
+<col width="5%">
 <col width="6%">
-<col width="7%">
-<col width="10%">
-<col width="14%">
+<col width="9%">
+<col width="12%">
+<col width="9%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">date</th>
 <th align="left">keyword</th>
 <th align="right">n_occur</th>
-<th align="right">n_grams</th>
+<th align="right">n_total</th>
 <th align="right">prop_occur</th>
 <th align="right">year</th>
 <th align="right">month</th>
 <th align="left">corpus</th>
 <th align="left">resolution</th>
+<th align="left">n_of</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -129,6 +131,7 @@ term in one of the three corpora between two specified dates.</p>
 <td align="right">1</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">1-grams</td>
 </tr>
 <tr class="even">
 <td align="left">1960-02-01</td>
@@ -140,6 +143,7 @@ term in one of the three corpora between two specified dates.</p>
 <td align="right">2</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">1-grams</td>
 </tr>
 <tr class="odd">
 <td align="left">1960-03-01</td>
@@ -151,6 +155,7 @@ term in one of the three corpora between two specified dates.</p>
 <td align="right">3</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">1-grams</td>
 </tr>
 <tr class="even">
 <td align="left">1960-04-01</td>
@@ -162,6 +167,7 @@ term in one of the three corpora between two specified dates.</p>
 <td align="right">4</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">1-grams</td>
 </tr>
 <tr class="odd">
 <td align="left">1960-05-01</td>
@@ -173,6 +179,7 @@ term in one of the three corpora between two specified dates.</p>
 <td align="right">5</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">1-grams</td>
 </tr>
 <tr class="even">
 <td align="left">1960-06-01</td>
@@ -184,6 +191,7 @@ term in one of the three corpora between two specified dates.</p>
 <td align="right">6</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">1-grams</td>
 </tr>
 </tbody>
 </table>
@@ -224,16 +232,17 @@ the words to look co-occurrences for.</p>
 <p>Here is an example of part of the output:</p>
 <table class="table">
 <colgroup>
-<col width="11%">
-<col width="10%">
-<col width="11%">
 <col width="10%">
 <col width="9%">
-<col width="13%">
-<col width="5%">
-<col width="6%">
+<col width="10%">
+<col width="9%">
 <col width="8%">
-<col width="11%">
+<col width="12%">
+<col width="4%">
+<col width="5%">
+<col width="7%">
+<col width="10%">
+<col width="7%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">date</th>
@@ -246,6 +255,7 @@ the words to look co-occurrences for.</p>
 <th align="right">month</th>
 <th align="left">corpus</th>
 <th align="left">resolution</th>
+<th align="left">n_of</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -259,6 +269,7 @@ the words to look co-occurrences for.</p>
 <td align="right">1</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">4-grams</td>
 </tr>
 <tr class="even">
 <td align="left">1960-02-01</td>
@@ -271,6 +282,7 @@ the words to look co-occurrences for.</p>
 <td align="right">2</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">4-grams</td>
 </tr>
 <tr class="odd">
 <td align="left">1960-03-01</td>
@@ -283,6 +295,7 @@ the words to look co-occurrences for.</p>
 <td align="right">3</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">4-grams</td>
 </tr>
 <tr class="even">
 <td align="left">1960-04-01</td>
@@ -295,6 +308,7 @@ the words to look co-occurrences for.</p>
 <td align="right">4</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">4-grams</td>
 </tr>
 <tr class="odd">
 <td align="left">1960-05-01</td>
@@ -307,6 +321,7 @@ the words to look co-occurrences for.</p>
 <td align="right">5</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">4-grams</td>
 </tr>
 <tr class="even">
 <td align="left">1960-06-01</td>
@@ -319,6 +334,7 @@ the words to look co-occurrences for.</p>
 <td align="right">6</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">4-grams</td>
 </tr>
 </tbody>
 </table>
@@ -345,7 +361,16 @@ time.</p>
 <span>  distance <span class="op">=</span> <span class="fl">3</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>The terms most often associated with “camarade” are:</p>
-<table class="table">
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="24%">
+<col width="12%">
+<col width="13%">
+<col width="12%">
+<col width="7%">
+<col width="7%">
+<col width="21%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">associated_word</th>
 <th align="right">n_occur</th>
@@ -353,7 +378,7 @@ time.</p>
 <th align="left">corpus</th>
 <th align="right">from</th>
 <th align="right">to</th>
-<th align="right">distance</th>
+<th align="left">cooccur_level</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -363,7 +388,7 @@ time.</p>
 <td align="left">lemonde</td>
 <td align="right">1960</td>
 <td align="right">1970</td>
-<td align="right">3</td>
+<td align="left">3-grams</td>
 </tr>
 <tr class="even">
 <td align="left">mao</td>
@@ -372,7 +397,7 @@ time.</p>
 <td align="left">lemonde</td>
 <td align="right">1960</td>
 <td align="right">1970</td>
-<td align="right">3</td>
+<td align="left">3-grams</td>
 </tr>
 <tr class="odd">
 <td align="left">toung</td>
@@ -381,7 +406,7 @@ time.</p>
 <td align="left">lemonde</td>
 <td align="right">1960</td>
 <td align="right">1970</td>
-<td align="right">3</td>
+<td align="left">3-grams</td>
 </tr>
 <tr class="even">
 <td align="left">ancien</td>
@@ -390,7 +415,7 @@ time.</p>
 <td align="left">lemonde</td>
 <td align="right">1960</td>
 <td align="right">1970</td>
-<td align="right">3</td>
+<td align="left">3-grams</td>
 </tr>
 <tr class="odd">
 <td align="left">tse</td>
@@ -399,7 +424,7 @@ time.</p>
 <td align="left">lemonde</td>
 <td align="right">1960</td>
 <td align="right">1970</td>
-<td align="right">3</td>
+<td align="left">3-grams</td>
 </tr>
 <tr class="even">
 <td align="left">dubcek</td>
@@ -408,7 +433,7 @@ time.</p>
 <td align="left">lemonde</td>
 <td align="right">1960</td>
 <td align="right">1970</td>
-<td align="right">3</td>
+<td align="left">3-grams</td>
 </tr>
 <tr class="odd">
 <td align="left">promotion</td>
@@ -417,7 +442,7 @@ time.</p>
 <td align="left">lemonde</td>
 <td align="right">1960</td>
 <td align="right">1970</td>
-<td align="right">3</td>
+<td align="left">3-grams</td>
 </tr>
 <tr class="even">
 <td align="left">compagnie</td>
@@ -426,7 +451,7 @@ time.</p>
 <td align="left">lemonde</td>
 <td align="right">1960</td>
 <td align="right">1970</td>
-<td align="right">3</td>
+<td align="left">3-grams</td>
 </tr>
 <tr class="odd">
 <td align="left">thorez</td>
@@ -435,7 +460,7 @@ time.</p>
 <td align="left">lemonde</td>
 <td align="right">1960</td>
 <td align="right">1970</td>
-<td align="right">3</td>
+<td align="left">3-grams</td>
 </tr>
 <tr class="even">
 <td align="left">togliatti</td>
@@ -444,7 +469,7 @@ time.</p>
 <td align="left">lemonde</td>
 <td align="right">1960</td>
 <td align="right">1970</td>
-<td align="right">3</td>
+<td align="left">3-grams</td>
 </tr>
 </tbody>
 </table>
@@ -452,7 +477,7 @@ time.</p>
 removed. Instead, we can remove other stopwords, by supplying a list of
 words to ignore to the <code>stopwords</code> parameter of the function.
 For instance, we can use the list in the <code>lsa</code> package,
-<code><a href="https://rdrr.io/pkg/lsa/man/stopwords.html" class="external-link">lsa::stopwords_fr</a></code>. To keep the stopwwords, set the
+<code>lsa::stopwords_fr</code>. To keep the stopwwords, set the
 <code>stopwords</code> parameter to <code>NULL</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ex_associated_stopwords</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gallicagram_associated.html">gallicagram_associated</a></span><span class="op">(</span></span>
@@ -464,7 +489,16 @@ For instance, we can use the list in the <code>lsa</code> package,
 <span>  stopwords <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>The most often associated terms without excluding stopwords are:</p>
-<table class="table">
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="24%">
+<col width="12%">
+<col width="13%">
+<col width="12%">
+<col width="7%">
+<col width="7%">
+<col width="21%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">associated_word</th>
 <th align="right">n_occur</th>
@@ -472,7 +506,7 @@ For instance, we can use the list in the <code>lsa</code> package,
 <th align="left">corpus</th>
 <th align="right">from</th>
 <th align="right">to</th>
-<th align="right">distance</th>
+<th align="left">cooccur_level</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -482,7 +516,7 @@ For instance, we can use the list in the <code>lsa</code> package,
 <td align="left">lemonde</td>
 <td align="right">1960</td>
 <td align="right">1970</td>
-<td align="right">3</td>
+<td align="left">3-grams</td>
 </tr>
 <tr class="even">
 <td align="left">son</td>
@@ -491,7 +525,7 @@ For instance, we can use the list in the <code>lsa</code> package,
 <td align="left">lemonde</td>
 <td align="right">1960</td>
 <td align="right">1970</td>
-<td align="right">3</td>
+<td align="left">3-grams</td>
 </tr>
 <tr class="odd">
 <td align="left">le</td>
@@ -500,7 +534,7 @@ For instance, we can use the list in the <code>lsa</code> package,
 <td align="left">lemonde</td>
 <td align="right">1960</td>
 <td align="right">1970</td>
-<td align="right">3</td>
+<td align="left">3-grams</td>
 </tr>
 <tr class="even">
 <td align="left">du</td>
@@ -509,7 +543,7 @@ For instance, we can use the list in the <code>lsa</code> package,
 <td align="left">lemonde</td>
 <td align="right">1960</td>
 <td align="right">1970</td>
-<td align="right">3</td>
+<td align="left">3-grams</td>
 </tr>
 <tr class="odd">
 <td align="left">un</td>
@@ -518,7 +552,7 @@ For instance, we can use the list in the <code>lsa</code> package,
 <td align="left">lemonde</td>
 <td align="right">1960</td>
 <td align="right">1970</td>
-<td align="right">3</td>
+<td align="left">3-grams</td>
 </tr>
 <tr class="even">
 <td align="left">et</td>
@@ -527,7 +561,7 @@ For instance, we can use the list in the <code>lsa</code> package,
 <td align="left">lemonde</td>
 <td align="right">1960</td>
 <td align="right">1970</td>
-<td align="right">3</td>
+<td align="left">3-grams</td>
 </tr>
 </tbody>
 </table>
@@ -652,27 +686,29 @@ inputs vectors of keywords:</p>
 <code>gallicagram_lexicon</code>:</p>
 <table class="table">
 <colgroup>
-<col width="11%">
 <col width="10%">
-<col width="8%">
-<col width="8%">
-<col width="11%">
+<col width="9%">
+<col width="7%">
+<col width="7%">
+<col width="10%">
+<col width="4%">
 <col width="5%">
-<col width="6%">
-<col width="8%">
-<col width="11%">
-<col width="21%">
+<col width="7%">
+<col width="10%">
+<col width="7%">
+<col width="19%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">date</th>
 <th align="left">keyword</th>
 <th align="right">n_occur</th>
-<th align="right">n_grams</th>
+<th align="right">n_total</th>
 <th align="right">prop_occur</th>
 <th align="right">year</th>
 <th align="right">month</th>
 <th align="left">corpus</th>
 <th align="left">resolution</th>
+<th align="left">n_of</th>
 <th align="left">lexicon</th>
 </tr></thead>
 <tbody>
@@ -686,6 +722,7 @@ inputs vectors of keywords:</p>
 <td align="right">1</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">1-grams</td>
 <td align="left">président+présidente</td>
 </tr>
 <tr class="even">
@@ -698,6 +735,7 @@ inputs vectors of keywords:</p>
 <td align="right">2</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">1-grams</td>
 <td align="left">président+présidente</td>
 </tr>
 <tr class="odd">
@@ -710,6 +748,7 @@ inputs vectors of keywords:</p>
 <td align="right">3</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">1-grams</td>
 <td align="left">président+présidente</td>
 </tr>
 <tr class="even">
@@ -722,6 +761,7 @@ inputs vectors of keywords:</p>
 <td align="right">4</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">1-grams</td>
 <td align="left">président+présidente</td>
 </tr>
 <tr class="odd">
@@ -734,6 +774,7 @@ inputs vectors of keywords:</p>
 <td align="right">5</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">1-grams</td>
 <td align="left">président+présidente</td>
 </tr>
 <tr class="even">
@@ -746,6 +787,7 @@ inputs vectors of keywords:</p>
 <td align="right">6</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
+<td align="left">1-grams</td>
 <td align="left">président+présidente</td>
 </tr>
 </tbody>
@@ -781,20 +823,22 @@ take some time to run.</p>
 <col width="4%">
 <col width="5%">
 <col width="6%">
-<col width="3%">
+<col width="2%">
 <col width="4%">
 <col width="6%">
-<col width="56%">
+<col width="4%">
+<col width="53%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">date</th>
 <th align="left">keyword</th>
 <th align="right">n_occur</th>
-<th align="right">n_grams</th>
+<th align="right">n_total</th>
 <th align="right">prop_occur</th>
 <th align="right">year</th>
 <th align="left">corpus</th>
 <th align="left">resolution</th>
+<th align="left">n_of</th>
 <th align="left">lexicon</th>
 </tr></thead>
 <tbody>
@@ -807,6 +851,7 @@ take some time to run.</p>
 <td align="right">1960</td>
 <td align="left">lemonde</td>
 <td align="left">yearly</td>
+<td align="left">1-grams</td>
 <td align="left">écologie+écologique+écologiquement+écologiques+écologiste+écologiste+écologistes+écologistes</td>
 </tr>
 <tr class="even">
@@ -818,6 +863,7 @@ take some time to run.</p>
 <td align="right">1961</td>
 <td align="left">lemonde</td>
 <td align="left">yearly</td>
+<td align="left">1-grams</td>
 <td align="left">écologie+écologique+écologiquement+écologiques+écologiste+écologiste+écologistes+écologistes</td>
 </tr>
 <tr class="odd">
@@ -829,6 +875,7 @@ take some time to run.</p>
 <td align="right">1962</td>
 <td align="left">lemonde</td>
 <td align="left">yearly</td>
+<td align="left">1-grams</td>
 <td align="left">écologie+écologique+écologiquement+écologiques+écologiste+écologiste+écologistes+écologistes</td>
 </tr>
 <tr class="even">
@@ -840,6 +887,7 @@ take some time to run.</p>
 <td align="right">1963</td>
 <td align="left">lemonde</td>
 <td align="left">yearly</td>
+<td align="left">1-grams</td>
 <td align="left">écologie+écologique+écologiquement+écologiques+écologiste+écologiste+écologistes+écologistes</td>
 </tr>
 <tr class="odd">
@@ -851,6 +899,7 @@ take some time to run.</p>
 <td align="right">1964</td>
 <td align="left">lemonde</td>
 <td align="left">yearly</td>
+<td align="left">1-grams</td>
 <td align="left">écologie+écologique+écologiquement+écologiques+écologiste+écologiste+écologistes+écologistes</td>
 </tr>
 <tr class="even">
@@ -862,6 +911,7 @@ take some time to run.</p>
 <td align="right">1965</td>
 <td align="left">lemonde</td>
 <td align="left">yearly</td>
+<td align="left">1-grams</td>
 <td align="left">écologie+écologique+écologiquement+écologiques+écologiste+écologiste+écologistes+écologistes</td>
 </tr>
 </tbody>

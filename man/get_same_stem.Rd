@@ -16,5 +16,7 @@ A character vector. Words with the same stem has the \code{keyword}
 Searches such words in the \code{rallicagram::word_lemma_stem} dataframe.
 }
 \examples{
-get_same_stem("président")
+\dontrun{
+  get_same_stem("président")
+}
 }

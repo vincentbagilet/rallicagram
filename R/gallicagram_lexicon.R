@@ -61,7 +61,7 @@ gallicagram_lexicon <- function(lexicon,
     dplyr::group_by(.data$date) |>
     dplyr::mutate(
       n_occur = sum(.data$n_occur),
-      prop_occur = .data$n_occur / .data$n_grams
+      prop_occur = .data$n_occur / .data$n_total
     ) |>
     dplyr::ungroup() |>
     dplyr::distinct() |>

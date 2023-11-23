@@ -13,7 +13,8 @@ prepare_param <- function(keyword,
                           corpus,
                           from,
                           to,
-                          resolution) {
+                          resolution,
+                          n_of = "grams") {
 
   #errors in from/to
   if (!is.numeric(from) || !is.numeric(to)) {
@@ -58,6 +59,15 @@ prepare_param <- function(keyword,
   } else if (corpus == "press" && resolution %in% c("daily")) {
     stop(
       "The 'press' corpus is only available at a monthly or yearly resolution",
+      call. = FALSE
+    )
+  }
+
+  #error in n_of
+  if (!(corpus == "lemonde" && n_of == "article") & !(n_of =="grams")) {
+    stop(
+      "'n_of' can only be equal to 'grams' except for the Le Monde corpus,
+      for which it can also be equal to 'article'",
       call. = FALSE
     )
   }

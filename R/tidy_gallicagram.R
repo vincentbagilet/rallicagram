@@ -26,7 +26,14 @@ tidy_gallicagram <- function(url, corpus, resolution) {
     read_data_gallicagram() |>
     dplyr::rename(keyword = "gram", year = "annee") |>
     dplyr::rename(
-      tidyselect::any_of(c(month = "mois", day = "jour"))
+      tidyselect::any_of(c(
+        month = "mois",
+        day = "jour",
+        n = "nb_articles_occur",
+        total = "nb_total_article",
+        n = "nb_articles_cooccur",
+        total = "nb_articles_cooccur"
+      ))
     ) |>
     dplyr::mutate(
       prop = .data$n / .data$total,

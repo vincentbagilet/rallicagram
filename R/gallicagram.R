@@ -28,11 +28,22 @@ gallicagram <- function(keyword,
                         corpus = "lemonde",
                         from = 1945,
                         to = 2022,
-                        resolution = "monthly") {
+                        resolution = "monthly",
+                        n_of = "grams") {
 
-  param_clean <- prepare_param(keyword, corpus, from, to, resolution)
+  param_clean <- prepare_param(keyword, corpus, from, to, resolution, n_of)
 
-  output <- paste("https://shiny.ens-paris-saclay.fr/guni/query?corpus=",
+  spaces_keyword <-
+    attr(gregexpr(" ", keyword, fixed = TRUE)[[1]], "match.length")
+  nb_words_keyword <- ifelse(spaces_keyword == -1, 1, length(spaces_keyword)+1)
+
+  output <- paste("https://shiny.ens-paris-saclay.fr/guni/query",
+                  ifelse(
+                    n_of == "article" & corpus == "lemonde",
+                    "_article",
+                    ""
+                  ),
+                  "?corpus=",
                   param_clean$corpus,
                   "&mot=",
                   param_clean$keyword,
@@ -46,8 +57,15 @@ gallicagram <- function(keyword,
     tidy_gallicagram(corpus, resolution) |>
     dplyr::rename(
       "n_occur" = "n",
-      "n_grams" = "total",
+      "n_total" = "total",
       "prop_occur" = "prop"
+    ) |>
+    dplyr::mutate(
+      n_of = ifelse(
+        n_of == "grams",
+        paste(nb_words_keyword, "grams", sep = "-"),
+        "articles"
+      )
     )
 
   return(output)

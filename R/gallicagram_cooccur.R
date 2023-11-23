@@ -35,12 +35,19 @@ gallicagram_cooccur <- function(keyword_1,
                                 from = 1945,
                                 to = 2022,
                                 resolution = "monthly",
-                                count_period = TRUE) {
+                                count_period = TRUE,
+                                n_of = "grams") {
 
   param_clean <- prepare_param(keyword_1, corpus, from, to, resolution)
   param_clean_2 <- prepare_param(keyword_2, corpus, from, to, resolution)
 
-  output <- paste("https://shiny.ens-paris-saclay.fr/guni/contain?corpus=",
+  output <- paste("https://shiny.ens-paris-saclay.fr/guni/",
+                  ifelse(
+                    n_of == "article" & corpus == "lemonde",
+                    "cooccur",
+                    "contain"
+                  ),
+                  "?corpus=",
                   param_clean$corpus,
                   "&mot1=",
                   param_clean$keyword,
@@ -63,7 +70,10 @@ gallicagram_cooccur <- function(keyword_1,
     dplyr::mutate(
       keyword_1 = keyword_1,
       keyword_2 = keyword_2,
-      gram = ifelse(.data$gram == "", NA, .data$gram)
+      gram = ifelse(.data$gram == "", NA, .data$gram),
+      n_of = ifelse(n_of == "grams",
+                        ifelse(corpus == "lemonde", "4-grams", "3-grams"),
+                        "article")
     ) |>
     dplyr::select("date", "keyword_1", "keyword_2", tidyselect::everything())
 
@@ -79,7 +89,7 @@ gallicagram_cooccur <- function(keyword_1,
       dplyr::group_by(.data$year) |>
       dplyr::mutate(
         n_cooccur = sum(.data$n_cooccur),
-        n_ngrams = sum(.data$n_ngrams),
+        n_total = sum(.data$n_ngrams),
         prop_cooccur = .data$n_cooccur / .data$n_ngrams
       ) |>
       dplyr::ungroup() |>

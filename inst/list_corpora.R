@@ -24,7 +24,7 @@ list_corpora <- list_corpora_raw |>
   ) |>
   tidyr::separate(
     period,
-    into = c("start_reliable", "end_reliable"),
+    into = c("reliable_from", "reliable_to"),
     convert = TRUE
   ) |>
   dplyr::select(-seuils)

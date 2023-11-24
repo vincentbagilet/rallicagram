@@ -68,19 +68,19 @@ error_corpus <- function(corpus,
   info_corpus <- list_corpora |> dplyr::filter(corpus == corpus_french)
 
   #reliability corpus
-  if (from < info_corpus$start_reliable) {
+  if (from < info_corpus$reliable_from) {
     warning(
       paste(
         "The", corpus_french,
-        "corpus is only reliable after", info_corpus$start_reliable
+        "corpus is only reliable after", info_corpus$reliable_from
       ),
       call. = FALSE
     )
   }
-  if (to > info_corpus$end_reliable) {
+  if (to > info_corpus$reliable_to) {
     warning(
       paste("The", corpus_french,
-            "corpus is only reliable before", info_corpus$end_reliable),
+            "corpus is only reliable before", info_corpus$reliable_to),
       call. = FALSE
     )
   }

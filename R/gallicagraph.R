@@ -33,7 +33,7 @@
 gallicagraph <- function(data, color = NULL) {
   data |>
     ggplot2::ggplot(
-      ggplot2::aes(x = date, y = prop_occur, color = {{ color }})
+      ggplot2::aes(x = date, y = .data$prop_occur, color = {{ color }})
     ) +
     ggplot2::geom_line() +
     ggplot2::labs(

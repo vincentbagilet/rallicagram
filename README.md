@@ -11,29 +11,8 @@
 `rallicagram` calls the [Gallicagram API](https://regicid.github.io/api)
 directly from R.
 [Gallicagram](https://shiny.ens-paris-saclay.fr/app/gallicagram)
-historically enabled to build time series of keywords used in a set of
-French corpora:
-
-- **Historical newspapers** from [Gallica](https://gallica.bnf.fr/), the
-  digital library of the French National Library (Bibliothèque nationale
-  de France, BnF) (corpus=“press”). A corpus of 3 million issues,
-  reliable from 1789 to 1950. Yearly or monthly resolution.
-- **Public domain books** available on
-  [Gallica](https://gallica.bnf.fr/) (corpus=“books”). 300 000 books.
-  Increased reliability through the 16th to 18th centuries and up
-  to 1940. Yearly resolution.
-- **Articles published in [*Le Monde*](https://www.lemonde.fr/)**
-  (corpus=“lemonde”). Available and reliable from December 1944 to
-  February 22, 2022. Yearly, monthly or daily resolution.
-
-Additional information can be found on a
-[preprint](https://osf.io/preprints/socarxiv/84bf3/) by Gallicagram
-developers [Benoît de Courson](https://regicid.github.io/) and [Benjamin
-Azoulay](https://benjamin-azoulay.my.canva.site/) and on the “Notice”
-tab of the [Gallicagram
-website](https://shiny.ens-paris-saclay.fr/app/gallicagram).
-
-The set of corpora has now been vastly extended:
+historically enables to build time series of keywords used in the
+following a set of corpora:
 
 | Corpus             | Corpus Name                    | Reliable From | Reliable To | Nb Words | Max Length | Resolution |
 |:-------------------|:-------------------------------|--------------:|------------:|---------:|-----------:|:-----------|
@@ -54,6 +33,12 @@ The set of corpora has now been vastly extended:
 | huma               | L’Humanité                     |          1904 |        1952 | 3.18e+08 |          2 | daily      |
 | substitles         | Opensubtitles (français)       |          1935 |        2020 | 1.70e+07 |          3 | yearly     |
 | subtitles_en       | Opensubtitles (anglais)        |          1930 |        2020 | 1.02e+08 |          3 | yearly     |
+
+Additional information can be found on a
+[preprint](https://osf.io/preprints/socarxiv/84bf3/) by Gallicagram
+developers [Benoît de Courson](https://regicid.github.io/) and Benjamin
+Azoulay and on the “Notice” tab of the [Gallicagram
+website](https://shiny.ens-paris-saclay.fr/app/gallicagram).
 
 ## Installation
 

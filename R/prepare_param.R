@@ -23,11 +23,11 @@ prepare_param <- function(keyword,
            ifelse(corpus == "books", "livres",
                   ifelse(corpus == "lemonde", "lemonde", corpus)))
 
-  if (!(corpus_french %in% list_corpora$corpus)) {
+  if (!(corpus_french %in% rallicagram::list_corpora$corpus)) {
     stop(
       paste(
         "The corpus should be one of:",
-        paste(list_corpora$corpus, collapse = ", ")
+        paste(rallicagram::list_corpora$corpus, collapse = ", ")
       )
     )
   }
@@ -55,17 +55,9 @@ prepare_param <- function(keyword,
     corpus_french,
     from_numeric,
     to_numeric,
-    resolution
+    resolution,
+    n_of
   )
-
-  #error in n_of
-  if (!(corpus == "lemonde" && n_of == "article") & !(n_of =="grams")) {
-    stop(
-      "'n_of' can only be equal to 'grams' except for the Le Monde corpus,
-      for which it can also be equal to 'article'",
-      call. = FALSE
-    )
-  }
 
   #resolutions
   if (resolution == "monthly" && info_corpus[["resolution"]] == "yearly") {

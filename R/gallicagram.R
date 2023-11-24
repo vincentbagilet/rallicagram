@@ -25,6 +25,11 @@
 #' "yearly".
 #' The finest available resolution for the corpus selected can be found
 #' in the \code{resolution} column of the \code{list_corpora} dataset.
+#' @param n_of A character string. The type of object to compute number of
+#' occurrences for. If set to "grams", will compute the number of "grams" that
+#' correspond to the keyword for the given period. If set to "article" (only
+#' available for lemonde), will compute the number of articles that contain the
+#' keyword for the given period.
 #'
 #' @inherit tidy_gallicagram return
 #'
@@ -50,7 +55,7 @@ gallicagram <- function(keyword,
 
   output <- paste("https://shiny.ens-paris-saclay.fr/guni/query",
                   ifelse(
-                    n_of == "article" & corpus == "lemonde",
+                    n_of == "articles" & corpus == "lemonde",
                     "_article",
                     ""
                   ),

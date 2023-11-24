@@ -26,7 +26,7 @@ library(rallicagram)
 ```
 
 `rallicagram` is a R wrapper for the [Gallicagram API](https://regicid.github.io/api). More info on Gallicagram and its API can be found on a [preprint](https://osf.io/preprints/socarxiv/84bf3/) by Gallicagram developers [
-Benoît de Courson](https://regicid.github.io/) and [Benjamin Azoulay](https://benjamin-azoulay.my.canva.site/), on the "Notice" tab of the [Gallicagram website](https://shiny.ens-paris-saclay.fr/app/gallicagram) and on the [API documentation](https://regicid.github.io/api).
+Benoît de Courson](https://regicid.github.io/) and Benjamin Azoulay, on the "Notice" tab of the [Gallicagram website](https://shiny.ens-paris-saclay.fr/app/gallicagram) and on the [API documentation](https://regicid.github.io/api).
 
 # Main functions
 

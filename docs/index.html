@@ -67,32 +67,22 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p><code>rallicagram</code> calls the <a href="https://regicid.github.io/api" class="external-link">Gallicagram API</a> directly from R. <a href="https://shiny.ens-paris-saclay.fr/app/gallicagram" class="external-link">Gallicagram</a> historically enabled to build time series of keywords used in a set of French corpora:</p>
-<ul>
-<li>
-<strong>Historical newspapers</strong> from <a href="https://gallica.bnf.fr/" class="external-link">Gallica</a>, the digital library of the French National Library (Bibliothèque nationale de France, BnF) (corpus=“press”). A corpus of 3 million issues, reliable from 1789 to 1950. Yearly or monthly resolution.</li>
-<li>
-<strong>Public domain books</strong> available on <a href="https://gallica.bnf.fr/" class="external-link">Gallica</a> (corpus=“books”). 300 000 books. Increased reliability through the 16th to 18th centuries and up to 1940. Yearly resolution.</li>
-<li>
-<strong>Articles published in <a href="https://www.lemonde.fr/" class="external-link"><em>Le Monde</em></a></strong> (corpus=“lemonde”). Available and reliable from December 1944 to February 22, 2022. Yearly, monthly or daily resolution.</li>
-</ul>
-<p>Additional information can be found on a <a href="https://osf.io/preprints/socarxiv/84bf3/" class="external-link">preprint</a> by Gallicagram developers <a href="https://regicid.github.io/" class="external-link">Benoît de Courson</a> and <a href="https://benjamin-azoulay.my.canva.site/" class="external-link">Benjamin Azoulay</a> and on the “Notice” tab of the <a href="https://shiny.ens-paris-saclay.fr/app/gallicagram" class="external-link">Gallicagram website</a>.</p>
-<p>The set of corpora has now been vastly extended:</p>
+<p><code>rallicagram</code> calls the <a href="https://regicid.github.io/api" class="external-link">Gallicagram API</a> directly from R. <a href="https://shiny.ens-paris-saclay.fr/app/gallicagram" class="external-link">Gallicagram</a> historically enables to build time series of keywords used in the following a set of corpora:</p>
 <table class="table">
 <colgroup>
 <col width="17%">
-<col width="27%">
+<col width="28%">
 <col width="13%">
-<col width="12%">
+<col width="11%">
 <col width="8%">
 <col width="10%">
 <col width="10%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">Corpus</th>
-<th align="left">Name Corpus</th>
-<th align="right">Start Reliable</th>
-<th align="right">End Reliable</th>
+<th align="left">Corpus Name</th>
+<th align="right">Reliable From</th>
+<th align="right">Reliable To</th>
 <th align="right">Nb Words</th>
 <th align="right">Max Length</th>
 <th align="left">Resolution</th>
@@ -253,6 +243,7 @@
 </tr>
 </tbody>
 </table>
+<p>Additional information can be found on a <a href="https://osf.io/preprints/socarxiv/84bf3/" class="external-link">preprint</a> by Gallicagram developers <a href="https://regicid.github.io/" class="external-link">Benoît de Courson</a> and Benjamin Azoulay and on the “Notice” tab of the <a href="https://shiny.ens-paris-saclay.fr/app/gallicagram" class="external-link">Gallicagram website</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>

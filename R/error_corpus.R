@@ -14,6 +14,8 @@
 #' for the analysis.
 #' @param resolution A character string specifying the desired resolution for
 #' the analysis (e.g., "daily", "monthly", "yearly").
+#' @param n_of A character string specifying the type of object to compute the
+#' number of occurrences for.
 #'
 #'
 #' @return This function does not return a value but may issue warnings or
@@ -37,11 +39,12 @@
 #'
 #' @export
 error_param <- function(info_corpus,
-                         keyword,
-                         corpus,
-                         from,
-                         to,
-                         resolution) {
+                        keyword,
+                        corpus,
+                        from,
+                        to,
+                        resolution,
+                        n_of) {
 
   #errors in from/to
   if (!is.numeric(from) || !is.numeric(to)) {
@@ -101,6 +104,15 @@ error_param <- function(info_corpus,
         "corpus is only available at a", info_corpus$resolution,
         "resolution"
       ),
+      call. = FALSE
+    )
+  }
+
+  #error in n_of
+  if (!(corpus == "lemonde" && n_of == "articles") & !(n_of =="grams")) {
+    stop(
+      "'n_of' can only be equal to 'grams' except for the Le Monde corpus,
+      for which it can also be equal to 'article'",
       call. = FALSE
     )
   }

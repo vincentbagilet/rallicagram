@@ -52,8 +52,8 @@ by year, month or day.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gallicagram</span><span class="op">(</span></span>
 <span>  <span class="va">keyword</span>,</span>
 <span>  corpus <span class="op">=</span> <span class="st">"lemonde"</span>,</span>
-<span>  from <span class="op">=</span> <span class="fl">1945</span>,</span>
-<span>  to <span class="op">=</span> <span class="fl">2022</span>,</span>
+<span>  from <span class="op">=</span> <span class="st">"earliest"</span>,</span>
+<span>  to <span class="op">=</span> <span class="st">"latest"</span>,</span>
 <span>  resolution <span class="op">=</span> <span class="st">"monthly"</span>,</span>
 <span>  n_of <span class="op">=</span> <span class="st">"grams"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -73,13 +73,15 @@ available corpora can be found in the <code>list_corpora</code> dataset.</p></dd
 
 
 <dt>from</dt>
-<dd><p>An integer. Starting year.</p></dd>
+<dd><p>An integer or "earliest". The starting year.
+If set to "earliest", use the earliest date at which the data is reliable
+for this corpus, as described in <code>list_corpora</code>.</p></dd>
 
 
 <dt>to</dt>
-<dd><p>An integer. End year.
-The finest available resolution for the corpus selected can be found
-in the <code>resolution</code> column of the <code>list_corpora</code> dataset.</p></dd>
+<dd><p>An integer or "latest". The end year.
+If set to "latest", use the latest date at which the data is reliable
+for this corpus, as described in <code>list_corpora</code>.</p></dd>
 
 
 <dt>resolution</dt>
@@ -87,6 +89,14 @@ in the <code>resolution</code> column of the <code>list_corpora</code> dataset.<
 "yearly".
 The finest available resolution for the corpus selected can be found
 in the <code>resolution</code> column of the <code>list_corpora</code> dataset.</p></dd>
+
+
+<dt>n_of</dt>
+<dd><p>A character string. The type of object to compute number of
+occurrences for. If set to "grams", will compute the number of "grams" that
+correspond to the keyword for the given period. If set to "article" (only
+available for lemonde), will compute the number of articles that contain the
+keyword for the given period.</p></dd>
 
 </dl></div>
     <div id="value">

@@ -72,9 +72,7 @@ gallicagram_cooccur <- function(keyword_1,
       keyword_1 = keyword_1,
       keyword_2 = keyword_2,
       gram = ifelse(.data$gram == "", NA, .data$gram),
-      n_of = ifelse(n_of == "grams",
-                        ifelse(corpus == "lemonde", "4-grams", "3-grams"),
-                        "article")
+      n_of = n_of
     ) |>
     dplyr::select("date", "keyword_1", "keyword_2", tidyselect::everything())
 

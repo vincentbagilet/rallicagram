@@ -72,8 +72,7 @@
 <p><code>rallicagram</code> is a R wrapper for the <a href="https://regicid.github.io/api" class="external-link">Gallicagram API</a>. More info on
 Gallicagram and its API can be found on a <a href="https://osf.io/preprints/socarxiv/84bf3/" class="external-link">preprint</a> by
 Gallicagram developers <a href="https://regicid.github.io/" class="external-link">Benoît de
-Courson</a> and <a href="https://benjamin-azoulay.my.canva.site/" class="external-link">Benjamin Azoulay</a>, on
-the “Notice” tab of the <a href="https://shiny.ens-paris-saclay.fr/app/gallicagram" class="external-link">Gallicagram
+Courson</a> and Benjamin Azoulay, on the “Notice” tab of the <a href="https://shiny.ens-paris-saclay.fr/app/gallicagram" class="external-link">Gallicagram
 website</a> and on the <a href="https://regicid.github.io/api" class="external-link">API
 documentation</a>.</p>
 <div class="section level2">
@@ -232,17 +231,17 @@ the words to look co-occurrences for.</p>
 <p>Here is an example of part of the output:</p>
 <table class="table">
 <colgroup>
+<col width="11%">
+<col width="10%">
+<col width="11%">
 <col width="10%">
 <col width="9%">
-<col width="10%">
-<col width="9%">
-<col width="8%">
-<col width="12%">
-<col width="4%">
+<col width="13%">
 <col width="5%">
-<col width="7%">
-<col width="10%">
-<col width="7%">
+<col width="6%">
+<col width="8%">
+<col width="11%">
+<col width="6%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">date</th>
@@ -269,7 +268,7 @@ the words to look co-occurrences for.</p>
 <td align="right">1</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
-<td align="left">4-grams</td>
+<td align="left">grams</td>
 </tr>
 <tr class="even">
 <td align="left">1960-02-01</td>
@@ -282,7 +281,7 @@ the words to look co-occurrences for.</p>
 <td align="right">2</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
-<td align="left">4-grams</td>
+<td align="left">grams</td>
 </tr>
 <tr class="odd">
 <td align="left">1960-03-01</td>
@@ -295,7 +294,7 @@ the words to look co-occurrences for.</p>
 <td align="right">3</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
-<td align="left">4-grams</td>
+<td align="left">grams</td>
 </tr>
 <tr class="even">
 <td align="left">1960-04-01</td>
@@ -308,7 +307,7 @@ the words to look co-occurrences for.</p>
 <td align="right">4</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
-<td align="left">4-grams</td>
+<td align="left">grams</td>
 </tr>
 <tr class="odd">
 <td align="left">1960-05-01</td>
@@ -321,7 +320,7 @@ the words to look co-occurrences for.</p>
 <td align="right">5</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
-<td align="left">4-grams</td>
+<td align="left">grams</td>
 </tr>
 <tr class="even">
 <td align="left">1960-06-01</td>
@@ -334,7 +333,7 @@ the words to look co-occurrences for.</p>
 <td align="right">6</td>
 <td align="left">lemonde</td>
 <td align="left">monthly</td>
-<td align="left">4-grams</td>
+<td align="left">grams</td>
 </tr>
 </tbody>
 </table>
@@ -477,7 +476,7 @@ time.</p>
 removed. Instead, we can remove other stopwords, by supplying a list of
 words to ignore to the <code>stopwords</code> parameter of the function.
 For instance, we can use the list in the <code>lsa</code> package,
-<code>lsa::stopwords_fr</code>. To keep the stopwwords, set the
+<code><a href="https://rdrr.io/pkg/lsa/man/stopwords.html" class="external-link">lsa::stopwords_fr</a></code>. To keep the stopwwords, set the
 <code>stopwords</code> parameter to <code>NULL</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ex_associated_stopwords</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gallicagram_associated.html">gallicagram_associated</a></span><span class="op">(</span></span>

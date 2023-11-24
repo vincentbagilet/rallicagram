@@ -39,6 +39,12 @@ For books can only be "yearly".}
 containing both keywords.
 If TRUE, returns the number of times both keywords co-occur
 in each resolution period.}
+
+\item{n_of}{A character string. The type of object to compute number of
+occurrences for. If set to "grams", will compute the number of "grams" that
+correspond to the keyword for the given period. If set to "article" (only
+available for lemonde), will compute the number of articles that contain the
+keyword for the given period.}
 }
 \value{
 A tibble. With the \code{keyword},

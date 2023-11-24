@@ -8,7 +8,7 @@
 A data frame with 17 rows and 7 variables:
 \describe{
   \item{corpus}{Code name of the corpus.}
-  \item{name_corpus}{Plain language name of the corpus.}
+  \item{corpus_name}{Plain language name of the corpus.}
   \item{reliable_from}{The year at which the corpus starts being reliable.}
   \item{reliable_to}{The year at which the corpus stops being reliable.}
   \item{nb_words}{The number of words in the corpus.}

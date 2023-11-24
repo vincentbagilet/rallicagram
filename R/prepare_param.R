@@ -49,17 +49,37 @@ prepare_param <- function(keyword,
     )
   }
 
-  #translations
-  resolution_french <- ifelse(resolution == "yearly", "annee",
-                       ifelse(resolution == "monthly", "mois",
-                       ifelse(resolution == "daily", "jour",
-                          stop("Invalid resolution", call. = FALSE))))
-
   #to handle code written with a previous version of the package
   corpus_french <-
     ifelse(corpus == "press", "presse",
            ifelse(corpus == "books", "livres",
                   ifelse(corpus == "lemonde", "lemonde", corpus)))
+
+  info_corpus <-
+    rallicagram::list_corpora[
+      rallicagram::list_corpora$corpus == corpus_french,]
+
+  #resolutions
+  if (resolution == "monthly" && info_corpus[["resolution"]] == "yearly") {
+    resol <- "yearly"
+    warning(
+      "Resolution set to 'yearly', the finest resolution available",
+      call. = FALSE
+    )
+  } else if (resolution == "daily" && info_corpus[["resolution"]] == "monthly") {
+    resol <- "monthly"
+    warning(
+      "Resolution set to 'monthly', the finest resolution available",
+      call. = FALSE
+    )
+  } else {resol <- resolution}
+
+  #translations
+  resolution_french <-
+    ifelse(resol == "yearly", "annee",
+           ifelse(resol == "monthly", "mois",
+                  ifelse(resol == "daily", "jour",
+                         stop("Invalid resolution", call. = FALSE))))
 
   keyword_clean <- gsub(" ", "%20", tolower(keyword))
 

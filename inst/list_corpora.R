@@ -1,4 +1,5 @@
 ## The (super simple) code to prepare the `list_corpora` data set
+## Retrieve the data directly from the API doc
 
 url <- "https://regicid.github.io/api"
 
@@ -16,7 +17,10 @@ list_corpora_raw <- url |>
     resolution,
     seuils
   ) |>
-  dplyr::mutate(period = stringr::str_sub(period, 1, 9))
+  dplyr::mutate(
+    period = stringr::str_sub(period, 1, 9),
+    resolution = stringr::str_extract(resolution, "\\w+(?=\\s?)")
+  )
 
 # list_corpora_raw <-
 #   readr::read_delim(

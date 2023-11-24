@@ -65,7 +65,8 @@ error_corpus <- function(corpus,
     )
   }
 
-  info_corpus <- list_corpora |> dplyr::filter(corpus == corpus_french)
+  info_corpus <- rallicagram::list_corpora |>
+    dplyr::filter(corpus == corpus_french)
 
   #reliability corpus
   if (from < info_corpus$reliable_from) {

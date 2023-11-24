@@ -1,6 +1,11 @@
 template:
-  params:
-    bootswatch: cosmo
+  bootstrap: 5
+  bootswatch: journal
+  bslib:
+    # pkgdown-nav-height: 100px
+    base_font: {google: "Lato"}
+    heading_font: {google: "Lato"}
+    primary: "#1D4749"
 
 authors:
   Vincent Bagilet:
@@ -10,3 +15,38 @@ navbar:
   structure:
     right: [github]
 
+reference:
+- title: Main functions
+  contents:
+  - gallicagram
+  - gallicagram_associated
+  - gallicagram_cooccur
+  - gallicagram_with
+
+- title: Lexicon version of main functions
+  desc: >
+    Running the main functions for more that one keyword.
+  contents:
+  - gallicagram_lexicon
+  - gallicagram_associated_lexicon
+  - gallicagram_cooccur_lexicon
+  - get_same_stem
+
+- title: Other functions
+  contents:
+  - gallicagraph
+  - gallicagram_with_month
+  - gallicagram_all
+
+- title: Data
+  contents:
+  - list_corpora
+  - stopwords_gallica
+  - word_lemma_stem
+
+- title: Internal functions
+  contents:
+  - error_param
+  - prepare_param
+  - read_data_gallicagram
+  - tidy_gallicagram

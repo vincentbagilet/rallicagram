@@ -1,4 +1,4 @@
-#' Check for errors in the parameters
+#' Internal function to check for errors in the parameters
 #'
 #' This internal function checks for errors in the specified parameters,
 #' including the validity of the time range, the keyword, and the resolution,

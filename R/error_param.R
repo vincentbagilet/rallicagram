@@ -93,21 +93,6 @@ error_param <- function(info_corpus,
     stop("Resolution can only be daily, monthly or yearly.")
   }
 
-  if (
-    (resolution == "monthly" && info_corpus$resolution == "yearly") ||
-      (resolution == "daily" &&
-       info_corpus$resolution %in% c("yearly", "monthly"))
-  ) {
-    stop(
-      paste(
-        "The", corpus,
-        "corpus is only available at a", info_corpus$resolution,
-        "resolution"
-      ),
-      call. = FALSE
-    )
-  }
-
   #error in n_of
   if (!(corpus == "lemonde" && n_of == "articles") & !(n_of =="grams")) {
     stop(

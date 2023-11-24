@@ -61,7 +61,7 @@ gallicagram_cooccur <- function(keyword_1,
                   "&count=",
                   ifelse(count_period, "True", "False"),
                   sep = "") |>
-    tidy_gallicagram(corpus, resolution) |>
+    tidy_gallicagram(param_clean$corpus, param_clean$resolution) |>
     dplyr::rename(
       "gram" = "keyword",
       "n_cooccur" = "n",

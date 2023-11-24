@@ -39,8 +39,8 @@ tidy_gallicagram <- function(url, corpus, resolution) {
       prop = .data$n / .data$total,
       corpus = corpus,
       resolution = resolution,
-      month_pad = ifelse(resolution == "yearly", 01, .data$month),
-      day_pad = ifelse(resolution != "daily", 01, .data$day),
+      month_pad = ifelse(resolution == "annee", 01, .data$month),
+      day_pad = ifelse(resolution != "jour", 01, .data$day),
       date = as.Date(
         paste(.data$year, .data$month_pad, .data$day_pad, sep = "-")
       )

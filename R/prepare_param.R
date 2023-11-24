@@ -60,7 +60,8 @@ prepare_param <- function(keyword,
   )
 
   #resolutions
-  if (resolution == "monthly" && info_corpus[["resolution"]] == "yearly") {
+  if ((resolution == "monthly" || resolution == "daily") &&
+      info_corpus[["resolution"]] == "yearly") {
     resol <- "yearly"
     warning(
       "Resolution set to 'yearly', the finest resolution available",

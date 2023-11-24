@@ -36,7 +36,7 @@ test_that("Invalid resolution", {
     gallicagram(keyword = "président", resolution = "err"),
     "Resolution can only.+"
   )
-  expect_error(
+  expect_warning(
     gallicagram(
       keyword = "président",
       corpus = "books",
@@ -44,9 +44,9 @@ test_that("Invalid resolution", {
       from = 1800,
       to = 1820
     ),
-    ".+only available.+"
+    "Resolution set.+"
   )
-  expect_error(
+  expect_warning(
     gallicagram(
       keyword = "président",
       corpus = "press",
@@ -54,7 +54,7 @@ test_that("Invalid resolution", {
       to = 1820,
       resolution = "daily"
     ),
-    ".+only available.+"
+    "Resolution set.+"
   )
 })
 

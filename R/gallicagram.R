@@ -70,7 +70,7 @@ gallicagram <- function(keyword,
                   "&resolution=",
                   param_clean$resolution,
                   sep = "") |>
-    tidy_gallicagram(corpus, resolution) |>
+    tidy_gallicagram(param_clean$corpus, param_clean$resolution) |>
     dplyr::rename(
       "n_occur" = "n",
       "n_total" = "total",

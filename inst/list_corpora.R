@@ -1,12 +1,30 @@
 ## The (super simple) code to prepare the `list_corpora` data set
 
-list_corpora_raw <-
-  readr::read_delim(
-    "inst/data-raw/list_corpora_raw.csv",
-    delim = ";",
-    escape_double = FALSE,
-    trim_ws = TRUE
-  )
+url <- "https://regicid.github.io/api"
+
+list_corpora_raw <- url |>
+  rvest::read_html() |>
+  rvest::html_node("table") |>
+  rvest::html_table() |>
+  janitor::clean_names() |>
+  dplyr::select(
+    corpus = code_api,
+    corpus_name = titre,
+    period = periode_conseillee,
+    nb_words = volume_en_mots,
+    max_length = longueur_max,
+    resolution,
+    seuils
+  ) |>
+  dplyr::mutate(period = stringr::str_sub(period, 1, 9))
+
+# list_corpora_raw <-
+#   readr::read_delim(
+#     "inst/data-raw/list_corpora_raw.csv",
+#     delim = ";",
+#     escape_double = FALSE,
+#     trim_ws = TRUE
+#   )
 
 list_corpora <- list_corpora_raw |>
  dplyr::mutate(

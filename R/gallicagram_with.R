@@ -42,8 +42,8 @@
 #' }
 gallicagram_with <- function(keyword,
                              corpus = "lemonde",
-                             from = 1945,
-                             to = 2022,
+                             from = "earliest",
+                             to = "latest",
                              n_results = 20,
                              after = FALSE,
                              length = 2) {
@@ -85,9 +85,9 @@ gallicagram_with <- function(keyword,
                   "&mot=",
                   param_clean$keyword,
                   "&from=",
-                  from,
+                  param_clean$from,
                   "&to=",
-                  to,
+                  param_clean$to,
                   "&n_joker=",
                   n_results,
                   "&after=",
@@ -98,10 +98,10 @@ gallicagram_with <- function(keyword,
     read_data_gallicagram() |>
     dplyr::rename("n_occur" = "tot", "ngram" = "gram") |>
     dplyr::mutate(
-      keyword = keyword,
+      keyword = param_clean$keyword,
       corpus = param_clean$corpus,
-      from = from,
-      to = to
+      from = param_clean$from,
+      to = param_clean$to
     )
 
   return(output)

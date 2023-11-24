@@ -35,25 +35,25 @@ website](https://shiny.ens-paris-saclay.fr/app/gallicagram).
 
 The set of corpora has now been vastly extended:
 
-| Corpus             | Name Corpus                    | Start Reliable | End Reliable | Nb Words | Max Length | Resolution |
-|:-------------------|:-------------------------------|---------------:|-------------:|---------:|-----------:|:-----------|
-| lemonde            | Le Monde                       |           1944 |         2023 | 1.50e+09 |          4 | daily      |
-| presse             | Presse de Gallica              |           1789 |         1950 | 5.70e+10 |          3 | monthly    |
-| livres             | Livres de Gallica              |           1600 |         1940 | 1.60e+10 |          5 | yearly     |
-| ddb                | Deutsches Zeitungsportal (DDB) |           1780 |         1950 | 3.90e+10 |          2 | monthly    |
-| american_stories   | American Stories               |           1798 |         1963 | 2.00e+10 |          3 | yearly     |
-| paris              | Journal de Paris               |           1777 |         1827 | 8.60e+07 |          2 | daily      |
-| moniteur           | Moniteur Universel             |           1789 |         1869 | 5.11e+08 |          2 | daily      |
-| journal_des_debats | Journal des Débats             |           1789 |         1944 | 1.20e+09 |          1 | daily      |
-| la_presse          | La Presse                      |           1836 |         1869 | 2.53e+08 |          2 | daily      |
-| constitutionnel    | Le Constitutionnel             |           1821 |         1913 | 6.40e+07 |          2 | daily      |
-| figaro             | Le Figaro                      |           1854 |         1952 | 8.70e+08 |          2 | daily      |
-| temps              | Le Temps                       |           1861 |         1942 | 1.00e+09 |          2 | daily      |
-| petit_journal      | Le Petit Journal               |           1863 |         1942 | 7.45e+08 |          2 | daily      |
-| petit_parisien     | Le Petit Parisien              |           1876 |         1944 | 6.31e+08 |          2 | daily      |
-| huma               | L’Humanité                     |           1904 |         1952 | 3.18e+08 |          2 | daily      |
-| substitles         | Opensubtitles (français)       |           1935 |         2020 | 1.70e+07 |          3 | yearly     |
-| subtitles_en       | Opensubtitles (anglais)        |           1930 |         2020 | 1.02e+08 |          3 | yearly     |
+| Corpus             | Corpus Name                    | Reliable From | Reliable To | Nb Words | Max Length | Resolution |
+|:-------------------|:-------------------------------|--------------:|------------:|---------:|-----------:|:-----------|
+| lemonde            | Le Monde                       |          1944 |        2023 | 1.50e+09 |          4 | daily      |
+| presse             | Presse de Gallica              |          1789 |        1950 | 5.70e+10 |          3 | monthly    |
+| livres             | Livres de Gallica              |          1600 |        1940 | 1.60e+10 |          5 | yearly     |
+| ddb                | Deutsches Zeitungsportal (DDB) |          1780 |        1950 | 3.90e+10 |          2 | monthly    |
+| american_stories   | American Stories               |          1798 |        1963 | 2.00e+10 |          3 | yearly     |
+| paris              | Journal de Paris               |          1777 |        1827 | 8.60e+07 |          2 | daily      |
+| moniteur           | Moniteur Universel             |          1789 |        1869 | 5.11e+08 |          2 | daily      |
+| journal_des_debats | Journal des Débats             |          1789 |        1944 | 1.20e+09 |          1 | daily      |
+| la_presse          | La Presse                      |          1836 |        1869 | 2.53e+08 |          2 | daily      |
+| constitutionnel    | Le Constitutionnel             |          1821 |        1913 | 6.40e+07 |          2 | daily      |
+| figaro             | Le Figaro                      |          1854 |        1952 | 8.70e+08 |          2 | daily      |
+| temps              | Le Temps                       |          1861 |        1942 | 1.00e+09 |          2 | daily      |
+| petit_journal      | Le Petit Journal               |          1863 |        1942 | 7.45e+08 |          2 | daily      |
+| petit_parisien     | Le Petit Parisien              |          1876 |        1944 | 6.31e+08 |          2 | daily      |
+| huma               | L’Humanité                     |          1904 |        1952 | 3.18e+08 |          2 | daily      |
+| substitles         | Opensubtitles (français)       |          1935 |        2020 | 1.70e+07 |          3 | yearly     |
+| subtitles_en       | Opensubtitles (anglais)        |          1930 |        2020 | 1.02e+08 |          3 | yearly     |
 
 ## Installation
 

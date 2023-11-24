@@ -12,11 +12,11 @@ test_that("Error if keyword not character string", {
 test_that("Error if from or to not numerical", {
   expect_error(
     gallicagram(keyword = "président", from = "err"),
-    "'from' and 'to' should be numeric"
+    "'from' and 'to' should be numeric.+"
   )
   expect_error(
     gallicagram(keyword = "président", to = "err"),
-    "'from' and 'to' should be numeric"
+    "'from' and 'to' should be numeric.+"
   )
 })
 

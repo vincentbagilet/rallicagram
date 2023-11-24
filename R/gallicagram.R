@@ -15,10 +15,12 @@
 #' in the \code{resolution} column of the \code{list_corpora} dataset.
 #' @param corpus A character string. The corpus to search. The list of
 #' available corpora can be found in the \code{list_corpora} dataset.
-#' @param from An integer. Starting year.
-#' @param to An integer. End year.
-#' The finest available resolution for the corpus selected can be found
-#' in the \code{resolution} column of the \code{list_corpora} dataset.
+#' @param from An integer or "earliest". The starting year.
+#' If set to "earliest", use the earliest date at which the data is reliable
+#' for this corpus, as described in \code{list_corpora}.
+#' @param to An integer or "latest". The end year.
+#' If set to "latest", use the latest date at which the data is reliable
+#' for this corpus, as described in \code{list_corpora}.
 #' @param resolution A character string. Can only be "daily", "monthly" or
 #' "yearly".
 #' The finest available resolution for the corpus selected can be found
@@ -34,8 +36,8 @@
 #' @export
 gallicagram <- function(keyword,
                         corpus = "lemonde",
-                        from = 1945,
-                        to = 2022,
+                        from = "earliest",
+                        to = "latest",
                         resolution = "monthly",
                         n_of = "grams") {
 
@@ -57,9 +59,9 @@ gallicagram <- function(keyword,
                   "&mot=",
                   param_clean$keyword,
                   "&from=",
-                  from,
+                  param_clean$from,
                   "&to=",
-                  to,
+                  param_clean$to,
                   "&resolution=",
                   param_clean$resolution,
                   sep = "") |>

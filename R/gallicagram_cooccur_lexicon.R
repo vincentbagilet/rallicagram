@@ -27,8 +27,8 @@
 gallicagram_cooccur_lexicon <- function(lexicon_1,
                                         lexicon_2,
                                         corpus = "lemonde",
-                                        from = 1945,
-                                        to = 2022,
+                                        from = "earliest",
+                                        to = "latest",
                                         resolution = "monthly") {
 
   output <- NULL

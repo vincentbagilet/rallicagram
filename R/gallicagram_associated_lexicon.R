@@ -31,8 +31,8 @@
 #' }
 gallicagram_associated_lexicon <- function(lexicon,
                                            corpus = "lemonde",
-                                           from = 1945,
-                                           to = 2022,
+                                           from = "earliest",
+                                           to = "latest",
                                            n_results = 20,
                                            distance = "max",
                         stopwords = rallicagram::stopwords_gallica[1:500]) {

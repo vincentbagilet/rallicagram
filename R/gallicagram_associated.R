@@ -49,8 +49,8 @@
 #' gallicagram_associated("camarade")
 gallicagram_associated <- function(keyword,
                                    corpus = "lemonde",
-                                   from = 1945,
-                                   to = 2022,
+                                   from = "earliest",
+                                   to = "latest",
                                    n_results = 20,
                                    distance = "max",
                                    stopwords =
@@ -108,9 +108,9 @@ gallicagram_associated <- function(keyword,
                   "&mot=",
                   param_clean$keyword,
                   "&from=",
-                  from,
+                  param_clean$from,
                   "&to=",
-                  to,
+                  param_clean$to,
                   "&n_joker=",
                   n_joker,
                   "&length=",
@@ -133,10 +133,10 @@ gallicagram_associated <- function(keyword,
     dplyr::arrange(dplyr::desc(.data$n_occur)) |>
     #add param
     dplyr::mutate(
-      keyword = keyword,
+      keyword = param_clean$keyword,
       corpus = param_clean$corpus,
-      from = from,
-      to = to,
+      from = param_clean$from,
+      to = param_clean$to,
       cooccur_level = ifelse(
         distance == "article",
         "articles",

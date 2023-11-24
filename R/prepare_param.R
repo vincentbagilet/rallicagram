@@ -7,7 +7,8 @@
 #' @inheritParams gallicagram
 #'
 #' @returns A list.
-#' Contains cleaned function parameters (`keyword`, `corpus` and `resolution`).
+#' Contains cleaned function parameters (`keyword`, `corpus`, `from`, `to`
+#' and `resolution`).
 #'
 prepare_param <- function(keyword,
                           corpus,
@@ -16,29 +17,46 @@ prepare_param <- function(keyword,
                           resolution,
                           n_of = "grams") {
 
-  #errors in from/to
-  if (!is.numeric(from) || !is.numeric(to)) {
-    stop("'from' and 'to' should be numeric", call. = FALSE)
-  }
+  #to handle code written with a previous version of the package
+  corpus_french <-
+    ifelse(corpus == "press", "presse",
+           ifelse(corpus == "books", "livres",
+                  ifelse(corpus == "lemonde", "lemonde", corpus)))
 
-  if (from > to) {
-    stop("'from' cannot be larger than 'to'", call. = FALSE)
-  }
-
-  #errors in keyword
-  if (!is.character(keyword)) {
-    stop("'keyword' should be a character string", call. = FALSE)
-  }
-
-  if (length(keyword) != 1) {
+  if (!(corpus_french %in% list_corpora$corpus)) {
     stop(
-      "'keyword' should be a character string and not a character vector",
-      call. = FALSE
+      paste(
+        "The corpus should be one of:",
+        paste(list_corpora$corpus, collapse = ", ")
+      )
     )
   }
 
-  #error corpus
-  rallicagram::error_corpus(corpus, from, to, resolution)
+  info_corpus <-
+    rallicagram::list_corpora[
+      rallicagram::list_corpora$corpus == corpus_french,]
+
+  from_numeric <- ifelse(
+    from == "earliest",
+    info_corpus[["reliable_from"]],
+    from
+  )
+
+  to_numeric <- ifelse(
+    to == "latest",
+    info_corpus[["reliable_to"]],
+    to
+  )
+
+  #error in params
+  rallicagram::error_param(
+    info_corpus,
+    keyword,
+    corpus_french,
+    from_numeric,
+    to_numeric,
+    resolution
+  )
 
   #error in n_of
   if (!(corpus == "lemonde" && n_of == "article") & !(n_of =="grams")) {
@@ -48,16 +66,6 @@ prepare_param <- function(keyword,
       call. = FALSE
     )
   }
-
-  #to handle code written with a previous version of the package
-  corpus_french <-
-    ifelse(corpus == "press", "presse",
-           ifelse(corpus == "books", "livres",
-                  ifelse(corpus == "lemonde", "lemonde", corpus)))
-
-  info_corpus <-
-    rallicagram::list_corpora[
-      rallicagram::list_corpora$corpus == corpus_french,]
 
   #resolutions
   if (resolution == "monthly" && info_corpus[["resolution"]] == "yearly") {
@@ -86,6 +94,8 @@ prepare_param <- function(keyword,
   param_clean <- list(
     "keyword" = keyword_clean,
     "corpus" = corpus_french,
+    "from" = from_numeric,
+    "to" = to_numeric,
     "resolution" = resolution_french
   )
 

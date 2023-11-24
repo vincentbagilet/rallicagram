@@ -7,8 +7,8 @@
 gallicagram_lexicon(
   lexicon,
   corpus = "lemonde",
-  from = 1945,
-  to = 2022,
+  from = "earliest",
+  to = "latest",
   resolution = "monthly"
 )
 }
@@ -20,11 +20,13 @@ a 4-gram in the "lemonde" corpus.}
 \item{corpus}{A character string. The corpus to search. The list of
 available corpora can be found in the \code{list_corpora} dataset.}
 
-\item{from}{An integer. Starting year.}
+\item{from}{An integer or "earliest". The starting year.
+If set to "earliest", use the earliest date at which the data is reliable
+for this corpus, as described in \code{list_corpora}.}
 
-\item{to}{An integer. End year.
-The finest available resolution for the corpus selected can be found
-in the \code{resolution} column of the \code{list_corpora} dataset.}
+\item{to}{An integer or "latest". The end year.
+If set to "latest", use the latest date at which the data is reliable
+for this corpus, as described in \code{list_corpora}.}
 
 \item{resolution}{A character string. Can only be "daily", "monthly" or
 "yearly".

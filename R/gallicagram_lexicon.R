@@ -38,8 +38,8 @@
 #' }
 gallicagram_lexicon <- function(lexicon,
                                 corpus = "lemonde",
-                                from = 1945,
-                                to = 2022,
+                                from = "earliest",
+                                to = "latest",
                                 resolution = "monthly") {
 
   output <- NULL

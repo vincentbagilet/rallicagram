@@ -20,7 +20,9 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-`rallicagram` calls the [Gallicagram API](https://regicid.github.io/api) directly from R. [Gallicagram](https://shiny.ens-paris-saclay.fr/app/gallicagram) historically enables to build time series of keywords used in the following a set of corpora:
+`rallicagram` is a R wrapper for the [Gallicagram API](https://regicid.github.io/api). [Gallicagram](https://shiny.ens-paris-saclay.fr/app/gallicagram) is a super nice tool and set of databases that enable to easily run simple Natural Language Processing (**NLP**) analyses on a wide set of corpora. In particular, it enables to build historical **time series of occurrences of keywords** in various media in one line of code.
+
+The corpora available via Gallicagram are:
 
 ```{r list_corpora, echo=FALSE}
 rallicagram::list_corpora |> 

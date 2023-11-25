@@ -64,7 +64,8 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p><code>rallicagram</code> calls the <a href="https://regicid.github.io/api" class="external-link">Gallicagram API</a> directly from R. <a href="https://shiny.ens-paris-saclay.fr/app/gallicagram" class="external-link">Gallicagram</a> historically enables to build time series of keywords used in the following a set of corpora:</p>
+<p><code>rallicagram</code> is a R wrapper for the <a href="https://regicid.github.io/api" class="external-link">Gallicagram API</a>. <a href="https://shiny.ens-paris-saclay.fr/app/gallicagram" class="external-link">Gallicagram</a> is a super nice tool and set of databases that enable to easily run simple Natural Language Processing (<strong>NLP</strong>) analyses on a wide set of corpora. In particular, it enables to build historical <strong>time series of occurrences of keywords</strong> in various media in one line of code.</p>
+<p>The corpora available via Gallicagram are:</p>
 <table class="table">
 <colgroup>
 <col width="17%">
@@ -221,7 +222,7 @@
 <td align="left">daily</td>
 </tr>
 <tr class="even">
-<td align="left">substitles</td>
+<td align="left">subtitles</td>
 <td align="left">Opensubtitles (français)</td>
 <td align="right">1935</td>
 <td align="right">2020</td>
@@ -267,16 +268,16 @@
 <span><span class="co">#&gt; # A tibble: 132 × 10</span></span>
 <span><span class="co">#&gt;    date       keyword   n_occur n_total prop_occur  year month corpus resolution</span></span>
 <span><span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;       &lt;int&gt;   &lt;int&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     </span></span>
-<span><span class="co">#&gt;  1 1960-01-01 président    1338  872943    0.00153  1960     1 lemon… monthly   </span></span>
-<span><span class="co">#&gt;  2 1960-02-01 président    1360  915672    0.00149  1960     2 lemon… monthly   </span></span>
-<span><span class="co">#&gt;  3 1960-03-01 président    1461  928764    0.00157  1960     3 lemon… monthly   </span></span>
-<span><span class="co">#&gt;  4 1960-04-01 président    1239  772707    0.00160  1960     4 lemon… monthly   </span></span>
-<span><span class="co">#&gt;  5 1960-05-01 président    1355  835612    0.00162  1960     5 lemon… monthly   </span></span>
-<span><span class="co">#&gt;  6 1960-06-01 président    1314  850245    0.00155  1960     6 lemon… monthly   </span></span>
-<span><span class="co">#&gt;  7 1960-07-01 président    1189  942062    0.00126  1960     7 lemon… monthly   </span></span>
-<span><span class="co">#&gt;  8 1960-08-01 président     979  739018    0.00132  1960     8 lemon… monthly   </span></span>
-<span><span class="co">#&gt;  9 1960-09-01 président    1506  904804    0.00166  1960     9 lemon… monthly   </span></span>
-<span><span class="co">#&gt; 10 1960-10-01 président    1107  826661    0.00134  1960    10 lemon… monthly   </span></span>
+<span><span class="co">#&gt;  1 1960-01-01 président    1338  872943    0.00153  1960     1 lemon… mois      </span></span>
+<span><span class="co">#&gt;  2 1960-02-01 président    1360  915672    0.00149  1960     2 lemon… mois      </span></span>
+<span><span class="co">#&gt;  3 1960-03-01 président    1461  928764    0.00157  1960     3 lemon… mois      </span></span>
+<span><span class="co">#&gt;  4 1960-04-01 président    1239  772707    0.00160  1960     4 lemon… mois      </span></span>
+<span><span class="co">#&gt;  5 1960-05-01 président    1355  835612    0.00162  1960     5 lemon… mois      </span></span>
+<span><span class="co">#&gt;  6 1960-06-01 président    1314  850245    0.00155  1960     6 lemon… mois      </span></span>
+<span><span class="co">#&gt;  7 1960-07-01 président    1189  942062    0.00126  1960     7 lemon… mois      </span></span>
+<span><span class="co">#&gt;  8 1960-08-01 président     979  739018    0.00132  1960     8 lemon… mois      </span></span>
+<span><span class="co">#&gt;  9 1960-09-01 président    1506  904804    0.00166  1960     9 lemon… mois      </span></span>
+<span><span class="co">#&gt; 10 1960-10-01 président    1107  826661    0.00134  1960    10 lemon… mois      </span></span>
 <span><span class="co">#&gt; # ℹ 122 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 1 more variable: n_of &lt;chr&gt;</span></span></code></pre></div>
 <p>It enables to draw nice graphs representing the evolution of the use of a term in time.</p>

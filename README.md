@@ -8,11 +8,15 @@
 
 ## Overview
 
-`rallicagram` calls the [Gallicagram API](https://regicid.github.io/api)
-directly from R.
-[Gallicagram](https://shiny.ens-paris-saclay.fr/app/gallicagram)
-historically enables to build time series of keywords used in the
-following a set of corpora:
+`rallicagram` is a R wrapper for the [Gallicagram
+API](https://regicid.github.io/api).
+[Gallicagram](https://shiny.ens-paris-saclay.fr/app/gallicagram) is a
+super nice tool and set of databases that enable to easily run simple
+Natural Language Processing (**NLP**) analyses on a wide set of corpora.
+In particular, it enables to build historical **time series of
+occurrences of keywords** in various media in one line of code.
+
+The corpora available via Gallicagram are:
 
 | Corpus             | Corpus Name                    | Reliable From | Reliable To | Nb Words | Max Length | Resolution |
 |:-------------------|:-------------------------------|--------------:|------------:|---------:|-----------:|:-----------|
@@ -31,7 +35,7 @@ following a set of corpora:
 | petit_journal      | Le Petit Journal               |          1863 |        1942 | 7.45e+08 |          2 | daily      |
 | petit_parisien     | Le Petit Parisien              |          1876 |        1944 | 6.31e+08 |          2 | daily      |
 | huma               | L’Humanité                     |          1904 |        1952 | 3.18e+08 |          2 | daily      |
-| substitles         | Opensubtitles (français)       |          1935 |        2020 | 1.70e+07 |          3 | yearly     |
+| subtitles          | Opensubtitles (français)       |          1935 |        2020 | 1.70e+07 |          3 | yearly     |
 | subtitles_en       | Opensubtitles (anglais)        |          1930 |        2020 | 1.02e+08 |          3 | yearly     |
 
 Additional information can be found on a
@@ -69,16 +73,16 @@ gallicagram(
 #> # A tibble: 132 × 10
 #>    date       keyword   n_occur n_total prop_occur  year month corpus resolution
 #>    <date>     <chr>       <int>   <int>      <dbl> <int> <int> <chr>  <chr>     
-#>  1 1960-01-01 président    1338  872943    0.00153  1960     1 lemon… monthly   
-#>  2 1960-02-01 président    1360  915672    0.00149  1960     2 lemon… monthly   
-#>  3 1960-03-01 président    1461  928764    0.00157  1960     3 lemon… monthly   
-#>  4 1960-04-01 président    1239  772707    0.00160  1960     4 lemon… monthly   
-#>  5 1960-05-01 président    1355  835612    0.00162  1960     5 lemon… monthly   
-#>  6 1960-06-01 président    1314  850245    0.00155  1960     6 lemon… monthly   
-#>  7 1960-07-01 président    1189  942062    0.00126  1960     7 lemon… monthly   
-#>  8 1960-08-01 président     979  739018    0.00132  1960     8 lemon… monthly   
-#>  9 1960-09-01 président    1506  904804    0.00166  1960     9 lemon… monthly   
-#> 10 1960-10-01 président    1107  826661    0.00134  1960    10 lemon… monthly   
+#>  1 1960-01-01 président    1338  872943    0.00153  1960     1 lemon… mois      
+#>  2 1960-02-01 président    1360  915672    0.00149  1960     2 lemon… mois      
+#>  3 1960-03-01 président    1461  928764    0.00157  1960     3 lemon… mois      
+#>  4 1960-04-01 président    1239  772707    0.00160  1960     4 lemon… mois      
+#>  5 1960-05-01 président    1355  835612    0.00162  1960     5 lemon… mois      
+#>  6 1960-06-01 président    1314  850245    0.00155  1960     6 lemon… mois      
+#>  7 1960-07-01 président    1189  942062    0.00126  1960     7 lemon… mois      
+#>  8 1960-08-01 président     979  739018    0.00132  1960     8 lemon… mois      
+#>  9 1960-09-01 président    1506  904804    0.00166  1960     9 lemon… mois      
+#> 10 1960-10-01 président    1107  826661    0.00134  1960    10 lemon… mois      
 #> # ℹ 122 more rows
 #> # ℹ 1 more variable: n_of <chr>
 ```

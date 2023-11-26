@@ -10,7 +10,7 @@ get_same_stem(keyword)
 \item{keyword}{A character string.}
 }
 \value{
-A character vector. Words with the same stem has the \code{keyword}
+A character vector. Words with the same stem as the \code{keyword}.
 }
 \description{
 Searches such words in the \code{rallicagram::word_lemma_stem} dataframe.

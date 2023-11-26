@@ -5,7 +5,7 @@
 #'
 #' @param keyword A character string.
 #'
-#' @returns A character vector. Words with the same stem has the \code{keyword}
+#' @returns A character vector. Words with the same stem as the \code{keyword}.
 #'
 #' @export
 #' @examples

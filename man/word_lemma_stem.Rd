@@ -3,7 +3,7 @@
 \docType{data}
 \name{word_lemma_stem}
 \alias{word_lemma_stem}
-\title{A data frame containing a words, their lemma and stem of the lemma}
+\title{A data frame containing words, their lemmas and stem of the lemmas}
 \format{
 A data frame with 3 columns and 142,694 rows.
 }

@@ -6,7 +6,7 @@
 "stopwords_gallica"
 
 
-#' A data frame containing a words, their lemma and stem of the lemma
+#' A data frame containing words, their lemmas and stem of the lemmas
 #'
 #' The lemmas come from the \href{http://www.lexique.org/}{Lexique} data base.
 #' The stems are obtained by stemming these lemmas using the \code{SnowballC}

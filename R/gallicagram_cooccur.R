@@ -58,6 +58,8 @@ gallicagram_cooccur <- function(keyword_1,
                   param_clean$from,
                   "&to=",
                   param_clean$to,
+                  "&resolution=",
+                  param_clean$resolution,
                   "&count=",
                   ifelse(count_period, "True", "False"),
                   sep = "") |>
@@ -79,21 +81,6 @@ gallicagram_cooccur <- function(keyword_1,
   #gram = keyword_1&keyword_2 when count_period = TRUE so redundant
   if (count_period) {
     output <- dplyr::select(output, -"gram")
-  }
-
-  #can't specify the resolution in the API. Always monthly for press and lemonde
-  #thus, average by hand
-  if (resolution == "yearly" && corpus %in% c("press", "lemonde")) {
-    output <- output |>
-      dplyr::group_by(.data$year) |>
-      dplyr::mutate(
-        n_cooccur = sum(.data$n_cooccur),
-        n_total = sum(.data$n_ngrams),
-        prop_cooccur = .data$n_cooccur / .data$n_ngrams
-      ) |>
-      dplyr::ungroup() |>
-      dplyr::select(-"month") |>
-      dplyr::distinct()
   }
 
   return(output)

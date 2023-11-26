@@ -63,6 +63,9 @@ This function sums the outputs of calls of \code{gallicagram_associated}
 obtained for each keyword in the vector.
 
 Can typically be used with the function \code{get_same_stem()}.
+
+This function is only available for the three main corpora
+(historical press, Gallica books, Le Monde newspaper).
 }
 \examples{
 \dontrun{

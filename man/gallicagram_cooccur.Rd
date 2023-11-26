@@ -60,11 +60,15 @@ potentially the \code{month} and \code{day} of the observation.
 }
 \description{
 Retrieves the proportion of close co-occurrences of two keywords in one of
-the corpora by year, month or day.
+the three main corpora (historical press, Gallica books, Le Monde newspaper)
+by year or month.
 }
 \details{
 Close co-occurrences correspond to the number of 3-grams
 (4-grams in the Le Monde corpus) that contain the two keywords.
+
+This function is only available for the three main corpora
+(historical press, Gallica books, Le Monde newspaper).
 
 This function corresponds to the \code{Contain} route of the API.
 }

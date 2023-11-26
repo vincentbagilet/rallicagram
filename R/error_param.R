@@ -70,6 +70,15 @@ error_param <- function(info_corpus,
     )
   }
 
+  #cooccurr, associated and with only work with lemonde, livres, presse
+  if (grepl("_(associated|with|cooccur)", deparse(sys.call(-2))[1]) &&
+      !(corpus %in% c("lemonde", "livres", "presse"))) {
+    stop(
+      "This function is only available for the corpora lemonde, livres, and presse.",
+      call. = FALSE
+    )
+  }
+
   #reliability corpus
   if (from < info_corpus$reliable_from) {
     warning(

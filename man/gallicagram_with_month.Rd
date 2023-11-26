@@ -49,6 +49,9 @@ It also returns the input parameters
 Returns the most frequent ngrams containing a keyword for a given month
 }
 \details{
+This function is only available for the three main corpora
+(historical press, Gallica books, Le Monde newspaper).
+
 This function corresponds to the \code{joker_month} route of the API.
 
 It is analogous to \code{gallicagram_with} but for a precise month instead

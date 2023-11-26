@@ -2,8 +2,8 @@
 #'
 #' @description
 #' Retrieves the proportion of close co-occurrences of two lexicons in one of
-#' the corpora (historical press, Gallica books, Le Monde newspaper)
-#' by year, month or day.
+#' the three main corpora (historical press, Gallica books, Le Monde newspaper)
+#' by year or month.
 #'
 #' @details
 #' Close co-occurrences correspond to the number of 3-grams
@@ -12,6 +12,9 @@
 #'
 #' This function simply loops the function \code{gallicagram_cooccur} over each
 #' word of each lexicon and sums the results. It can thus take some time to run.
+#'
+#' This function is only available for the three main corpora
+#' (historical press, Gallica books, Le Monde newspaper).
 #'
 #' @param lexicon_1 A character vector. One of the two lexicons to search.
 #' @param lexicon_2 A character vector. The other lexicon to search.

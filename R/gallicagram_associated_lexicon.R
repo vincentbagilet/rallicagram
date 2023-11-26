@@ -11,6 +11,9 @@
 #'
 #' Can typically be used with the function \code{get_same_stem()}.
 #'
+#' This function is only available for the three main corpora
+#' (historical press, Gallica books, Le Monde newspaper).
+#'
 #' @param lexicon A character vector. Keywords to search.
 #'
 #' @inheritParams gallicagram_associated

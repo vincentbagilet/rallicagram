@@ -53,6 +53,9 @@ It also returns the input parameters
 Returns the most frequent ngrams containing a keyword over a given period.
 }
 \details{
+This function is only available for the three main corpora
+(historical press, Gallica books, Le Monde newspaper).
+
 This function corresponds to the \code{Joker} route of the API,
 accessed through the 'Joker' function on the Gallicagram app.
 When length = 1, it is analogous to the 'Joker' function on Ngram Viewer.

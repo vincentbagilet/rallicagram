@@ -7,6 +7,9 @@
 #' @details
 #' This functions calls the '\code{associated}' route of the API.
 #'
+#' This function is only available for the three main corpora
+#' (historical press, Gallica books, Le Monde newspaper).
+#'
 #' Note that the API route does not allow to search for associated words
 #' after a punctuation mark.
 #' For instance, in "son camarade, le chasseur, a", the function will

@@ -49,7 +49,7 @@
 #'
 #' @export
 #' @examples
-#' gallicagram_associated("camarade")
+#' gallicagram_associated("camarade", from = 1960, to = 1970)
 gallicagram_associated <- function(keyword,
                                    corpus = "lemonde",
                                    from = "earliest",

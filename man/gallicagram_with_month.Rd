@@ -65,7 +65,5 @@ includes the most frequent ngrams of the form "* camarade".
 Searching the "press" corpus can require a long running time.
 }
 \examples{
-\dontrun{
-  gallicagram_with_month("camarade", length = 2)
-}
+  gallicagram_with_month("camarade")
 }

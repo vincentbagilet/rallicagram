@@ -32,9 +32,7 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
-#'   gallicagram_with_month("camarade", length = 2)
-#' }
+#'   gallicagram_with_month("camarade")
 gallicagram_with_month <- function(keyword,
                                    corpus = "lemonde",
                                    year = 2022,
@@ -42,6 +40,10 @@ gallicagram_with_month <- function(keyword,
                                    n_results = 20,
                                    after = FALSE,
                                    length = 2) {
+
+  param_clean <-
+    prepare_param(keyword, corpus, year, year, resolution = "yearly")
+  # param resolution not used
 
   #errors handling
   if (!is.numeric(length)) {
@@ -75,10 +77,6 @@ gallicagram_with_month <- function(keyword,
          Specifying a keyword without the apostrophe will also return words
          associated with the apostrophe version of the keyword.", call. = FALSE)
   }
-
-  param_clean <-
-    prepare_param(keyword, corpus, year, year, resolution = "yearly")
-  # param resolution not used
 
   output <- paste("https://shiny.ens-paris-saclay.fr/guni/joker_mois?corpus=",
                   param_clean$corpus,

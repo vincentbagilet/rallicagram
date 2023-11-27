@@ -63,8 +63,6 @@ Information regarding available characteristics of the corpus can be found
 in the \code{list_corpora} dataset.
 }
 \examples{
-\dontrun{
   gallicagram("président")
-}
 
 }

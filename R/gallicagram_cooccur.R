@@ -31,9 +31,7 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
 #'   gallicagram_cooccur("président", "mauvais")
-#' }
 gallicagram_cooccur <- function(keyword_1,
                                 keyword_2,
                                 corpus = "lemonde",

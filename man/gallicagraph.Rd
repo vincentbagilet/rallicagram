@@ -25,7 +25,6 @@ This function can also be combined with faceting by adding for instance
 \code{+ facet_wrap(~ keyword)} after calling the function.
 }
 \examples{
-\dontrun{
   gallicagram("président") |>
     gallicagraph()
 
@@ -36,6 +35,5 @@ This function can also be combined with faceting by adding for instance
   gallicagram("président") |>
     rbind(gallicagram("république")) |>
     gallicagraph() +
-    facet_wrap(~ keyword)
-}
+    ggplot2::facet_wrap(~ keyword)
 }

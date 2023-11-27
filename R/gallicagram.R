@@ -34,9 +34,7 @@
 #' @inherit tidy_gallicagram return
 #'
 #' @examples
-#' \dontrun{
 #'   gallicagram("président")
-#' }
 #'
 #' @export
 gallicagram <- function(keyword,

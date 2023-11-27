@@ -40,9 +40,7 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
-#'   gallicagram_with("camarade", length = 2)
-#' }
+#'   gallicagram_with("camarade", from = 1960, to = 1970)
 gallicagram_with <- function(keyword,
                              corpus = "lemonde",
                              from = "earliest",

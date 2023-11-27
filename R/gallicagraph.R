@@ -17,7 +17,6 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
 #'   gallicagram("président") |>
 #'     gallicagraph()
 #'
@@ -28,8 +27,7 @@
 #'   gallicagram("président") |>
 #'     rbind(gallicagram("république")) |>
 #'     gallicagraph() +
-#'     facet_wrap(~ keyword)
-#' }
+#'     ggplot2::facet_wrap(~ keyword)
 gallicagraph <- function(data, color = NULL) {
   data |>
     ggplot2::ggplot(
@@ -44,5 +42,6 @@ gallicagraph <- function(data, color = NULL) {
         '" in the ', paste(unique(data$corpus), collapse = '", "'), " corpus" ,
         sep = ""
       )
-    )
+    ) +
+    ggplot2::theme_minimal()
 }

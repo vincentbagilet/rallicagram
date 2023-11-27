@@ -80,5 +80,5 @@ Apostrophes and letters preceding them are withdrawn from the dataset
 Searching the "press" corpus can require a long running time.
 }
 \examples{
-gallicagram_associated("camarade")
+gallicagram_associated("camarade", from = 1960, to = 1970)
 }

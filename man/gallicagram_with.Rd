@@ -71,7 +71,5 @@ includes the most frequent ngrams of the form "* camarade".
 Searching the "presse" corpus can require a long running time.
 }
 \examples{
-\dontrun{
-  gallicagram_with("camarade", length = 2)
-}
+  gallicagram_with("camarade", from = 1960, to = 1970)
 }

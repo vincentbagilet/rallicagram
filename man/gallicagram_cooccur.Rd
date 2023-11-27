@@ -73,7 +73,5 @@ This function is only available for the three main corpora
 This function corresponds to the \code{Contain} route of the API.
 }
 \examples{
-\dontrun{
   gallicagram_cooccur("président", "mauvais")
-}
 }

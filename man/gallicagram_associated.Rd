@@ -50,8 +50,9 @@ If \code{NULL} does not remove any stopwords.}
 \value{
 A tibble. Containing the words the most frequently associated with
 the \code{keyword} mentioned (\code{associated_word}),
-the number of occurrences over the period (\code{n_occur}),
-and the level at which the cooccurrences are computed (n-grams or articles,
+the number of co-occurrences between the keyword and the associated
+word over the period (\code{n_co-occur}),
+and the level at which the co-occurrences are computed (n-grams or articles,
 reported in (\code{cooccur_level})).
 It also returns the input parameters
 \code{keyword}, \code{corpus}, \code{from} and \code{to}.

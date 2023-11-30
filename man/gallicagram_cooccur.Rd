@@ -12,7 +12,7 @@ gallicagram_cooccur(
   to = "latest",
   resolution = "monthly",
   count_period = TRUE,
-  n_of = "grams"
+  cooccur_level = "grams"
 )
 }
 \arguments{
@@ -40,11 +40,9 @@ containing both keywords.
 If TRUE, returns the number of times both keywords co-occur
 in each resolution period.}
 
-\item{n_of}{A character string. The type of object to compute number of
-occurrences for. If set to "grams", will compute the number of "grams" that
-correspond to the keyword for the given period. If set to "article" (only
-available for lemonde), will compute the number of articles that contain the
-keyword for the given period.}
+\item{cooccur_level}{character string. Either "grams" or "article".
+The level at which to look for co-occurences of the two keywords:
+in 3-grams for "livres" and "presse" and in 4-grams or article for "lemonde".}
 }
 \value{
 A tibble. With the \code{keyword},

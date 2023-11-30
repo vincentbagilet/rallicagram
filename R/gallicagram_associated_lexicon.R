@@ -23,7 +23,8 @@
 #' @returns A tibble. With the words the most frequently associated with any of
 #' the keywords in the \code{lexicon} mentioned (\code{associated_word}),
 #' the first \code{keyword} in this lexicon, typically the main one
-#' and the number of occurrences over the period (\code{n_occur}).
+#' and the number of co-occurrences between the keyword and the associated
+#' word over the period (\code{n_co-occur}).
 #' It also returns the input parameters
 #' \code{keyword}, \code{corpus}, \code{from} and \code{to}.
 #'
@@ -59,10 +60,10 @@ gallicagram_associated_lexicon <- function(lexicon,
   output <- output |>
     dplyr::mutate(keyword = lexicon[1]) |>
     dplyr::group_by(.data$associated_word) |>
-    dplyr::mutate(n_occur = sum(.data$n_occur)) |>
+    dplyr::mutate(n_cooccur = sum(.data$n_cooccur)) |>
     dplyr::ungroup() |>
     dplyr::distinct() |>
-    dplyr::arrange(dplyr::desc(.data$n_occur)) |>
+    dplyr::arrange(dplyr::desc(.data$n_cooccur)) |>
     dplyr::mutate(
       lexicon = paste(lexicon, collapse = "+")
     ) |>

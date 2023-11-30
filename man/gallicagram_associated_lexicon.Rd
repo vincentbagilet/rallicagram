@@ -50,7 +50,8 @@ If \code{NULL} does not remove any stopwords.}
 A tibble. With the words the most frequently associated with any of
 the keywords in the \code{lexicon} mentioned (\code{associated_word}),
 the first \code{keyword} in this lexicon, typically the main one
-and the number of occurrences over the period (\code{n_occur}).
+and the number of co-occurrences between the keyword and the associated
+word over the period (\code{n_co-occur}).
 It also returns the input parameters
 \code{keyword}, \code{corpus}, \code{from} and \code{to}.
 }

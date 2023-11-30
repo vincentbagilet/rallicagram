@@ -23,6 +23,9 @@
 #' containing both keywords.
 #' If TRUE, returns the number of times both keywords co-occur
 #' in each resolution period.
+#' @param cooccur_level character string. Either "grams" or "article".
+#' The level at which to look for co-occurences of the two keywords:
+#' in 3-grams for "livres" and "presse" and in 4-grams or article for "lemonde".
 #' @inheritParams gallicagram
 #'
 #' @inherit tidy_gallicagram return
@@ -39,14 +42,14 @@ gallicagram_cooccur <- function(keyword_1,
                                 to = "latest",
                                 resolution = "monthly",
                                 count_period = TRUE,
-                                n_of = "grams") {
+                                cooccur_level = "grams") {
 
   param_clean <- prepare_param(keyword_1, corpus, from, to, resolution)
   param_clean_2 <- prepare_param(keyword_2, corpus, from, to, resolution)
 
   output <- paste("https://shiny.ens-paris-saclay.fr/guni/",
                   ifelse(
-                    n_of == "article" & corpus == "lemonde",
+                    cooccur_level == "article" & corpus == "lemonde",
                     "cooccur",
                     "contain"
                   ),
@@ -75,8 +78,12 @@ gallicagram_cooccur <- function(keyword_1,
     dplyr::mutate(
       keyword_1 = keyword_1,
       keyword_2 = keyword_2,
-      gram = ifelse(.data$gram == "", NA, .data$gram),
-      n_of = n_of
+      cooccur_level = ifelse(
+        cooccur_level == "article", cooccur_level,
+        ifelse(corpus == "lemonde", "4-grams", "3-grams"))
+    ) |>
+    dplyr::mutate(
+      dplyr::across(tidyselect::any_of("gram"), \(x) ifelse(x == "", NA, x))
     ) |>
     dplyr::select("date", "keyword_1", "keyword_2", tidyselect::everything())
 

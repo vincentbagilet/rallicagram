@@ -76,7 +76,7 @@ prepare_param <- function(keyword,
   } else {resol <- resolution}
 
   #translations
-  resolution_french <-
+  resolution_fr <-
     ifelse(resol == "yearly", "annee",
            ifelse(resol == "monthly", "mois",
                   ifelse(resol == "daily", "jour",
@@ -89,7 +89,8 @@ prepare_param <- function(keyword,
     "corpus" = corpus_french,
     "from" = from_numeric,
     "to" = to_numeric,
-    "resolution" = resolution_french
+    "resolution_fr" = resolution_fr,
+    "resolution_en" = resol
   )
 
   return(param_clean)

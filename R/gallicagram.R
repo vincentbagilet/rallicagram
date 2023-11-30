@@ -66,9 +66,9 @@ gallicagram <- function(keyword,
                   "&to=",
                   param_clean$to,
                   "&resolution=",
-                  param_clean$resolution,
+                  param_clean$resolution_fr,
                   sep = "") |>
-    tidy_gallicagram(param_clean$corpus, param_clean$resolution) |>
+    tidy_gallicagram(param_clean$corpus, param_clean$resolution_en) |>
     dplyr::rename(
       "n_occur" = "n",
       "n_total" = "total",

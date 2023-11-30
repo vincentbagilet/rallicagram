@@ -5,6 +5,8 @@
 #' add the input parameters to the output tibble.
 #'
 #' @param url A url to pass the Gallicagram API
+#' @param resolution_en A character string. Can only be "daily", "monthly" or
+#' "yearly".
 #' @inheritParams gallicagram
 #'
 #' @importFrom rlang .data
@@ -20,7 +22,7 @@
 #' the \code{year} and
 #' potentially the \code{month} and \code{day} of the observation.
 #'
-tidy_gallicagram <- function(url, corpus, resolution) {
+tidy_gallicagram <- function(url, corpus, resolution_en) {
 
   url |>
     read_data_gallicagram() |>
@@ -38,9 +40,9 @@ tidy_gallicagram <- function(url, corpus, resolution) {
     dplyr::mutate(
       prop = .data$n / .data$total,
       corpus = corpus,
-      resolution = resolution,
-      month_pad = ifelse(resolution == "annee", 01, .data$month),
-      day_pad = ifelse(resolution != "jour", 01, .data$day),
+      resolution = resolution_en,
+      month_pad = ifelse(resolution_en == "yearly", 01, .data$month),
+      day_pad = ifelse(resolution_en != "daily", 01, .data$day),
       date = as.Date(
         paste(.data$year, .data$month_pad, .data$day_pad, sep = "-")
       )

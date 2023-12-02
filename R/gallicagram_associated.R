@@ -23,11 +23,17 @@
 #'
 #' Searching the "press" corpus can require a long running time.
 #'
-#' @param distance An integer or "max". The maximum distance,
+#' @param distance An integer, "max" or "articles". The maximum distance,
 #' in number of words, at which to look for words associated with the keyword.
 #' The max length for each corpus (distance + number of words in the keyword)
 #' is described in the \code{max_length} column
 #' of the \code{list_corpora} dataset.
+#'
+#' When set to "max", automatically considers the longest ngram possible for
+#' this corpus.
+#'
+#' When set to "articles", looks for associated words within the whole
+#' article. Only available for the "lemonde" corpus.
 #' @param stopwords A character vector of stopwords to remove.
 #' The default is the vector of the 500 most frequent words in the Gallica
 #' books dataset. We can change this number by passing
@@ -41,8 +47,8 @@
 #'
 #' @returns A tibble. Containing the words the most frequently associated with
 #' the \code{keyword} mentioned (\code{associated_word}),
-#' the number of co-occurrences between the keyword and the associated
-#' word over the period (\code{n_co-occur}),
+#' the syntagma at which the co-occurrences between the keyword and the
+#' associated word are computed (\code{cooccur_level}),
 #' and the level at which the co-occurrences are computed (n-grams or articles,
 #' reported in (\code{cooccur_level})).
 #' It also returns the input parameters
@@ -64,21 +70,21 @@ gallicagram_associated <- function(keyword,
   # param resolution not used
 
   #errors handling 1
-  if (!(is.numeric(distance) || distance %in% c("max", "article"))) {
+  if (!(is.numeric(distance) || distance %in% c("max", "articles"))) {
     stop(
-      "'distance' should be numeric, 'max' or 'article' (for lemonde only)",
+      "'distance' should be numeric, 'max' or 'articles' (for lemonde only)",
       call. = FALSE
     )
   }
 
-  if (distance == "article" && corpus != "lemonde") {
+  if (distance == "articles" && corpus != "lemonde") {
     stop(
-      "'distance' can only be set to 'article' for the lemonde corpus",
+      "'distance' can only be set to 'articles' for the lemonde corpus",
       call. = FALSE
     )
   }
 
-  if (distance <= 0 & !(distance %in% c("max", "article"))) {
+  if (distance <= 0 & !(distance %in% c("max", "articles"))) {
     stop(
       "'distance' has to be larger than 0",
       call. = FALSE
@@ -90,7 +96,7 @@ gallicagram_associated <- function(keyword,
     rallicagram::list_corpora$corpus == param_clean$corpus, "max_length"][[1]]
 
   asked_length <- ifelse(
-    distance %in% c("max", "article"),
+    distance %in% c("max", "articles"),
     max_length_corpus,
     length(strsplit(x = keyword, split = " ")[[1]]) + distance
   )
@@ -119,7 +125,7 @@ gallicagram_associated <- function(keyword,
   }
 
   output <- paste("https://shiny.ens-paris-saclay.fr/guni/associated",
-                  ifelse(distance == "article", "_article", ""),
+                  ifelse(distance == "articles", "_article", ""),
                   "?corpus=",
                   param_clean$corpus,
                   "&mot=",
@@ -155,8 +161,8 @@ gallicagram_associated <- function(keyword,
       from = param_clean$from,
       to = param_clean$to,
       cooccur_level = ifelse(
-        distance == "article",
-        "article",
+        distance == "articles",
+        "articles",
         paste(length - 1, "grams", sep = "-"))
       # distance = length - 1
     )

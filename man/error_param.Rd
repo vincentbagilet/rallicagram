@@ -4,7 +4,7 @@
 \alias{error_param}
 \title{Internal function to check for errors in the parameters}
 \usage{
-error_param(info_corpus, keyword, corpus, from, to, resolution, n_of)
+error_param(info_corpus, keyword, corpus, from, to, resolution, n_of_level)
 }
 \arguments{
 \item{info_corpus}{A data frame containing information about the selected
@@ -23,8 +23,9 @@ for the analysis.}
 \item{resolution}{A character string specifying the desired resolution for
 the analysis (e.g., "daily", "monthly", "yearly").}
 
-\item{n_of}{A character string specifying the type of object to compute the
-number of occurrences for.}
+\item{n_of_level}{A character string specifying the type of object to
+compute the number of occurrences for or the level at which to compute
+co-occurrences.}
 }
 \value{
 This function does not return a value but may issue warnings or

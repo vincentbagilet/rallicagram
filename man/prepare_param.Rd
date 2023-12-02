@@ -4,34 +4,32 @@
 \alias{prepare_param}
 \title{Internal function to prepare the parameters to use them in the API call.}
 \usage{
-prepare_param(keyword, corpus, from, to, resolution, n_of = "grams")
+prepare_param(
+  keyword,
+  corpus,
+  from,
+  to,
+  resolution = "yearly",
+  n_of_level = "grams"
+)
 }
 \arguments{
-\item{keyword}{A character string. Keyword to search.
-The largest number of words the keyword can contain can be found
-in the \code{resolution} column of the \code{list_corpora} dataset.}
+\item{keyword}{A character string specifying the keyword for analysis.}
 
-\item{corpus}{A character string. The corpus to search. The list of
-available corpora can be found in the \code{list_corpora} dataset.}
+\item{corpus}{A character string specifying the code of the corpus.}
 
-\item{from}{An integer or "earliest". The starting year.
-If set to "earliest", use the earliest date at which the data is reliable
-for this corpus, as described in \code{list_corpora}.}
+\item{from}{An integer or "earliest" representing the starting year
+for the analysis.}
 
-\item{to}{An integer or "latest". The end year.
-If set to "latest", use the latest date at which the data is reliable
-for this corpus, as described in \code{list_corpora}.}
+\item{to}{An integer or "latest" representing the ending year
+for the analysis.}
 
-\item{resolution}{A character string. Can only be "daily", "monthly" or
-"yearly".
-The finest available resolution for the corpus selected can be found
-in the \code{resolution} column of the \code{list_corpora} dataset.}
+\item{resolution}{A character string specifying the desired resolution for
+the analysis (e.g., "daily", "monthly", "yearly").}
 
-\item{n_of}{A character string. The type of object to compute number of
-occurrences for. If set to "grams", will compute the number of "grams" that
-correspond to the keyword for the given period. If set to "article" (only
-available for lemonde), will compute the number of articles that contain the
-keyword for the given period.}
+\item{n_of_level}{A character string specifying the type of object to
+compute the number of occurrences for or the level at which to compute
+co-occurrences.}
 }
 \value{
 A list.

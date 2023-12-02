@@ -14,10 +14,13 @@ in the \code{resolution} column of the \code{list_corpora} dataset.}
 \value{
 A tibble. With the \code{keyword},
 the number of occurrences (\code{n_occur}) or co-occurrences
-(\code{n_cooccur}), the total number of ngrams over the period of a
-given observation (\code{n_grams} or \code{n_ngrams}),
+(\code{n_cooccur}), the total number of ngrams or aritcles
+over the period (\code{n_total}),
 the proportion of occurrences or co-occurrences of the keyword(s) over the
 period of a given observation (\code{prop_occcur} or \code{prop_coocccur}),
+either info about whether the total number is a number of grams or articles
+(\code{n_of}) or about
+the syntagma at which the co-occurrences are computed (\code{cooccur_level}),
 the date at the beginning of the period of a given observation (\code{date}),
 the \code{corpus}, the \code{resolution},
 the \code{year} and

@@ -34,11 +34,17 @@ for this corpus, as described in \code{list_corpora}.}
 associated words to return. \code{n_results} can also be set to "all" to
 return all the available results.}
 
-\item{distance}{An integer or "max". The maximum distance,
+\item{distance}{An integer, "max" or "articles". The maximum distance,
 in number of words, at which to look for words associated with the keyword.
 The max length for each corpus (distance + number of words in the keyword)
 is described in the \code{max_length} column
-of the \code{list_corpora} dataset.}
+of the \code{list_corpora} dataset.
+
+When set to "max", automatically considers the longest ngram possible for
+this corpus.
+
+When set to "articles", looks for associated words within the whole
+article. Only available for the "lemonde" corpus.}
 
 \item{stopwords}{A character vector of stopwords to remove.
 The default is the vector of the 500 most frequent words in the Gallica
@@ -50,8 +56,8 @@ If \code{NULL} does not remove any stopwords.}
 \value{
 A tibble. Containing the words the most frequently associated with
 the \code{keyword} mentioned (\code{associated_word}),
-the number of co-occurrences between the keyword and the associated
-word over the period (\code{n_co-occur}),
+the syntagma at which the co-occurrences between the keyword and the
+associated word are computed (\code{cooccur_level}),
 and the level at which the co-occurrences are computed (n-grams or articles,
 reported in (\code{cooccur_level})).
 It also returns the input parameters

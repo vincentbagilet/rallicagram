@@ -14,9 +14,9 @@
 #' for the analysis.
 #' @param resolution A character string specifying the desired resolution for
 #' the analysis (e.g., "daily", "monthly", "yearly").
-#' @param n_of A character string specifying the type of object to compute the
-#' number of occurrences for.
-#'
+#' @param n_of_level A character string specifying the type of object to
+#' compute the number of occurrences for or the level at which to compute
+#' co-occurrences.
 #'
 #' @return This function does not return a value but may issue warnings or
 #' errors if any issues are found.
@@ -44,12 +44,13 @@ error_param <- function(info_corpus,
                         from,
                         to,
                         resolution,
-                        n_of) {
+                        n_of_level) {
 
   #errors in from/to
   if (!is.numeric(from) || !is.numeric(to)) {
     stop(
-      "'from' and 'to' should be numeric or 'earliest' or 'latest' respectively.",
+      paste("'from' and 'to' should be numeric",
+            "or 'earliest' or 'latest' respectively."),
       call. = FALSE
     )
   }
@@ -74,7 +75,8 @@ error_param <- function(info_corpus,
   if (grepl("_(associated|with|cooccur)", deparse(sys.call(-2))[1]) &&
       !(corpus %in% c("lemonde", "livres", "presse"))) {
     stop(
-      "This function is only available for the corpora lemonde, livres, and presse.",
+      paste("This function is only available for the corpora",
+            "lemonde, livres, and presse."),
       call. = FALSE
     )
   }
@@ -102,11 +104,14 @@ error_param <- function(info_corpus,
     stop("Resolution can only be daily, monthly or yearly.")
   }
 
-  #error in n_of
-  if (!(corpus == "lemonde" && n_of == "articles") & !(n_of =="grams")) {
+  #error in n_of_level
+  if (!(corpus == "lemonde" &&
+        n_of_level == "articles") && !(n_of_level == "grams")) {
+
     stop(
-      "'n_of' can only be equal to 'grams' except for the Le Monde corpus,
-      for which it can also be equal to 'article'",
+      paste("'n_of' and 'cooccur_level' can only be equal to 'grams'",
+            "except for the Le Monde corpus,",
+            "for which they can also be equal to 'articles'"),
       call. = FALSE
     )
   }

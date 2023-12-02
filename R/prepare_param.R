@@ -4,7 +4,7 @@
 #' Checks potential errors, translates the parameters, set parameters for
 #' the API call.
 #'
-#' @inheritParams gallicagram
+#' @inheritParams error_param
 #'
 #' @returns A list.
 #' Contains cleaned function parameters (`keyword`, `corpus`, `from`, `to`
@@ -14,8 +14,8 @@ prepare_param <- function(keyword,
                           corpus,
                           from,
                           to,
-                          resolution,
-                          n_of = "grams") {
+                          resolution = "yearly",
+                          n_of_level = "grams") {
 
   #to handle code written with a previous version of the package
   corpus_french <-
@@ -56,7 +56,7 @@ prepare_param <- function(keyword,
     from_numeric,
     to_numeric,
     resolution,
-    n_of
+    n_of_level
   )
 
   #resolutions

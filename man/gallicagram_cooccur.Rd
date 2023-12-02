@@ -40,17 +40,21 @@ containing both keywords.
 If TRUE, returns the number of times both keywords co-occur
 in each resolution period.}
 
-\item{cooccur_level}{character string. Either "grams" or "article".
+\item{cooccur_level}{character string. Either "grams" or "articles".
 The level at which to look for co-occurences of the two keywords:
-in 3-grams for "livres" and "presse" and in 4-grams or article for "lemonde".}
+in 3-grams for "livres" and "presse"
+and in 4-grams or articles for "lemonde".}
 }
 \value{
 A tibble. With the \code{keyword},
 the number of occurrences (\code{n_occur}) or co-occurrences
-(\code{n_cooccur}), the total number of ngrams over the period of a
-given observation (\code{n_grams} or \code{n_ngrams}),
+(\code{n_cooccur}), the total number of ngrams or aritcles
+over the period (\code{n_total}),
 the proportion of occurrences or co-occurrences of the keyword(s) over the
 period of a given observation (\code{prop_occcur} or \code{prop_coocccur}),
+either info about whether the total number is a number of grams or articles
+(\code{n_of}) or about
+the syntagma at which the co-occurrences are computed (\code{cooccur_level}),
 the date at the beginning of the period of a given observation (\code{date}),
 the \code{corpus}, the \code{resolution},
 the \code{year} and
@@ -68,7 +72,7 @@ Close co-occurrences correspond to the number of 3-grams
 This function is only available for the three main corpora
 (historical press, Gallica books, Le Monde newspaper).
 
-This function corresponds to the \code{Contain} route of the API.
+It corresponds to the \code{Contain} route of the API.
 }
 \examples{
   gallicagram_cooccur("président", "mauvais")

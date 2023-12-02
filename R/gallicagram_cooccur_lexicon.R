@@ -13,7 +13,7 @@
 #' This function simply loops the function \code{gallicagram_cooccur} over each
 #' word of each lexicon and sums the results. It can thus take some time to run.
 #'
-#' This function is only available for the three main corpora
+#' It is only available for the three main corpora
 #' (historical press, Gallica books, Le Monde newspaper).
 #'
 #' @param lexicon_1 A character vector. One of the two lexicons to search.
@@ -48,7 +48,7 @@ gallicagram_cooccur_lexicon <- function(lexicon_1,
     dplyr::group_by(.data$date) |>
     dplyr::mutate(
       n_cooccur = sum(.data$n_cooccur),
-      prop_cooccur = .data$n_cooccur / .data$n_ngrams
+      prop_cooccur = .data$n_cooccur / .data$n_total
     ) |>
     dplyr::select(-keyword_1, -keyword_2) |>
     dplyr::distinct() |>

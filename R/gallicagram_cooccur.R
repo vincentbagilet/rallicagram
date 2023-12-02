@@ -12,7 +12,7 @@
 #' This function is only available for the three main corpora
 #' (historical press, Gallica books, Le Monde newspaper).
 #'
-#' This function corresponds to the \code{Contain} route of the API.
+#' It corresponds to the \code{Contain} route of the API.
 #'
 #' @param keyword_1 A character string. One of the two keywords to search.
 #' @param keyword_2 A character string. The other keyword to search.
@@ -23,9 +23,10 @@
 #' containing both keywords.
 #' If TRUE, returns the number of times both keywords co-occur
 #' in each resolution period.
-#' @param cooccur_level character string. Either "grams" or "article".
+#' @param cooccur_level character string. Either "grams" or "articles".
 #' The level at which to look for co-occurences of the two keywords:
-#' in 3-grams for "livres" and "presse" and in 4-grams or article for "lemonde".
+#' in 3-grams for "livres" and "presse"
+#' and in 4-grams or articles for "lemonde".
 #' @inheritParams gallicagram
 #'
 #' @inherit tidy_gallicagram return
@@ -44,8 +45,10 @@ gallicagram_cooccur <- function(keyword_1,
                                 count_period = TRUE,
                                 cooccur_level = "grams") {
 
-  param_clean <- prepare_param(keyword_1, corpus, from, to, resolution)
-  param_clean_2 <- prepare_param(keyword_2, corpus, from, to, resolution)
+  param_clean <-
+    prepare_param(keyword_1, corpus, from, to, resolution, cooccur_level)
+  param_clean_2 <-
+    prepare_param(keyword_2, corpus, from, to, resolution, cooccur_level)
 
   output <- paste("https://shiny.ens-paris-saclay.fr/guni/",
                   ifelse(
@@ -72,14 +75,14 @@ gallicagram_cooccur <- function(keyword_1,
     dplyr::rename(
       "gram" = "keyword",
       "n_cooccur" = "n",
-      "n_ngrams" = "total",
+      "n_total" = "total",
       "prop_cooccur" = "prop"
     ) |>
     dplyr::mutate(
       keyword_1 = keyword_1,
       keyword_2 = keyword_2,
       cooccur_level = ifelse(
-        cooccur_level == "article", cooccur_level,
+        cooccur_level == "articles", cooccur_level,
         ifelse(corpus == "lemonde", "4-grams", "3-grams"))
     ) |>
     dplyr::mutate(

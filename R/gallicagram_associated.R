@@ -110,9 +110,10 @@ gallicagram_associated <- function(keyword,
   #errors handling2
   if (asked_length > max_length_corpus) {
     warning(
-      paste("Distance set to 'max'. The sum of the number of words in 'keyword'
-            and 'distance' cannot be more than",
-            max_length_corpus, "for this corpus."),
+      paste(
+        "Distance set to 'max'. The sum of the number of words in 'keyword'",
+        "and 'distance' cannot be more than",
+        max_length_corpus, "for this corpus."),
       call. = FALSE
     )
   }

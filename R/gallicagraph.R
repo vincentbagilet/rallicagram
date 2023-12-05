@@ -29,6 +29,11 @@
 #'     gallicagraph() +
 #'     ggplot2::facet_wrap(~ keyword)
 gallicagraph <- function(data, color = NULL) {
+  corpus_data <- unique(data$corpus)
+
+  corpus_name <- rallicagram::list_corpora[
+    rallicagram::list_corpora$corpus == corpus_data, "corpus_name"]
+
   data |>
     ggplot2::ggplot(
       ggplot2::aes(x = date, y = .data$prop_occur, color = {{ color }})
@@ -36,12 +41,13 @@ gallicagraph <- function(data, color = NULL) {
     ggplot2::geom_line() +
     ggplot2::labs(
       x = NULL,
-      y = paste("Proportion of", unique(data$n_of), "in the corpus"),
+      y = paste("Proportion (of", unique(data$n_of), "in the corpus)"),
       title = paste(
-        'Occurences of "', paste(unique(data$keyword), collapse = '", "'),
-        '" in the ', paste(unique(data$corpus), collapse = '", "'), " corpus" ,
+        'Evolution of the coverage of "',
+        paste(unique(data$keyword), collapse = '", "'),
+        '" in the ', paste(corpus_name, collapse = '", "'), " corpus" ,
         sep = ""
-      )
-    ) +
-    ggplot2::theme_minimal()
+      ),
+      color = NULL
+    )
 }

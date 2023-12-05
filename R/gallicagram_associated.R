@@ -105,7 +105,7 @@ gallicagram_associated <- function(keyword,
 
   n_joker <- ifelse(is.null(stopwords),
                     n_results + length(strsplit(x = keyword, split = " ")[[1]]),
-                    "all")
+                    1000000001)
 
   #errors handling2
   if (asked_length > max_length_corpus) {

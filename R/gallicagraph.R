@@ -29,10 +29,10 @@
 #'     gallicagraph() +
 #'     ggplot2::facet_wrap(~ keyword)
 gallicagraph <- function(data, color = NULL) {
-  corpus_data <- unique(data$corpus)
 
-  corpus_name <- rallicagram::list_corpora[
-    rallicagram::list_corpora$corpus == corpus_data, "corpus_name"]
+  corpus_name <- rallicagram::list_corpora |>
+    dplyr::filter(.data$corpus %in% unique(data$corpus)) |>
+    dplyr::pull("corpus_name")
 
   data |>
     ggplot2::ggplot(

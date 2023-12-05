@@ -52,7 +52,7 @@ gallicagram_cooccur <- function(keyword_1,
 
   output <- paste("https://shiny.ens-paris-saclay.fr/guni/",
                   ifelse(
-                    cooccur_level == "article" & corpus == "lemonde",
+                    cooccur_level == "articles" & corpus == "lemonde",
                     "cooccur",
                     "contain"
                   ),

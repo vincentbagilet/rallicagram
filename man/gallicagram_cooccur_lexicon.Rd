@@ -10,7 +10,8 @@ gallicagram_cooccur_lexicon(
   corpus = "lemonde",
   from = "earliest",
   to = "latest",
-  resolution = "monthly"
+  resolution = "monthly",
+  cooccur_level = "grams"
 )
 }
 \arguments{
@@ -32,6 +33,11 @@ for this corpus, as described in \code{list_corpora}.}
 \item{resolution}{A character string.
 For press and lemonde can be either "yearly" or "monthly".
 For books can only be "yearly".}
+
+\item{cooccur_level}{character string. Either "grams" or "articles".
+The level at which to look for co-occurences of the two keywords:
+in 3-grams for "livres" and "presse"
+and in 4-grams or articles for "lemonde".}
 }
 \value{
 A tibble. With the \code{keyword},

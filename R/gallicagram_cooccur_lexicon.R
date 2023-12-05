@@ -32,15 +32,17 @@ gallicagram_cooccur_lexicon <- function(lexicon_1,
                                         corpus = "lemonde",
                                         from = "earliest",
                                         to = "latest",
-                                        resolution = "monthly") {
+                                        resolution = "monthly",
+                                        cooccur_level = "grams") {
 
   output <- NULL
 
   for (keyword_1 in lexicon_1) {
     for (keyword_2 in lexicon_2) {
       output <- output |>
-        rbind(gallicagram_cooccur(keyword_1, keyword_2,
-                              corpus, from, to, resolution))
+        rbind(gallicagram_cooccur(
+          keyword_1, keyword_2,
+          corpus, from, to, resolution, count_period = TRUE, cooccur_level))
     }
   }
 
@@ -50,9 +52,12 @@ gallicagram_cooccur_lexicon <- function(lexicon_1,
       n_cooccur = sum(.data$n_cooccur),
       prop_cooccur = .data$n_cooccur / .data$n_total
     ) |>
+    dplyr::ungroup() |>
     dplyr::select(-keyword_1, -keyword_2) |>
     dplyr::distinct() |>
     dplyr::mutate(
+      keyword_1 = lexicon_1[1],
+      keyword_2 = lexicon_2[1],
       lexicon_1 = paste(lexicon_1, collapse = "+"),
       lexicon_2 = paste(lexicon_2, collapse = "+")
     )

@@ -7,8 +7,12 @@ test_that("Error if lexicon not character a character vector", {
 
 test_that("Error if distance too large", {
   expect_warning(
-    gallicagram_associated_lexicon(lexicon = "camarade", corpus = "lemonde",
-                           distance = 5),
+    gallicagram_associated_lexicon(
+      lexicon = "camarade",
+      corpus = "lemonde",
+      distance = 5,
+      from = 2020
+    ),
     "Distance set to \\'max\\'.+"
   )
   expect_warning(

@@ -4,22 +4,27 @@
 \alias{gallicagraph}
 \title{Automatically produces the relevant graph}
 \usage{
-gallicagraph(data, color = NULL)
+gallicagraph(data, color = NULL, labels_color = NA)
 }
 \arguments{
-\item{data}{A data frame produced by one of the \code{gallicagram} or
-\code{gallicagram_coocur} functions or their lexicon counterparts
+\item{data}{A data frame produced by one of the \code{gallicagram},
+\code{gallicagram_coocur} or \code{gallicagram_associated}
+functions or their lexicon counterparts
 (or several of such data frames bound by rows).}
 
 \item{color}{A variable to set colors for the graph}
+
+\item{labels_color}{A character string. The color in which to print
+the labels. Set to \code{NA} for no label.}
 }
 \value{
 A graph describing the evolution of the proportion of
 (co-)occurrences of one or several keywords in one or several corpora.
 }
 \description{
-Takes as input data produced by one of the \code{gallicagram} or
-\code{gallicagram_coocur} functions or their lexicon counterparts and
+Takes as input data produced by one of the \code{gallicagram},
+\code{gallicagram_coocur} or \code{gallicagram_associated}
+functions or their lexicon counterparts and
 produces the corresponding base graph.
 }
 \details{
@@ -31,5 +36,8 @@ This function can also be combined with faceting by adding for instance
     gallicagraph()
 
   gallicagram_cooccur("président", "ancien") |>
+    gallicagraph()
+
+  gallicagram_associated("président", from = 2020) |>
     gallicagraph()
 }

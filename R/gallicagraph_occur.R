@@ -17,6 +17,8 @@
 #' @returns A graph describing the evolution of the proportion of occurrences
 #' of one or several keywords in one or several corpora.
 #'
+#' @importFrom rlang .data
+#'
 #' @export
 #' @examples
 #'   gallicagram("président") |>
@@ -52,7 +54,7 @@ gallicagraph_occur <- function(data, color = NULL) {
         'Evolution of the coverage of',
         ifelse(("lexicon" %in% names(data)), ' the "', ' "'),
         paste(unique(data$keyword), collapse = '", "'),
-        ifelse(("lexicon" %in% names(data)), '" lexicon ', '" '),
+        ifelse(("lexicon" %in% names(data)), '" lexicon ', '"'),
         sep = ""
       ),
       subtitle = paste(

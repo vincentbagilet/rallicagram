@@ -17,6 +17,8 @@
 #' @returns A graph describing the evolution of the proportion of co-occurrences
 #' of two keywords in one or several corpora.
 #'
+#' @importFrom rlang .data
+#'
 #' @export
 #' @examples
 #'   gallicagram_cooccur("président", "ancien") |>
@@ -51,10 +53,11 @@ gallicagraph_cooccur <- function(data, color = NULL) {
       x = NULL,
       y = paste("Proportion (of", unique(data$cooccur_level), "in the corpus)"),
       title = paste(
-        "Evolution of co-occurences of",
-        ifelse(("lexicon_1" %in% names(data_clean)), "the", ""),
+        "Evolution of co-occurences of ",
+        ifelse(("lexicon_1" %in% names(data_clean)), "the ", ""),
         paste(unique(data_clean$keyword), collapse = ", "),
-        ifelse(("lexicon_1" %in% names(data_clean)), "lexicons", "")
+        ifelse(("lexicon_1" %in% names(data_clean)), " lexicons", ""),
+        sep = ""
       ),
       subtitle = paste(
         'In', paste(unique(data_clean$cooccur_level)),

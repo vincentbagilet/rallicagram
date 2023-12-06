@@ -37,6 +37,7 @@ reference:
   - gallicagraph
   - gallicagraph_occur
   - gallicagraph_cooccur
+  - gallicagraph_associated
 
 - title: Other functions
   contents:

@@ -1,53 +1,35 @@
-#' Graph describing the evolution of the proportion of occurrences
+#' Automatically produces the relevant graph
 #'
 #' @description
-#' Takes as input data produced by \code{gallicagram} and produces a graph
-#' describing the evolution of the proportion of occurrences in this data set.
+#' Takes as input data produced by one of the \code{gallicagram} or
+#' \code{gallicagram_coocur} functions or their lexicon counterparts and
+#' produces the corresponding base graph.
 #'
 #' @details
 #' This function can also be combined with faceting by adding for instance
 #' \code{+ facet_wrap(~ keyword)} after calling the function.
 #'
-#' @param data A data frame produced by the \code{gallicagram} function
+#' @param data A data frame produced by one of the \code{gallicagram} or
+#' \code{gallicagram_coocur} functions or their lexicon counterparts
 #' (or several of such data frames bound by rows).
 #' @param color A variable to set colors for the graph
 #'
-#' @returns A graph describing the evolution of the proportion of occurrences
-#' of one or several keywords in one or several corpora.
+#' @returns A graph describing the evolution of the proportion of
+#' (co-)occurrences of one or several keywords in one or several corpora.
 #'
 #' @export
 #' @examples
 #'   gallicagram("président") |>
 #'     gallicagraph()
 #'
-#'   gallicagram("président") |>
-#'     rbind(gallicagram("république")) |>
-#'     gallicagraph(color = keyword)
-#'
-#'   gallicagram("président") |>
-#'     rbind(gallicagram("république")) |>
-#'     gallicagraph() +
-#'     ggplot2::facet_wrap(~ keyword)
+#'   gallicagram_cooccur("président", "ancien") |>
+#'     gallicagraph()
 gallicagraph <- function(data, color = NULL) {
-
-  corpus_name <- rallicagram::list_corpora |>
-    dplyr::filter(.data$corpus %in% unique(data$corpus)) |>
-    dplyr::pull("corpus_name")
-
-  data |>
-    ggplot2::ggplot(
-      ggplot2::aes(x = date, y = .data$prop_occur, color = {{ color }})
-    ) +
-    ggplot2::geom_line() +
-    ggplot2::labs(
-      x = NULL,
-      y = paste("Proportion (of", unique(data$n_of), "in the corpus)"),
-      title = paste(
-        'Evolution of the coverage of "',
-        paste(unique(data$keyword), collapse = '", "'),
-        '" in the ', paste(corpus_name, collapse = '", "'), " corpus" ,
-        sep = ""
-      ),
-      color = NULL
-    )
+  if ("n_occur" %in% names(data)) {
+    gallicagraph_occur(data)
+  } else if ("n_cooccur" %in% names(data)) {
+    gallicagraph_cooccur(data)
+  } else {
+    stop("Only works for data produced by rallicagram")
+  }
 }

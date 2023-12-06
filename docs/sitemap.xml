@@ -55,6 +55,12 @@
     <loc>/reference/gallicagraph.html</loc>
   </url>
   <url>
+    <loc>/reference/gallicagraph_cooccur.html</loc>
+  </url>
+  <url>
+    <loc>/reference/gallicagraph_occur.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_same_stem.html</loc>
   </url>
   <url>

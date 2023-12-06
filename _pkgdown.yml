@@ -32,9 +32,14 @@ reference:
   - gallicagram_cooccur_lexicon
   - get_same_stem
 
-- title: Other functions
+- title: Graph functions
   contents:
   - gallicagraph
+  - gallicagraph_occur
+  - gallicagraph_cooccur
+
+- title: Other functions
+  contents:
   - gallicagram_with_month
   - gallicagram_all
 

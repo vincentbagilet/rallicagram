@@ -2,23 +2,25 @@
 % Please edit documentation in R/gallicagraph.R
 \name{gallicagraph}
 \alias{gallicagraph}
-\title{Graph describing the evolution of the proportion of occurrences}
+\title{Automatically produces the relevant graph}
 \usage{
 gallicagraph(data, color = NULL)
 }
 \arguments{
-\item{data}{A data frame produced by the \code{gallicagram} function
+\item{data}{A data frame produced by one of the \code{gallicagram} or
+\code{gallicagram_coocur} functions or their lexicon counterparts
 (or several of such data frames bound by rows).}
 
 \item{color}{A variable to set colors for the graph}
 }
 \value{
-A graph describing the evolution of the proportion of occurrences
-of one or several keywords in one or several corpora.
+A graph describing the evolution of the proportion of
+(co-)occurrences of one or several keywords in one or several corpora.
 }
 \description{
-Takes as input data produced by \code{gallicagram} and produces a graph
-describing the evolution of the proportion of occurrences in this data set.
+Takes as input data produced by one of the \code{gallicagram} or
+\code{gallicagram_coocur} functions or their lexicon counterparts and
+produces the corresponding base graph.
 }
 \details{
 This function can also be combined with faceting by adding for instance
@@ -28,12 +30,6 @@ This function can also be combined with faceting by adding for instance
   gallicagram("président") |>
     gallicagraph()
 
-  gallicagram("président") |>
-    rbind(gallicagram("république")) |>
-    gallicagraph(color = keyword)
-
-  gallicagram("président") |>
-    rbind(gallicagram("république")) |>
-    gallicagraph() +
-    ggplot2::facet_wrap(~ keyword)
+  gallicagram_cooccur("président", "ancien") |>
+    gallicagraph()
 }

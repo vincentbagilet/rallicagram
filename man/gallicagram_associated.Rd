@@ -11,7 +11,8 @@ gallicagram_associated(
   to = "latest",
   n_results = 20,
   distance = "max",
-  stopwords = rallicagram::stopwords_gallica[1:500]
+  stopwords = rallicagram::stopwords_gallica[1:500],
+  remove_numbers = TRUE
 )
 }
 \arguments{
@@ -52,6 +53,9 @@ books dataset. We can change this number by passing
 \code{stopwords_gallicca[1:300]} (for instance, for the 300 most frequent)
 to the \code{stopwords} argument. Can also be \code{lsa::stopwords_fr}
 If \code{NULL} does not remove any stopwords.}
+
+\item{remove_numbers}{If TRUE removes numbers from the list of associated
+words.}
 }
 \value{
 A tibble. Containing the words the most frequently associated with

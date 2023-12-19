@@ -40,6 +40,8 @@
 #' \code{stopwords_gallicca[1:300]} (for instance, for the 300 most frequent)
 #' to the \code{stopwords} argument. Can also be \code{lsa::stopwords_fr}
 #' If \code{NULL} does not remove any stopwords.
+#' @param remove_numbers If TRUE removes numbers from the list of associated
+#' words.
 #'
 #' @inheritParams gallicagram_with
 #'
@@ -64,7 +66,8 @@ gallicagram_associated <- function(keyword,
                                    n_results = 20,
                                    distance = "max",
                                    stopwords =
-                                     rallicagram::stopwords_gallica[1:500]) {
+                                     rallicagram::stopwords_gallica[1:500],
+                                   remove_numbers = TRUE) {
 
   param_clean <- prepare_param(keyword, corpus, from, to, resolution = "yearly")
   # param resolution not used
@@ -144,7 +147,7 @@ gallicagram_associated <- function(keyword,
     #remove apostrophes (except for n' since they carry meaning)
     dplyr::mutate(
       associated_word = sub(
-        pattern = "[n'^\\w]'",
+        pattern = "^([a-m]|[o-z])'",
         replacement = "",
         x = .data$gram
       )
@@ -167,6 +170,11 @@ gallicagram_associated <- function(keyword,
         paste(length - 1, "grams", sep = "-"))
       # distance = length - 1
     )
+
+  if (remove_numbers) {
+    output <- output |>
+      dplyr::filter(!is.na(gsub("\\d", NA, .data$associated_word)))
+  }
 
   #remove stopwords
   if (!is.null(stopwords)) {

@@ -11,7 +11,7 @@ gallicagram_cooccur(
   from = "earliest",
   to = "latest",
   resolution = "monthly",
-  count_period = TRUE,
+  count_phrase = FALSE,
   cooccur_level = "grams"
 )
 }
@@ -35,9 +35,9 @@ for this corpus, as described in \code{list_corpora}.}
 For press and lemonde can be either "yearly" or "monthly".
 For books can only be "yearly".}
 
-\item{count_period}{If FALSE, counts the co-occurrences of each phrase
+\item{count_phrase}{If TRUE, counts the co-occurrences of each phrase
 containing both keywords.
-If TRUE, returns the number of times both keywords co-occur
+If FALSE, returns the number of times both keywords co-occur
 in each resolution period.}
 
 \item{cooccur_level}{character string. Either "grams" or "articles".

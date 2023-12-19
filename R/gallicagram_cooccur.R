@@ -19,9 +19,9 @@
 #' @param resolution A character string.
 #' For press and lemonde can be either "yearly" or "monthly".
 #' For books can only be "yearly".
-#' @param count_period If FALSE, counts the co-occurrences of each phrase
+#' @param count_phrase If TRUE, counts the co-occurrences of each phrase
 #' containing both keywords.
-#' If TRUE, returns the number of times both keywords co-occur
+#' If FALSE, returns the number of times both keywords co-occur
 #' in each resolution period.
 #' @param cooccur_level character string. Either "grams" or "articles".
 #' The level at which to look for co-occurences of the two keywords:
@@ -42,7 +42,7 @@ gallicagram_cooccur <- function(keyword_1,
                                 from = "earliest",
                                 to = "latest",
                                 resolution = "monthly",
-                                count_period = TRUE,
+                                count_phrase = FALSE,
                                 cooccur_level = "grams") {
 
   param_clean <-
@@ -69,7 +69,7 @@ gallicagram_cooccur <- function(keyword_1,
                   "&resolution=",
                   param_clean$resolution_fr,
                   "&count=",
-                  count_period,
+                  ifelse(count_phrase, "False", "True"), #opposite to API
                   sep = "") |>
     tidy_gallicagram(param_clean$corpus, param_clean$resolution_en) |>
     dplyr::rename(
@@ -90,8 +90,8 @@ gallicagram_cooccur <- function(keyword_1,
     ) |>
     dplyr::select("date", "keyword_1", "keyword_2", tidyselect::everything())
 
-  #gram = keyword_1&keyword_2 when count_period = TRUE so redundant
-  if (count_period) {
+  #gram = keyword_1&keyword_2 when count_phrase = FALSE so redundant
+  if (!count_phrase) {
     output <- dplyr::select(output, -"gram")
   }
 

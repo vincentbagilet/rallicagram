@@ -27,7 +27,7 @@ library(rallicagram)
 
 This vignette introduces the main functions in the package and provides examples of simple analyses that can be carried out with these functions. 
 
-More information on each function is available in the documentation of each function, accessible by typing in the console `help("gallicagram")` for the `gallicagram` function instance.
+More information is available in the documentation of each function, accessible by typing `help("gallicagram")` in the console for instance, for the `gallicagram` function.
 
 # Main functions
 
@@ -226,4 +226,4 @@ We can then pass it to `purrr::pmap_dfr` that will call the function `gallicagra
 purrr::pmap_dfr(params_pmap, gallicagram)
 ```
 
-This method also applies for the other functions in the `rallicagram` package.
+This method also applies to the other functions in the `rallicagram` package.

@@ -29,7 +29,7 @@
 #'   gallicagram_cooccur("président", "ancien") |>
 #'     gallicagraph()
 #'
-#'   gallicagram_associated("président", from = 2020) |>
+#'   gallicagram_associated("patate", from = 2020) |>
 #'     gallicagraph()
 gallicagraph <- function(data, color = NULL, labels_color = NA) {
   if ("n_occur" %in% names(data)) {

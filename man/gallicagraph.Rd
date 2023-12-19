@@ -38,6 +38,6 @@ This function can also be combined with faceting by adding for instance
   gallicagram_cooccur("président", "ancien") |>
     gallicagraph()
 
-  gallicagram_associated("président", from = 2020) |>
+  gallicagram_associated("patate", from = 2020) |>
     gallicagraph()
 }

@@ -42,7 +42,7 @@ gallicagram_cooccur_lexicon <- function(lexicon_1,
       output <- output |>
         rbind(gallicagram_cooccur(
           keyword_1, keyword_2,
-          corpus, from, to, resolution, count_period = TRUE, cooccur_level))
+          corpus, from, to, resolution, count_phrase = TRUE, cooccur_level))
     }
   }
 

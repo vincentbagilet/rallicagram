@@ -58,7 +58,7 @@ by year or month.</p>
 <span>  from <span class="op">=</span> <span class="st">"earliest"</span>,</span>
 <span>  to <span class="op">=</span> <span class="st">"latest"</span>,</span>
 <span>  resolution <span class="op">=</span> <span class="st">"monthly"</span>,</span>
-<span>  count_period <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  count_phrase <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  cooccur_level <span class="op">=</span> <span class="st">"grams"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -96,10 +96,10 @@ For press and lemonde can be either "yearly" or "monthly".
 For books can only be "yearly".</p></dd>
 
 
-<dt>count_period</dt>
-<dd><p>If FALSE, counts the co-occurrences of each phrase
+<dt>count_phrase</dt>
+<dd><p>If TRUE, counts the co-occurrences of each phrase
 containing both keywords.
-If TRUE, returns the number of times both keywords co-occur
+If FALSE, returns the number of times both keywords co-occur
 in each resolution period.</p></dd>
 
 

@@ -55,7 +55,8 @@
 <span>  to <span class="op">=</span> <span class="st">"latest"</span>,</span>
 <span>  n_results <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>  distance <span class="op">=</span> <span class="st">"max"</span>,</span>
-<span>  stopwords <span class="op">=</span> <span class="fu">rallicagram</span><span class="fu">::</span><span class="va"><a href="stopwords_gallica.html">stopwords_gallica</a></span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">500</span><span class="op">]</span></span>
+<span>  stopwords <span class="op">=</span> <span class="fu">rallicagram</span><span class="fu">::</span><span class="va"><a href="stopwords_gallica.html">stopwords_gallica</a></span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">500</span><span class="op">]</span>,</span>
+<span>  remove_numbers <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -110,6 +111,11 @@ books dataset. We can change this number by passing
 to the <code>stopwords</code> argument. Can also be <code><a href="https://rdrr.io/pkg/lsa/man/stopwords.html" class="external-link">lsa::stopwords_fr</a></code>
 If <code>NULL</code> does not remove any stopwords.</p></dd>
 
+
+<dt>remove_numbers</dt>
+<dd><p>If TRUE removes numbers from the list of associated
+words.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -150,14 +156,14 @@ as it increases the probability of ngrams to be excluded from the database.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> khrouchtchev           76 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> mao                    47 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> toung                  40 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ancien                 35 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ancien                 38 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> tse                    28 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> dubcek                 22 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> promotion              18 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> compagnie              16 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> thorez                 16 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> togliatti              16 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> ami                    15 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> ami                    16 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> compagnie              16 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> thorez                 16 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> togliatti              16 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> direction              15 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> rochet                 14 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> club                   13 camarade lemonde  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">1</span>970 3-grams      </span>

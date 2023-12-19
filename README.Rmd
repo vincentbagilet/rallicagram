@@ -20,19 +20,9 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-`rallicagram` is a R wrapper for the [Gallicagram API](https://regicid.github.io/api). [Gallicagram](https://shiny.ens-paris-saclay.fr/app/gallicagram) is a super nice tool and set of databases that enable to easily run simple Natural Language Processing (**NLP**) analyses on a wide set of corpora. In particular, it enables to build historical **time series of occurrences of keywords** in various media in one line of code.
+`rallicagram` is a R wrapper for the [Gallicagram API](https://regicid.github.io/api). 
 
-The corpora available via Gallicagram are:
-
-```{r list_corpora, echo=FALSE}
-rallicagram::list_corpora |> 
-  dplyr::rename_with(\(x) stringr::str_replace(x, "_", " ") |>  
-                       stringr::str_to_title()) |> 
-  knitr::kable()
-```
-
-Additional information can be found on a [preprint](https://osf.io/preprints/socarxiv/84bf3/) by Gallicagram developers [
-Benoît de Courson](https://regicid.github.io/) and Benjamin Azoulay and on the "Notice" tab of the [Gallicagram website](https://shiny.ens-paris-saclay.fr/app/gallicagram).
+[Gallicagram](https://shiny.ens-paris-saclay.fr/app/gallicagram) is a super nice tool and set of databases that enables to easily run simple Natural Language Processing (**NLP**) analyses on a wide set of corpora. In particular, it enables to build historical **time series of occurrences of keywords** in various media in one line of code.
 
 ## Installation
 
@@ -45,45 +35,36 @@ devtools::install_github("vincentbagilet/rallicagram")
 
 ## Usage
 
-The main function, `gallicagram`, builds a data frame with the yearly, monthly or daily proportion of mentions of a term in one of the three corpora between two specified dates.
+The main function, `gallicagram`, builds a data frame with the yearly, monthly or daily proportion of mentions of a term.
 
 ```{r usage}
 library(rallicagram)
 
-gallicagram(
-  keyword = "président", 
-  corpus = "lemonde", 
-  from = 1960, 
-  to = 1970,
-  resolution = "monthly"
-)
+gallicagram(keyword = "président", corpus = "lemonde", from = 1960)
 ```
 
-It enables to draw nice graphs representing the evolution of the use of a term in time.
+It enables to draw nice graphs representing the evolution of the use of a term in time, in two lines of code.
 
 ```{r graph, dpi=300, out.width="70%", fig.align = "center", echo=FALSE, message=FALSE}
 library(mediocrethemes)
 set_mediocre_all()
 
-ex_data <- gallicagram(
-  keyword = "informatique", 
-  corpus = "lemonde", 
-  from = 1945, 
-  to = 2022,
-  resolution = "yearly"
-)
-
-ex_data |> 
-  ggplot(aes(x = date, y = prop_occur)) + 
-  geom_line(linewidth = 0.7) +
-  labs(
-    title = "Evolution of occurrences of 'computering' (informatique)",
-    subtitle = "In the french newspaper Le Monde",
-    x = NULL,
-    y = "Proportion of occurrences"
-  )
-  
+gallicagram(keyword = "obama", from = 2005) |> 
+  gallicagraph()
 ```
 
+The package also allows to describe co-occurrences or words associated with a keyword. The corresponding functions are described in the [vignette](articles/rallicagram.html).
 
-Additional functions, to describe close co-occurrences or words associated with a ngram are also available in this package and described in the [vignette](articles/rallicagram.html).
+## Corpora
+
+The corpora available via Gallicagram are:
+
+```{r list_corpora, echo=FALSE}
+rallicagram::list_corpora |> 
+  dplyr::rename_with(\(x) stringr::str_replace(x, "_", " ") |>  
+                       stringr::str_to_title()) |> 
+  knitr::kable()
+```
+
+Additional information on Gallicagram can be found on a [preprint](https://osf.io/preprints/socarxiv/84bf3/) by Gallicagram developers [
+Benoît de Courson](https://regicid.github.io/) and Benjamin Azoulay and on the "Notice" tab of the [Gallicagram website](https://shiny.ens-paris-saclay.fr/app/gallicagram).

@@ -69,7 +69,7 @@ gallicagram_cooccur <- function(keyword_1,
                   "&resolution=",
                   param_clean$resolution_fr,
                   "&count=",
-                  ifelse(count_period, "True", "False"),
+                  count_period,
                   sep = "") |>
     tidy_gallicagram(param_clean$corpus, param_clean$resolution_en) |>
     dplyr::rename(

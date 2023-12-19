@@ -64,7 +64,47 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p><code>rallicagram</code> is a R wrapper for the <a href="https://regicid.github.io/api" class="external-link">Gallicagram API</a>. <a href="https://shiny.ens-paris-saclay.fr/app/gallicagram" class="external-link">Gallicagram</a> is a super nice tool and set of databases that enable to easily run simple Natural Language Processing (<strong>NLP</strong>) analyses on a wide set of corpora. In particular, it enables to build historical <strong>time series of occurrences of keywords</strong> in various media in one line of code.</p>
+<p><code>rallicagram</code> is a R wrapper for the <a href="https://regicid.github.io/api" class="external-link">Gallicagram API</a>.</p>
+<p><a href="https://shiny.ens-paris-saclay.fr/app/gallicagram" class="external-link">Gallicagram</a> is a super nice tool and set of databases that enables to easily run simple Natural Language Processing (<strong>NLP</strong>) analyses on a wide set of corpora. In particular, it enables to build historical <strong>time series of occurrences of keywords</strong> in various media in one line of code.</p>
+</div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the development version of rallicagram from <a href="https://github.com/vincentbagilet/rallicagram" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"vincentbagilet/rallicagram"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
+<p>The main function, <code>gallicagram</code>, builds a data frame with the yearly, monthly or daily proportion of mentions of a term.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">rallicagram</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/gallicagram.html">gallicagram</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"président"</span>, corpus <span class="op">=</span> <span class="st">"lemonde"</span>, from <span class="op">=</span> <span class="fl">1960</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 756 × 10</span></span>
+<span><span class="co">#&gt;    date       keyword   n_occur n_total prop_occur  year month corpus resolution</span></span>
+<span><span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;       &lt;int&gt;   &lt;int&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     </span></span>
+<span><span class="co">#&gt;  1 1960-01-01 président    1338  872943    0.00153  1960     1 lemon… monthly   </span></span>
+<span><span class="co">#&gt;  2 1960-02-01 président    1360  915672    0.00149  1960     2 lemon… monthly   </span></span>
+<span><span class="co">#&gt;  3 1960-03-01 président    1461  928764    0.00157  1960     3 lemon… monthly   </span></span>
+<span><span class="co">#&gt;  4 1960-04-01 président    1239  772707    0.00160  1960     4 lemon… monthly   </span></span>
+<span><span class="co">#&gt;  5 1960-05-01 président    1355  835612    0.00162  1960     5 lemon… monthly   </span></span>
+<span><span class="co">#&gt;  6 1960-06-01 président    1314  850245    0.00155  1960     6 lemon… monthly   </span></span>
+<span><span class="co">#&gt;  7 1960-07-01 président    1189  942062    0.00126  1960     7 lemon… monthly   </span></span>
+<span><span class="co">#&gt;  8 1960-08-01 président     979  739018    0.00132  1960     8 lemon… monthly   </span></span>
+<span><span class="co">#&gt;  9 1960-09-01 président    1506  904804    0.00166  1960     9 lemon… monthly   </span></span>
+<span><span class="co">#&gt; 10 1960-10-01 président    1107  826661    0.00134  1960    10 lemon… monthly   </span></span>
+<span><span class="co">#&gt; # ℹ 746 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 1 more variable: n_of &lt;chr&gt;</span></span></code></pre></div>
+<p>It enables to draw nice graphs representing the evolution of the use of a term in time, in two lines of code.</p>
+<p><img src="reference/figures/README-graph-1.png" width="70%" style="display: block; margin: auto;"></p>
+<p>The package also allows to describe co-occurrences or words associated with a keyword. The corresponding functions are described in the <a href="articles/rallicagram.html">vignette</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="corpora">Corpora<a class="anchor" aria-label="anchor" href="#corpora"></a>
+</h2>
 <p>The corpora available via Gallicagram are:</p>
 <table class="table">
 <colgroup>
@@ -241,48 +281,7 @@
 </tr>
 </tbody>
 </table>
-<p>Additional information can be found on a <a href="https://osf.io/preprints/socarxiv/84bf3/" class="external-link">preprint</a> by Gallicagram developers <a href="https://regicid.github.io/" class="external-link">Benoît de Courson</a> and Benjamin Azoulay and on the “Notice” tab of the <a href="https://shiny.ens-paris-saclay.fr/app/gallicagram" class="external-link">Gallicagram website</a>.</p>
-</div>
-<div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<p>You can install the development version of rallicagram from <a href="https://github.com/vincentbagilet/rallicagram" class="external-link">GitHub</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"vincentbagilet/rallicagram"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
-</h2>
-<p>The main function, <code>gallicagram</code>, builds a data frame with the yearly, monthly or daily proportion of mentions of a term in one of the three corpora between two specified dates.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">rallicagram</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="reference/gallicagram.html">gallicagram</a></span><span class="op">(</span></span>
-<span>  keyword <span class="op">=</span> <span class="st">"président"</span>, </span>
-<span>  corpus <span class="op">=</span> <span class="st">"lemonde"</span>, </span>
-<span>  from <span class="op">=</span> <span class="fl">1960</span>, </span>
-<span>  to <span class="op">=</span> <span class="fl">1970</span>,</span>
-<span>  resolution <span class="op">=</span> <span class="st">"monthly"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 132 × 10</span></span>
-<span><span class="co">#&gt;    date       keyword   n_occur n_total prop_occur  year month corpus resolution</span></span>
-<span><span class="co">#&gt;    &lt;date&gt;     &lt;chr&gt;       &lt;int&gt;   &lt;int&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     </span></span>
-<span><span class="co">#&gt;  1 1960-01-01 président    1338  872943    0.00153  1960     1 lemon… mois      </span></span>
-<span><span class="co">#&gt;  2 1960-02-01 président    1360  915672    0.00149  1960     2 lemon… mois      </span></span>
-<span><span class="co">#&gt;  3 1960-03-01 président    1461  928764    0.00157  1960     3 lemon… mois      </span></span>
-<span><span class="co">#&gt;  4 1960-04-01 président    1239  772707    0.00160  1960     4 lemon… mois      </span></span>
-<span><span class="co">#&gt;  5 1960-05-01 président    1355  835612    0.00162  1960     5 lemon… mois      </span></span>
-<span><span class="co">#&gt;  6 1960-06-01 président    1314  850245    0.00155  1960     6 lemon… mois      </span></span>
-<span><span class="co">#&gt;  7 1960-07-01 président    1189  942062    0.00126  1960     7 lemon… mois      </span></span>
-<span><span class="co">#&gt;  8 1960-08-01 président     979  739018    0.00132  1960     8 lemon… mois      </span></span>
-<span><span class="co">#&gt;  9 1960-09-01 président    1506  904804    0.00166  1960     9 lemon… mois      </span></span>
-<span><span class="co">#&gt; 10 1960-10-01 président    1107  826661    0.00134  1960    10 lemon… mois      </span></span>
-<span><span class="co">#&gt; # ℹ 122 more rows</span></span>
-<span><span class="co">#&gt; # ℹ 1 more variable: n_of &lt;chr&gt;</span></span></code></pre></div>
-<p>It enables to draw nice graphs representing the evolution of the use of a term in time.</p>
-<p><img src="reference/figures/README-graph-1.png" width="70%" style="display: block; margin: auto;"></p>
-<p>Additional functions, to describe close co-occurrences or words associated with a ngram are also available in this package and described in the <a href="articles/rallicagram.html">vignette</a>.</p>
+<p>Additional information on Gallicagram can be found on a <a href="https://osf.io/preprints/socarxiv/84bf3/" class="external-link">preprint</a> by Gallicagram developers <a href="https://regicid.github.io/" class="external-link">Benoît de Courson</a> and Benjamin Azoulay and on the “Notice” tab of the <a href="https://shiny.ens-paris-saclay.fr/app/gallicagram" class="external-link">Gallicagram website</a>.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">

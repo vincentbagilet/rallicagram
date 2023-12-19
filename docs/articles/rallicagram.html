@@ -68,12 +68,13 @@
 
     
     
-<p><code>rallicagram</code> is a R wrapper for the <a href="https://regicid.github.io/api" class="external-link">Gallicagram API</a>. More info on
-Gallicagram and its API can be found on a <a href="https://osf.io/preprints/socarxiv/84bf3/" class="external-link">preprint</a> by
-Gallicagram developers <a href="https://regicid.github.io/" class="external-link">Benoît de
-Courson</a> and Benjamin Azoulay, on the “Notice” tab of the <a href="https://shiny.ens-paris-saclay.fr/app/gallicagram" class="external-link">Gallicagram
-website</a> and on the <a href="https://regicid.github.io/api" class="external-link">API
-documentation</a>.</p>
+<p>This vignette introduces the main functions in the package and
+provides examples of simple analyses that can be carried out with these
+functions.</p>
+<p>More information on each function is available in the documentation
+of each function, accessible by typing in the console
+<code><a href="../reference/gallicagram.html">help("gallicagram")</a></code> for the <code>gallicagram</code>
+function instance.</p>
 <div class="section level2">
 <h2 id="main-functions">Main functions<a class="anchor" aria-label="anchor" href="#main-functions"></a>
 </h2>
@@ -82,8 +83,10 @@ documentation</a>.</p>
 </h3>
 <p>The main function in this package, <code>gallicagram</code>, builds a
 data frame with the yearly, monthly or daily proportion of mentions of a
-term in one of the three corpora between two specified dates.</p>
-<p>This function corresponds to the <code>Query</code> route of the <a href="https://regicid.github.io/api" class="external-link">API</a>.</p>
+term in one of the corpora.</p>
+<p>For the <em>Le Monde</em> corpus, this function allows to compute the
+number of newspaper articles that mention the keywords (parameter
+<code>n_of = "articles"</code>).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ex_occur</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gallicagram.html">gallicagram</a></span><span class="op">(</span></span>
 <span>  keyword <span class="op">=</span> <span class="st">"président"</span>,</span>
@@ -92,7 +95,7 @@ term in one of the three corpora between two specified dates.</p>
 <span>  to <span class="op">=</span> <span class="fl">1970</span>,</span>
 <span>  resolution <span class="op">=</span> <span class="st">"monthly"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>Here is an example of part of the output:</p>
+<p>Here is an example of the first rows of the output:</p>
 <table class="table">
 <colgroup>
 <col width="12%">
@@ -193,32 +196,21 @@ term in one of the three corpora between two specified dates.</p>
 </tr>
 </tbody>
 </table>
-<div class="section level4">
-<h4 id="occurences-for-all-copora-and-the-longest-period-possible">Occurences for all copora and the longest period possible<a class="anchor" aria-label="anchor" href="#occurences-for-all-copora-and-the-longest-period-possible"></a>
-</h4>
-<p>The function <code>gallicagram_all</code> enables to retrieve the
-yearly proportion of occurrences of a keyword in each of the corpora for
-the longest time range for which the data is available and reliable.</p>
-<p>It only takes one parameter: the keyword of interest. It then calls
-<code>gallicagram(keyword)</code> for each corpus and for the longest
-period possible for the corpus and returns a data frame with the outcome
-of each call.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/gallicagram_all.html">gallicagram_all</a></span><span class="op">(</span><span class="st">"président"</span><span class="op">)</span></span></code></pre></div>
-</div>
 </div>
 <div class="section level3">
 <h3 id="co-occurrences">Co-occurrences<a class="anchor" aria-label="anchor" href="#co-occurrences"></a>
 </h3>
 <p><code>gallicagram_cooccur</code> builds a data frame with the yearly,
 monthly or daily proportion of mentions of close co-occurrences of two
-keywords in one of the three corpora between two specified dates.</p>
-<p>Close co-occurrences correspond to the number of 3-grams (4-grams in
-the <em>Le Monde</em> corpus) that contain the two keywords. This
-function corresponds to the <code>Contain</code> route of the <a href="https://regicid.github.io/api" class="external-link">API</a>.</p>
-<p>The parameters <code>keyword_1</code> and <code>keyword_2</code> take
-the words to look co-occurrences for.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+keywords in one of the three main corpora (<code>lemonde</code>,
+<code>livres</code> and <code>presse</code>) between two specified
+dates.</p>
+<p>Close co-occurrences correspond to words that are less than 3 (4 in
+the <em>Le Monde</em> corpus) words away in the initial text. For the
+<em>Le Monde</em> corpus, this function allows to compute the number of
+co-occurrences within an entire article (parameter
+<code>cooccur_level = "articles"</code>).</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ex_cooccur</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gallicagram_cooccur.html">gallicagram_cooccur</a></span><span class="op">(</span></span>
 <span>  keyword_1 <span class="op">=</span> <span class="st">"président"</span>,</span>
 <span>  keyword_2 <span class="op">=</span> <span class="st">"république"</span>,</span>
@@ -341,15 +333,11 @@ the words to look co-occurrences for.</p>
 <h3 id="associations">Associations<a class="anchor" aria-label="anchor" href="#associations"></a>
 </h3>
 <p><code>gallicagram_associated</code> builds a data frame with the
-words most frequently used close (at a specified distance) to a given
-keyword over the period. This function calls the <code>associated</code>
-route of the <a href="https://regicid.github.io/api" class="external-link">API</a>.</p>
-<p>The keyword can be a 2-gram in the “books” and “press” corpora and a
-3-gram in the “lemonde” corpus. The length of the keyword plus the
-distance cannot be more than 3 for the “books” and “press” corpora and a
-4 for the “lemonde” corpus. Searching the “press” corpus can take a long
-time.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+words most frequently used close to a given keyword over the period. For
+the <em>Le Monde</em> corpus, this function allows to compute the number
+of co-occurences within an entire article (parameter
+<code>distance = "articles"</code>).</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ex_associated</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gallicagram_associated.html">gallicagram_associated</a></span><span class="op">(</span></span>
 <span>  keyword <span class="op">=</span> <span class="st">"camarade"</span>,</span>
 <span>  corpus <span class="op">=</span> <span class="st">"lemonde"</span>,</span>
@@ -408,7 +396,7 @@ time.</p>
 </tr>
 <tr class="even">
 <td align="left">ancien</td>
-<td align="right">35</td>
+<td align="right">38</td>
 <td align="left">camarade</td>
 <td align="left">lemonde</td>
 <td align="right">1960</td>
@@ -443,6 +431,15 @@ time.</p>
 <td align="left">3-grams</td>
 </tr>
 <tr class="even">
+<td align="left">ami</td>
+<td align="right">16</td>
+<td align="left">camarade</td>
+<td align="left">lemonde</td>
+<td align="right">1960</td>
+<td align="right">1970</td>
+<td align="left">3-grams</td>
+</tr>
+<tr class="odd">
 <td align="left">compagnie</td>
 <td align="right">16</td>
 <td align="left">camarade</td>
@@ -451,110 +448,9 @@ time.</p>
 <td align="right">1970</td>
 <td align="left">3-grams</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">thorez</td>
 <td align="right">16</td>
-<td align="left">camarade</td>
-<td align="left">lemonde</td>
-<td align="right">1960</td>
-<td align="right">1970</td>
-<td align="left">3-grams</td>
-</tr>
-<tr class="even">
-<td align="left">togliatti</td>
-<td align="right">16</td>
-<td align="left">camarade</td>
-<td align="left">lemonde</td>
-<td align="right">1960</td>
-<td align="right">1970</td>
-<td align="left">3-grams</td>
-</tr>
-</tbody>
-</table>
-<p>By default, the most frequent words in the Gallica books corpus are
-removed. Instead, we can remove other stopwords, by supplying a list of
-words to ignore to the <code>stopwords</code> parameter of the function.
-For instance, we can use the list in the <code>lsa</code> package,
-<code><a href="https://rdrr.io/pkg/lsa/man/stopwords.html" class="external-link">lsa::stopwords_fr</a></code>. To keep the stopwwords, set the
-<code>stopwords</code> parameter to <code>NULL</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ex_associated_stopwords</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gallicagram_associated.html">gallicagram_associated</a></span><span class="op">(</span></span>
-<span>  keyword <span class="op">=</span> <span class="st">"camarade"</span>,</span>
-<span>  corpus <span class="op">=</span> <span class="st">"lemonde"</span>,</span>
-<span>  from <span class="op">=</span> <span class="fl">1960</span>,</span>
-<span>  to <span class="op">=</span> <span class="fl">1970</span>,</span>
-<span>  n_results <span class="op">=</span> <span class="fl">10</span>,</span>
-<span>  stopwords <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>The most often associated terms without excluding stopwords are:</p>
-<table class="table">
-<colgroup>
-<col width="23%">
-<col width="14%">
-<col width="13%">
-<col width="11%">
-<col width="7%">
-<col width="7%">
-<col width="20%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">associated_word</th>
-<th align="right">n_cooccur</th>
-<th align="left">keyword</th>
-<th align="left">corpus</th>
-<th align="right">from</th>
-<th align="right">to</th>
-<th align="left">cooccur_level</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">de</td>
-<td align="right">488</td>
-<td align="left">camarade</td>
-<td align="left">lemonde</td>
-<td align="right">1960</td>
-<td align="right">1970</td>
-<td align="left">3-grams</td>
-</tr>
-<tr class="even">
-<td align="left">son</td>
-<td align="right">338</td>
-<td align="left">camarade</td>
-<td align="left">lemonde</td>
-<td align="right">1960</td>
-<td align="right">1970</td>
-<td align="left">3-grams</td>
-</tr>
-<tr class="odd">
-<td align="left">le</td>
-<td align="right">302</td>
-<td align="left">camarade</td>
-<td align="left">lemonde</td>
-<td align="right">1960</td>
-<td align="right">1970</td>
-<td align="left">3-grams</td>
-</tr>
-<tr class="even">
-<td align="left">du</td>
-<td align="right">228</td>
-<td align="left">camarade</td>
-<td align="left">lemonde</td>
-<td align="right">1960</td>
-<td align="right">1970</td>
-<td align="left">3-grams</td>
-</tr>
-<tr class="odd">
-<td align="left">un</td>
-<td align="right">221</td>
-<td align="left">camarade</td>
-<td align="left">lemonde</td>
-<td align="right">1960</td>
-<td align="right">1970</td>
-<td align="left">3-grams</td>
-</tr>
-<tr class="even">
-<td align="left">et</td>
-<td align="right">199</td>
 <td align="left">camarade</td>
 <td align="left">lemonde</td>
 <td align="right">1960</td>
@@ -566,104 +462,45 @@ For instance, we can use the list in the <code>lsa</code> package,
 </div>
 </div>
 <div class="section level2">
+<h2 id="graphs">Graphs<a class="anchor" aria-label="anchor" href="#graphs"></a>
+</h2>
+<p>One of the main usage of <code>Gallicagram</code> is to plot time
+series of occurrences in a corpus. The function
+<code>gallicagraph</code> enables to do that in only one additional line
+of code. It take as input a dataframe produced by one of the functions
+from the package and automatically produces the corresponding graph:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># my own theme for ggplot graphs</span></span>
+<span><span class="fu">mediocrethemes</span><span class="fu">::</span><span class="fu"><a href="https://vincentbagilet.github.io/mediocrethemes/reference/set_mediocre_all.html" class="external-link">set_mediocre_all</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/gallicagram.html">gallicagram</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"obama"</span>, corpus <span class="op">=</span> <span class="st">"lemonde"</span>, from <span class="op">=</span> <span class="fl">2005</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/gallicagraph.html">gallicagraph</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="rallicagram_files/figure-html/graph_line-1.png" width="70%" style="display: block; margin: auto;"></p>
+<p>Note that I use my own ggplot theme <a href="https://vincentbagilet.github.io/mediocrethemes/" class="external-link"><code>mediocrethemes</code></a>.
+The use of this theme is of course not mandatory and one can remove the
+line <code><a href="https://vincentbagilet.github.io/mediocrethemes/reference/set_mediocre_all.html" class="external-link">mediocrethemes::set_mediocre_all()</a></code>).</p>
+<p>One can also use the same function to plot words associated with a
+given keyword:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/gallicagram_associated.html">gallicagram_associated</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="st">"obama"</span>, corpus <span class="op">=</span> <span class="st">"lemonde"</span>, from <span class="op">=</span> <span class="fl">2005</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/gallicagraph.html">gallicagraph</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="rallicagram_files/figure-html/graph_associated-1.png" width="70%" style="display: block; margin: auto;"></p>
+</div>
+<div class="section level2">
 <h2 id="more-than-one-keyword">More than one keyword<a class="anchor" aria-label="anchor" href="#more-than-one-keyword"></a>
 </h2>
 <div class="section level3">
-<h3 id="searching-several-keywords">Searching several keywords<a class="anchor" aria-label="anchor" href="#searching-several-keywords"></a>
-</h3>
-<p>In order to run the functions for several keywords at once, we can
-use the function <code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::map_dfr</a></code>. It takes as parameters the
-vector of keywords to search, followed by the function
-(<code>gallicagram</code>) and additional arguments to pass to the
-function. It returns a unique data frame with the results for searches
-corresponding to each keyword, basically binding the dataframes produced
-by each keyword search.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">keywords</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"république"</span>, <span class="st">"france"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">keywords</span>, <span class="va">gallicagram</span>,</span>
-<span>               corpus <span class="op">=</span> <span class="st">"lemonde"</span>, from <span class="op">=</span> <span class="st">"1960"</span>, to <span class="op">=</span> <span class="st">"1970"</span><span class="op">)</span></span></code></pre></div>
-<p>Based on that same principle, we can run several searches at once,
-varying all parameters, not only the keyword searched. To do that, we
-can specify the series of parameters in a data frame, each row
-corresponding to a set of parameters to run the <code>gallicagram</code>
-function for. We then pass this data frame to
-<code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::pmap_dfr</a></code>.</p>
-<p>To specify the set of parameters, we can either build the parameters
-data frame by hand. It is also often helpful to use
-<code><a href="https://tidyr.tidyverse.org/reference/expand.html" class="external-link">tidyr::crossing</a></code> to create all combination of possible
-searches.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">params_pmap</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
-<span>    from <span class="op">=</span> <span class="fl">1850</span>,</span>
-<span>    to <span class="op">=</span> <span class="fl">1870</span>,</span>
-<span>    resolution <span class="op">=</span> <span class="st">"yearly"</span></span>
-<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html" class="external-link">crossing</a></span><span class="op">(</span>corpus <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"press"</span>, <span class="st">"books"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html" class="external-link">crossing</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"république"</span>, <span class="st">"france"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>The corresponding set of parameters to search looks like this:</p>
-<table class="table">
-<thead><tr class="header">
-<th align="right">from</th>
-<th align="right">to</th>
-<th align="left">resolution</th>
-<th align="left">corpus</th>
-<th align="left">keyword</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="right">1850</td>
-<td align="right">1870</td>
-<td align="left">yearly</td>
-<td align="left">books</td>
-<td align="left">france</td>
-</tr>
-<tr class="even">
-<td align="right">1850</td>
-<td align="right">1870</td>
-<td align="left">yearly</td>
-<td align="left">books</td>
-<td align="left">république</td>
-</tr>
-<tr class="odd">
-<td align="right">1850</td>
-<td align="right">1870</td>
-<td align="left">yearly</td>
-<td align="left">press</td>
-<td align="left">france</td>
-</tr>
-<tr class="even">
-<td align="right">1850</td>
-<td align="right">1870</td>
-<td align="left">yearly</td>
-<td align="left">press</td>
-<td align="left">république</td>
-</tr>
-</tbody>
-</table>
-<p>We can then pass it to <code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::pmap_dfr</a></code> that will call
-the function <code>gallicagram</code> for each of the 4 sets of
-parameters defined in the rows of <code>params_pmap</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">pmap_dfr</a></span><span class="op">(</span><span class="va">params_pmap</span>, <span class="va">gallicagram</span><span class="op">)</span></span></code></pre></div>
-<p>This method also apply for the other functions in the
-<code>rallicagram</code> package.</p>
-</div>
-<div class="section level3">
 <h3 id="occurrences-of-a-lexicon">Occurrences of a lexicon<a class="anchor" aria-label="anchor" href="#occurrences-of-a-lexicon"></a>
 </h3>
-<p>If one wants to compute occurrences in a lexicon, co-occurrences in
-two lexicons or words associated with a lexicon, one can use the
-functions with suffix <code>_lexicon</code>
+<p>Each of the main function described above has a <code>lexicon</code>
+counterpart, adding a suffix <code>_lexicon</code>
 (<code>gallicagram_lexicon</code>,
 <code>gallicagram_cooccur_lexicon</code> and
-<code>gallicagram_associated_lexicon</code>). They simply loop the
-function over each word the lexicon(s) and sums the results. It takes as
-inputs vectors of keywords:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code>gallicagram_associated_lexicon</code>). Each function simply loop
+the intial function over each word the lexicon(s) and sums the results.
+It thus compute the sum of (co-)occurrences of each word in the
+lexicon:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ex_lexicon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gallicagram_lexicon.html">gallicagram_lexicon</a></span><span class="op">(</span></span>
 <span>  lexicon <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"président"</span>, <span class="st">"présidente"</span><span class="op">)</span>,</span>
 <span>  corpus <span class="op">=</span> <span class="st">"lemonde"</span>,</span>
@@ -790,20 +627,23 @@ inputs vectors of keywords:</p>
 </tr>
 </tbody>
 </table>
+<p>These functions are particularly helpful to compute the number of
+occurrences of words from a whole lexical field (or the plural or
+feminine form of a keyword, etc).</p>
 </div>
 <div class="section level3">
 <h3 id="words-with-the-same-stem">Words with the same stem<a class="anchor" aria-label="anchor" href="#words-with-the-same-stem"></a>
 </h3>
-<p>The function <code><a href="../reference/get_same_stem.html">get_same_stem()</a></code> takes as input a keyword
-and returns a vector of words that share the same stem. For instance,
-for “écologie”:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<p>The function <code><a href="../reference/get_same_stem.html">get_same_stem()</a></code> enables to retrieve part of
+these forms: those that share the same stem as the keyword of interest.
+For instance, for “écologie”:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_same_stem.html">get_same_stem</a></span><span class="op">(</span><span class="st">"écologie"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "écologie"       "écologique"     "écologiquement" "écologiques"   </span></span>
 <span><span class="co">#&gt; [5] "écologiste"     "écologiste"     "écologistes"    "écologistes"</span></span></code></pre></div>
 <p>This function is particularly useful when its output is passed to one
 of the <code>_lexicon</code> functions:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ex_stem_lexicon</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_same_stem.html">get_same_stem</a></span><span class="op">(</span><span class="st">"écologie"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/gallicagram_lexicon.html">gallicagram_lexicon</a></span><span class="op">(</span></span>
 <span>    corpus <span class="op">=</span> <span class="st">"lemonde"</span>,</span>
@@ -811,9 +651,8 @@ of the <code>_lexicon</code> functions:</p>
 <span>    to <span class="op">=</span> <span class="fl">1970</span>,</span>
 <span>    resolution <span class="op">=</span> <span class="st">"yearly"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p>It enables to get all the occurrences for words that share the same
-stem as the keyword. Note that due to the number of requests, it may
-take some time to run.</p>
+<p>Note that due to the number of requests sent to the API, it may take
+some time to run.</p>
 <table style="width:100%;" class="table">
 <colgroup>
 <col width="6%">
@@ -915,53 +754,90 @@ take some time to run.</p>
 </tbody>
 </table>
 </div>
+<div class="section level3">
+<h3 id="searching-several-keywords">Searching several keywords<a class="anchor" aria-label="anchor" href="#searching-several-keywords"></a>
+</h3>
+<p>One can also run the functions for several keywords but separately,
+without suming the result. To do so, one can use the function
+<code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::map_dfr</a></code>. It takes as parameters the vector of
+keywords to search, followed by the function (<code>gallicagram</code>)
+and additional arguments to pass to the function. It returns a unique
+data frame with the results for searches corresponding to each keyword,
+basically binding the dataframes produced by each keyword search.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">keywords</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"république"</span>, <span class="st">"france"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">keywords</span>, <span class="va">gallicagram</span>,</span>
+<span>               corpus <span class="op">=</span> <span class="st">"lemonde"</span>, from <span class="op">=</span> <span class="st">"1960"</span>, to <span class="op">=</span> <span class="st">"1970"</span><span class="op">)</span></span></code></pre></div>
+<p>Based on that same principle, we can run several searches at once,
+varying all parameters, not only the keyword searched. To do that, we
+can specify the series of parameters in a data frame, each row
+corresponding to a set of parameters to run the <code>gallicagram</code>
+function for. We then pass this data frame to
+<code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::pmap_dfr</a></code>.</p>
+<p>To specify the set of parameters, we can either build the parameters
+data frame by hand. It is also often helpful to use
+<code><a href="https://tidyr.tidyverse.org/reference/expand.html" class="external-link">tidyr::crossing</a></code> to create all combination of possible
+searches.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">params_pmap</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>    from <span class="op">=</span> <span class="fl">1850</span>,</span>
+<span>    to <span class="op">=</span> <span class="fl">1870</span>,</span>
+<span>    resolution <span class="op">=</span> <span class="st">"yearly"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html" class="external-link">crossing</a></span><span class="op">(</span>corpus <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"press"</span>, <span class="st">"books"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand.html" class="external-link">crossing</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"république"</span>, <span class="st">"france"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>The corresponding set of parameters to search looks like this:</p>
+<table class="table">
+<thead><tr class="header">
+<th align="right">from</th>
+<th align="right">to</th>
+<th align="left">resolution</th>
+<th align="left">corpus</th>
+<th align="left">keyword</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">1850</td>
+<td align="right">1870</td>
+<td align="left">yearly</td>
+<td align="left">books</td>
+<td align="left">france</td>
+</tr>
+<tr class="even">
+<td align="right">1850</td>
+<td align="right">1870</td>
+<td align="left">yearly</td>
+<td align="left">books</td>
+<td align="left">république</td>
+</tr>
+<tr class="odd">
+<td align="right">1850</td>
+<td align="right">1870</td>
+<td align="left">yearly</td>
+<td align="left">press</td>
+<td align="left">france</td>
+</tr>
+<tr class="even">
+<td align="right">1850</td>
+<td align="right">1870</td>
+<td align="left">yearly</td>
+<td align="left">press</td>
+<td align="left">république</td>
+</tr>
+</tbody>
+</table>
+<p>We can then pass it to <code><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">purrr::pmap_dfr</a></code> that will call
+the function <code>gallicagram</code> for each of the 4 sets of
+parameters defined in the rows of <code>params_pmap</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">pmap_dfr</a></span><span class="op">(</span><span class="va">params_pmap</span>, <span class="va">gallicagram</span><span class="op">)</span></span></code></pre></div>
+<p>This method also applies for the other functions in the
+<code>rallicagram</code> package.</p>
 </div>
-<div class="section level2">
-<h2 id="graphs">Graphs<a class="anchor" aria-label="anchor" href="#graphs"></a>
-</h2>
-<p>One of the main usage of <code>Gallicagram</code> is to plot time
-series of occurrences in a corpus. Here is an example graph using
-<code>ggplot</code> (and my own ggplot theme <a href="https://vincentbagilet.github.io/mediocrethemes/" class="external-link"><code>mediocrethemes</code></a>.
-The use of this theme is of course not mandatory and one can remove the
-line <code><a href="https://vincentbagilet.github.io/mediocrethemes/reference/set_mediocre_all.html" class="external-link">mediocrethemes::set_mediocre_all()</a></code>):</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="fu">mediocrethemes</span><span class="fu">::</span><span class="fu"><a href="https://vincentbagilet.github.io/mediocrethemes/reference/set_mediocre_all.html" class="external-link">set_mediocre_all</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">ex_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gallicagram.html">gallicagram</a></span><span class="op">(</span></span>
-<span>  keyword <span class="op">=</span> <span class="st">"informatique"</span>,</span>
-<span>  corpus <span class="op">=</span> <span class="st">"lemonde"</span>,</span>
-<span>  from <span class="op">=</span> <span class="fl">1945</span>,</span>
-<span>  to <span class="op">=</span> <span class="fl">2022</span>,</span>
-<span>  resolution <span class="op">=</span> <span class="st">"yearly"</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">ex_data</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">prop_occur</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"Evolution of occurrences of 'computering' (informatique)"</span>,</span>
-<span>    subtitle <span class="op">=</span> <span class="st">"In the french newspaper Le Monde"</span>,</span>
-<span>    x <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>    y <span class="op">=</span> <span class="st">"Proportion of occurrences"</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="rallicagram_files/figure-html/raw_ts-1.png" width="70%" style="display: block; margin: auto;"></p>
-<p>We can use <code>geom_smooth</code> to plot smoother lines. When
-using the default loess smoothing, the parameter <code>span</code>
-controls the amount of smoothing. Larger values are associated with less
-smoothing. Here is the same graph but smoothed:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ex_data</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">prop_occur</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>span <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"Evolution of occurrences of 'computering' (informatique)"</span>,</span>
-<span>    subtitle <span class="op">=</span> <span class="st">"In the french newspaper Le Monde"</span>,</span>
-<span>    x <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>    y <span class="op">=</span> <span class="st">"Proportion of occurrences"</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; `geom_smooth()` using method = 'loess' and formula = 'y ~ x'</span></span></code></pre></div>
-<p><img src="rallicagram_files/figure-html/smoothed_ts-1.png" width="70%" style="display: block; margin: auto;"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

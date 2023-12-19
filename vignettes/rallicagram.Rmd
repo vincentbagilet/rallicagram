@@ -25,16 +25,17 @@ knitr::opts_chunk$set(
 library(rallicagram)
 ```
 
-`rallicagram` is a R wrapper for the [Gallicagram API](https://regicid.github.io/api). More info on Gallicagram and its API can be found on a [preprint](https://osf.io/preprints/socarxiv/84bf3/) by Gallicagram developers [
-Benoît de Courson](https://regicid.github.io/) and Benjamin Azoulay, on the "Notice" tab of the [Gallicagram website](https://shiny.ens-paris-saclay.fr/app/gallicagram) and on the [API documentation](https://regicid.github.io/api).
+This vignette introduces the main functions in the package and provides examples of simple analyses that can be carried out with these functions. 
+
+More information on each function is available in the documentation of each function, accessible by typing in the console `help("gallicagram")` for the `gallicagram` function instance.
 
 # Main functions
 
 ## Occurrences
 
-The main function in this package, `gallicagram`, builds a data frame with the yearly, monthly or daily proportion of mentions of a term in one of the three corpora between two specified dates. 
+The main function in this package, `gallicagram`, builds a data frame with the yearly, monthly or daily proportion of mentions of a term in one of the corpora. 
 
-This function corresponds to the `Query` route of the [API](https://regicid.github.io/api).
+For the *Le Monde* corpus, this function allows to compute the number of newspaper articles that mention the keywords (parameter `n_of = "articles"`). 
 
 ```{r ex_occur}
 ex_occur <- gallicagram(
@@ -46,7 +47,7 @@ ex_occur <- gallicagram(
 )
 ```
 
-Here is an example of part of the output:
+Here is an example of the first rows of the output:
 
 ```{r kable_occur, echo=FALSE}
 ex_occur |>
@@ -54,23 +55,11 @@ ex_occur |>
   knitr::kable()
 ```
 
-### Occurences for all copora and the longest period possible
-
-The function `gallicagram_all` enables to retrieve the yearly proportion of occurrences of a keyword in each of the corpora for the longest time range for which the data is available and reliable. 
-
-It only takes one parameter: the keyword of interest. It then calls `gallicagram(keyword)` for each corpus and for the longest period possible for the corpus and returns a data frame with the outcome of each call.
-
-```{r ex_all, eval=FALSE}
-gallicagram_all("président")
-```
-
 ## Co-occurrences
 
-`gallicagram_cooccur` builds a data frame with the yearly, monthly or daily proportion of mentions of close co-occurrences of two keywords in one of the three corpora between two specified dates.
+`gallicagram_cooccur` builds a data frame with the yearly, monthly or daily proportion of mentions of close co-occurrences of two keywords in one of the three main corpora (`lemonde`, `livres` and `presse`) between two specified dates.
 
-Close co-occurrences correspond to the number of 3-grams (4-grams in the *Le Monde* corpus) that contain the two keywords. This function corresponds to the `Contain` route of the [API](https://regicid.github.io/api).
-
-The parameters `keyword_1` and `keyword_2` take the words to look co-occurrences for.
+Close co-occurrences correspond to words that are less than 3 (4 in the *Le Monde* corpus) words away in the initial text. For the *Le Monde* corpus, this function allows to compute the number of co-occurrences within an entire article (parameter `cooccur_level = "articles"`). 
 
 ```{r ex_cooccur}
 ex_cooccur <- gallicagram_cooccur(
@@ -93,9 +82,7 @@ ex_cooccur |>
 
 ## Associations
 
-`gallicagram_associated`  builds a data frame with the words most frequently used close (at a specified distance) to a given keyword over the period. This function calls the `associated` route of the [API](https://regicid.github.io/api).
-
-The keyword can be a 2-gram in the "books" and "press" corpora and a 3-gram in the "lemonde" corpus. The length of the keyword plus the distance cannot be more than 3 for the "books" and "press" corpora and a 4 for the "lemonde" corpus. Searching the "press" corpus can take a long time. 
+`gallicagram_associated` builds a data frame with the words most frequently used close  to a given keyword over the period. For the *Le Monde* corpus, this function allows to compute the number of co-occurences within an entire article (parameter `distance = "articles"`). 
 
 ```{r ex_assoc}
 ex_associated <- gallicagram_associated(
@@ -115,32 +102,93 @@ ex_associated |>
   knitr::kable()
 ```
 
-By default, the most frequent words in the Gallica books corpus are removed. Instead, we can remove other stopwords, by supplying a list of words to ignore to the `stopwords` parameter of the function. For instance, we can use the list in the `lsa` package, `lsa::stopwords_fr`. To keep the stopwwords, set the `stopwords` parameter to `NULL`.
+# Graphs
 
-```{r ex_assoc_stopwords}
-ex_associated_stopwords <- gallicagram_associated(
-  keyword = "camarade",
-  corpus = "lemonde",
-  from = 1960,
-  to = 1970,
-  n_results = 10,
-  stopwords = NULL
-)
+One of the main usage of `Gallicagram` is to plot time series of occurrences in a corpus. The function `gallicagraph` enables to do that in only one additional line of code. It take as input a dataframe produced by one of the functions from the package and automatically produces the corresponding graph:
+
+```{r graph_line, message=FALSE}
+# my own theme for ggplot graphs
+mediocrethemes::set_mediocre_all()
+
+gallicagram(keyword = "obama", corpus = "lemonde", from = 2005) |> 
+  gallicagraph()
 ```
 
-The most often associated terms without excluding stopwords are:
+Note that I use my own ggplot theme [`mediocrethemes`](https://vincentbagilet.github.io/mediocrethemes/). The use of this theme is of course not mandatory and one can remove the line `mediocrethemes::set_mediocre_all()`).
 
-```{r kable_assoc_stopwords, echo=FALSE}
-ex_associated_stopwords |>
-  utils::head() |>
-  knitr::kable()
+One can also use the same function to plot words associated with a given keyword:
+
+```{r graph_associated, message=FALSE, fig.asp=1.2}
+gallicagram_associated(keyword = "obama", corpus = "lemonde", from = 2005) |> 
+  gallicagraph()
 ```
 
 # More than one keyword
 
+## Occurrences of a lexicon
+
+Each of the main function described above has a `lexicon` counterpart, adding a suffix `_lexicon` (`gallicagram_lexicon`, `gallicagram_cooccur_lexicon` and `gallicagram_associated_lexicon`). Each function simply loop the intial function over each word the lexicon(s) and sums the results. It thus compute the sum of (co-)occurrences of each word in the lexicon:
+
+```{r ex_lexicon}
+ex_lexicon <- gallicagram_lexicon(
+  lexicon = c("président", "présidente"),
+  corpus = "lemonde",
+  from = 1960,
+  to = 1970,
+  resolution = "monthly"
+)
+
+ex_cooccur_lexicon <- gallicagram_cooccur_lexicon(
+  lexicon_1 = c("président", "présidente"),
+  lexicon_2 = c("mauvais", "nul"),
+  corpus = "lemonde",
+  from = 1960,
+  to = 1970,
+  resolution = "monthly"
+)
+```
+
+Here is an example of part of the output of `gallicagram_lexicon`:
+
+```{r kable_lexicon, echo=FALSE}
+ex_lexicon |>
+  utils::head() |>
+  knitr::kable()
+```
+
+These functions are particularly helpful to compute the number of occurrences of words from a whole lexical field (or the plural or feminine form of a keyword, etc).
+
+## Words with the same stem
+
+The function `get_same_stem()` enables to retrieve part of these forms: those that share the same stem as the keyword of interest. For instance, for "écologie":
+
+```{r get_same_stem}
+get_same_stem("écologie")
+```
+
+This function is particularly useful when its output is passed to one of the `_lexicon` functions:
+
+```{r ex_stem_lexicon}
+ex_stem_lexicon <- get_same_stem("écologie") |> 
+  gallicagram_lexicon(
+    corpus = "lemonde",
+    from = 1960,
+    to = 1970,
+    resolution = "yearly"
+  )
+```
+
+Note that due to the number of requests sent to the API, it may take some time to run. 
+
+```{r kable_stem_lexicon, echo=FALSE}
+ex_stem_lexicon |>
+  utils::head() |>
+  knitr::kable()
+```
+
 ## Searching several keywords
 
-In order to run the functions for several keywords at once, we can use the function `purrr::map_dfr`. It takes as parameters the vector of keywords to search, followed by the function (`gallicagram`) and additional arguments to pass to the function. It returns a unique data frame with the results for searches corresponding to each keyword, basically binding the dataframes produced by each keyword search.
+One can also run the functions for several keywords but separately, without suming the result. To do so, one can use the function `purrr::map_dfr`. It takes as parameters the vector of keywords to search, followed by the function (`gallicagram`) and additional arguments to pass to the function. It returns a unique data frame with the results for searches corresponding to each keyword, basically binding the dataframes produced by each keyword search.
 
 ```{r map, eval=FALSE}
 library(purrr)
@@ -178,104 +226,4 @@ We can then pass it to `purrr::pmap_dfr` that will call the function `gallicagra
 purrr::pmap_dfr(params_pmap, gallicagram)
 ```
 
-This method also apply for the other functions in the `rallicagram` package.
-
-## Occurrences of a lexicon
-
-If one wants to compute occurrences in a lexicon, co-occurrences in two lexicons or words associated with a lexicon, one can use the functions with suffix `_lexicon` (`gallicagram_lexicon`, `gallicagram_cooccur_lexicon` and `gallicagram_associated_lexicon`). They simply loop the function over each  word the lexicon(s) and sums the results. It takes as inputs vectors of keywords:
-
-```{r ex_lexicon}
-ex_lexicon <- gallicagram_lexicon(
-  lexicon = c("président", "présidente"),
-  corpus = "lemonde",
-  from = 1960,
-  to = 1970,
-  resolution = "monthly"
-)
-
-ex_cooccur_lexicon <- gallicagram_cooccur_lexicon(
-  lexicon_1 = c("président", "présidente"),
-  lexicon_2 = c("mauvais", "nul"),
-  corpus = "lemonde",
-  from = 1960,
-  to = 1970,
-  resolution = "monthly"
-)
-```
-
-Here is an example of part of the output of `gallicagram_lexicon`:
-
-```{r kable_lexicon, echo=FALSE}
-ex_lexicon |>
-  utils::head() |>
-  knitr::kable()
-```
-
-## Words with the same stem
-
-The function `get_same_stem()` takes as input a keyword and returns a vector of words that share the same stem. For instance, for "écologie":
-
-```{r get_same_stem}
-get_same_stem("écologie")
-```
-
-This function is particularly useful when its output is passed to one of the `_lexicon` functions:
-
-```{r ex_stem_lexicon}
-ex_stem_lexicon <- get_same_stem("écologie") |> 
-  gallicagram_lexicon(
-    corpus = "lemonde",
-    from = 1960,
-    to = 1970,
-    resolution = "yearly"
-  )
-```
-
-It enables to get all the occurrences for words that share the same stem as the keyword. Note that due to the number of requests, it may take some time to run. 
-
-```{r kable_stem_lexicon, echo=FALSE}
-ex_stem_lexicon |>
-  utils::head() |>
-  knitr::kable()
-```
-
-# Graphs
-
-One of the main usage of `Gallicagram` is to plot time series of occurrences in a corpus. Here is an example graph using `ggplot` (and my own ggplot theme [`mediocrethemes`](https://vincentbagilet.github.io/mediocrethemes/). The use of this theme is of course not mandatory and one can remove the line `mediocrethemes::set_mediocre_all()`): 
-
-```{r raw_ts, message=FALSE}
-library(ggplot2)
-mediocrethemes::set_mediocre_all()
-
-ex_data <- gallicagram(
-  keyword = "informatique",
-  corpus = "lemonde",
-  from = 1945,
-  to = 2022,
-  resolution = "yearly"
-)
-
-ex_data |>
-  ggplot(aes(x = date, y = prop_occur)) +
-  geom_line() +
-  labs(
-    title = "Evolution of occurrences of 'computering' (informatique)",
-    subtitle = "In the french newspaper Le Monde",
-    x = NULL,
-    y = "Proportion of occurrences"
-  )
-```
-
-We can use `geom_smooth` to plot smoother lines. When using the default loess smoothing, the parameter `span` controls the amount of smoothing. Larger values are associated with less smoothing. Here is the same graph but smoothed:
-
-```{r smoothed_ts}
-ex_data |>
-  ggplot(aes(x = date, y = prop_occur)) +
-  geom_smooth(span = 0.2) +
-  labs(
-    title = "Evolution of occurrences of 'computering' (informatique)",
-    subtitle = "In the french newspaper Le Monde",
-    x = NULL,
-    y = "Proportion of occurrences"
-  )
-```
+This method also applies for the other functions in the `rallicagram` package.

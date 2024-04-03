@@ -33,7 +33,8 @@
 #' this corpus.
 #'
 #' When set to "articles", looks for associated words within the whole
-#' article. Only available for the "lemonde" corpus.
+#' article. Only available for the "lemonde" corpus and for unigrams
+#' (ie keywords only made of one word).
 #' @param stopwords A character vector of stopwords to remove.
 #' The default is the vector of the 500 most frequent words in the Gallica
 #' books dataset. We can change this number by passing
@@ -160,7 +161,7 @@ gallicagram_associated <- function(keyword,
     dplyr::arrange(dplyr::desc(.data$n_cooccur)) |>
     #add param
     dplyr::mutate(
-      keyword = param_clean$keyword,
+      keyword = sub("%20", " ", param_clean$keyword),
       corpus = param_clean$corpus,
       from = param_clean$from,
       to = param_clean$to,

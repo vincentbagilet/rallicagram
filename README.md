@@ -85,6 +85,7 @@ The corpora available via Gallicagram are:
 | huma               | L’Humanité                     |          1904 |        1952 | 3.18e+08 |          2 | daily      |
 | subtitles          | Opensubtitles (français)       |          1935 |        2020 | 1.70e+07 |          3 | yearly     |
 | subtitles_en       | Opensubtitles (anglais)        |          1930 |        2020 | 1.02e+08 |          3 | yearly     |
+| rap                | Rap (Genius)                   |          1989 |        2024 | 2.00e+07 |          5 | yearly     |
 
 Additional information on Gallicagram can be found on a
 [preprint](https://osf.io/preprints/socarxiv/84bf3/) by Gallicagram

@@ -51,7 +51,9 @@ gallicagraph_occur <- function(data, color = NULL) {
       x = NULL,
       y = paste("Proportion (of", unique(data$n_of), "in the corpus)"),
       title = paste(
-        'Evolution of the coverage of',
+        'Evolution of the ',
+        data$resolution,
+        ' coverage of',
         ifelse(("lexicon" %in% names(data)), ' the "', ' "'),
         paste(unique(data$keyword), collapse = '", "'),
         ifelse(("lexicon" %in% names(data)), '" lexicon ', '"'),

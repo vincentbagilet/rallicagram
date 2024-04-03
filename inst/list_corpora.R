@@ -18,7 +18,7 @@ list_corpora_raw <- url |>
     seuils
   ) |>
   dplyr::mutate(
-    period = stringr::str_sub(period, 1, 9),
+    period = stringr::str_remove_all(period, "[^\\d-]"),
     resolution = stringr::str_extract(resolution, "\\w+(?=\\s?)")
   )
 
@@ -47,8 +47,10 @@ list_corpora <- list_corpora_raw |>
   tidyr::separate(
     period,
     into = c("reliable_from", "reliable_to"),
+    sep = "-",
     convert = TRUE
   ) |>
-  dplyr::select(-seuils)
+  dplyr::select(-seuils) |>
+  dplyr::filter(corpus_name != "Persée")
 
 usethis::use_data(list_corpora, overwrite = TRUE)

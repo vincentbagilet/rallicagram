@@ -27,8 +27,9 @@
 #' in the \code{resolution} column of the \code{list_corpora} dataset.
 #' @param n_of A character string. The type of object to compute number of
 #' occurrences for. If set to "grams", will compute the number of "grams" that
-#' correspond to the keyword for the given period. If set to "article" (only
-#' available for lemonde), will compute the number of articles that contain the
+#' correspond to the keyword for the given period. If set to "articles"
+#' (only available for lemonde and for unigrams, ie for keywords only made of
+#' one word), will compute the number of articles that contain the
 #' keyword for the given period.
 #'
 #' @inherit tidy_gallicagram return

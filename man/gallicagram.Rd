@@ -36,7 +36,7 @@ in the \code{resolution} column of the \code{list_corpora} dataset.}
 
 \item{n_of}{A character string. The type of object to compute number of
 occurrences for. If set to "grams", will compute the number of "grams" that
-correspond to the keyword for the given period. If set to "article" (only
+correspond to the keyword for the given period. If set to "articles" (only
 available for lemonde), will compute the number of articles that contain the
 keyword for the given period.}
 }

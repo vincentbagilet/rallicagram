@@ -9,6 +9,8 @@
 #'
 #' This function is only available for the three main corpora
 #' (historical press, Gallica books, Le Monde newspaper).
+#' Searching the "press" corpus take a long time and return an error.
+#' If it does, run the same function again, it will start off where it stopped.
 #'
 #' Note that the API route does not allow to search for associated words
 #' after a punctuation mark.
@@ -20,8 +22,6 @@
 #'
 #' Apostrophes and letters preceding them are withdrawn from the dataset
 #' (except for n' since they carry meaning)
-#'
-#' Searching the "press" corpus can require a long running time.
 #'
 #' @param distance An integer, "max" or "articles". The maximum distance,
 #' in number of words, at which to look for words associated with the keyword.

@@ -17,8 +17,8 @@ gallicagram_associated(
 }
 \arguments{
 \item{keyword}{A character string. Keyword to search.
-The largest number of words the keyword can contain can be found
-in the \code{resolution} column of the \code{list_corpora} dataset.}
+The string cannot contain more words than \code{max_length} for this corpus,
+as indicated in the \code{list_corpora} dataset.}
 
 \item{corpus}{A character string. The corpus to search. The list of
 available corpora can be found in the \code{list_corpora} dataset.}
@@ -45,7 +45,8 @@ When set to "max", automatically considers the longest ngram possible for
 this corpus.
 
 When set to "articles", looks for associated words within the whole
-article. Only available for the "lemonde" corpus.}
+article. Only available for the "lemonde" corpus and for unigrams
+(ie keywords only made of one word).}
 
 \item{stopwords}{A character vector of stopwords to remove.
 The default is the vector of the 500 most frequent words in the Gallica
@@ -76,6 +77,8 @@ This functions calls the '\code{associated}' route of the API.
 
 This function is only available for the three main corpora
 (historical press, Gallica books, Le Monde newspaper).
+Searching the "press" corpus take a long time and return an error.
+If it does, run the same function again, it will start off where it stopped.
 
 Note that the API route does not allow to search for associated words
 after a punctuation mark.
@@ -87,8 +90,6 @@ as it increases the probability of ngrams to be excluded from the database.
 
 Apostrophes and letters preceding them are withdrawn from the dataset
 (except for n' since they carry meaning)
-
-Searching the "press" corpus can require a long running time.
 }
 \examples{
 gallicagram_associated("camarade", from = 1960, to = 1970)

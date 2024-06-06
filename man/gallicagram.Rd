@@ -15,8 +15,8 @@ gallicagram(
 }
 \arguments{
 \item{keyword}{A character string. Keyword to search.
-The largest number of words the keyword can contain can be found
-in the \code{resolution} column of the \code{list_corpora} dataset.}
+The string cannot contain more words than \code{max_length} for this corpus,
+as indicated in the \code{list_corpora} dataset.}
 
 \item{corpus}{A character string. The corpus to search. The list of
 available corpora can be found in the \code{list_corpora} dataset.}
@@ -36,8 +36,9 @@ in the \code{resolution} column of the \code{list_corpora} dataset.}
 
 \item{n_of}{A character string. The type of object to compute number of
 occurrences for. If set to "grams", will compute the number of "grams" that
-correspond to the keyword for the given period. If set to "articles" (only
-available for lemonde), will compute the number of articles that contain the
+correspond to the keyword for the given period. If set to "articles"
+(only available for lemonde and for unigrams, ie for keywords only made of
+one word), will compute the number of articles that contain the
 keyword for the given period.}
 }
 \value{

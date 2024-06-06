@@ -43,7 +43,8 @@ When set to "max", automatically considers the longest ngram possible for
 this corpus.
 
 When set to "articles", looks for associated words within the whole
-article. Only available for the "lemonde" corpus.}
+article. Only available for the "lemonde" corpus and for unigrams
+(ie keywords only made of one word).}
 
 \item{stopwords}{A character vector of stopwords to remove.
 The default is the vector of the 500 most frequent words in the Gallica

@@ -10,7 +10,8 @@ prepare_param(
   from,
   to,
   resolution = "yearly",
-  n_of_level = "grams"
+  n_of_level = "grams",
+  subcorpora = NULL
 )
 }
 \arguments{
@@ -30,11 +31,13 @@ the analysis (e.g., "daily", "monthly", "yearly").}
 \item{n_of_level}{A character string specifying the type of object to
 compute the number of occurrences for or the level at which to compute
 co-occurrences.}
+
+\item{subcorpora}{A character vector specifying the codes of the subcorpora.}
 }
 \value{
 A list.
-Contains cleaned function parameters (`keyword`, `corpus`, `from`, `to`
-and `resolution`).
+Contains cleaned function parameters (`keyword`, `corpus`, `from`, `to`,
+`resolution` and `subcorpora`).
 }
 \description{
 Checks potential errors, translates the parameters, set parameters for

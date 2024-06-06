@@ -44,3 +44,30 @@
 #'
 #' @usage data("list_corpora")
 "list_corpora"
+
+#' A data frame containing information about the available subcorpora
+#'
+#' It includes the code name of the corpus and subcorpus,
+#' its plain language name,
+#' the years for which the data is reliable,
+#' and the academic disciplines it relates too.
+#'
+#' @format A data frame with 368 rows and 6 variables:
+#' \describe{
+#'   \item{corpus}{Code name of the corpus.}
+#'   \item{subcorpus}{Code name of the subcorpus.}
+#'   \item{subcorpus_name}{Plain language name of the subcorpus.}
+#'   \item{reliable_from}{The year at which the subcorpus starts being reliable.}
+#'   \item{reliable_to}{The year at which the subcorpus stops being reliable.}
+#'   \item{disciplines}{The academic disciplines associated with this subcopus.}
+#' }
+#'
+#' @examples
+#' \dontrun{
+#'   # Load the dataset
+#'   data("list_corpora")
+#' }
+#'
+#' @usage data("list_subcorpora")
+"list_subcorpora"
+

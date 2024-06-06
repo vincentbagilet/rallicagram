@@ -10,23 +10,24 @@ gallicagram(
   from = "earliest",
   to = "latest",
   resolution = "monthly",
-  n_of = "grams"
+  n_of = "grams",
+  subcorpora = NULL
 )
 }
 \arguments{
 \item{keyword}{A character string. Keyword to search.
-The string cannot contain more words than \code{max_length} for this corpus,
-as indicated in the \code{list_corpora} dataset.}
+The string cannot contain more words than the \code{max_length}
+for this corpus, as indicated in the \code{list_corpora} dataset.}
 
 \item{corpus}{A character string. The corpus to search. The list of
 available corpora can be found in the \code{list_corpora} dataset.}
 
 \item{from}{An integer or "earliest". The starting year.
-If set to "earliest", use the earliest date at which the data is reliable
+If set to "earliest", it uses the earliest date at which the data is reliable
 for this corpus, as described in \code{list_corpora}.}
 
 \item{to}{An integer or "latest". The end year.
-If set to "latest", use the latest date at which the data is reliable
+If set to "latest", it uses the latest date at which the data is reliable
 for this corpus, as described in \code{list_corpora}.}
 
 \item{resolution}{A character string. Can only be "daily", "monthly" or
@@ -34,12 +35,17 @@ for this corpus, as described in \code{list_corpora}.}
 The finest available resolution for the corpus selected can be found
 in the \code{resolution} column of the \code{list_corpora} dataset.}
 
-\item{n_of}{A character string. The type of object to compute number of
-occurrences for. If set to "grams", will compute the number of "grams" that
-correspond to the keyword for the given period. If set to "articles"
+\item{n_of}{A character string. The type of object to the compute number of
+occurrences for. If set to "grams", the function will compute the number
+of "grams" that correspond to the keyword for the given period.
+If set to "articles"
 (only available for lemonde and for unigrams, ie for keywords only made of
 one word), will compute the number of articles that contain the
 keyword for the given period.}
+
+\item{subcorpora}{A character vector. The subcorpora to consider.
+Only available for \code{corpus = persee}. The list of available Persee
+subcorpora can be found in the \code{list_subcorpora} dataset.}
 }
 \value{
 A tibble. With the \code{keyword},

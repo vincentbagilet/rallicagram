@@ -47,6 +47,7 @@ reference:
 - title: Data
   contents:
   - list_corpora
+  - list_subcorpora
   - stopwords_gallica
   - word_lemma_stem
 

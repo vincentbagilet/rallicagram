@@ -54,7 +54,8 @@ the API call.</p>
 <span>  <span class="va">from</span>,</span>
 <span>  <span class="va">to</span>,</span>
 <span>  resolution <span class="op">=</span> <span class="st">"yearly"</span>,</span>
-<span>  n_of_level <span class="op">=</span> <span class="st">"grams"</span></span>
+<span>  n_of_level <span class="op">=</span> <span class="st">"grams"</span>,</span>
+<span>  subcorpora <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -88,14 +89,18 @@ the analysis (e.g., "daily", "monthly", "yearly").</p></dd>
 compute the number of occurrences for or the level at which to compute
 co-occurrences.</p></dd>
 
+
+<dt>subcorpora</dt>
+<dd><p>A character vector specifying the codes of the subcorpora.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
 <p>A list.
-Contains cleaned function parameters (`keyword`, `corpus`, `from`, `to`
-and `resolution`).</p>
+Contains cleaned function parameters (`keyword`, `corpus`, `from`, `to`,
+`resolution` and `subcorpora`).</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

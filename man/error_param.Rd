@@ -4,7 +4,16 @@
 \alias{error_param}
 \title{Internal function to check for errors in the parameters}
 \usage{
-error_param(info_corpus, keyword, corpus, from, to, resolution, n_of_level)
+error_param(
+  info_corpus,
+  keyword,
+  corpus,
+  from,
+  to,
+  resolution,
+  n_of_level,
+  subcorpora
+)
 }
 \arguments{
 \item{info_corpus}{A data frame containing information about the selected
@@ -26,6 +35,8 @@ the analysis (e.g., "daily", "monthly", "yearly").}
 \item{n_of_level}{A character string specifying the type of object to
 compute the number of occurrences for or the level at which to compute
 co-occurrences.}
+
+\item{subcorpora}{A character vector specifying the codes of the subcorpora.}
 }
 \value{
 This function does not return a value but may issue warnings or
@@ -48,6 +59,8 @@ This function performs the following checks:
   \item{Validity of Resolution:}{Ensures that the specified
   \code{resolution} is one of "daily", "monthly", or "yearly" and is
   compatible with the corpus's available resolutions.}
+  \item{Validity of the subcorpora:}{Ensures that the specified subcorpora
+  are valid.}
 }
 }
 \keyword{error}

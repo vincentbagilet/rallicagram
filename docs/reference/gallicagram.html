@@ -54,7 +54,8 @@ by year, month or day.</p>
 <span>  from <span class="op">=</span> <span class="st">"earliest"</span>,</span>
 <span>  to <span class="op">=</span> <span class="st">"latest"</span>,</span>
 <span>  resolution <span class="op">=</span> <span class="st">"monthly"</span>,</span>
-<span>  n_of <span class="op">=</span> <span class="st">"grams"</span></span>
+<span>  n_of <span class="op">=</span> <span class="st">"grams"</span>,</span>
+<span>  subcorpora <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -62,8 +63,8 @@ by year, month or day.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>keyword</dt>
 <dd><p>A character string. Keyword to search.
-The largest number of words the keyword can contain can be found
-in the <code>resolution</code> column of the <code>list_corpora</code> dataset.</p></dd>
+The string cannot contain more words than the <code>max_length</code>
+for this corpus, as indicated in the <code>list_corpora</code> dataset.</p></dd>
 
 
 <dt>corpus</dt>
@@ -73,13 +74,13 @@ available corpora can be found in the <code>list_corpora</code> dataset.</p></dd
 
 <dt>from</dt>
 <dd><p>An integer or "earliest". The starting year.
-If set to "earliest", use the earliest date at which the data is reliable
+If set to "earliest", it uses the earliest date at which the data is reliable
 for this corpus, as described in <code>list_corpora</code>.</p></dd>
 
 
 <dt>to</dt>
 <dd><p>An integer or "latest". The end year.
-If set to "latest", use the latest date at which the data is reliable
+If set to "latest", it uses the latest date at which the data is reliable
 for this corpus, as described in <code>list_corpora</code>.</p></dd>
 
 
@@ -91,11 +92,19 @@ in the <code>resolution</code> column of the <code>list_corpora</code> dataset.<
 
 
 <dt>n_of</dt>
-<dd><p>A character string. The type of object to compute number of
-occurrences for. If set to "grams", will compute the number of "grams" that
-correspond to the keyword for the given period. If set to "articles" (only
-available for lemonde), will compute the number of articles that contain the
+<dd><p>A character string. The type of object to the compute number of
+occurrences for. If set to "grams", the function will compute the number
+of "grams" that correspond to the keyword for the given period.
+If set to "articles"
+(only available for lemonde and for unigrams, ie for keywords only made of
+one word), will compute the number of articles that contain the
 keyword for the given period.</p></dd>
+
+
+<dt>subcorpora</dt>
+<dd><p>A character vector. The subcorpora to consider.
+Only available for <code>corpus = persee</code>. The list of available Persee
+subcorpora can be found in the <code>list_subcorpora</code> dataset.</p></dd>
 
 </dl></div>
     <div class="section level2">

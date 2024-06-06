@@ -51,6 +51,6 @@ list_corpora <- list_corpora_raw |>
     convert = TRUE
   ) |>
   dplyr::select(-seuils) |>
-  dplyr::filter(corpus_name != "Persée")
+  dplyr::mutate(corpus = ifelse(corpus_name == "Persée", "persee", corpus))
 
 usethis::use_data(list_corpora, overwrite = TRUE)

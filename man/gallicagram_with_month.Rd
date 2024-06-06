@@ -17,8 +17,8 @@ gallicagram_with_month(
 }
 \arguments{
 \item{keyword}{A character string. Keyword to search.
-The string cannot contain more words than \code{max_length} for this corpus,
-as indicated in the \code{list_corpora} dataset.}
+The string cannot contain more words than the \code{max_length}
+for this corpus, as indicated in the \code{list_corpora} dataset.}
 
 \item{corpus}{A character string. The corpus to search. The list of
 available corpora can be found in the \code{list_corpora} dataset.}

@@ -64,8 +64,8 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>keyword</dt>
 <dd><p>A character string. Keyword to search.
-The largest number of words the keyword can contain can be found
-in the <code>resolution</code> column of the <code>list_corpora</code> dataset.</p></dd>
+The string cannot contain more words than the <code>max_length</code>
+for this corpus, as indicated in the <code>list_corpora</code> dataset.</p></dd>
 
 
 <dt>corpus</dt>
@@ -75,13 +75,13 @@ available corpora can be found in the <code>list_corpora</code> dataset.</p></dd
 
 <dt>from</dt>
 <dd><p>An integer or "earliest". The starting year.
-If set to "earliest", use the earliest date at which the data is reliable
+If set to "earliest", it uses the earliest date at which the data is reliable
 for this corpus, as described in <code>list_corpora</code>.</p></dd>
 
 
 <dt>to</dt>
 <dd><p>An integer or "latest". The end year.
-If set to "latest", use the latest date at which the data is reliable
+If set to "latest", it uses the latest date at which the data is reliable
 for this corpus, as described in <code>list_corpora</code>.</p></dd>
 
 
@@ -100,7 +100,8 @@ of the <code>list_corpora</code> dataset.</p>
 <p>When set to "max", automatically considers the longest ngram possible for
 this corpus.</p>
 <p>When set to "articles", looks for associated words within the whole
-article. Only available for the "lemonde" corpus.</p></dd>
+article. Only available for the "lemonde" corpus and for unigrams
+(ie keywords only made of one word).</p></dd>
 
 
 <dt>stopwords</dt>
@@ -134,7 +135,9 @@ It also returns the input parameters
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This functions calls the '<code>associated</code>' route of the API.</p>
 <p>This function is only available for the three main corpora
-(historical press, Gallica books, Le Monde newspaper).</p>
+(historical press, Gallica books, Le Monde newspaper).
+Searching the "press" corpus take a long time and return an error.
+If it does, run the same function again, it will start off where it stopped.</p>
 <p>Note that the API route does not allow to search for associated words
 after a punctuation mark.
 For instance, in "son camarade, le chasseur, a", the function will
@@ -144,7 +147,6 @@ Thus, there might be less associated words at a longer distance
 as it increases the probability of ngrams to be excluded from the database.</p>
 <p>Apostrophes and letters preceding them are withdrawn from the dataset
 (except for n' since they carry meaning)</p>
-<p>Searching the "press" corpus can require a long running time.</p>
     </div>
 
     <div class="section level2">

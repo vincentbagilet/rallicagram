@@ -17,18 +17,18 @@ gallicagram_with(
 }
 \arguments{
 \item{keyword}{A character string. Keyword to search.
-The string cannot contain more words than \code{max_length} for this corpus,
-as indicated in the \code{list_corpora} dataset.}
+The string cannot contain more words than the \code{max_length}
+for this corpus, as indicated in the \code{list_corpora} dataset.}
 
 \item{corpus}{A character string. The corpus to search. The list of
 available corpora can be found in the \code{list_corpora} dataset.}
 
 \item{from}{An integer or "earliest". The starting year.
-If set to "earliest", use the earliest date at which the data is reliable
+If set to "earliest", it uses the earliest date at which the data is reliable
 for this corpus, as described in \code{list_corpora}.}
 
 \item{to}{An integer or "latest". The end year.
-If set to "latest", use the latest date at which the data is reliable
+If set to "latest", it uses the latest date at which the data is reliable
 for this corpus, as described in \code{list_corpora}.}
 
 \item{n_results}{An integer. The number of most frequently

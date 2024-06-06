@@ -17,6 +17,7 @@
 #' @param n_of_level A character string specifying the type of object to
 #' compute the number of occurrences for or the level at which to compute
 #' co-occurrences.
+#' @param subcorpora A character vector specifying the codes of the subcorpora.
 #'
 #' @return This function does not return a value but may issue warnings or
 #' errors if any issues are found.
@@ -33,6 +34,8 @@
 #'   \item{Validity of Resolution:}{Ensures that the specified
 #'   \code{resolution} is one of "daily", "monthly", or "yearly" and is
 #'   compatible with the corpus's available resolutions.}
+#'   \item{Validity of the subcorpora:}{Ensures that the specified subcorpora
+#'   are valid.}
 #' }
 #'
 #' @keywords internal, error
@@ -44,7 +47,8 @@ error_param <- function(info_corpus,
                         from,
                         to,
                         resolution,
-                        n_of_level) {
+                        n_of_level,
+                        subcorpora) {
 
   #errors in from/to
   if (!is.numeric(from) || !is.numeric(to)) {
@@ -113,6 +117,19 @@ error_param <- function(info_corpus,
             "except for the Le Monde corpus,",
             "for which they can also be equal to 'articles'"),
       call. = FALSE
+    )
+  }
+
+  #error in subcorpora
+  valid_subcorpora <- rallicagram::list_subcorpora[
+    rallicagram::list_subcorpora$corpus == corpus, ]
+
+  if (!is.null(subcorpora) &
+      !all(subcorpora %in% valid_subcorpora)) {
+    stop(
+      paste(
+        "Invalid subcorpus name for this corpus. Should be NULL",
+        "or one of the one specified in rallicagram::list_subcorpora.")
     )
   }
 }

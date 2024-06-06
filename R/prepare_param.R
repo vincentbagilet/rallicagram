@@ -7,15 +7,16 @@
 #' @inheritParams error_param
 #'
 #' @returns A list.
-#' Contains cleaned function parameters (`keyword`, `corpus`, `from`, `to`
-#' and `resolution`).
+#' Contains cleaned function parameters (`keyword`, `corpus`, `from`, `to`,
+#' `resolution` and `subcorpora`).
 #'
 prepare_param <- function(keyword,
                           corpus,
                           from,
                           to,
                           resolution = "yearly",
-                          n_of_level = "grams") {
+                          n_of_level = "grams",
+                          subcorpora = NULL) {
 
   #to handle code written with a previous version of the package
   corpus_french <-
@@ -56,7 +57,8 @@ prepare_param <- function(keyword,
     from_numeric,
     to_numeric,
     resolution,
-    n_of_level
+    n_of_level,
+    subcorpora
   )
 
   #resolutions
@@ -84,13 +86,16 @@ prepare_param <- function(keyword,
 
   keyword_clean <- gsub(" ", "%20", tolower(keyword))
 
+  subcorpora_clean <- paste(subcorpora, collapse = "+")
+
   param_clean <- list(
     "keyword" = keyword_clean,
     "corpus" = corpus_french,
     "from" = from_numeric,
     "to" = to_numeric,
     "resolution_fr" = resolution_fr,
-    "resolution_en" = resol
+    "resolution_en" = resol,
+    "subcorpora" = subcorpora_clean
   )
 
   return(param_clean)

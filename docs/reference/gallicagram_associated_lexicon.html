@@ -75,13 +75,13 @@ available corpora can be found in the <code>list_corpora</code> dataset.</p></dd
 
 <dt>from</dt>
 <dd><p>An integer or "earliest". The starting year.
-If set to "earliest", use the earliest date at which the data is reliable
+If set to "earliest", it uses the earliest date at which the data is reliable
 for this corpus, as described in <code>list_corpora</code>.</p></dd>
 
 
 <dt>to</dt>
 <dd><p>An integer or "latest". The end year.
-If set to "latest", use the latest date at which the data is reliable
+If set to "latest", it uses the latest date at which the data is reliable
 for this corpus, as described in <code>list_corpora</code>.</p></dd>
 
 
@@ -100,7 +100,8 @@ of the <code>list_corpora</code> dataset.</p>
 <p>When set to "max", automatically considers the longest ngram possible for
 this corpus.</p>
 <p>When set to "articles", looks for associated words within the whole
-article. Only available for the "lemonde" corpus.</p></dd>
+article. Only available for the "lemonde" corpus and for unigrams
+(ie keywords only made of one word).</p></dd>
 
 
 <dt>stopwords</dt>

@@ -8,8 +8,8 @@ gallicagram_all(keyword)
 }
 \arguments{
 \item{keyword}{A character string. Keyword to search.
-The string cannot contain more words than \code{max_length} for this corpus,
-as indicated in the \code{list_corpora} dataset.}
+The string cannot contain more words than the \code{max_length}
+for this corpus, as indicated in the \code{list_corpora} dataset.}
 }
 \value{
 A tibble. With the \code{keyword},

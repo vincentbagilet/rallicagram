@@ -32,6 +32,9 @@
 #' (only available for lemonde and for unigrams, ie for keywords only made of
 #' one word), will compute the number of articles that contain the
 #' keyword for the given period.
+#' @param subcorpora A character vector. The subcorpora to consider.
+#' Only available for \code{corpus = persee}. The list of available Persee
+#' subcorpora can be found in the \code{list_subcorpora} dataset.
 #'
 #' @inherit tidy_gallicagram return
 #'
@@ -44,9 +47,11 @@ gallicagram <- function(keyword,
                         from = "earliest",
                         to = "latest",
                         resolution = "monthly",
-                        n_of = "grams") {
+                        n_of = "grams",
+                        subcorpora = NULL) {
 
-  param_clean <- prepare_param(keyword, corpus, from, to, resolution, n_of)
+  param_clean <-
+    prepare_param(keyword, corpus, from, to, resolution, n_of, subcorpora)
 
   spaces_keyword <-
     attr(gregexpr(" ", keyword, fixed = TRUE)[[1]], "match.length")
@@ -57,7 +62,9 @@ gallicagram <- function(keyword,
                   ifelse(
                     n_of == "articles" & corpus == "lemonde",
                     "_article",
-                    ""
+                    ifelse(corpus == "persee",
+                           "_persee",
+                           "")
                   ),
                   "?corpus=",
                   param_clean$corpus,
@@ -69,6 +76,11 @@ gallicagram <- function(keyword,
                   param_clean$to,
                   "&resolution=",
                   param_clean$resolution_fr,
+                  ifelse(
+                    param_clean$subcorpora != "",
+                    paste("&revue=", param_clean$subcorpora, sep = ""),
+                    ""
+                  ),
                   sep = "") |>
     tidy_gallicagram(param_clean$corpus, param_clean$resolution_en) |>
     dplyr::rename(

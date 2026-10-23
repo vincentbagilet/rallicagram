@@ -58,7 +58,7 @@ gallicagram <- function(keyword,
   nb_words_keyword <-
     ifelse(spaces_keyword == -1, 1, length(spaces_keyword) + 1)
 
-  output <- paste("https://shiny.ens-paris-saclay.fr/guni/query",
+  output <- paste("https://shiny.ens-paris-saclay.fr/guni/query_ngram",
                   ifelse(
                     n_of == "articles" & corpus == "lemonde",
                     "_article",

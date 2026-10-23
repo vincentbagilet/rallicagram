@@ -47,7 +47,7 @@ It enables to draw nice graphs representing the evolution of the use of a term i
 
 ```{r graph, dpi=300, out.width="70%", fig.align = "center", echo=FALSE, message=FALSE}
 library(mediocrethemes)
-set_mediocre_all()
+set_mediocre_all(theme = theme_idid)
 
 gallicagram(keyword = "obama", from = 2005) |> 
   gallicagraph()
@@ -61,6 +61,7 @@ The corpora available via Gallicagram are:
 
 ```{r list_corpora, echo=FALSE}
 rallicagram::list_corpora |> 
+  dplyr::mutate(nb_words = ifelse(is.na(nb_words), "-", nb_words)) |> 
   dplyr::rename_with(\(x) stringr::str_replace(x, "_", " ") |>  
                        stringr::str_to_title()) |> 
   knitr::kable()

@@ -68,7 +68,8 @@ ex_cooccur <- gallicagram_cooccur(
   corpus = "lemonde",
   from = 1960,
   to = 1970,
-  resolution = "monthly"
+  resolution = "monthly",
+  cooccur_level = "articles"
 )
 ```
 
@@ -91,7 +92,7 @@ ex_associated <- gallicagram_associated(
   from = 1960,
   to = 1970,
   n_results = 10,
-  distance = 3
+  distance = 4
 )
 ```
 
@@ -127,7 +128,7 @@ gallicagram_associated(keyword = "obama", corpus = "lemonde", from = 2005) |>
 
 ## Occurrences of a lexicon
 
-Each of the main function described above has a `lexicon` counterpart, adding a suffix `_lexicon` (`gallicagram_lexicon`, `gallicagram_cooccur_lexicon` and `gallicagram_associated_lexicon`). Each function simply loop the intial function over each word the lexicon(s) and sums the results. It thus compute the sum of (co-)occurrences of each word in the lexicon:
+Each of the main function described above has a `lexicon` counterpart, adding a suffix `_lexicon` (`gallicagram_lexicon`, `gallicagram_cooccur_lexicon` and `gallicagram_associated_lexicon`). Each function simply loop the initial function over each word the lexicon(s) and sums the results. It thus compute the sum of (co-)occurrences of each word in the lexicon:
 
 ```{r ex_lexicon}
 ex_lexicon <- gallicagram_lexicon(
@@ -144,7 +145,8 @@ ex_cooccur_lexicon <- gallicagram_cooccur_lexicon(
   corpus = "lemonde",
   from = 1960,
   to = 1970,
-  resolution = "monthly"
+  resolution = "monthly",
+  cooccur_level = "articles"
 )
 ```
 

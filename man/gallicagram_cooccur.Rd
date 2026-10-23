@@ -75,5 +75,5 @@ This function is only available for the three main corpora
 It corresponds to the \code{Contain} route of the API.
 }
 \examples{
-  gallicagram_cooccur("président", "mauvais")
+  gallicagram_cooccur("président", "mauvais", corpus = "press")
 }

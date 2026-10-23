@@ -1,7 +1,6 @@
-pandoc: 3.1.1
-pkgdown: 2.0.7
+pandoc: '3.10'
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   rallicagram: rallicagram.html
-last_built: 2024-06-06T16:28Z
-
+last_built: 2026-10-23T12:48Z

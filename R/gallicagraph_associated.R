@@ -56,6 +56,9 @@ gallicagraph_associated <- function(data, labels_color = NA) {
       )
     ) +
     ggplot2::coord_flip() +
-    ggplot2::theme(panel.background = ggplot2::element_blank()) +
-    ggplot2::theme(axis.ticks.y = ggplot2::element_blank())
+    ggplot2::theme(
+      panel.background = ggplot2::element_blank(),
+      axis.ticks.y = ggplot2::element_blank(),
+      panel.grid.major.y = ggplot2::element_blank()
+    )
 }

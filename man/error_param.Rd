@@ -50,17 +50,17 @@ based on the provided information about the corpus.
 \details{
 This function performs the following checks:
  \itemize{
-  \item{Validity of Time Range:}{Ensures that the specified time range
-  (\code{from} to \code{to}) is numeric and valid.}
-  \item{Validity of Keyword:}{Checks whether the specified \code{keyword} is
-  a character string and not a character vector.}
-  \item{Reliability of Corpus:}{Verifies that the specified time range falls
-  within the reliable range of the given corpus.}
-  \item{Validity of Resolution:}{Ensures that the specified
+  \item Validity of Time Range: Ensures that the specified time range
+  (\code{from} to \code{to}) is numeric and valid.
+  \item Validity of Keyword: Checks whether the specified \code{keyword} is
+  a character string and not a character vector.
+  \item Reliability of Corpus:Verifies that the specified time range falls
+  within the reliable range of the given corpus.
+  \item Validity of Resolution: Ensures that the specified
   \code{resolution} is one of "daily", "monthly", or "yearly" and is
-  compatible with the corpus's available resolutions.}
-  \item{Validity of the subcorpora:}{Ensures that the specified subcorpora
-  are valid.}
+  compatible with the corpus's available resolutions.
+  \item Validity of the subcorpora: Ensures that the specified subcorpora
+  are valid.
 }
 }
 \keyword{error}

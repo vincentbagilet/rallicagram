@@ -4,6 +4,7 @@
 # rallicagram
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 ## Overview
@@ -66,26 +67,80 @@ with a keyword. The corresponding functions are described in the
 
 The corpora available via Gallicagram are:
 
-| Corpus             | Corpus Name                    | Reliable From | Reliable To | Nb Words | Max Length | Resolution |
-|:-------------------|:-------------------------------|--------------:|------------:|---------:|-----------:|:-----------|
-| lemonde            | Le Monde                       |          1944 |        2023 | 1.50e+09 |          4 | daily      |
-| presse             | Presse de Gallica              |          1789 |        1950 | 5.70e+10 |          3 | monthly    |
-| livres             | Livres de Gallica              |          1600 |        1940 | 1.60e+10 |          5 | yearly     |
-| ddb                | Deutsches Zeitungsportal (DDB) |          1780 |        1950 | 3.90e+10 |          2 | monthly    |
-| american_stories   | American Stories               |          1798 |        1963 | 2.00e+10 |          3 | yearly     |
-| paris              | Journal de Paris               |          1777 |        1827 | 8.60e+07 |          2 | daily      |
-| moniteur           | Moniteur Universel             |          1789 |        1869 | 5.11e+08 |          2 | daily      |
-| journal_des_debats | Journal des Débats             |          1789 |        1944 | 1.20e+09 |          1 | daily      |
-| la_presse          | La Presse                      |          1836 |        1869 | 2.53e+08 |          2 | daily      |
-| constitutionnel    | Le Constitutionnel             |          1821 |        1913 | 6.40e+07 |          2 | daily      |
-| figaro             | Le Figaro                      |          1854 |        1952 | 8.70e+08 |          2 | daily      |
-| temps              | Le Temps                       |          1861 |        1942 | 1.00e+09 |          2 | daily      |
-| petit_journal      | Le Petit Journal               |          1863 |        1942 | 7.45e+08 |          2 | daily      |
-| petit_parisien     | Le Petit Parisien              |          1876 |        1944 | 6.31e+08 |          2 | daily      |
-| huma               | L’Humanité                     |          1904 |        1952 | 3.18e+08 |          2 | daily      |
-| subtitles          | Opensubtitles (français)       |          1935 |        2020 | 1.70e+07 |          3 | yearly     |
-| subtitles_en       | Opensubtitles (anglais)        |          1930 |        2020 | 1.02e+08 |          3 | yearly     |
-| rap                | Rap (Genius)                   |          1989 |        2024 | 2.00e+07 |          5 | yearly     |
+| Corpus | Corpus Name | Reliable From | Reliable To | Nb Words | Max Length | Resolution |
+|:---|:---|---:|---:|:---|---:|:---|
+| lemonde_rubriques | Le Monde (rubriques) | 1945 | 2024 | 1.5e+09 | 4 | monthly |
+| presse | Presse de Gallica | 1789 | 1950 | 5.7e+10 | 3 | monthly |
+| livres | Livres de Gallica | 1700 | 1940 | 1.6e+10 | 5 | yearly |
+| presse_livres | Presse + livres de Gallica | 1789 | 1940 | 7.3e+10 | 3 | yearly |
+| ddb | Deutsches Zeitungsportal (DDB) | 1780 | 1950 | 3.9e+10 | 2 | monthly |
+| american_stories | American Stories | 1798 | 1963 | 2e+10 | 3 | yearly |
+| guardian | The Guardian | 1999 | 2026 | 2e+09 | 2 | daily |
+| paris | Journal de Paris | 1777 | 1827 | 8.6e+07 | 2 | daily |
+| moniteur | Moniteur Universel | 1789 | 1869 | 5.11e+08 | 2 | daily |
+| journal_des_debats | Journal des Débats | 1789 | 1944 | 1.2e+09 | 1 | daily |
+| la_presse | La Presse | 1836 | 1869 | 2.53e+08 | 2 | daily |
+| constitutionnel | Le Constitutionnel | 1821 | 1913 | 6.4e+07 | 2 | daily |
+| figaro | Le Figaro | 1854 | 1952 | 8.7e+08 | 2 | daily |
+| temps | Le Temps | 1861 | 1942 | 1e+09 | 2 | daily |
+| petit_journal | Le Petit Journal | 1863 | 1942 | 7.45e+08 | 2 | daily |
+| journal_officiel | Journal officiel | 1869 | 1952 | 8.42e+08 | 1 | daily |
+| petit_parisien | Le Petit Parisien | 1876 | 1944 | 6.31e+08 | 2 | daily |
+| huma | L’Humanité | 1904 | 1952 | 3.18e+08 | 2 | daily |
+| subtitles | Opensubtitles (français) | 1935 | 2020 | 1.7e+07 | 3 | yearly |
+| subtitles_en | Opensubtitles (anglais) | 1930 | 2020 | 1.02e+08 | 3 | yearly |
+| rap | Rap français (Genius) | 1995 | 2024 | 2e+07 | 5 | yearly |
+| persee | Persée | 1930 | 2023 | 1e+09 | 2 | yearly |
+| route à part (query_cairn) | Cairn | 2001 | 2025 | \- | 3 | yearly |
+| route à part (persee+cairn) | Persée + Cairn | 1930 | 2025 | \- | 2 | yearly |
+| tv_bfmtv | BFM TV (transcriptions) | 2026 | 2026 | \- | 3 | daily |
+| tv_cnews | CNews (transcriptions) | 2026 | 2026 | \- | 3 | daily |
+| tv_franceinfo | France Info (transcriptions) | 2026 | 2026 | \- | 3 | daily |
+| ouest | Ouest-France (Gallica) | 1899 | 2025 | \- | 2 | yearly |
+| prenoms | Prénoms INSEE | 1900 | 2024 | \- | 1 | yearly |
+| jorf | Journal officiel (JORF) | 1990 | 2026 | 5.9e+08 | 2 | monthly |
+| libe | Libération | 1998 | 2025 | \- | 3 | daily |
+| majinbook | \# Majinbook français | 1700 | 2023 | \- | 4 | yearly |
+| spa_majinbook | \# Majinbook espagnol | 1700 | 2023 | \- | 4 | yearly |
+| eng_majinbook | \# Majinbook anglais | 1700 | 2023 | \- | 2 | yearly |
+| deu_majinbook | \# Majinbook allemand | 1700 | 2023 | \- | 4 | yearly |
+| presse_moderne | Presse contemporaine (toutes) | 2008 | 2026 | \- | 2 | daily |
+| 20minutes | 20 Minutes | 2006 | 2026 | \- | 2 | daily |
+| bfmtv | BFM TV | 2012 | 2026 | \- | 2 | daily |
+| challenges | Challenges | 2006 | 2026 | \- | 2 | daily |
+| cnews | CNews | 2012 | 2026 | \- | 2 | daily |
+| francesoir | France Soir | 2015 | 2026 | \- | 2 | daily |
+| gala | Gala | 2008 | 2026 | \- | 2 | daily |
+| l_opinion | L’Opinion | 2013 | 2026 | \- | 2 | daily |
+| lacroix | La Croix | 1995 | 2024 | \- | 3 | monthly |
+| la_depeche | La Dépêche | 2012 | 2026 | \- | 2 | daily |
+| laprovence | La Provence | 2014 | 2026 | \- | 2 | daily |
+| latribune | La Tribune | 2015 | 2026 | \- | 2 | daily |
+| le_capital | Le Capital | 2009 | 2026 | \- | 2 | daily |
+| le_courrier_de_l_ouest | Le Courrier de l’Ouest | 2019 | 2026 | \- | 2 | daily |
+| le_figaro | Le Figaro (web) | 2006 | 2026 | \- | 2 | daily |
+| le_journal_du_dimanche | Le Journal du Dimanche | 2008 | 2026 | \- | 2 | daily |
+| le_maine_libre | Le Maine Libre | 2019 | 2026 | \- | 2 | daily |
+| le_marin | Le Marin | 2013 | 2026 | \- | 2 | daily |
+| le_monde | Le Monde | 1945 | 2026 | \- | 2 | daily |
+| le_nouvel_observateur | Le Nouvel Observateur | 2010 | 2026 | \- | 2 | daily |
+| le_telegramme | Le Télégramme | 2009 | 2011 | \- | 2 | daily |
+| leparisien | Le Parisien | 2001 | 2024 | \- | 2 | monthly |
+| les_echos | Les Échos | 1991 | 2026 | \- | 2 | daily |
+| marianne | Marianne | 2019 | 2026 | \- | 2 | daily |
+| mediapart | Mediapart | 2008 | 2026 | \- | 2 | daily |
+| midilibre | Midi Libre | 2011 | 2026 | \- | 2 | daily |
+| nice_matin | Nice-Matin | 2015 | 2026 | \- | 2 | daily |
+| ouest_france | Ouest-France | 2012 | 2026 | \- | 2 | daily |
+| paris_match | Paris Match | 2009 | 2026 | \- | 2 | daily |
+| paris_normandie | Paris Normandie | 2021 | 2026 | \- | 2 | daily |
+| presse_ocean | Presse Océan | 2019 | 2026 | \- | 2 | daily |
+| sud_ouest | Sud Ouest | 2010 | 2017 | \- | 2 | daily |
+| telerama | Télérama | 2008 | 2026 | \- | 2 | daily |
+| valeurs_actuelles | Valeurs Actuelles | 2008 | 2025 | \- | 2 | daily |
+| voici | Voici | 2018 | 2026 | \- | 2 | daily |
+| voiles_et_voiliers | Voiles et Voiliers | 2009 | 2026 | \- | 2 | daily |
+| lemonde | Le Monde | 1945 | 2026 | \- | 2 | daily |
 
 Additional information on Gallicagram can be found on a
 [preprint](https://osf.io/preprints/socarxiv/84bf3/) by Gallicagram

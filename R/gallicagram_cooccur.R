@@ -35,7 +35,7 @@
 #'
 #' @export
 #' @examples
-#'   gallicagram_cooccur("président", "mauvais")
+#'   gallicagram_cooccur("président", "mauvais", corpus = "press")
 gallicagram_cooccur <- function(keyword_1,
                                 keyword_2,
                                 corpus = "lemonde",

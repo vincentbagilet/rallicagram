@@ -26,7 +26,7 @@
 #'
 #' @export
 #' @examples
-#' gallicagram_cooccur_lexicon(c("président", "présidente"), c("mauvais", "nul"))
+#' gallicagram_cooccur_lexicon(c("président", "présidente"), c("mauvais", "nul"), corpus = "press")
 gallicagram_cooccur_lexicon <- function(lexicon_1,
                                         lexicon_2,
                                         corpus = "lemonde",

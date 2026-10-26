@@ -64,10 +64,10 @@ a given month.
 
 For instance "camarade" is often followed by "staline" or "khrouchtchev" in
 Le Monde. The function returns the most frequent ngrams of the form
-"camarade \_" where "_" is a placeholder for any ngram of length up to
+"camarade \code{_}" where "\code{_}" is a placeholder for any ngram of length up to
 \code{length}. When no placeholder is specified, it is assumed that one is
 located after keyword. The placeholder can be located within phrases. For
-example, "le _ staline".
+example, "le \code{_} staline".
 
 The running time for the "presse" corpus can be long.
 }

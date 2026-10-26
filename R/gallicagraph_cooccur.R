@@ -21,21 +21,21 @@
 #'
 #' @export
 #' @examples
-#'   gallicagram_cooccur("président", "ancien") |>
+#'   gallicagram_cooccur("président", "ancien", cooccur_level = "articles") |>
 #'     gallicagraph_cooccur()
 #'
-#'   gallicagram_cooccur("président", "ancien") |>
-#'     rbind(gallicagram_cooccur("président", "république")) |>
+#'   gallicagram_cooccur("président", "ancien", cooccur_level = "articles") |>
+#'     rbind(gallicagram_cooccur("président", "république", cooccur_level = "articles")) |>
 #'     gallicagraph_cooccur(color = keyword)
 #'
-#'   gallicagram_cooccur("président", "ancien") |>
-#'     rbind(gallicagram_cooccur("président", "république")) |>
+#'   gallicagram_cooccur("président", "ancien", cooccur_level = "articles") |>
+#'     rbind(gallicagram_cooccur("président", "république", cooccur_level = "articles")) |>
 #'     gallicagraph_cooccur() +
 #'     ggplot2::facet_wrap(~ keyword)
 gallicagraph_cooccur <- function(data, color = NULL) {
 
   corpus_name <- rallicagram::list_corpora |>
-    dplyr::filter(.data$corpus %in% unique(data$corpus)) |>
+    dplyr::filter(.data$corpus %in% unique(.data$corpus)) |>
     dplyr::pull("corpus_name")
 
   data_clean <- data |>

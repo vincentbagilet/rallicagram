@@ -57,7 +57,10 @@ by year, month or day.</p>
 <dl><dt id="arg-keyword">keyword<a class="anchor" aria-label="anchor" href="#arg-keyword"></a></dt>
 <dd><p>A character string. Keyword to search.
 The string cannot contain more words than the <code>max_length</code>
-for this corpus, as indicated in the <code>list_corpora</code> dataset.</p></dd>
+for this corpus, as indicated in the <code>list_corpora</code> dataset. "*" is a
+wildcard that can be used at the end of words and will represent any set of
+letters, e.g. "ecolo*" will return the counts for all words
+starting with "ecolo".</p></dd>
 
 
 <dt id="arg-corpus">corpus<a class="anchor" aria-label="anchor" href="#arg-corpus"></a></dt>

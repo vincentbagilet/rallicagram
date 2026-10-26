@@ -89,6 +89,13 @@ gallicagram_with_month <- function(keyword,
                   n_results,
                   "&length=",
                   length,
+                  ifelse(
+                    rallicagram::list_corpora$alt_base[
+                      rallicagram::list_corpora$corpus == param_clean$corpus
+                    ],
+                    "&elias=true",
+                    ""
+                  ),
                   sep = "") |>
     read_data_gallicagram() |>
     dplyr::rename("n_occur" = "tot", "ngram" = "gram") |>

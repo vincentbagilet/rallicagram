@@ -143,6 +143,13 @@ gallicagram_associated <- function(keyword,
                   n_joker,
                   "&length=",
                   length,
+                  ifelse(
+                    rallicagram::list_corpora$alt_base[
+                      rallicagram::list_corpora$corpus == param_clean$corpus
+                    ],
+                    "&elias=true",
+                    ""
+                  ),
                   sep = "") |>
     read_data_gallicagram() |>
     #remove apostrophes (except for n' since they carry meaning)

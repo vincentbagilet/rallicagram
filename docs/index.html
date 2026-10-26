@@ -50,16 +50,16 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p><code>rallicagram</code> is a R wrapper for the <a href="https://regicid.github.io/api" class="external-link">Gallicagram API</a>.</p>
-<p><a href="https://shiny.ens-paris-saclay.fr/app/gallicagram" class="external-link">Gallicagram</a> is a super nice tool and set of databases that enables to easily run simple Natural Language Processing (<strong>NLP</strong>) analyses on a wide set of corpora. In particular, it enables to build historical <strong>time series of occurrences of keywords</strong> in various media in one line of code.</p>
+<p><code>rallicagram</code> is a R wrapper for the <a href="https://www.gallicagram.com/" class="external-link">Gallicagram</a> API.</p>
+<p><a href="https://www.gallicagram.com/" class="external-link">Gallicagram</a> is a super nice tool and set of databases that enables to easily run simple Natural Language Processing (<strong>NLP</strong>) analyses on a wide set of corpora. In particular, it enables to build historical <strong>time series of occurrences of keywords</strong> in various media in one line of code.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the development version of rallicagram from <a href="https://github.com/vincentbagilet/rallicagram" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"vincentbagilet/rallicagram"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"vincentbagilet/rallicagram"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -91,678 +91,742 @@
 <div class="section level2">
 <h2 id="corpora">Corpora<a class="anchor" aria-label="anchor" href="#corpora"></a>
 </h2>
-<p>The corpora available via Gallicagram are:</p>
-<table style="width:100%;" class="table">
+<p>The corpora available via Gallicagram are the following. Note, for now, there are two “Le Monde” corpora, with different functions associated with each (this is a feature of the data base and will evolve shortly).</p>
+<table class="table">
 <colgroup>
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
 </colgroup>
 <thead><tr>
-<th align="left">Corpus</th>
 <th align="left">Corpus Name</th>
+<th align="left">Corpus</th>
 <th align="right">Reliable From</th>
 <th align="right">Reliable To</th>
-<th align="left">Nb Words</th>
 <th align="right">Max Length</th>
 <th align="left">Resolution</th>
+<th align="left">Number Of Words</th>
+<th align="left">Available Functions</th>
 </tr></thead>
 <tbody>
 <tr>
-<td align="left">lemonde_rubriques</td>
 <td align="left">Le Monde (rubriques)</td>
+<td align="left">lemonde</td>
 <td align="right">1945</td>
 <td align="right">2024</td>
-<td align="left">1.5e+09</td>
-<td align="right">4</td>
+<td align="right">3</td>
 <td align="left">monthly</td>
+<td align="left">1.5e+09</td>
+<td align="left">article|cooccurr_article|associated_article|with|associated</td>
 </tr>
 <tr>
-<td align="left">presse</td>
 <td align="left">Presse de Gallica</td>
+<td align="left">presse</td>
 <td align="right">1789</td>
 <td align="right">1950</td>
-<td align="left">5.7e+10</td>
 <td align="right">3</td>
 <td align="left">monthly</td>
+<td align="left">5.7e+10</td>
+<td align="left">cooccurr|with|associated</td>
 </tr>
 <tr>
-<td align="left">livres</td>
 <td align="left">Livres de Gallica</td>
+<td align="left">livres</td>
 <td align="right">1700</td>
 <td align="right">1940</td>
-<td align="left">1.6e+10</td>
 <td align="right">5</td>
 <td align="left">yearly</td>
+<td align="left">1.6e+10</td>
+<td align="left">cooccurr|with|associated</td>
 </tr>
 <tr>
-<td align="left">presse_livres</td>
 <td align="left">Presse + livres de Gallica</td>
+<td align="left">presse_livres</td>
 <td align="right">1789</td>
 <td align="right">1940</td>
-<td align="left">7.3e+10</td>
 <td align="right">3</td>
 <td align="left">yearly</td>
+<td align="left">7.3e+10</td>
+<td align="left">-</td>
 </tr>
 <tr>
-<td align="left">ddb</td>
 <td align="left">Deutsches Zeitungsportal (DDB)</td>
+<td align="left">ddb</td>
 <td align="right">1780</td>
 <td align="right">1950</td>
-<td align="left">3.9e+10</td>
 <td align="right">2</td>
 <td align="left">monthly</td>
+<td align="left">3.9e+10</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">american_stories</td>
 <td align="left">American Stories</td>
+<td align="left">american_stories</td>
 <td align="right">1798</td>
 <td align="right">1963</td>
-<td align="left">2e+10</td>
 <td align="right">3</td>
 <td align="left">yearly</td>
+<td align="left">2e+10</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">guardian</td>
 <td align="left">The Guardian</td>
+<td align="left">guardian</td>
 <td align="right">1999</td>
 <td align="right">2026</td>
-<td align="left">2e+09</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">2e+09</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">paris</td>
 <td align="left">Journal de Paris</td>
+<td align="left">paris</td>
 <td align="right">1777</td>
 <td align="right">1827</td>
-<td align="left">8.6e+07</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">8.6e+07</td>
+<td align="left">cooccurr|with|associated</td>
 </tr>
 <tr>
-<td align="left">moniteur</td>
 <td align="left">Moniteur Universel</td>
+<td align="left">moniteur</td>
 <td align="right">1789</td>
 <td align="right">1869</td>
-<td align="left">5.11e+08</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">5.11e+08</td>
+<td align="left">cooccurr|with|associated</td>
 </tr>
 <tr>
-<td align="left">journal_des_debats</td>
 <td align="left">Journal des Débats</td>
+<td align="left">journal_des_debats</td>
 <td align="right">1789</td>
 <td align="right">1944</td>
-<td align="left">1.2e+09</td>
 <td align="right">1</td>
 <td align="left">daily</td>
+<td align="left">1.2e+09</td>
+<td align="left">cooccurr</td>
 </tr>
 <tr>
-<td align="left">la_presse</td>
 <td align="left">La Presse</td>
+<td align="left">la_presse</td>
 <td align="right">1836</td>
 <td align="right">1869</td>
-<td align="left">2.53e+08</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">2.53e+08</td>
+<td align="left">cooccurr</td>
 </tr>
 <tr>
-<td align="left">constitutionnel</td>
 <td align="left">Le Constitutionnel</td>
+<td align="left">constitutionnel</td>
 <td align="right">1821</td>
 <td align="right">1913</td>
-<td align="left">6.4e+07</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">6.4e+07</td>
+<td align="left">cooccurr</td>
 </tr>
 <tr>
-<td align="left">figaro</td>
 <td align="left">Le Figaro</td>
+<td align="left">figaro</td>
 <td align="right">1854</td>
 <td align="right">1952</td>
-<td align="left">8.7e+08</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">8.7e+08</td>
+<td align="left">cooccurr|with|associated</td>
 </tr>
 <tr>
-<td align="left">temps</td>
 <td align="left">Le Temps</td>
+<td align="left">temps</td>
 <td align="right">1861</td>
 <td align="right">1942</td>
-<td align="left">1e+09</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">1e+09</td>
+<td align="left">cooccurr|with|associated</td>
 </tr>
 <tr>
-<td align="left">petit_journal</td>
 <td align="left">Le Petit Journal</td>
+<td align="left">petit_journal</td>
 <td align="right">1863</td>
 <td align="right">1942</td>
-<td align="left">7.45e+08</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">7.45e+08</td>
+<td align="left">cooccurr|with|associated</td>
 </tr>
 <tr>
-<td align="left">journal_officiel</td>
 <td align="left">Journal officiel</td>
+<td align="left">journal_officiel</td>
 <td align="right">1869</td>
 <td align="right">1952</td>
-<td align="left">8.42e+08</td>
 <td align="right">1</td>
 <td align="left">daily</td>
+<td align="left">8.42e+08</td>
+<td align="left">cooccurr</td>
 </tr>
 <tr>
-<td align="left">petit_parisien</td>
 <td align="left">Le Petit Parisien</td>
+<td align="left">petit_parisien</td>
 <td align="right">1876</td>
 <td align="right">1944</td>
-<td align="left">6.31e+08</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">6.31e+08</td>
+<td align="left">cooccurr|with|associated</td>
 </tr>
 <tr>
-<td align="left">huma</td>
 <td align="left">L’Humanité</td>
+<td align="left">huma</td>
 <td align="right">1904</td>
 <td align="right">1952</td>
-<td align="left">3.18e+08</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">3.18e+08</td>
+<td align="left">cooccurr|with|associated</td>
 </tr>
 <tr>
-<td align="left">subtitles</td>
 <td align="left">Opensubtitles (français)</td>
+<td align="left">subtitles</td>
 <td align="right">1935</td>
 <td align="right">2020</td>
-<td align="left">1.7e+07</td>
 <td align="right">3</td>
 <td align="left">yearly</td>
+<td align="left">1.7e+07</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">subtitles_en</td>
 <td align="left">Opensubtitles (anglais)</td>
+<td align="left">subtitles_en</td>
 <td align="right">1930</td>
 <td align="right">2020</td>
-<td align="left">1.02e+08</td>
 <td align="right">3</td>
 <td align="left">yearly</td>
+<td align="left">1.02e+08</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">rap</td>
 <td align="left">Rap français (Genius)</td>
+<td align="left">rap</td>
 <td align="right">1995</td>
 <td align="right">2024</td>
-<td align="left">2e+07</td>
 <td align="right">5</td>
 <td align="left">yearly</td>
+<td align="left">2e+07</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">persee</td>
 <td align="left">Persée</td>
+<td align="left">persee</td>
 <td align="right">1930</td>
 <td align="right">2023</td>
-<td align="left">1e+09</td>
 <td align="right">2</td>
 <td align="left">yearly</td>
+<td align="left">1e+09</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">route à part (query_cairn)</td>
 <td align="left">Cairn</td>
+<td align="left">route à part (query_cairn)</td>
 <td align="right">2001</td>
 <td align="right">2025</td>
-<td align="left">-</td>
 <td align="right">3</td>
 <td align="left">yearly</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">route à part (persee+cairn)</td>
 <td align="left">Persée + Cairn</td>
+<td align="left">route à part (persee+cairn)</td>
 <td align="right">1930</td>
 <td align="right">2025</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">yearly</td>
+<td align="left">-</td>
+<td align="left">-</td>
 </tr>
 <tr>
-<td align="left">tv_bfmtv</td>
 <td align="left">BFM TV (transcriptions)</td>
+<td align="left">tv_bfmtv</td>
 <td align="right">2026</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">3</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">tv_cnews</td>
 <td align="left">CNews (transcriptions)</td>
+<td align="left">tv_cnews</td>
 <td align="right">2026</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">3</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">tv_franceinfo</td>
 <td align="left">France Info (transcriptions)</td>
+<td align="left">tv_franceinfo</td>
 <td align="right">2026</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">3</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">ouest</td>
 <td align="left">Ouest-France (Gallica)</td>
+<td align="left">ouest</td>
 <td align="right">1899</td>
 <td align="right">2025</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">yearly</td>
+<td align="left">-</td>
+<td align="left">-</td>
 </tr>
 <tr>
-<td align="left">prenoms</td>
 <td align="left">Prénoms INSEE</td>
+<td align="left">prenoms</td>
 <td align="right">1900</td>
 <td align="right">2024</td>
-<td align="left">-</td>
 <td align="right">1</td>
 <td align="left">yearly</td>
+<td align="left">-</td>
+<td align="left">-</td>
 </tr>
 <tr>
-<td align="left">jorf</td>
 <td align="left">Journal officiel (JORF)</td>
+<td align="left">jorf</td>
 <td align="right">1990</td>
 <td align="right">2026</td>
-<td align="left">5.9e+08</td>
 <td align="right">2</td>
 <td align="left">monthly</td>
+<td align="left">5.9e+08</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">libe</td>
 <td align="left">Libération</td>
+<td align="left">libe</td>
 <td align="right">1998</td>
 <td align="right">2025</td>
-<td align="left">-</td>
 <td align="right">3</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">majinbook</td>
 <td align="left"># Majinbook français</td>
+<td align="left">majinbook</td>
 <td align="right">1700</td>
 <td align="right">2023</td>
-<td align="left">-</td>
 <td align="right">4</td>
 <td align="left">yearly</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">spa_majinbook</td>
 <td align="left"># Majinbook espagnol</td>
+<td align="left">spa_majinbook</td>
 <td align="right">1700</td>
 <td align="right">2023</td>
-<td align="left">-</td>
 <td align="right">4</td>
 <td align="left">yearly</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">eng_majinbook</td>
 <td align="left"># Majinbook anglais</td>
+<td align="left">eng_majinbook</td>
 <td align="right">1700</td>
 <td align="right">2023</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">yearly</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">deu_majinbook</td>
 <td align="left"># Majinbook allemand</td>
+<td align="left">deu_majinbook</td>
 <td align="right">1700</td>
 <td align="right">2023</td>
-<td align="left">-</td>
 <td align="right">4</td>
 <td align="left">yearly</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">presse_moderne</td>
 <td align="left">Presse contemporaine (toutes)</td>
+<td align="left">presse_moderne</td>
 <td align="right">2008</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">-</td>
 </tr>
 <tr>
-<td align="left">20minutes</td>
 <td align="left">20 Minutes</td>
+<td align="left">20minutes</td>
 <td align="right">2006</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">bfmtv</td>
 <td align="left">BFM TV</td>
+<td align="left">bfmtv</td>
 <td align="right">2012</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">challenges</td>
 <td align="left">Challenges</td>
+<td align="left">challenges</td>
 <td align="right">2006</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">cnews</td>
 <td align="left">CNews</td>
+<td align="left">cnews</td>
 <td align="right">2012</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">francesoir</td>
 <td align="left">France Soir</td>
+<td align="left">francesoir</td>
 <td align="right">2015</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">gala</td>
 <td align="left">Gala</td>
+<td align="left">gala</td>
 <td align="right">2008</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">l_opinion</td>
 <td align="left">L’Opinion</td>
+<td align="left">l_opinion</td>
 <td align="right">2013</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">lacroix</td>
 <td align="left">La Croix</td>
+<td align="left">lacroix</td>
 <td align="right">1995</td>
 <td align="right">2024</td>
-<td align="left">-</td>
 <td align="right">3</td>
 <td align="left">monthly</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">la_depeche</td>
 <td align="left">La Dépêche</td>
+<td align="left">la_depeche</td>
 <td align="right">2012</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">laprovence</td>
 <td align="left">La Provence</td>
+<td align="left">laprovence</td>
 <td align="right">2014</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">latribune</td>
 <td align="left">La Tribune</td>
+<td align="left">latribune</td>
 <td align="right">2015</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">le_capital</td>
 <td align="left">Le Capital</td>
+<td align="left">le_capital</td>
 <td align="right">2009</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">le_courrier_de_l_ouest</td>
 <td align="left">Le Courrier de l’Ouest</td>
+<td align="left">le_courrier_de_l_ouest</td>
 <td align="right">2019</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">le_figaro</td>
 <td align="left">Le Figaro (web)</td>
+<td align="left">le_figaro</td>
 <td align="right">2006</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">le_journal_du_dimanche</td>
 <td align="left">Le Journal du Dimanche</td>
+<td align="left">le_journal_du_dimanche</td>
 <td align="right">2008</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">le_maine_libre</td>
 <td align="left">Le Maine Libre</td>
+<td align="left">le_maine_libre</td>
 <td align="right">2019</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">le_marin</td>
 <td align="left">Le Marin</td>
+<td align="left">le_marin</td>
 <td align="right">2013</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">le_monde</td>
 <td align="left">Le Monde</td>
+<td align="left">le_monde</td>
 <td align="right">1945</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">le_nouvel_observateur</td>
 <td align="left">Le Nouvel Observateur</td>
+<td align="left">le_nouvel_observateur</td>
 <td align="right">2010</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">le_telegramme</td>
 <td align="left">Le Télégramme</td>
+<td align="left">le_telegramme</td>
 <td align="right">2009</td>
 <td align="right">2011</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">leparisien</td>
 <td align="left">Le Parisien</td>
+<td align="left">leparisien</td>
 <td align="right">2001</td>
 <td align="right">2024</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">monthly</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">les_echos</td>
 <td align="left">Les Échos</td>
+<td align="left">les_echos</td>
 <td align="right">1991</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">marianne</td>
 <td align="left">Marianne</td>
+<td align="left">marianne</td>
 <td align="right">2019</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">mediapart</td>
 <td align="left">Mediapart</td>
+<td align="left">mediapart</td>
 <td align="right">2008</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">midilibre</td>
 <td align="left">Midi Libre</td>
+<td align="left">midilibre</td>
 <td align="right">2011</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">nice_matin</td>
 <td align="left">Nice-Matin</td>
+<td align="left">nice_matin</td>
 <td align="right">2015</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">ouest_france</td>
 <td align="left">Ouest-France</td>
+<td align="left">ouest_france</td>
 <td align="right">2012</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">paris_match</td>
 <td align="left">Paris Match</td>
+<td align="left">paris_match</td>
 <td align="right">2009</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">paris_normandie</td>
 <td align="left">Paris Normandie</td>
+<td align="left">paris_normandie</td>
 <td align="right">2021</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">presse_ocean</td>
 <td align="left">Presse Océan</td>
+<td align="left">presse_ocean</td>
 <td align="right">2019</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">sud_ouest</td>
 <td align="left">Sud Ouest</td>
+<td align="left">sud_ouest</td>
 <td align="right">2010</td>
 <td align="right">2017</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">telerama</td>
 <td align="left">Télérama</td>
+<td align="left">telerama</td>
 <td align="right">2008</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">valeurs_actuelles</td>
 <td align="left">Valeurs Actuelles</td>
+<td align="left">valeurs_actuelles</td>
 <td align="right">2008</td>
 <td align="right">2025</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">voici</td>
 <td align="left">Voici</td>
+<td align="left">voici</td>
 <td align="right">2018</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
+<td align="left">-</td>
+<td align="left">with|associated</td>
 </tr>
 <tr>
-<td align="left">voiles_et_voiliers</td>
 <td align="left">Voiles et Voiliers</td>
+<td align="left">voiles_et_voiliers</td>
 <td align="right">2009</td>
 <td align="right">2026</td>
-<td align="left">-</td>
 <td align="right">2</td>
 <td align="left">daily</td>
-</tr>
-<tr>
-<td align="left">lemonde</td>
-<td align="left">Le Monde</td>
-<td align="right">1945</td>
-<td align="right">2026</td>
 <td align="left">-</td>
-<td align="right">2</td>
-<td align="left">daily</td>
+<td align="left">with|associated</td>
 </tr>
 </tbody>
 </table>
-<p>Additional information on Gallicagram can be found on a <a href="https://osf.io/preprints/socarxiv/84bf3/" class="external-link">preprint</a> by Gallicagram developers <a href="https://regicid.github.io/" class="external-link">Benoît de Courson</a> and Benjamin Azoulay and on the “Notice” tab of the <a href="https://shiny.ens-paris-saclay.fr/app/gallicagram" class="external-link">Gallicagram website</a>.</p>
+<p>Additional information on Gallicagram can be found on a <a href="https://osf.io/preprints/socarxiv/84bf3/" class="external-link">preprint</a> by Gallicagram developers <a href="https://regicid.github.io/" class="external-link">Benoît de Courson</a> and Benjamin Azoulay and on the “Notice” tab of the <a href="https://www.gallicagram.com/" class="external-link">Gallicagram website</a>.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">

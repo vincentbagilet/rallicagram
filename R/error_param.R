@@ -89,7 +89,7 @@ error_param <- function(info_corpus,
   func_type <- regmatches(call_func, m = regexpr("with|cooccur|associated", call_func))
 
   if (!length(func_type) == 0) {
-    if (!grepl(func_type, list_corpora$available_func[list_corpora$corpus == corpus])) {
+    if (!grepl(func_type, rallicagram::list_corpora$available_func[rallicagram::list_corpora$corpus == corpus])) {
       stop("This function is not suported for this corpus")
     }
   }

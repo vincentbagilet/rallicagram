@@ -85,6 +85,13 @@ gallicagram <- function(keyword,
                     paste("&revue=", param_clean$subcorpora, sep = ""),
                     ""
                   ),
+                  ifelse(
+                    rallicagram::list_corpora$alt_base[
+                      rallicagram::list_corpora$corpus == param_clean$corpus
+                    ],
+                    "&elias=true",
+                    ""
+                  ),
                   sep = "") |>
     tidy_gallicagram(param_clean$corpus, param_clean$resolution_en) |>
     dplyr::rename(

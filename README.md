@@ -9,14 +9,14 @@
 
 ## Overview
 
-`rallicagram` is a R wrapper for the [Gallicagram
-API](https://regicid.github.io/api).
+`rallicagram` is a R wrapper for the
+[Gallicagram](https://www.gallicagram.com/) API.
 
-[Gallicagram](https://shiny.ens-paris-saclay.fr/app/gallicagram) is a
-super nice tool and set of databases that enables to easily run simple
-Natural Language Processing (**NLP**) analyses on a wide set of corpora.
-In particular, it enables to build historical **time series of
-occurrences of keywords** in various media in one line of code.
+[Gallicagram](https://www.gallicagram.com/) is a super nice tool and set
+of databases that enables to easily run simple Natural Language
+Processing (**NLP**) analyses on a wide set of corpora. In particular,
+it enables to build historical **time series of occurrences of
+keywords** in various media in one line of code.
 
 ## Installation
 
@@ -24,8 +24,8 @@ You can install the development version of rallicagram from
 [GitHub](https://github.com/vincentbagilet/rallicagram) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("vincentbagilet/rallicagram")
+# install.packages("pak")
+pak::pak("vincentbagilet/rallicagram")
 ```
 
 ## Usage
@@ -65,84 +65,86 @@ with a keyword. The corresponding functions are described in the
 
 ## Corpora
 
-The corpora available via Gallicagram are:
+The corpora available via Gallicagram are the following. Note, for now,
+there are two “Le Monde” corpora, with different functions associated
+with each (this is a feature of the data base and will evolve shortly).
 
-| Corpus | Corpus Name | Reliable From | Reliable To | Nb Words | Max Length | Resolution | Available Func |
-|:---|:---|---:|---:|:---|---:|:---|:---|
-| lemonde | Le Monde (rubriques) | 1945 | 2024 | 1.5e+09 | 4 | monthly | article\|cooccurr_article\|associated_article\|with\|associated |
-| presse | Presse de Gallica | 1789 | 1950 | 5.7e+10 | 3 | monthly | cooccurr\|with\|associated |
-| livres | Livres de Gallica | 1700 | 1940 | 1.6e+10 | 5 | yearly | cooccurr\|with\|associated |
-| presse_livres | Presse + livres de Gallica | 1789 | 1940 | 7.3e+10 | 3 | yearly | NA |
-| ddb | Deutsches Zeitungsportal (DDB) | 1780 | 1950 | 3.9e+10 | 2 | monthly | with\|associated |
-| american_stories | American Stories | 1798 | 1963 | 2e+10 | 3 | yearly | with\|associated |
-| guardian | The Guardian | 1999 | 2026 | 2e+09 | 2 | daily | with\|associated |
-| paris | Journal de Paris | 1777 | 1827 | 8.6e+07 | 2 | daily | cooccurr\|with\|associated |
-| moniteur | Moniteur Universel | 1789 | 1869 | 5.11e+08 | 2 | daily | cooccurr\|with\|associated |
-| journal_des_debats | Journal des Débats | 1789 | 1944 | 1.2e+09 | 1 | daily | cooccurr |
-| la_presse | La Presse | 1836 | 1869 | 2.53e+08 | 2 | daily | cooccurr |
-| constitutionnel | Le Constitutionnel | 1821 | 1913 | 6.4e+07 | 2 | daily | cooccurr |
-| figaro | Le Figaro | 1854 | 1952 | 8.7e+08 | 2 | daily | cooccurr\|with\|associated |
-| temps | Le Temps | 1861 | 1942 | 1e+09 | 2 | daily | cooccurr\|with\|associated |
-| petit_journal | Le Petit Journal | 1863 | 1942 | 7.45e+08 | 2 | daily | cooccurr\|with\|associated |
-| journal_officiel | Journal officiel | 1869 | 1952 | 8.42e+08 | 1 | daily | cooccurr |
-| petit_parisien | Le Petit Parisien | 1876 | 1944 | 6.31e+08 | 2 | daily | cooccurr\|with\|associated |
-| huma | L’Humanité | 1904 | 1952 | 3.18e+08 | 2 | daily | cooccurr\|with\|associated |
-| subtitles | Opensubtitles (français) | 1935 | 2020 | 1.7e+07 | 3 | yearly | with\|associated |
-| subtitles_en | Opensubtitles (anglais) | 1930 | 2020 | 1.02e+08 | 3 | yearly | with\|associated |
-| rap | Rap français (Genius) | 1995 | 2024 | 2e+07 | 5 | yearly | with\|associated |
-| persee | Persée | 1930 | 2023 | 1e+09 | 2 | yearly | with\|associated |
-| route à part (query_cairn) | Cairn | 2001 | 2025 | \- | 3 | yearly | with\|associated |
-| route à part (persee+cairn) | Persée + Cairn | 1930 | 2025 | \- | 2 | yearly | NA |
-| tv_bfmtv | BFM TV (transcriptions) | 2026 | 2026 | \- | 3 | daily | with\|associated |
-| tv_cnews | CNews (transcriptions) | 2026 | 2026 | \- | 3 | daily | with\|associated |
-| tv_franceinfo | France Info (transcriptions) | 2026 | 2026 | \- | 3 | daily | with\|associated |
-| ouest | Ouest-France (Gallica) | 1899 | 2025 | \- | 2 | yearly | NA |
-| prenoms | Prénoms INSEE | 1900 | 2024 | \- | 1 | yearly | NA |
-| jorf | Journal officiel (JORF) | 1990 | 2026 | 5.9e+08 | 2 | monthly | with\|associated |
-| libe | Libération | 1998 | 2025 | \- | 3 | daily | with\|associated |
-| majinbook | \# Majinbook français | 1700 | 2023 | \- | 4 | yearly | with\|associated |
-| spa_majinbook | \# Majinbook espagnol | 1700 | 2023 | \- | 4 | yearly | with\|associated |
-| eng_majinbook | \# Majinbook anglais | 1700 | 2023 | \- | 2 | yearly | with\|associated |
-| deu_majinbook | \# Majinbook allemand | 1700 | 2023 | \- | 4 | yearly | with\|associated |
-| presse_moderne | Presse contemporaine (toutes) | 2008 | 2026 | \- | 2 | daily | NA |
-| 20minutes | 20 Minutes | 2006 | 2026 | \- | 2 | daily | with\|associated |
-| bfmtv | BFM TV | 2012 | 2026 | \- | 2 | daily | with\|associated |
-| challenges | Challenges | 2006 | 2026 | \- | 2 | daily | with\|associated |
-| cnews | CNews | 2012 | 2026 | \- | 2 | daily | with\|associated |
-| francesoir | France Soir | 2015 | 2026 | \- | 2 | daily | with\|associated |
-| gala | Gala | 2008 | 2026 | \- | 2 | daily | with\|associated |
-| l_opinion | L’Opinion | 2013 | 2026 | \- | 2 | daily | with\|associated |
-| lacroix | La Croix | 1995 | 2024 | \- | 3 | monthly | with\|associated |
-| la_depeche | La Dépêche | 2012 | 2026 | \- | 2 | daily | with\|associated |
-| laprovence | La Provence | 2014 | 2026 | \- | 2 | daily | with\|associated |
-| latribune | La Tribune | 2015 | 2026 | \- | 2 | daily | with\|associated |
-| le_capital | Le Capital | 2009 | 2026 | \- | 2 | daily | with\|associated |
-| le_courrier_de_l_ouest | Le Courrier de l’Ouest | 2019 | 2026 | \- | 2 | daily | with\|associated |
-| le_figaro | Le Figaro (web) | 2006 | 2026 | \- | 2 | daily | with\|associated |
-| le_journal_du_dimanche | Le Journal du Dimanche | 2008 | 2026 | \- | 2 | daily | with\|associated |
-| le_maine_libre | Le Maine Libre | 2019 | 2026 | \- | 2 | daily | with\|associated |
-| le_marin | Le Marin | 2013 | 2026 | \- | 2 | daily | with\|associated |
-| le_monde | Le Monde | 1945 | 2026 | \- | 2 | daily | with\|associated |
-| le_nouvel_observateur | Le Nouvel Observateur | 2010 | 2026 | \- | 2 | daily | with\|associated |
-| le_telegramme | Le Télégramme | 2009 | 2011 | \- | 2 | daily | with\|associated |
-| leparisien | Le Parisien | 2001 | 2024 | \- | 2 | monthly | with\|associated |
-| les_echos | Les Échos | 1991 | 2026 | \- | 2 | daily | with\|associated |
-| marianne | Marianne | 2019 | 2026 | \- | 2 | daily | with\|associated |
-| mediapart | Mediapart | 2008 | 2026 | \- | 2 | daily | with\|associated |
-| midilibre | Midi Libre | 2011 | 2026 | \- | 2 | daily | with\|associated |
-| nice_matin | Nice-Matin | 2015 | 2026 | \- | 2 | daily | with\|associated |
-| ouest_france | Ouest-France | 2012 | 2026 | \- | 2 | daily | with\|associated |
-| paris_match | Paris Match | 2009 | 2026 | \- | 2 | daily | with\|associated |
-| paris_normandie | Paris Normandie | 2021 | 2026 | \- | 2 | daily | with\|associated |
-| presse_ocean | Presse Océan | 2019 | 2026 | \- | 2 | daily | with\|associated |
-| sud_ouest | Sud Ouest | 2010 | 2017 | \- | 2 | daily | with\|associated |
-| telerama | Télérama | 2008 | 2026 | \- | 2 | daily | with\|associated |
-| valeurs_actuelles | Valeurs Actuelles | 2008 | 2025 | \- | 2 | daily | with\|associated |
-| voici | Voici | 2018 | 2026 | \- | 2 | daily | with\|associated |
-| voiles_et_voiliers | Voiles et Voiliers | 2009 | 2026 | \- | 2 | daily | with\|associated |
+| Corpus Name | Corpus | Reliable From | Reliable To | Max Length | Resolution | Number Of Words | Available Functions |
+|:---|:---|---:|---:|---:|:---|:---|:---|
+| Le Monde (rubriques) | lemonde | 1945 | 2024 | 3 | monthly | 1.5e+09 | article\|cooccurr_article\|associated_article\|with\|associated |
+| Presse de Gallica | presse | 1789 | 1950 | 3 | monthly | 5.7e+10 | cooccurr\|with\|associated |
+| Livres de Gallica | livres | 1700 | 1940 | 5 | yearly | 1.6e+10 | cooccurr\|with\|associated |
+| Presse + livres de Gallica | presse_livres | 1789 | 1940 | 3 | yearly | 7.3e+10 | \- |
+| Deutsches Zeitungsportal (DDB) | ddb | 1780 | 1950 | 2 | monthly | 3.9e+10 | with\|associated |
+| American Stories | american_stories | 1798 | 1963 | 3 | yearly | 2e+10 | with\|associated |
+| The Guardian | guardian | 1999 | 2026 | 2 | daily | 2e+09 | with\|associated |
+| Journal de Paris | paris | 1777 | 1827 | 2 | daily | 8.6e+07 | cooccurr\|with\|associated |
+| Moniteur Universel | moniteur | 1789 | 1869 | 2 | daily | 5.11e+08 | cooccurr\|with\|associated |
+| Journal des Débats | journal_des_debats | 1789 | 1944 | 1 | daily | 1.2e+09 | cooccurr |
+| La Presse | la_presse | 1836 | 1869 | 2 | daily | 2.53e+08 | cooccurr |
+| Le Constitutionnel | constitutionnel | 1821 | 1913 | 2 | daily | 6.4e+07 | cooccurr |
+| Le Figaro | figaro | 1854 | 1952 | 2 | daily | 8.7e+08 | cooccurr\|with\|associated |
+| Le Temps | temps | 1861 | 1942 | 2 | daily | 1e+09 | cooccurr\|with\|associated |
+| Le Petit Journal | petit_journal | 1863 | 1942 | 2 | daily | 7.45e+08 | cooccurr\|with\|associated |
+| Journal officiel | journal_officiel | 1869 | 1952 | 1 | daily | 8.42e+08 | cooccurr |
+| Le Petit Parisien | petit_parisien | 1876 | 1944 | 2 | daily | 6.31e+08 | cooccurr\|with\|associated |
+| L’Humanité | huma | 1904 | 1952 | 2 | daily | 3.18e+08 | cooccurr\|with\|associated |
+| Opensubtitles (français) | subtitles | 1935 | 2020 | 3 | yearly | 1.7e+07 | with\|associated |
+| Opensubtitles (anglais) | subtitles_en | 1930 | 2020 | 3 | yearly | 1.02e+08 | with\|associated |
+| Rap français (Genius) | rap | 1995 | 2024 | 5 | yearly | 2e+07 | with\|associated |
+| Persée | persee | 1930 | 2023 | 2 | yearly | 1e+09 | with\|associated |
+| Cairn | route à part (query_cairn) | 2001 | 2025 | 3 | yearly | \- | with\|associated |
+| Persée + Cairn | route à part (persee+cairn) | 1930 | 2025 | 2 | yearly | \- | \- |
+| BFM TV (transcriptions) | tv_bfmtv | 2026 | 2026 | 3 | daily | \- | with\|associated |
+| CNews (transcriptions) | tv_cnews | 2026 | 2026 | 3 | daily | \- | with\|associated |
+| France Info (transcriptions) | tv_franceinfo | 2026 | 2026 | 3 | daily | \- | with\|associated |
+| Ouest-France (Gallica) | ouest | 1899 | 2025 | 2 | yearly | \- | \- |
+| Prénoms INSEE | prenoms | 1900 | 2024 | 1 | yearly | \- | \- |
+| Journal officiel (JORF) | jorf | 1990 | 2026 | 2 | monthly | 5.9e+08 | with\|associated |
+| Libération | libe | 1998 | 2025 | 3 | daily | \- | with\|associated |
+| \# Majinbook français | majinbook | 1700 | 2023 | 4 | yearly | \- | with\|associated |
+| \# Majinbook espagnol | spa_majinbook | 1700 | 2023 | 4 | yearly | \- | with\|associated |
+| \# Majinbook anglais | eng_majinbook | 1700 | 2023 | 2 | yearly | \- | with\|associated |
+| \# Majinbook allemand | deu_majinbook | 1700 | 2023 | 4 | yearly | \- | with\|associated |
+| Presse contemporaine (toutes) | presse_moderne | 2008 | 2026 | 2 | daily | \- | \- |
+| 20 Minutes | 20minutes | 2006 | 2026 | 2 | daily | \- | with\|associated |
+| BFM TV | bfmtv | 2012 | 2026 | 2 | daily | \- | with\|associated |
+| Challenges | challenges | 2006 | 2026 | 2 | daily | \- | with\|associated |
+| CNews | cnews | 2012 | 2026 | 2 | daily | \- | with\|associated |
+| France Soir | francesoir | 2015 | 2026 | 2 | daily | \- | with\|associated |
+| Gala | gala | 2008 | 2026 | 2 | daily | \- | with\|associated |
+| L’Opinion | l_opinion | 2013 | 2026 | 2 | daily | \- | with\|associated |
+| La Croix | lacroix | 1995 | 2024 | 3 | monthly | \- | with\|associated |
+| La Dépêche | la_depeche | 2012 | 2026 | 2 | daily | \- | with\|associated |
+| La Provence | laprovence | 2014 | 2026 | 2 | daily | \- | with\|associated |
+| La Tribune | latribune | 2015 | 2026 | 2 | daily | \- | with\|associated |
+| Le Capital | le_capital | 2009 | 2026 | 2 | daily | \- | with\|associated |
+| Le Courrier de l’Ouest | le_courrier_de_l_ouest | 2019 | 2026 | 2 | daily | \- | with\|associated |
+| Le Figaro (web) | le_figaro | 2006 | 2026 | 2 | daily | \- | with\|associated |
+| Le Journal du Dimanche | le_journal_du_dimanche | 2008 | 2026 | 2 | daily | \- | with\|associated |
+| Le Maine Libre | le_maine_libre | 2019 | 2026 | 2 | daily | \- | with\|associated |
+| Le Marin | le_marin | 2013 | 2026 | 2 | daily | \- | with\|associated |
+| Le Monde | le_monde | 1945 | 2026 | 2 | daily | \- | with\|associated |
+| Le Nouvel Observateur | le_nouvel_observateur | 2010 | 2026 | 2 | daily | \- | with\|associated |
+| Le Télégramme | le_telegramme | 2009 | 2011 | 2 | daily | \- | with\|associated |
+| Le Parisien | leparisien | 2001 | 2024 | 2 | monthly | \- | with\|associated |
+| Les Échos | les_echos | 1991 | 2026 | 2 | daily | \- | with\|associated |
+| Marianne | marianne | 2019 | 2026 | 2 | daily | \- | with\|associated |
+| Mediapart | mediapart | 2008 | 2026 | 2 | daily | \- | with\|associated |
+| Midi Libre | midilibre | 2011 | 2026 | 2 | daily | \- | with\|associated |
+| Nice-Matin | nice_matin | 2015 | 2026 | 2 | daily | \- | with\|associated |
+| Ouest-France | ouest_france | 2012 | 2026 | 2 | daily | \- | with\|associated |
+| Paris Match | paris_match | 2009 | 2026 | 2 | daily | \- | with\|associated |
+| Paris Normandie | paris_normandie | 2021 | 2026 | 2 | daily | \- | with\|associated |
+| Presse Océan | presse_ocean | 2019 | 2026 | 2 | daily | \- | with\|associated |
+| Sud Ouest | sud_ouest | 2010 | 2017 | 2 | daily | \- | with\|associated |
+| Télérama | telerama | 2008 | 2026 | 2 | daily | \- | with\|associated |
+| Valeurs Actuelles | valeurs_actuelles | 2008 | 2025 | 2 | daily | \- | with\|associated |
+| Voici | voici | 2018 | 2026 | 2 | daily | \- | with\|associated |
+| Voiles et Voiliers | voiles_et_voiliers | 2009 | 2026 | 2 | daily | \- | with\|associated |
 
 Additional information on Gallicagram can be found on a
 [preprint](https://osf.io/preprints/socarxiv/84bf3/) by Gallicagram
 developers [Benoît de Courson](https://regicid.github.io/) and Benjamin
 Azoulay and on the “Notice” tab of the [Gallicagram
-website](https://shiny.ens-paris-saclay.fr/app/gallicagram).
+website](https://www.gallicagram.com/).

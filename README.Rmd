@@ -20,17 +20,17 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-`rallicagram` is a R wrapper for the [Gallicagram API](https://regicid.github.io/api). 
+`rallicagram` is a R wrapper for the [Gallicagram](https://www.gallicagram.com/) API. 
 
-[Gallicagram](https://shiny.ens-paris-saclay.fr/app/gallicagram) is a super nice tool and set of databases that enables to easily run simple Natural Language Processing (**NLP**) analyses on a wide set of corpora. In particular, it enables to build historical **time series of occurrences of keywords** in various media in one line of code.
+[Gallicagram](https://www.gallicagram.com/) is a super nice tool and set of databases that enables to easily run simple Natural Language Processing (**NLP**) analyses on a wide set of corpora. In particular, it enables to build historical **time series of occurrences of keywords** in various media in one line of code.
 
 ## Installation
 
 You can install the development version of rallicagram from [GitHub](https://github.com/vincentbagilet/rallicagram) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("vincentbagilet/rallicagram")
+# install.packages("pak")
+pak::pak("vincentbagilet/rallicagram")
 ```
 
 ## Usage
@@ -57,15 +57,21 @@ The package also allows to describe co-occurrences or words associated with a ke
 
 ## Corpora
 
-The corpora available via Gallicagram are:
+The corpora available via Gallicagram are the following. Note, for now, there are two "Le Monde" corpora, with different functions associated with each (this is a feature of the data base and will evolve shortly).
 
 ```{r list_corpora, echo=FALSE}
 rallicagram::list_corpora |> 
-  dplyr::mutate(nb_words = ifelse(is.na(nb_words), "-", nb_words)) |> 
-  dplyr::rename_with(\(x) stringr::str_replace(x, "_", " ") |>  
+  dplyr::mutate(
+    number_of_words = ifelse(is.na(nb_words), "-", nb_words),
+    available_functions = ifelse(is.na(available_func), "-", available_func)
+  ) |> 
+  dplyr::select(
+    corpus_name, dplyr::everything(), -alt_base, -nb_words, -available_func
+  ) |> 
+  dplyr::rename_with(\(x) stringr::str_replace_all(x, "_", " ") |>  
                        stringr::str_to_title()) |> 
   knitr::kable()
 ```
 
 Additional information on Gallicagram can be found on a [preprint](https://osf.io/preprints/socarxiv/84bf3/) by Gallicagram developers [
-Benoît de Courson](https://regicid.github.io/) and Benjamin Azoulay and on the "Notice" tab of the [Gallicagram website](https://shiny.ens-paris-saclay.fr/app/gallicagram).
+Benoît de Courson](https://regicid.github.io/) and Benjamin Azoulay and on the "Notice" tab of the [Gallicagram website](https://www.gallicagram.com/).

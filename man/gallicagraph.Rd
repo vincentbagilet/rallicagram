@@ -35,7 +35,7 @@ This function can also be combined with faceting by adding for instance
   gallicagram("président") |>
     gallicagraph()
 
-  gallicagram_cooccur("président", "ancien") |>
+  gallicagram_cooccur("président", "ancien", cooccur_level = "articles") |>
     gallicagraph()
 
   gallicagram_associated("patate", from = 2020) |>

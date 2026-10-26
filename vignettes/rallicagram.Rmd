@@ -145,7 +145,8 @@ ex_cooccur_lexicon <- gallicagram_cooccur_lexicon(
   corpus = "lemonde",
   from = 1960,
   to = 1970,
-  resolution = "monthly"
+  resolution = "monthly",
+  cooccur_level = "articles"
 )
 ```
 

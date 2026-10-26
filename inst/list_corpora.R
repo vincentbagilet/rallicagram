@@ -15,13 +15,12 @@ list_corpora <- list_corpora_raw |>
     max_length = longueur_max,
     resolution,
     seuils,
-    available_func = available_modes
+    available_func = available_modes,
+    alt_base = elias
   ) |>
   dplyr::mutate(
     period = stringr::str_remove_all(period, "[^\\d-]"),
-    resolution = stringr::str_extract(resolution, "\\w+(?=\\s?)")
-  ) |>
-  dplyr::mutate(
+    resolution = stringr::str_extract(resolution, "\\w+(?=\\s?)"),
     max_length = stringr::str_sub(max_length, 1, 1) |> as.integer(),
     nb_words = nb_words |>
       stringr::str_replace(",", ".") |>
@@ -37,7 +36,8 @@ list_corpora <- list_corpora_raw |>
     available_func = stringr::str_replace(available_func, "joker", "with"),
     available_func = stringr::str_replace(available_func, "cooccurrence", "cooccurr"),
     available_func = stringr::str_replace(available_func, "nearby", "associated"),
-    available_func = stringr::str_remove(available_func, "\\|?document\\|?")
+    available_func = stringr::str_remove(available_func, "\\|?document\\|?"),
+    alt_base = !is.na(alt_base)
   ) |>
   tidyr::separate(
     period,

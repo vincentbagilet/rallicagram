@@ -34,6 +34,10 @@
 #'   \item{nb_words}{The number of words in the corpus.}
 #'   \item{max_length}{The maximum length of ngrams available.}
 #'   \item{resolution}{The finest available resolution (daily, monthly, yearly)}
+#'   \item{available_func}{The set of available functions for this corpus, in
+#'   addition to \code{gallicagram()}}
+#'   \item{alt_base}{An internal variable that indicates in which database the
+#'   corpus is stored.}
 #' }
 #'
 #' @examples

@@ -27,15 +27,15 @@ This function can also be combined with faceting by adding for instance
 \code{+ facet_wrap(~ keyword)} after calling the function.
 }
 \examples{
-  gallicagram_cooccur("président", "ancien") |>
+  gallicagram_cooccur("président", "ancien", cooccur_level = "articles") |>
     gallicagraph_cooccur()
 
-  gallicagram_cooccur("président", "ancien") |>
-    rbind(gallicagram_cooccur("président", "république")) |>
+  gallicagram_cooccur("président", "ancien", cooccur_level = "articles") |>
+    rbind(gallicagram_cooccur("président", "république", cooccur_level = "articles")) |>
     gallicagraph_cooccur(color = keyword)
 
-  gallicagram_cooccur("président", "ancien") |>
-    rbind(gallicagram_cooccur("président", "république")) |>
+  gallicagram_cooccur("président", "ancien", cooccur_level = "articles") |>
+    rbind(gallicagram_cooccur("président", "république", cooccur_level = "articles")) |>
     gallicagraph_cooccur() +
     ggplot2::facet_wrap(~ keyword)
 }

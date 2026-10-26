@@ -38,7 +38,6 @@ gallicagram_with_month <- function(keyword,
                                    year = 2022,
                                    month = 1,
                                    n_results = 20,
-                                   after = FALSE,
                                    length = 2) {
 
   param_clean <-
@@ -88,8 +87,6 @@ gallicagram_with_month <- function(keyword,
                   month,
                   "&n_joker=",
                   n_results,
-                  "&after=",
-                  ifelse(after, "True", "False"),
                   "&length=",
                   length,
                   sep = "") |>

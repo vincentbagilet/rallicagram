@@ -70,6 +70,7 @@ gallicagram_cooccur <- function(keyword_1,
                   param_clean$resolution_fr,
                   "&count=",
                   ifelse(count_phrase, "False", "True"), #opposite to API
+                  # ifelse(cooccur_level == "grams", "&elias=true", ""),
                   sep = "") |>
     tidy_gallicagram(param_clean$corpus, param_clean$resolution_en) |>
     dplyr::rename(

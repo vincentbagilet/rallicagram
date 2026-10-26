@@ -71,5 +71,5 @@ It is only available for the three main corpora
 (historical press, Gallica books, Le Monde newspaper).
 }
 \examples{
-gallicagram_cooccur_lexicon(c("président", "présidente"), c("mauvais", "nul"))
+gallicagram_cooccur_lexicon(c("président", "présidente"), c("mauvais", "nul"), corpus = "press")
 }

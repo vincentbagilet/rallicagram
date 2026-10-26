@@ -129,8 +129,8 @@ gallicagram_associated <- function(keyword,
          associated with the apostrophe version of the keyword.", call. = FALSE)
   }
 
-  output <- paste("https://shiny.ens-paris-saclay.fr/guni/associated_ngram",
-                  ifelse(distance == "articles", "_article", ""),
+  output <- paste("https://shiny.ens-paris-saclay.fr/guni/associated",
+                  ifelse(distance == "articles", "_article", "_ngram"),
                   "?corpus=",
                   param_clean$corpus,
                   "&mot=",

@@ -9,7 +9,10 @@ gallicagram_all(keyword)
 \arguments{
 \item{keyword}{A character string. Keyword to search.
 The string cannot contain more words than the \code{max_length}
-for this corpus, as indicated in the \code{list_corpora} dataset.}
+for this corpus, as indicated in the \code{list_corpora} dataset. "*" is a
+wildcard that can be used at the end of words and will represent any set of
+letters, e.g. "ecolo*" will return the counts for all words
+starting with "ecolo".}
 }
 \value{
 A tibble. With the \code{keyword},

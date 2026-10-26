@@ -11,14 +11,16 @@ gallicagram_with_month(
   year = 2022,
   month = 1,
   n_results = 20,
-  after = FALSE,
   length = 2
 )
 }
 \arguments{
 \item{keyword}{A character string. Keyword to search.
 The string cannot contain more words than the \code{max_length}
-for this corpus, as indicated in the \code{list_corpora} dataset.}
+for this corpus, as indicated in the \code{list_corpora} dataset. "*" is a
+wildcard that can be used at the end of words and will represent any set of
+letters, e.g. "ecolo*" will return the counts for all words
+starting with "ecolo".}
 
 \item{corpus}{A character string. The corpus to search. The list of
 available corpora can be found in the \code{list_corpora} dataset.}
@@ -30,9 +32,6 @@ available corpora can be found in the \code{list_corpora} dataset.}
 \item{n_results}{An integer. The number of most frequently
 associated words to return. \code{n_results} can also be set to "all" to
 return all the available results.}
-
-\item{after}{A boolean. Whether to consider only words following the keyword
-and not those preceding. Set to \code{FALSE} by default.}
 
 \item{length}{An integer. The length of the ngrams considered.
 Can be up to 3 in the "books" and "press" corpora and 4 in the

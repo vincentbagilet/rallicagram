@@ -14,7 +14,8 @@ list_corpora <- list_corpora_raw |>
     nb_words = volume_en_mots,
     max_length = longueur_max,
     resolution,
-    seuils
+    seuils,
+    available_func = available_modes
   ) |>
   dplyr::mutate(
     period = stringr::str_remove_all(period, "[^\\d-]"),
@@ -32,7 +33,11 @@ list_corpora <- list_corpora_raw |>
       resolution == "Journalière" ~ "daily",
       resolution == "Mensuelle" ~ "monthly",
       resolution == "Annuelle" ~ "yearly"
-    )
+    ),
+    available_func = stringr::str_replace(available_func, "joker", "with"),
+    available_func = stringr::str_replace(available_func, "cooccurrence", "cooccurr"),
+    available_func = stringr::str_replace(available_func, "nearby", "associated"),
+    available_func = stringr::str_remove(available_func, "\\|?document\\|?")
   ) |>
   tidyr::separate(
     period,
@@ -41,10 +46,10 @@ list_corpora <- list_corpora_raw |>
     convert = TRUE
   ) |>
   dplyr::select(-seuils) |>
-  dplyr::mutate(corpus = ifelse(corpus_name == "Persée", "persee", corpus))|>
-  dplyr::bind_rows( #to remove when API fixed
-    dplyr::filter(list_corpora, corpus == "le_monde") |>
-      dplyr::mutate(corpus = "lemonde")
+  dplyr::mutate(
+    corpus = ifelse(corpus_name == "Persée", "persee",
+                    ifelse(corpus == "lemonde_rubriques", "lemonde", corpus)),
+    max_length = ifelse(corpus == "lemonde", 3, max_length) #to fix an issue in the API
   )
 
 usethis::use_data(list_corpora, overwrite = TRUE)

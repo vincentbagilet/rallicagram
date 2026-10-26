@@ -17,16 +17,16 @@
 #'
 #' For instance "camarade" is often followed by "staline" or "khrouchtchev" in
 #' Le Monde. The function returns the most frequent ngrams of the form
-#' "camarade *" when setting \code{after = TRUE}. \code{after = FALSE} also
-#' includes the most frequent ngrams of the form "* camarade".
+#' "camarade \_" where "_" is a placeholder for any ngram of length up to
+#' \code{length}. When no placeholder is specified, it is assumed that one is
+#' located after keyword. The placeholder can be located within phrases. For
+#' example, "le _ staline".
 #'
-#' Searching the "presse" corpus can require a long running time.
+#' The running time for the "presse" corpus can be long.
 #'
 #' @param n_results An integer. The number of most frequently
 #' associated words to return. \code{n_results} can also be set to "all" to
 #' return all the available results.
-#' @param after A boolean. Whether to consider only words following the keyword
-#' and not those preceding. Set to \code{FALSE} by default.
 #' @param length An integer. The length of the ngrams considered.
 #' Can be up to 3 in the "books" and "press" corpora and 4 in the
 #' "lemonde" corpus.
@@ -46,7 +46,6 @@ gallicagram_with <- function(keyword,
                              from = "earliest",
                              to = "latest",
                              n_results = 20,
-                             after = FALSE,
                              length = 2) {
 
   param_clean <- prepare_param(keyword, corpus, from, to, resolution = "yearly")
@@ -81,7 +80,7 @@ gallicagram_with <- function(keyword,
          associated with the apostrophe version of the keyword.", call. = FALSE)
   }
 
-  output <- paste("https://shiny.ens-paris-saclay.fr/guni/joker?corpus=",
+  output <- paste("https://shiny.ens-paris-saclay.fr/guni/joker_ngram?corpus=",
                   param_clean$corpus,
                   "&mot=",
                   param_clean$keyword,
@@ -91,8 +90,6 @@ gallicagram_with <- function(keyword,
                   param_clean$to,
                   "&n_joker=",
                   n_results,
-                  "&after=",
-                  ifelse(after, "True", "False"),
                   "&length=",
                   length,
                   sep = "") |>

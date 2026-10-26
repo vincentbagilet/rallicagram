@@ -92,7 +92,7 @@ ex_associated <- gallicagram_associated(
   from = 1960,
   to = 1970,
   n_results = 10,
-  distance = 4
+  distance = 2
 )
 ```
 
@@ -145,8 +145,7 @@ ex_cooccur_lexicon <- gallicagram_cooccur_lexicon(
   corpus = "lemonde",
   from = 1960,
   to = 1970,
-  resolution = "monthly",
-  cooccur_level = "articles"
+  resolution = "monthly"
 )
 ```
 

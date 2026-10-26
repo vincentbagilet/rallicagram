@@ -21,8 +21,7 @@ prepare_param <- function(keyword,
   #to handle code written with a previous version of the package
   corpus_french <-
     ifelse(corpus == "press", "presse",
-           ifelse(corpus == "books", "livres",
-                  ifelse(corpus == "lemonde", "lemonde", corpus)))
+           ifelse(corpus == "books", "livres", corpus))
 
   if (!(corpus_french %in% rallicagram::list_corpora$corpus)) {
     stop(

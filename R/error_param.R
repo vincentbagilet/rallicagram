@@ -76,14 +76,24 @@ error_param <- function(info_corpus,
   }
 
   #cooccurr, associated and with only work with lemonde, livres, presse
-  if (grepl("_(associated|with|cooccur)", deparse(sys.call(-2))[1]) &&
-      !(corpus %in% c("lemonde", "livres", "presse"))) {
-    stop(
-      paste("This function is only available for the corpora",
-            "lemonde, livres, and presse."),
-      call. = FALSE
-    )
+  # if (grepl("_(associated|with|cooccur)", deparse(sys.call(-2))[1]) &&
+  #     !(corpus %in% c("lemonde", "livres", "presse"))) {
+  #   stop(
+  #     paste("This function is only available for the corpora",
+  #           "lemonde, livres, and presse."),
+  #     call. = FALSE
+  #   )
+  # }
+
+  call_func <- deparse(sys.call(-2))[1]
+  func_type <- regmatches(call_func, m = regexpr("with|cooccur|associated", call_func))
+
+  if (!length(func_type) == 0) {
+    if (!grepl(func_type, list_corpora$available_func[list_corpora$corpus == corpus])) {
+      stop("This function is not suported for this corpus")
+    }
   }
+
 
   #reliability corpus
   if (from < info_corpus$reliable_from) {
